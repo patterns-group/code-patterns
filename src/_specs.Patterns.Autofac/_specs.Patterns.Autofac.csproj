@@ -72,11 +72,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Features\CoreModule.feature.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CoreModule.feature</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Steps\ContainerSteps.cs" />
     <Compile Include="Steps\Runtime\DefaultDateTimeInfoSteps.cs" />
@@ -90,17 +85,9 @@
       <Project>{2BC41806-D0BF-4993-B342-CC7A3EDDF313}</Project>
       <Name>Patterns</Name>
     </ProjectReference>
-    <ProjectReference Include="..\_specs.Common\_specs.Common.csproj">
-      <Project>{466C99AC-179A-4327-8B0F-6388F4F3C047}</Project>
-      <Name>_specs.Common</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Features\CoreModule.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>CoreModule.feature.cs</LastGenOutput>
-    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

@@ -79,36 +79,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Features\Collections\AddRange.feature.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AddRange.feature</DependentUpon>
-    </Compile>
-    <Compile Include="Features\Collections\Each.feature.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Each.feature</DependentUpon>
-    </Compile>
-    <Compile Include="Features\ExceptionHandling\ExceptionHandling.feature.cs">
-      <DependentUpon>ExceptionHandling.feature</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Features\Runtime\DateTimeInfo.feature.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DateTimeInfo.feature</DependentUpon>
-    </Compile>
-    <Compile Include="Features\Runtime\TimeExtensions.feature.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TimeExtensions.feature</DependentUpon>
-    </Compile>
-    <Compile Include="Features\Text\RegularExpressions\CompiledRegex.feature.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CompiledRegex.feature</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -136,46 +106,15 @@
     <Compile Include="Steps\Observations\TypeUsageObservations.cs" />
     <Compile Include="Steps\Overrides\TestOverrides.cs" />
     <Compile Include="Steps\State\TestEvent.cs" />
-    <Compile Include="Subjects\ITestBucket.cs" />
-    <Compile Include="Subjects\TemperamentalTestSubject.cs" />
-    <Compile Include="Subjects\TestSubject.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Features\Collections\AddRange.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>AddRange.feature.cs</LastGenOutput>
-    </None>
-    <None Include="Features\Collections\Each.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>Each.feature.cs</LastGenOutput>
-    </None>
-    <None Include="Features\ExceptionHandling\ExceptionHandling.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>ExceptionHandling.feature.cs</LastGenOutput>
-    </None>
-    <None Include="Features\Runtime\DateTimeInfo.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>DateTimeInfo.feature.cs</LastGenOutput>
-    </None>
-    <None Include="Features\Runtime\TimeExtensions.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>TimeExtensions.feature.cs</LastGenOutput>
-    </None>
-    <None Include="Features\Text\RegularExpressions\CompiledRegex.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>CompiledRegex.feature.cs</LastGenOutput>
-    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Patterns\Patterns.csproj">
       <Project>{2BC41806-D0BF-4993-B342-CC7A3EDDF313}</Project>
       <Name>Patterns</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\_specs.Common\_specs.Common.csproj">
-      <Project>{466C99AC-179A-4327-8B0F-6388F4F3C047}</Project>
-      <Name>_specs.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
