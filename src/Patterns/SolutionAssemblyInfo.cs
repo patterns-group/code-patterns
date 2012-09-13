@@ -38,5 +38,5 @@ using Patterns;
 [assembly: ComVisible(false)]
 [assembly: NeutralResourcesLanguage("en-US")]
 [assembly: AssemblyVersion("3.2.4")]
-[assembly: AssemblyFileVersion("3.2.4.*")]
+[assembly: AssemblyFileVersion("3.2.4.0")]
 [assembly: AssemblyInformationalVersion("3.2.4-beta")]

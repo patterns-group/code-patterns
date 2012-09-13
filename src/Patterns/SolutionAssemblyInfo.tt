@@ -2,7 +2,7 @@
 <#@ output extension=".cs" #>
 <#@ include file="SolutionAssemblyInfo.settings.tt" #><#
 var versionFormat = "{0}.{1}.{2}";
-var fileVersionFormat = "{0}.{1}.{2}.*";
+var fileVersionFormat = "{0}.{1}.{2}.0";
 var infoVersionFormat = "{0}.{1}.{2}-beta";
 int year = DateTime.Now.Year;
 string version = string.Format(versionFormat, MajorVersion, MinorVersion, Revision);
