@@ -26,13 +26,12 @@
 using System;
 
 using Patterns.Runtime;
+using Patterns.Specifications.Framework;
+using Patterns.Specifications.Steps.Observations;
 
 using TechTalk.SpecFlow;
 
-using _specs.Framework;
-using _specs.Steps.Observations;
-
-namespace _specs.Steps.Factories
+namespace Patterns.Specifications.Steps.Factories
 {
 	[Binding]
 	public class TimeFactory

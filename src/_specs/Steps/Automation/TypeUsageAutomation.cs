@@ -23,12 +23,13 @@
 
 #endregion
 
-using _specs.Steps.Factories;
-using _specs.Steps.Observations;
 using Patterns.ExceptionHandling;
+using Patterns.Specifications.Steps.Factories;
+using Patterns.Specifications.Steps.Observations;
+
 using TechTalk.SpecFlow;
 
-namespace _specs.Steps.Automation
+namespace Patterns.Specifications.Steps.Automation
 {
 	[Binding]
 	public class TypeUsageAutomation

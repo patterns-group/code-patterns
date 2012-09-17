@@ -30,7 +30,7 @@ using System.Reflection;
 
 using TechTalk.SpecFlow;
 
-namespace _specs.Framework
+namespace Patterns.Specifications.Framework
 {
 	public static class Extensions
 	{

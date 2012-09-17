@@ -29,14 +29,13 @@ using System.Collections.Generic;
 using FizzWare.NBuilder;
 
 using Patterns.Collections;
+using Patterns.Specifications.Framework.TestTargets;
+using Patterns.Specifications.Steps.Factories;
+using Patterns.Specifications.Steps.Observations;
 
 using TechTalk.SpecFlow;
 
-using _specs.Framework.TestTargets;
-using _specs.Steps.Factories;
-using _specs.Steps.Observations;
-
-namespace _specs.Steps.Automation
+namespace Patterns.Specifications.Steps.Automation
 {
 	[Binding]
 	public class CollectionAutomation

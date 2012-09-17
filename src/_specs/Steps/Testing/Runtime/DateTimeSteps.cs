@@ -28,13 +28,12 @@ using System;
 using FluentAssertions;
 
 using Patterns.Runtime;
+using Patterns.Specifications.Framework;
 using Patterns.Testing.Runtime;
 
 using TechTalk.SpecFlow;
 
-using _specs.Framework;
-
-namespace _specs.Steps.Testing.Runtime
+namespace Patterns.Specifications.Steps.Testing.Runtime
 {
 	[Binding]
 	public class DateTimeSteps

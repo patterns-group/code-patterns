@@ -27,14 +27,13 @@ using System.Diagnostics;
 using System.Threading;
 
 using Patterns.ExceptionHandling;
+using Patterns.Specifications.Steps.Automation;
+using Patterns.Specifications.Steps.Observations;
+using Patterns.Specifications.Steps.State;
 
 using TechTalk.SpecFlow;
 
-using _specs.Steps.Automation;
-using _specs.Steps.Observations;
-using _specs.Steps.State;
-
-namespace _specs.Steps.Overrides
+namespace Patterns.Specifications.Steps.Overrides
 {
 	[Binding]
 	public class TestOverrides

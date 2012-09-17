@@ -23,7 +23,7 @@
 
 #endregion
 
-namespace _specs.Steps.State
+namespace Patterns.Specifications.Steps.State
 {
 	public class TestEvent {}
 }

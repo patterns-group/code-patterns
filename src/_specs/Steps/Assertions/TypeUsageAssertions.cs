@@ -25,14 +25,14 @@
 
 using FluentAssertions;
 
+using Patterns.Specifications.Framework;
+using Patterns.Specifications.Framework.TestTargets;
+using Patterns.Specifications.Steps.Automation;
+using Patterns.Specifications.Steps.Observations;
+
 using TechTalk.SpecFlow;
 
-using _specs.Framework;
-using _specs.Framework.TestTargets;
-using _specs.Steps.Automation;
-using _specs.Steps.Observations;
-
-namespace _specs.Steps.Assertions
+namespace Patterns.Specifications.Steps.Assertions
 {
 	[Binding]
 	public class TypeUsageAssertions

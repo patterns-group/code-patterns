@@ -25,7 +25,7 @@
 
 using System.Collections.ObjectModel;
 
-namespace _specs.Framework.TestTargets
+namespace Patterns.Specifications.Framework.TestTargets
 {
 	public interface ITestBucket
 	{

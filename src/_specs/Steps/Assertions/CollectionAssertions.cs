@@ -25,11 +25,11 @@
 
 using FluentAssertions;
 
+using Patterns.Specifications.Steps.Factories;
+
 using TechTalk.SpecFlow;
 
-using _specs.Steps.Factories;
-
-namespace _specs.Steps.Assertions
+namespace Patterns.Specifications.Steps.Assertions
 {
 	[Binding]
 	public class CollectionAssertions

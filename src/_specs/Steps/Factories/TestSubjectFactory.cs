@@ -28,12 +28,12 @@ using System.Linq;
 
 using FizzWare.NBuilder;
 
+using Patterns.Specifications.Framework;
+using Patterns.Specifications.Framework.TestTargets;
+
 using TechTalk.SpecFlow;
 
-using _specs.Framework;
-using _specs.Framework.TestTargets;
-
-namespace _specs.Steps.Factories
+namespace Patterns.Specifications.Steps.Factories
 {
 	[Binding]
 	public class TestSubjectFactory : TechTalk.SpecFlow.Steps

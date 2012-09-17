@@ -26,11 +26,11 @@
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
+using Patterns.Specifications.Framework;
+
 using TechTalk.SpecFlow;
 
-using _specs.Framework;
-
-namespace _specs.Steps.Observations
+namespace Patterns.Specifications.Steps.Observations
 {
 	public class RegexObservations
 	{

@@ -26,12 +26,12 @@
 using Moq;
 using Moq.Contrib.Indy;
 
+using Patterns.Specifications.Framework;
+using Patterns.Specifications.Framework.TestTargets;
+
 using TechTalk.SpecFlow;
 
-using _specs.Framework;
-using _specs.Framework.TestTargets;
-
-namespace _specs.Steps.Factories
+namespace Patterns.Specifications.Steps.Factories
 {
 	[Binding]
 	public class MockFactory : TechTalk.SpecFlow.Steps

@@ -26,14 +26,13 @@
 using System;
 
 using Patterns.Runtime;
+using Patterns.Specifications.Framework;
+using Patterns.Specifications.Steps.Factories;
+using Patterns.Specifications.Steps.Observations;
 
 using TechTalk.SpecFlow;
 
-using _specs.Framework;
-using _specs.Steps.Factories;
-using _specs.Steps.Observations;
-
-namespace _specs.Steps.Automation
+namespace Patterns.Specifications.Steps.Automation
 {
 	[Binding]
 	public class TimeAutomation

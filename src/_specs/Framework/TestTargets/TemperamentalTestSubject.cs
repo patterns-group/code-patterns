@@ -27,10 +27,10 @@ using System;
 using System.Linq;
 using System.Reactive.Subjects;
 
-using _specs.Properties;
-using _specs.Steps.State;
+using Patterns.Specifications.Properties;
+using Patterns.Specifications.Steps.State;
 
-namespace _specs.Framework.TestTargets
+namespace Patterns.Specifications.Framework.TestTargets
 {
 	public class TemperamentalTestSubject
 	{

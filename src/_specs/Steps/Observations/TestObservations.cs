@@ -27,13 +27,13 @@ using System.Collections.Generic;
 
 using FluentAssertions;
 
+using Patterns.Specifications.Framework;
+using Patterns.Specifications.Properties;
+using Patterns.Specifications.Steps.State;
+
 using TechTalk.SpecFlow;
 
-using _specs.Framework;
-using _specs.Properties;
-using _specs.Steps.State;
-
-namespace _specs.Steps.Observations
+namespace Patterns.Specifications.Steps.Observations
 {
 	[Binding]
 	public class TestObservations

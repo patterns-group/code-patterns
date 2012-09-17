@@ -8,7 +8,7 @@
     <ProjectGuid>{5294698C-FC9F-491B-A914-22C5E32B51F6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>_specs</RootNamespace>
+    <RootNamespace>Patterns.Specifications</RootNamespace>
     <AssemblyName>_specs</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

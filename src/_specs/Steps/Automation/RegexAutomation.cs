@@ -25,12 +25,12 @@
 
 using System.Linq;
 
+using Patterns.Specifications.Steps.Factories;
+using Patterns.Specifications.Steps.Observations;
+
 using TechTalk.SpecFlow;
 
-using _specs.Steps.Factories;
-using _specs.Steps.Observations;
-
-namespace _specs.Steps.Automation
+namespace Patterns.Specifications.Steps.Automation
 {
 	[Binding]
 	public class RegexAutomation

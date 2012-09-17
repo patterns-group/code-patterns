@@ -27,7 +27,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace _specs.Framework
+namespace Patterns.Specifications.Framework
 {
 	public class TextParser
 	{

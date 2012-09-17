@@ -25,7 +25,7 @@
 
 using System;
 
-namespace _specs.Framework.TestTargets
+namespace Patterns.Specifications.Framework.TestTargets
 {
 	public class TestSubject
 	{

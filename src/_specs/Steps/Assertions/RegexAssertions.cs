@@ -29,13 +29,13 @@ using System.Text.RegularExpressions;
 
 using FluentAssertions;
 
+using Patterns.Specifications.Framework;
+using Patterns.Specifications.Steps.Factories;
+using Patterns.Specifications.Steps.Observations;
+
 using TechTalk.SpecFlow;
 
-using _specs.Framework;
-using _specs.Steps.Factories;
-using _specs.Steps.Observations;
-
-namespace _specs.Steps.Assertions
+namespace Patterns.Specifications.Steps.Assertions
 {
 	[Binding]
 	public class RegexAssertions

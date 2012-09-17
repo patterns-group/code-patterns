@@ -26,14 +26,14 @@
 using System;
 using System.Collections.Generic;
 
+using Patterns.Specifications.Framework;
+using Patterns.Specifications.Framework.TestTargets;
+using Patterns.Specifications.Steps.Factories;
+using Patterns.Specifications.Steps.State;
+
 using TechTalk.SpecFlow;
 
-using _specs.Framework;
-using _specs.Framework.TestTargets;
-using _specs.Steps.Factories;
-using _specs.Steps.State;
-
-namespace _specs.Steps.Observations
+namespace Patterns.Specifications.Steps.Observations
 {
 	[Binding]
 	public class TypeUsageObservations

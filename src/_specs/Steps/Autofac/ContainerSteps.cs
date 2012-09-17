@@ -26,12 +26,11 @@
 using Autofac;
 
 using Patterns.Autofac.Modules;
+using Patterns.Specifications.Framework;
 
 using TechTalk.SpecFlow;
 
-using _specs.Framework;
-
-namespace _specs.Steps.Autofac
+namespace Patterns.Specifications.Steps.Autofac
 {
 	[Binding]
 	public class ContainerSteps

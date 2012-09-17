@@ -25,12 +25,12 @@
 
 using System;
 
+using Patterns.Specifications.Framework;
+using Patterns.Specifications.Framework.TestTargets;
+
 using TechTalk.SpecFlow;
 
-using _specs.Framework;
-using _specs.Framework.TestTargets;
-
-namespace _specs.Steps.Automation
+namespace Patterns.Specifications.Steps.Automation
 {
 	[Binding]
 	public class TestBucketAutomation

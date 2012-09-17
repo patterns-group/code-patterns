@@ -28,12 +28,11 @@ using Autofac;
 using FluentAssertions;
 
 using Patterns.Runtime;
+using Patterns.Specifications.Framework;
 
 using TechTalk.SpecFlow;
 
-using _specs.Framework;
-
-namespace _specs.Steps.Autofac.Runtime
+namespace Patterns.Specifications.Steps.Autofac.Runtime
 {
 	[Binding]
 	public class DefaultDateTimeInfoSteps

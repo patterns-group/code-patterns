@@ -27,11 +27,11 @@ using System;
 
 using FluentAssertions;
 
+using Patterns.Specifications.Steps.Observations;
+
 using TechTalk.SpecFlow;
 
-using _specs.Steps.Observations;
-
-namespace _specs.Steps.Assertions
+namespace Patterns.Specifications.Steps.Assertions
 {
 	[Binding]
 	public class TimeAssertions

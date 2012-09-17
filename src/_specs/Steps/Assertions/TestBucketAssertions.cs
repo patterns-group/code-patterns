@@ -30,14 +30,14 @@ using FluentAssertions;
 
 using Moq;
 
+using Patterns.Specifications.Framework.TestTargets;
+using Patterns.Specifications.Steps.Factories;
+
 using TechTalk.SpecFlow;
 
-using _specs.Framework.TestTargets;
-using _specs.Steps.Factories;
+using MockFactory = Patterns.Specifications.Steps.Factories.MockFactory;
 
-using MockFactory = _specs.Steps.Factories.MockFactory;
-
-namespace _specs.Steps.Assertions
+namespace Patterns.Specifications.Steps.Assertions
 {
 	[Binding]
 	public class TestBucketAssertions

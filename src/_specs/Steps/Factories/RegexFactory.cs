@@ -25,13 +25,12 @@
 
 using System.Collections.Generic;
 
+using Patterns.Specifications.Framework;
 using Patterns.Text.RegularExpressions;
 
 using TechTalk.SpecFlow;
 
-using _specs.Framework;
-
-namespace _specs.Steps.Factories
+namespace Patterns.Specifications.Steps.Factories
 {
 	[Binding]
 	public class RegexFactory
