@@ -78,6 +78,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Patterns\SolutionAssemblyInfo.cs">
+      <Link>Properties\SolutionAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Features\Autofac\CoreModule.feature.cs">
       <DependentUpon>CoreModule.feature</DependentUpon>
       <AutoGen>True</AutoGen>
