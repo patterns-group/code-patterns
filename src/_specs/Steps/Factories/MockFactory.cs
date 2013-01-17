@@ -23,11 +23,17 @@
 
 #endregion
 
+using System.Configuration;
+
+using FluentAssertions;
+
 using Moq;
 using Moq.Contrib.Indy;
 
+using Patterns.Configuration;
 using Patterns.Specifications.Framework;
 using Patterns.Specifications.Framework.TestTargets;
+using Patterns.Specifications.Steps.Observations;
 
 using TechTalk.SpecFlow;
 
@@ -40,7 +46,7 @@ namespace Patterns.Specifications.Steps.Factories
 
 		public static IMockContainer Mocks
 		{
-			get { return ScenarioContext.Current.SafeGet<IMockContainer>(_mocksKey); }
+			get { return ScenarioContext.Current.Pull<IMockContainer>(_mocksKey); }
 			private set { ScenarioContext.Current[_mocksKey] = value; }
 		}
 
@@ -56,5 +62,32 @@ namespace Patterns.Specifications.Steps.Factories
 			Given("I have a collection with 0 items");
 			Mocks.GetMock<ITestBucket>().Setup(bucket => bucket.Add(It.IsAny<TestSubject>())).Callback<TestSubject>(TestSubjectFactory.SubjectCollection.Add);
 		}
+
+		[Given(@"I have a mocked config abstraction")]
+		public void CreateConfigAbstractionMocks()
+		{
+			Mocks.GetMock<IConfigurationManager>().Should().NotBeNull();
+		}
+
+		[Given(@"I have set the mocked config abstraction to return a (null )?Configuration Section when the section name is ""(.*)""")]
+		public void SetupConfigAbstractionMockGetSection(string isNull, string sectionName)
+		{
+            ConfigObservations.ExpectedConfig = new TestConfigSection();
+		    bool useNull = !string.IsNullOrEmpty(isNull);
+		    Mocks.GetMock<IConfigurationManager>().Setup(manager => manager.GetSection(sectionName)).Returns(useNull ? null : ConfigObservations.ExpectedConfig);
+		}
+
+        [Given(@"I have set the mocked config abstraction to throw an exception when asked for a Configuration Section with the section name ""(.*)""")]
+        public void SetupConfigAbstractionMockGetSectionThrowException(string sectionName)
+        {
+            Mocks.GetMock<IConfigurationManager>().Setup(manager => manager.GetSection(sectionName)).Throws(new ConfigurationErrorsException());
+        }
+
+        [Given(@"I have set the mocked config abstraction to return a different Configuration Section when the section name is ""(.*)""")]
+        public void SetupConfigAbstractionGetExceptionWrongType(string sectionName)
+        {
+            ConfigObservations.ExpectedConfig = new TestConfigSection();
+            Mocks.GetMock<IConfigurationManager>().Setup(manager => manager.GetSection(sectionName)).Returns(new AlternateTestConfigSection());
+        }
 	}
 }

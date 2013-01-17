@@ -39,7 +39,7 @@ namespace Patterns.Specifications.Steps.Automation
 
 		public static Action<ITestBucket, TestSubject> AddToTestBucketLogic
 		{
-			get { return ScenarioContext.Current.SafeGet<Action<ITestBucket, TestSubject>>(_addToTestBucketLogicKey); }
+			get { return ScenarioContext.Current.Pull<Action<ITestBucket, TestSubject>>(_addToTestBucketLogicKey); }
 			set { ScenarioContext.Current[_addToTestBucketLogicKey] = value; }
 		}
 	}

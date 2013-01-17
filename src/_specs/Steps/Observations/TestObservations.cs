@@ -54,19 +54,19 @@ namespace Patterns.Specifications.Steps.Observations
 
 		public static object CallResult
 		{
-			get { return ScenarioContext.Current.SafeGet<object>(_resultKey); }
+			get { return ScenarioContext.Current.Pull<object>(_resultKey); }
 			set { ScenarioContext.Current[_resultKey] = value; }
 		}
 
 		public static List<TestEvent> Errors
 		{
-			get { return ScenarioContext.Current.SafeGet<List<TestEvent>>(_errorKey); }
+			get { return ScenarioContext.Current.Pull<List<TestEvent>>(_errorKey); }
 			private set { ScenarioContext.Current[_errorKey] = value; }
 		}
 
 		public static int LastCapturedErrorCount
 		{
-			get { return ScenarioContext.Current.SafeGet<int>(_capturedErrorCountKey); }
+			get { return ScenarioContext.Current.Pull<int>(_capturedErrorCountKey); }
 			set { ScenarioContext.Current[_capturedErrorCountKey] = value; }
 		}
 

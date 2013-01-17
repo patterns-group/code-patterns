@@ -42,25 +42,25 @@ namespace Patterns.Specifications.Steps.Factories
 
 		public static string RegularExpressionSingleInputString
 		{
-			get { return ScenarioContext.Current.SafeGet<string>(_regexSingleInputStringKey); }
+			get { return ScenarioContext.Current.Pull<string>(_regexSingleInputStringKey); }
 			set { ScenarioContext.Current[_regexSingleInputStringKey] = value; }
 		}
 
 		public static string RegularExpressionPatternString
 		{
-			get { return ScenarioContext.Current.SafeGet<string>(_regexPatternStringKey); }
+			get { return ScenarioContext.Current.Pull<string>(_regexPatternStringKey); }
 			set { ScenarioContext.Current[_regexPatternStringKey] = value; }
 		}
 
 		public static IEnumerable<string> RegularExpressionInputStrings
 		{
-			get { return ScenarioContext.Current.SafeGet<IEnumerable<string>>(_regexInputStringsKey); }
+			get { return ScenarioContext.Current.Pull<IEnumerable<string>>(_regexInputStringsKey); }
 			set { ScenarioContext.Current[_regexInputStringsKey] = value; }
 		}
 
 		public static CompiledRegex RegularExpression
 		{
-			get { return ScenarioContext.Current.SafeGet<CompiledRegex>(_compiledRegexKey); }
+			get { return ScenarioContext.Current.Pull<CompiledRegex>(_compiledRegexKey); }
 			set { ScenarioContext.Current[_compiledRegexKey] = value; }
 		}
 

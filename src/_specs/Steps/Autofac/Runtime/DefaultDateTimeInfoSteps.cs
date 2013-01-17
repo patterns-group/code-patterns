@@ -41,7 +41,7 @@ namespace Patterns.Specifications.Steps.Autofac.Runtime
 
 		public static IDateTimeInfo DateTimeInfo
 		{
-			get { return ScenarioContext.Current.SafeGet<IDateTimeInfo>(_dateTimeInfoKey); }
+			get { return ScenarioContext.Current.Pull<IDateTimeInfo>(_dateTimeInfoKey); }
 			set { ScenarioContext.Current[_dateTimeInfoKey] = value; }
 		}
 

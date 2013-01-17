@@ -42,14 +42,16 @@
     <Reference Include="AutofacContrib.CommonServiceLocator">
       <HintPath>..\packages\Autofac.CommonServiceLocator.Indy.2.6.3.863\lib\net40\AutofacContrib.CommonServiceLocator.dll</HintPath>
     </Reference>
-    <Reference Include="Common.Logging">
-      <HintPath>..\packages\Common.Logging.2.1.1\lib\net40\Common.Logging.dll</HintPath>
+    <Reference Include="Common.Logging, Version=2.1.2.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Common.Logging.2.1.2\lib\net40\Common.Logging.dll</HintPath>
     </Reference>
     <Reference Include="FizzWare.NBuilder">
       <HintPath>..\packages\NBuilder.3.0.1.1\lib\FizzWare.NBuilder.dll</HintPath>
     </Reference>
-    <Reference Include="FluentAssertions">
-      <HintPath>..\packages\FluentAssertions.2.0.0-beta\Lib\net40\FluentAssertions.dll</HintPath>
+    <Reference Include="FluentAssertions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\FluentAssertions.2.0.0.1\lib\net40\FluentAssertions.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation">
       <HintPath>..\packages\CommonServiceLocator.1.0\lib\NET35\Microsoft.Practices.ServiceLocation.dll</HintPath>
@@ -60,10 +62,11 @@
     <Reference Include="Moq.Contrib.Indy">
       <HintPath>..\packages\Moq.Contrib.Indy.1.0.4563.32860\lib\net40\Moq.Contrib.Indy.dll</HintPath>
     </Reference>
-    <Reference Include="nunit.framework">
-      <HintPath>..\packages\NUnit.2.6.1\lib\nunit.framework.dll</HintPath>
+    <Reference Include="nunit.framework, Version=2.6.2.12296, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Reactive">
       <HintPath>..\packages\Rx_Experimental-Main.1.1.11111\lib\Net4\System.Reactive.dll</HintPath>
@@ -96,6 +99,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Features\Configuration\ConfigSource.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ConfigSource.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\ExceptionHandling\ExceptionHandling.feature.cs">
       <DependentUpon>ExceptionHandling.feature</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -122,8 +130,10 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Framework\Extensions.cs" />
+    <Compile Include="Framework\TestTargets\AlternateTestConfigSection.cs" />
     <Compile Include="Framework\TestTargets\ITestBucket.cs" />
     <Compile Include="Framework\TestTargets\TemperamentalTestSubject.cs" />
+    <Compile Include="Framework\TestTargets\TestConfigSection.cs" />
     <Compile Include="Framework\TestTargets\TestSubject.cs" />
     <Compile Include="Framework\TextParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -133,6 +143,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Steps\Assertions\CollectionAssertions.cs" />
+    <Compile Include="Steps\Assertions\ConfigAssertions.cs" />
     <Compile Include="Steps\Assertions\ErrorAssertions.cs" />
     <Compile Include="Steps\Assertions\RegexAssertions.cs" />
     <Compile Include="Steps\Assertions\TestBucketAssertions.cs" />
@@ -141,14 +152,17 @@
     <Compile Include="Steps\Autofac\ContainerSteps.cs" />
     <Compile Include="Steps\Autofac\Runtime\DefaultDateTimeInfoSteps.cs" />
     <Compile Include="Steps\Automation\CollectionAutomation.cs" />
+    <Compile Include="Steps\Automation\ConfigAutomation.cs" />
     <Compile Include="Steps\Automation\RegexAutomation.cs" />
     <Compile Include="Steps\Automation\TestBucketAutomation.cs" />
     <Compile Include="Steps\Automation\TimeAutomation.cs" />
     <Compile Include="Steps\Automation\TypeUsageAutomation.cs" />
+    <Compile Include="Steps\Factories\ConfigFactory.cs" />
     <Compile Include="Steps\Factories\MockFactory.cs" />
     <Compile Include="Steps\Factories\RegexFactory.cs" />
     <Compile Include="Steps\Factories\TestSubjectFactory.cs" />
     <Compile Include="Steps\Factories\TimeFactory.cs" />
+    <Compile Include="Steps\Observations\ConfigObservations.cs" />
     <Compile Include="Steps\Observations\RegexObservations.cs" />
     <Compile Include="Steps\Observations\TestObservations.cs" />
     <Compile Include="Steps\Observations\TimeObservations.cs" />
@@ -176,6 +190,10 @@
     <None Include="Features\Collections\Each.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Each.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Configuration\ConfigSource.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ConfigSource.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\ExceptionHandling\ExceptionHandling.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

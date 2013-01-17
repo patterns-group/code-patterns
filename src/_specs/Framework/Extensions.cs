@@ -45,7 +45,7 @@ namespace Patterns.Specifications.Framework
 			}
 		}
 
-		public static TValue SafeGet<TValue>(this ScenarioContext context, string key)
+		public static TValue Pull<TValue>(this ScenarioContext context, string key)
 		{
 			return context.ContainsKey(key) ? context[key] is TValue ? (TValue) context[key] : default(TValue) : default(TValue);
 		}

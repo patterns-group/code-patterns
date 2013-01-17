@@ -44,19 +44,19 @@ namespace Patterns.Specifications.Steps.Factories
 
 		public static TemperamentalTestSubject TestySubject
 		{
-			get { return ScenarioContext.Current.SafeGet<TemperamentalTestSubject>(_testSubjectKey); }
+			get { return ScenarioContext.Current.Pull<TemperamentalTestSubject>(_testSubjectKey); }
 			private set { ScenarioContext.Current[_testSubjectKey] = value; }
 		}
 
 		public static ICollection<TestSubject> SubjectCollection
 		{
-			get { return ScenarioContext.Current.SafeGet<ICollection<TestSubject>>(_testSubjectCollectionKey); }
+			get { return ScenarioContext.Current.Pull<ICollection<TestSubject>>(_testSubjectCollectionKey); }
 			private set { ScenarioContext.Current[_testSubjectCollectionKey] = value; }
 		}
 
 		public static IEnumerable<TestSubject> SubjectSet
 		{
-			get { return ScenarioContext.Current.SafeGet<IEnumerable<TestSubject>>(_testSubjectSetKey); }
+			get { return ScenarioContext.Current.Pull<IEnumerable<TestSubject>>(_testSubjectSetKey); }
 			private set { ScenarioContext.Current[_testSubjectSetKey] = value; }
 		}
 

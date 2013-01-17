@@ -24,6 +24,7 @@
 #endregion
 
 using System;
+using System.Configuration;
 
 using FluentAssertions;
 
@@ -43,5 +44,11 @@ namespace Patterns.Specifications.Steps.Assertions
 			var exception = (ArgumentNullException) TestObservations.CallResult;
 			exception.ParamName.Should().Be(paramName);
 		}
+
+        [Then(@"a configuration exception should have been thrown")]
+        public void ThenAnExceptionShouldHaveBeenThrown()
+        {
+            ConfigObservations.ConfigException.Should().NotBeNull().And.BeOfType<ConfigurationErrorsException>();
+        }
 	}
 }
