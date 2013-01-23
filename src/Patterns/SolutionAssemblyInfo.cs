@@ -1,6 +1,8 @@
+
+
 #region New BSD License
 
-// Copyright (c) 2012, John Batte
+// Copyright (c) 2013, John Batte
 // All rights reserved.
 // 
 // Redistribution and use in source and binary forms, with or without modification, are permitted
@@ -32,11 +34,12 @@ using Patterns;
 [assembly: AssemblyConfiguration(ProductStrings.Empty)]
 [assembly: AssemblyCompany(ProductStrings.Author)]
 [assembly: AssemblyProduct(ProductStrings.Product)]
-[assembly: AssemblyCopyright("Copyright © 2012")]
+[assembly: AssemblyCopyright("Copyright © 2013")]
 [assembly: AssemblyTrademark(ProductStrings.Empty)]
 [assembly: AssemblyCulture(ProductStrings.Empty)]
 [assembly: ComVisible(false)]
 [assembly: NeutralResourcesLanguage("en-US")]
-[assembly: AssemblyVersion("3.2.4")]
-[assembly: AssemblyFileVersion("3.2.4.0")]
-[assembly: AssemblyInformationalVersion("3.2.4-beta")]
+[assembly: AssemblyVersion("3.3.0")]
+[assembly: AssemblyFileVersion("3.3.0.0")]
+
+[assembly: AssemblyInformationalVersion("3.3.0-beta")]
