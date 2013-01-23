@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Configuration;
 using System.Linq;
@@ -8,11 +9,13 @@ namespace Patterns.Configuration
 	public class ConfigurationSource : IConfigurationSource
 	{
 		private readonly IConfigurationManager _configManager;
+	    private readonly Func<System.Configuration.Configuration, IConfiguration> _configFactory;
 
-		public ConfigurationSource(IConfigurationManager configManager)
+	    public ConfigurationSource(IConfigurationManager configManager, Func<System.Configuration.Configuration, IConfiguration> configFactory)
 		{
 			_configManager = configManager;
-			NameValueCollection appSettings = _configManager.AppSettings;
+		    _configFactory = configFactory;
+		    NameValueCollection appSettings = _configManager.AppSettings;
 			if(appSettings != null) AppSettings = appSettings.AllKeys.ToDictionary(key => key, key => appSettings[key]);
 			var connectionStrings = _configManager.ConnectionStrings;
 			if(connectionStrings != null) ConnectionStrings = connectionStrings.OfType<ConnectionStringSettings>().ToDictionary(settings => settings.Name, settings => settings);
@@ -34,22 +37,22 @@ namespace Patterns.Configuration
 
 		public virtual IConfiguration OpenExeConfiguration(string exePath)
 		{
-			return new ConfigurationWrapper(_configManager.OpenExeConfiguration(exePath));
+            return _configFactory(_configManager.OpenExeConfiguration(exePath));
 		}
 
 		public virtual IConfiguration OpenExeConfiguration(ConfigurationUserLevel userLevel)
 		{
-			return new ConfigurationWrapper(_configManager.OpenExeConfiguration(userLevel));
+            return _configFactory(_configManager.OpenExeConfiguration(userLevel));
 		}
 
 		public virtual IConfiguration OpenMachineConfiguration()
 		{
-			return new ConfigurationWrapper(_configManager.OpenMachineConfiguration());
+            return _configFactory(_configManager.OpenMachineConfiguration());
 		}
 
 		public virtual IConfiguration OpenMappedExeConfiguration(ExeConfigurationFileMap fileMap, ConfigurationUserLevel userLevel)
 		{
-			return new ConfigurationWrapper(_configManager.OpenMappedExeConfiguration(fileMap, userLevel));
+            return _configFactory(_configManager.OpenMappedExeConfiguration(fileMap, userLevel));
 		}
 
 		public virtual void RefreshSection(string sectionName)

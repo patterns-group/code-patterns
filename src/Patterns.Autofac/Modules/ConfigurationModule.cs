@@ -23,29 +23,23 @@
 
 #endregion
 
+using Autofac;
+
 using Patterns.Configuration;
-using Patterns.Specifications.Framework;
 
-using TechTalk.SpecFlow;
-
-namespace Patterns.Specifications.Steps.Factories
+namespace Patterns.Autofac.Modules
 {
-    [Binding]
-    public class ConfigFactory : TechTalk.SpecFlow.Steps
+    /// <summary>
+    ///     Provides packaged registration instructions for default implementations
+    ///     of public contracts defined in the Patterns.Configuration namespace.
+    /// </summary>
+    public class ConfigurationModule : Module
     {
-        private static readonly string _configSource = ScenarioContext.Current.NewKey();
-
-        public static IConfigurationSource ConfigSource
+        protected override void Load(ContainerBuilder builder)
         {
-            get { return ScenarioContext.Current.Pull<IConfigurationSource>(_configSource); }
-            set { ScenarioContext.Current[_configSource] = value; }
-        }
-
-        [Given(@"I have a new Configuration Source using the mocked config abstraction")]
-        public void CreateConfigSourceWithMocks()
-        {
-            ConfigSource = new ConfigurationSource(MockFactory.Mocks.GetMock<IConfigurationManager>().Object,
-                configuration => new ConfigurationWrapper(configuration));
+            builder.RegisterType<ConfigurationWrapper>().As<IConfiguration>();
+            builder.RegisterType<ConfigurationManagerWrapper>().As<IConfigurationManager>();
+            builder.RegisterType<ConfigurationSource>().As<IConfigurationSource>();
         }
     }
 }

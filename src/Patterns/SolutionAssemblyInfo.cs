@@ -39,7 +39,7 @@ using Patterns;
 [assembly: AssemblyCulture(ProductStrings.Empty)]
 [assembly: ComVisible(false)]
 [assembly: NeutralResourcesLanguage("en-US")]
-[assembly: AssemblyVersion("3.3.0")]
-[assembly: AssemblyFileVersion("3.3.0.0")]
+[assembly: AssemblyVersion("3.3.1")]
+[assembly: AssemblyFileVersion("3.3.1.0")]
 
-[assembly: AssemblyInformationalVersion("3.3.0-beta")]
+[assembly: AssemblyInformationalVersion("3.3.1-beta")]

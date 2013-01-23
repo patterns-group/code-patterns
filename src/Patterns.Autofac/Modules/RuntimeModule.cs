@@ -31,9 +31,9 @@ namespace Patterns.Autofac.Modules
 {
 	/// <summary>
 	/// Provides packaged registration instructions for default implementations
-	/// of public contracts defined in the Patterns library.
+    /// of public contracts defined in the Patterns.Runtime namespace.
 	/// </summary>
-	public class CoreModule : Module
+	public class RuntimeModule : Module
 	{
 		protected override void Load(ContainerBuilder builder)
 		{

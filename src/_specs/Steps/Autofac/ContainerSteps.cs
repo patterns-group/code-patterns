@@ -53,7 +53,7 @@ namespace Patterns.Specifications.Steps.Autofac
 		[Given("I have registered the core module")]
 		public void RegisterCoreModule()
 		{
-			Builder.RegisterModule(new CoreModule());
+			Builder.RegisterModule(new RuntimeModule());
 		}
 
 		[Given("I have created the container")]
