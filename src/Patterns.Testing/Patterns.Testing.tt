@@ -1,4 +1,6 @@
-﻿<?xml version="1.0"?>
+﻿<#@ template debug="false" hostspecific="false" language="C#" #><#@
+assembly name="System.Core" #><#@
+output extension=".nuspec" #><?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
 	<metadata>
 		<version>$version$</version>
@@ -11,6 +13,6 @@
 		<title>$id$</title>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>$description$</description>
-		<copyright>Copyright © 2014</copyright>
+		<copyright>Copyright © <#= DateTime.Now.Year + 1 #></copyright>
 	</metadata>
 </package>

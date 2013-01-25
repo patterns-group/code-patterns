@@ -15,6 +15,7 @@
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <BuildPackage>true</BuildPackage>
     <RestorePackages>true</RestorePackages>
+    <TransformOnBuild>true</TransformOnBuild>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -61,12 +62,12 @@
     <Compile Include="Runtime\DefaultDateTimeInfo.cs" />
     <Compile Include="Runtime\IDateTimeInfo.cs" />
     <Compile Include="Runtime\TimeExtensions.cs" />
+    <Compile Include="ProductStrings.cs" />
     <Compile Include="SolutionAssemblyInfo.cs">
-      <DependentUpon>SolutionAssemblyInfo.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <DependentUpon>SolutionAssemblyInfo.tt</DependentUpon>
     </Compile>
-    <Compile Include="ProductStrings.cs" />
     <Compile Include="Text\RegularExpressions\CompiledRegex.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -82,6 +83,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" />
+  <Import Project="$(SolutionDir)\T4\Microsoft.TextTemplating.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

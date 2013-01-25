@@ -23,6 +23,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{AB1B5C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "_specs", "_specs\_specs.csproj", "{5294698C-FC9F-491B-A914-22C5E32B51F6}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "T4", "T4", "{60248C0A-CBBB-4728-9888-104EEE710F21}"
+	ProjectSection(SolutionItems) = preProject
+		T4\Microsoft.TextTemplating.Build.Tasks.dll = T4\Microsoft.TextTemplating.Build.Tasks.dll
+		T4\Microsoft.TextTemplating.targets = T4\Microsoft.TextTemplating.targets
+		T4\Microsoft.VisualStudio.TextTemplating.Sdk.Host.11.0.dll = T4\Microsoft.VisualStudio.TextTemplating.Sdk.Host.11.0.dll
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -50,7 +57,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		CodeStyleEnforcer_Active = -1
 		CodeStyleEnforcer_RulesLocation = 1
+		CodeStyleEnforcer_Active = -1
 	EndGlobalSection
 EndGlobal
