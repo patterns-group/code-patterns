@@ -50,8 +50,8 @@ namespace Patterns.Specifications.Steps.Autofac
 			set { ScenarioContext.Current[_containerKey] = value; }
 		}
 
-		[Given("I have registered the core module")]
-		public void RegisterCoreModule()
+        [Given("I have registered the runtime module")]
+		public void RegisterRuntimeModule()
 		{
 			Builder.RegisterModule(new RuntimeModule());
 		}
