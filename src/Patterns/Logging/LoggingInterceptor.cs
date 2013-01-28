@@ -37,40 +37,52 @@ namespace Patterns.Logging
 		private const string _nullArgument = "[NULL]";
 		private const string _argumentListFormat = "({0})";
 		private const string _argumentListSeparator = ",";
+		private const string _stringDisplayFormat = @"""{0}""";
 		private readonly bool _trapInterceptedExceptions;
+		private readonly Func<Type, ILog> _logFactory;
 
-		public LoggingInterceptor(bool trapInterceptedExceptions)
+		public LoggingInterceptor(bool trapInterceptedExceptions, Func<Type, ILog> logFactory)
 		{
 			_trapInterceptedExceptions = trapInterceptedExceptions;
+			_logFactory = logFactory;
 		}
 
 		public void Intercept(IInvocation invocation)
 		{
-			ILog log = LogManager.GetLogger(invocation.TargetType);
+			ILog log = _logFactory(invocation.TargetType);
 			log.Trace(handler => handler(LoggingResources.MethodStartTraceFormat, invocation.TargetType, invocation.Method.Name));
 			log.Debug(handler => handler(LoggingResources.MethodArgsDebugFormat, invocation.Method.Name, GetMethodArguments(invocation)));
 
 			try
 			{
 				invocation.Proceed();
-				log.Info(handler => handler(LoggingResources.MethodInfoFormat, LoggingResources.MethodInfoPass));
+				log.Info(handler => handler(LoggingResources.MethodInfoFormat, invocation.Method.Name, LoggingResources.MethodInfoPass));
 			}
 			catch (Exception error)
 			{
-				log.Info(handler => handler(LoggingResources.MethodInfoFormat, LoggingResources.MethodInfoFail));
+				log.Info(handler => handler(LoggingResources.MethodInfoFormat, invocation.Method.Name, LoggingResources.MethodInfoFail));
 				log.Error(handler => handler(LoggingResources.ExceptionErrorFormat, invocation.Method.Name, error.ToFullString()));
 				if (!_trapInterceptedExceptions) throw;
 			}
 
-			log.Trace(handler => handler(LoggingResources.MethodStopTraceFormat, invocation.TargetType.Name, invocation.Method.Name));
+			log.Trace(handler => handler(LoggingResources.MethodStopTraceFormat, invocation.TargetType, invocation.Method.Name));
 
-			if (invocation.ReturnValue != null) log.Debug(handler => handler(LoggingResources.MethodReturnDebugFormat, invocation.Method.Name, invocation.ReturnValue));
+			if (invocation.ReturnValue == null) return;
+
+			object value = ConvertValueForDisplay(invocation.ReturnValue);
+			log.Debug(handler => handler(LoggingResources.MethodReturnDebugFormat, invocation.Method.Name, value));
 		}
 
 		private static string GetMethodArguments(IInvocation invocation)
 		{
-			object[] arguments = invocation.Arguments.Select(a => a ?? _nullArgument).ToArray();
+			object[] arguments = invocation.Arguments.Select(ConvertValueForDisplay).ToArray();
 			return string.Format(_argumentListFormat, string.Join(_argumentListSeparator, arguments));
+		}
+
+		private static object ConvertValueForDisplay(object value)
+		{
+			if (value == null) return _nullArgument;
+			return value is string ? string.Format(_stringDisplayFormat, value) : value;
 		}
 	}
 }

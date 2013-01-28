@@ -23,13 +23,22 @@
 
 #endregion
 
+using System;
+using System.Diagnostics;
+using System.Reflection;
+
 using Castle.DynamicProxy;
+
+using Common.Logging;
+
+using Moq;
 
 using Patterns.Logging;
 using Patterns.Specifications.Framework;
-using Patterns.Specifications.Steps.Factories;
 
 using TechTalk.SpecFlow;
+
+using MockFactory = Patterns.Specifications.Steps.Factories.MockFactory;
 
 namespace Patterns.Specifications.Steps.Logging
 {
@@ -39,6 +48,7 @@ namespace Patterns.Specifications.Steps.Logging
 	{
 		private static readonly string _loggingInterceptorKey = ScenarioContext.Current.NewKey();
 
+		#region Given
 		[Given(@"I have created a new container builder")]
 		public void ConfigureContainer()
 		{
@@ -63,38 +73,8 @@ namespace Patterns.Specifications.Steps.Logging
 			ScenarioContext.Current.Pending();
 		}
 
-		[When(@"I inspect the ILog instance the test type is using")]
-		public void GetILogImplementation()
-		{
-			ScenarioContext.Current.Pending();
-		}
-
-		[Then(@"the ILog instance should be configured correctly for the test type")]
-		public void AssertILogInstanceConfiguration()
-		{
-			ScenarioContext.Current.Pending();
-		}
-
 		[Given(@"I have registered an intercepted test type")]
 		public void RegisterInterceptedTestType()
-		{
-			ScenarioContext.Current.Pending();
-		}
-
-		[When(@"I call a method on the test type")]
-		public void CallTestTypeMethod()
-		{
-			ScenarioContext.Current.Pending();
-		}
-
-		[Then(@"the ILog instance should be called as expected using the happy path")]
-		public void AssertILogHappyPathCallPattern()
-		{
-			ScenarioContext.Current.Pending();
-		}
-
-		[Then(@"the ILog instance should be called as expected using the error path")]
-		public void AssertILogErrorPathCallPattern()
 		{
 			ScenarioContext.Current.Pending();
 		}
@@ -102,20 +82,12 @@ namespace Patterns.Specifications.Steps.Logging
 		[Given(@"I have created a LoggingInterceptor instance")]
 		public void CreateLoggingInterceptor()
 		{
-			ScenarioContext.Current[_loggingInterceptorKey] = new LoggingInterceptor(true);
-		}
-
-		[When(@"I tell the interceptor to intercept an invocation")]
-		public void InterceptInvocation()
-		{
-			var interceptor = ScenarioContext.Current.Pull<IInterceptor>(_loggingInterceptorKey);
-			interceptor.Intercept(MockFactory.Mocks.GetMock<IInvocation>().Object);
-		}
-
-		[Then(@"the IInvocation instance should be called as expected")]
-		public void AssertIInvocationCallPattern()
-		{
-			ScenarioContext.Current.Pending();
+			Mock<ILog> mockLog = MockFactory.Mocks.GetMock<ILog>();
+			mockLog.Setup(log => log.Trace(It.IsAny<Action<FormatMessageHandler>>())).Callback(GetLoggingHandlerAction());
+			mockLog.Setup(log => log.Debug(It.IsAny<Action<FormatMessageHandler>>())).Callback(GetLoggingHandlerAction());
+			mockLog.Setup(log => log.Info(It.IsAny<Action<FormatMessageHandler>>())).Callback(GetLoggingHandlerAction());
+			mockLog.Setup(log => log.Error(It.IsAny<Action<FormatMessageHandler>>())).Callback(GetLoggingHandlerAction());
+			ScenarioContext.Current[_loggingInterceptorKey] = new LoggingInterceptor(true, type => mockLog.Object);
 		}
 
 		[Given(@"I have configured my mock IInvocation instance to throw an error when proceeding")]
@@ -129,11 +101,85 @@ namespace Patterns.Specifications.Steps.Logging
 		{
 			ScenarioContext.Current.Pending();
 		}
+		#endregion
+
+		#region When
+		[When(@"I inspect the ILog instance the test type is using")]
+		public void GetILogImplementation()
+		{
+			ScenarioContext.Current.Pending();
+		}
+
+		[When(@"I call a method on the test type")]
+		public void CallTestTypeMethod()
+		{
+			ScenarioContext.Current.Pending();
+		}
+
+		[When(@"I tell the interceptor to intercept an invocation")]
+		public void InterceptInvocation()
+		{
+			Mock<IInvocation> mockInvocation = MockFactory.Mocks.GetMock<IInvocation>();
+			mockInvocation.SetupGet(call => call.TargetType).Returns(typeof (object));
+			MethodInfo toStringInfo = typeof (object).GetMethod("ToString");
+			Debug.Assert(toStringInfo != null);
+			mockInvocation.SetupGet(call => call.Method).Returns(toStringInfo);
+			mockInvocation.SetupGet(call => call.Arguments).Returns(new object[] {});
+			mockInvocation.SetupGet(call => call.ReturnValue).Returns("THIS IS A TEST");
+
+			var interceptor = ScenarioContext.Current.Pull<IInterceptor>(_loggingInterceptorKey);
+			interceptor.Intercept(mockInvocation.Object);
+		}
 
 		[When(@"I call a volatile method on the test type")]
 		public void CallVolatileTestTypeMethod()
 		{
 			ScenarioContext.Current.Pending();
+		}
+		#endregion
+
+		#region Then
+		[Then(@"the ILog instance should be configured correctly for the test type")]
+		public void AssertILogInstanceConfiguration()
+		{
+			ScenarioContext.Current.Pending();
+		}
+
+		[Then(@"the ILog instance should be called as expected using the happy path")]
+		public void AssertILogHappyPathCallPattern()
+		{
+			Mock<ILog> mockLog = MockFactory.Mocks.GetMock<ILog>();
+			mockLog.Verify(log => log.Trace(It.IsAny<Action<FormatMessageHandler>>()), Times.Exactly(2));
+			mockLog.Verify(log => log.Debug(It.IsAny<Action<FormatMessageHandler>>()), Times.Exactly(2));
+			mockLog.Verify(log => log.Info(It.IsAny<Action<FormatMessageHandler>>()), Times.Exactly(1));
+		}
+
+		[Then(@"the ILog instance should be called as expected using the error path")]
+		public void AssertILogErrorPathCallPattern()
+		{
+			ScenarioContext.Current.Pending();
+		}
+
+		[Then(@"the IInvocation instance should be called as expected")]
+		public void AssertIInvocationCallPattern()
+		{
+			Mock<IInvocation> mockInvocation = MockFactory.Mocks.GetMock<IInvocation>();
+
+			mockInvocation.VerifyGet(call => call.TargetType, Times.Exactly(3));
+			mockInvocation.VerifyGet(call => call.Method, Times.Exactly(5));
+			mockInvocation.VerifyGet(call => call.Arguments, Times.Exactly(1));
+			mockInvocation.VerifyGet(call => call.ReturnValue, Times.Exactly(2));
+		}
+		#endregion
+
+		private static Action<Action<FormatMessageHandler>> GetLoggingHandlerAction()
+		{
+			return action => action((format, args) =>
+			{
+				string message = string.Format(format, args);
+				Debug.WriteLine(message);
+				return message;
+			});
 		}
 	}
 }
