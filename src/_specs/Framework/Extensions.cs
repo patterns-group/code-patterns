@@ -45,12 +45,15 @@ namespace Patterns.Specifications.Framework
 			}
 		}
 
-		public static TValue Pull<TValue>(this ScenarioContext context, string key)
+		public static TValue Pull<TValue>(this ScenarioContext context, string key = null, Func<TValue> factory = null)
 		{
-			return context.ContainsKey(key) ? context[key] is TValue ? (TValue) context[key] : default(TValue) : default(TValue);
+		    key = string.IsNullOrEmpty(key) ? typeof (TValue).AssemblyQualifiedName : key;
+		    Debug.Assert(key != null);
+		    factory = factory ?? (() => default(TValue));
+            return context.ContainsKey(key) ? context[key] is TValue ? (TValue)context[key] : factory() : factory();
 		}
 
-		public static object GetDefault(this Type type)
+	    public static object GetDefault(this Type type)
 		{
 			MethodInfo factoryMethod = typeof (Extensions).GetMethods(BindingFlags.Public | BindingFlags.Static)
 				.Where(x => x.Name.StartsWith("Default") && x.IsGenericMethod)

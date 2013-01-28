@@ -23,108 +23,117 @@
 
 #endregion
 
+using Castle.DynamicProxy;
+
+using Patterns.Logging;
+using Patterns.Specifications.Framework;
+using Patterns.Specifications.Steps.Factories;
+
 using TechTalk.SpecFlow;
 
 namespace Patterns.Specifications.Steps.Logging
 {
-    [Binding]
-    [Scope(Feature = "Logging")]
-    public class LoggingSteps
-    {
-        [Given(@"I have configured a new container")]
-        public void ConfigureContainer()
-        {
-            ScenarioContext.Current.Pending();
-        }
+	[Binding]
+	[Scope(Feature = "Logging")]
+	public class LoggingSteps
+	{
+		private static readonly string _loggingInterceptorKey = ScenarioContext.Current.NewKey();
 
-        [Given(@"I have registered the LoggingModule")]
-        public void RegisterLoggingModule()
-        {
-            ScenarioContext.Current.Pending();
-        }
+		[Given(@"I have created a new container builder")]
+		public void ConfigureContainer()
+		{
+			ScenarioContext.Current.Pending();
+		}
 
-        [Given(@"I have registered a test type with a dependency on ILog")]
-        public void RegisterILogDependantTestType()
-        {
-            ScenarioContext.Current.Pending();
-        }
+		[Given(@"I have registered the LoggingModule")]
+		public void RegisterLoggingModule()
+		{
+			ScenarioContext.Current.Pending();
+		}
 
-        [Given(@"I have resolved an instance of the test type")]
-        public void ResolveTestType()
-        {
-            ScenarioContext.Current.Pending();
-        }
+		[Given(@"I have registered a test type with a dependency on ILog")]
+		public void RegisterILogDependantTestType()
+		{
+			ScenarioContext.Current.Pending();
+		}
 
-        [When(@"I inspect the ILog instance the test type is using")]
-        public void GetILogImplementation()
-        {
-            ScenarioContext.Current.Pending();
-        }
+		[Given(@"I have resolved an instance of the test type")]
+		public void ResolveTestType()
+		{
+			ScenarioContext.Current.Pending();
+		}
 
-        [Then(@"the ILog instance should be configured correctly for the test type")]
-        public void AssertILogInstanceConfiguration()
-        {
-            ScenarioContext.Current.Pending();
-        }
+		[When(@"I inspect the ILog instance the test type is using")]
+		public void GetILogImplementation()
+		{
+			ScenarioContext.Current.Pending();
+		}
 
-        [Given(@"I have registered an intercepted test type")]
-        public void RegisterInterceptedTestType()
-        {
-            ScenarioContext.Current.Pending();
-        }
+		[Then(@"the ILog instance should be configured correctly for the test type")]
+		public void AssertILogInstanceConfiguration()
+		{
+			ScenarioContext.Current.Pending();
+		}
 
-        [When(@"I call a method on the test type")]
-        public void CallTestTypeMethod()
-        {
-            ScenarioContext.Current.Pending();
-        }
+		[Given(@"I have registered an intercepted test type")]
+		public void RegisterInterceptedTestType()
+		{
+			ScenarioContext.Current.Pending();
+		}
 
-        [Then(@"the ILog instance should be called as expected using the happy path")]
-        public void AssertILogHappyPathCallPattern()
-        {
-            ScenarioContext.Current.Pending();
-        }
+		[When(@"I call a method on the test type")]
+		public void CallTestTypeMethod()
+		{
+			ScenarioContext.Current.Pending();
+		}
 
-        [Then(@"the ILog instance should be called as expected using the error path")]
-        public void AssertILogErrorPathCallPattern()
-        {
-            ScenarioContext.Current.Pending();
-        }
+		[Then(@"the ILog instance should be called as expected using the happy path")]
+		public void AssertILogHappyPathCallPattern()
+		{
+			ScenarioContext.Current.Pending();
+		}
 
-        [Given(@"I have created a LoggingInterceptor instance")]
-        public void CreateLoggingInterceptor()
-        {
-            ScenarioContext.Current.Pending();
-        }
+		[Then(@"the ILog instance should be called as expected using the error path")]
+		public void AssertILogErrorPathCallPattern()
+		{
+			ScenarioContext.Current.Pending();
+		}
 
-        [When(@"I tell the interceptor to intercept an invocation")]
-        public void InterceptInvocation()
-        {
-            ScenarioContext.Current.Pending();
-        }
+		[Given(@"I have created a LoggingInterceptor instance")]
+		public void CreateLoggingInterceptor()
+		{
+			ScenarioContext.Current[_loggingInterceptorKey] = new LoggingInterceptor(true);
+		}
 
-        [Then(@"the IInvocation instance should be called as expected")]
-        public void AssertIInvocationCallPattern()
-        {
-            ScenarioContext.Current.Pending();
-        }
+		[When(@"I tell the interceptor to intercept an invocation")]
+		public void InterceptInvocation()
+		{
+			var interceptor = ScenarioContext.Current.Pull<IInterceptor>(_loggingInterceptorKey);
+			interceptor.Intercept(MockFactory.Mocks.GetMock<IInvocation>().Object);
+		}
 
-        [Given(@"I have configured my mock IInvocation instance to throw an error when proceeding")]
-        public void ConfigureIInvocationThrowException()
-        {
-            ScenarioContext.Current.Pending();
-        }
+		[Then(@"the IInvocation instance should be called as expected")]
+		public void AssertIInvocationCallPattern()
+		{
+			ScenarioContext.Current.Pending();
+		}
 
-        [Given(@"I have created a manual interceptor proxy to a test type, using the LoggingInterceptor")]
-        public void CreateManualLoggingInterceptorProxy()
-        {
-            ScenarioContext.Current.Pending();
-        }
+		[Given(@"I have configured my mock IInvocation instance to throw an error when proceeding")]
+		public void ConfigureIInvocationThrowException()
+		{
+			ScenarioContext.Current.Pending();
+		}
 
-        [When(@"I call a volatile method on the test type")]
-        public void CallVolatileTestTypeMethod()
-        {
-            ScenarioContext.Current.Pending();
-        }
-    }
+		[Given(@"I have created a manual interceptor proxy to a test type, using the LoggingInterceptor")]
+		public void CreateManualLoggingInterceptorProxy()
+		{
+			ScenarioContext.Current.Pending();
+		}
+
+		[When(@"I call a volatile method on the test type")]
+		public void CallVolatileTestTypeMethod()
+		{
+			ScenarioContext.Current.Pending();
+		}
+	}
 }

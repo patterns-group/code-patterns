@@ -12,13 +12,15 @@
 # and the ILog instance. This means that the method used to retrieve an ILog
 # instance should be injected.
 Scenario: Logging Interceptor
-	Given I have created a LoggingInterceptor instance
+	Given I have a fresh mock container
+	And I have created a LoggingInterceptor instance
 	When I tell the interceptor to intercept an invocation
 	Then the ILog instance should be called as expected using the happy path
 	And the IInvocation instance should be called as expected
 
 Scenario: Logging Interceptor with Exception
-	Given I have created a LoggingInterceptor instance
+	Given I have a fresh mock container
+	And I have created a LoggingInterceptor instance
 	And I have configured my mock IInvocation instance to throw an error when proceeding
 	When I tell the interceptor to intercept an invocation
 	Then the IInvocation instance should be called as expected
@@ -40,7 +42,7 @@ Scenario: Manual Logging Interceptor with Exception
 # this applies to all logical paths that exist within the interceptor
 # (see above)
 Scenario: Autofac Interceptor
-	Given I have configured a new container
+	Given I have created a new container builder
 	And I have registered the LoggingModule
 	And I have registered an intercepted test type
 	And I have resolved an instance of the test type
@@ -48,7 +50,7 @@ Scenario: Autofac Interceptor
 	Then the ILog instance should be called as expected using the happy path
 
 Scenario: Autofac Interceptor with Exception
-	Given I have configured a new container
+	Given I have created a new container builder
 	And I have registered the LoggingModule
 	And I have registered an intercepted test type
 	And I have resolved an instance of the test type
@@ -59,7 +61,7 @@ Scenario: Autofac Interceptor with Exception
 # when we retrieve instances of types that depend on ILog
 # then we should see that the retrieved instances have the expected ILog references
 Scenario: Autofac ILog Provider
-	Given I have configured a new container
+	Given I have created a new container builder
 	And I have registered the LoggingModule
 	And I have registered a test type with a dependency on ILog
 	And I have resolved an instance of the test type

@@ -42,6 +42,9 @@
     <Reference Include="AutofacContrib.CommonServiceLocator">
       <HintPath>..\packages\Autofac.CommonServiceLocator.Indy.2.6.3.863\lib\net40\AutofacContrib.CommonServiceLocator.dll</HintPath>
     </Reference>
+    <Reference Include="Castle.Core">
+      <HintPath>..\packages\Castle.Core.3.1.0\lib\net40-client\Castle.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Common.Logging, Version=2.1.2.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Common.Logging.2.1.2\lib\net40\Common.Logging.dll</HintPath>
