@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="3.5.17.0" xmlns="http://joel.fjorden.se/CodeStyleEnforcer">
+  <Rule CodeType="Field">
+    <Overrides>
+      <Item>
+        <Key>
+          <Modifier>
+            <Modifiers>Const</Modifiers>
+            <Visibility>Public Internal ProtectedInternal Protected</Visibility>
+          </Modifier>
+        </Key>
+        <Value>
+          <Rule CodeType="Field" />
+        </Value>
+      </Item>
+      <Item>
+        <Key>
+          <Modifier>
+            <Modifiers>Readonly Static</Modifiers>
+            <Visibility>Public Internal</Visibility>
+          </Modifier>
+        </Key>
+        <Value>
+          <Rule CodeType="Field" />
+        </Value>
+      </Item>
+    </Overrides>
+    <Prefix>_</Prefix>
+    <Case>Camel</Case>
+  </Rule>
+  <Rule CodeType="Variable">
+    <Case>Camel</Case>
+  </Rule>
+  <Rule CodeType="Parameter">
+    <Case>Camel</Case>
+  </Rule>
+  <Rule CodeType="Property" />
+  <Rule CodeType="Method">
+    <Overrides>
+      <Item>
+        <Key>
+          <Modifier>
+            <Modifiers>Async</Modifiers>
+            <Visibility>All</Visibility>
+          </Modifier>
+        </Key>
+        <Value>
+          <Rule CodeType="Method">
+            <Suffix>Async</Suffix>
+          </Rule>
+        </Value>
+      </Item>
+    </Overrides>
+  </Rule>
+  <Rule CodeType="EventHandler">
+    <Prefix>On</Prefix>
+  </Rule>
+  <Rule CodeType="EnumerationValue" />
+  <Rule CodeType="Enumeration" />
+  <Rule CodeType="Interface">
+    <Prefix>I</Prefix>
+  </Rule>
+  <Rule CodeType="Structure" />
+  <Rule CodeType="Class" />
+  <Rule CodeType="Delegate" />
+  <Rule CodeType="Exception">
+    <Suffix>Exception</Suffix>
+  </Rule>
+  <Rule CodeType="Attribute">
+    <Suffix>Attribute</Suffix>
+  </Rule>
+</Rules>

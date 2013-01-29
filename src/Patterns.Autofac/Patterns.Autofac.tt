@@ -1,0 +1,19 @@
+﻿<#@
+template debug="false" hostspecific="false" language="C#" #><#@
+assembly name="System.Core" #><#@
+output extension=".nuspec" #><?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
+	<metadata>
+		<version>$version$</version>
+		<authors>$author$</authors>
+		<owners>$author$</owners>
+		<dependencies>
+			<dependency id="Patterns" version="$version$" />
+		</dependencies>
+		<id>$id$</id>
+		<title>$id$</title>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<description>$description$</description>
+		<copyright>Copyright © <#= DateTime.Now.Year #></copyright>
+	</metadata>
+</package>

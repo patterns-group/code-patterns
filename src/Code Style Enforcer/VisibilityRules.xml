@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="3.5.17.0" xmlns="http://joel.fjorden.se/CodeStyleEnforcer">
+  <Rule CodeType="Field">
+    <Overrides>
+      <Item>
+        <Key>
+          <Modifier>
+            <Modifiers>Const</Modifiers>
+            <Visibility>All</Visibility>
+          </Modifier>
+        </Key>
+        <Value>
+          <Rule CodeType="Field">
+            <AllowedVisibility>Public Internal ProtectedInternal Protected Private All Explicit</AllowedVisibility>
+          </Rule>
+        </Value>
+      </Item>
+      <Item>
+        <Key>
+          <Modifier>
+            <Modifiers>Readonly Static</Modifiers>
+            <Visibility>All</Visibility>
+          </Modifier>
+        </Key>
+        <Value>
+          <Rule CodeType="Field">
+            <AllowedVisibility>Public Internal ProtectedInternal Protected Private All Explicit</AllowedVisibility>
+          </Rule>
+        </Value>
+      </Item>
+    </Overrides>
+    <AllowedVisibility>Protected Private Explicit</AllowedVisibility>
+  </Rule>
+  <Rule CodeType="Property">
+    <AllowedVisibility>Public Internal ProtectedInternal Protected Private All Explicit</AllowedVisibility>
+  </Rule>
+  <Rule CodeType="Method">
+    <AllowedVisibility>Public Internal ProtectedInternal Protected Private All Explicit</AllowedVisibility>
+  </Rule>
+  <Rule CodeType="EventHandler">
+    <AllowedVisibility>Protected Private Explicit</AllowedVisibility>
+  </Rule>
+  <Rule CodeType="Interface">
+    <AllowedVisibility>Public Internal Explicit</AllowedVisibility>
+  </Rule>
+  <Rule CodeType="Structure">
+    <AllowedVisibility>Public Internal Explicit</AllowedVisibility>
+  </Rule>
+  <Rule CodeType="Class">
+    <AllowedVisibility>Public Internal Explicit</AllowedVisibility>
+  </Rule>
+  <Rule CodeType="Enumeration">
+    <AllowedVisibility>Public Internal ProtectedInternal Protected Private All Explicit</AllowedVisibility>
+  </Rule>
+  <Rule CodeType="Delegate">
+    <AllowedVisibility>Public Internal ProtectedInternal Protected Private All Explicit</AllowedVisibility>
+  </Rule>
+  <Rule CodeType="Exception">
+    <AllowedVisibility>Public Internal Explicit</AllowedVisibility>
+  </Rule>
+  <Rule CodeType="Attribute">
+    <AllowedVisibility>Public Internal Explicit</AllowedVisibility>
+  </Rule>
+</Rules>
