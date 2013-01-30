@@ -18,6 +18,13 @@ Scenario: Logging Interceptor
 	Then the ILog instance should be called as expected using the happy path
 	And the IInvocation instance should be called as expected
 
+Scenario: Logging Interceptor with no return
+	Given I have a fresh mock container
+	And I have created a LoggingInterceptor instance
+	When I tell the interceptor to intercept an invocation with no return value
+	Then the ILog instance should be called as expected using the happy path for no returns
+	And the IInvocation instance should be called as expected using the path for no returns
+
 Scenario: Logging Interceptor with Exception
 	Given I have a fresh mock container
 	And I have created a LoggingInterceptor instance

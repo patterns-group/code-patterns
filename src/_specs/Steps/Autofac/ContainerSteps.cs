@@ -40,13 +40,13 @@ namespace Patterns.Specifications.Steps.Autofac
 
 		public static ContainerBuilder Builder
 		{
-			get { return ScenarioContext.Current.Pull<ContainerBuilder>(_builderKey); }
+			get { return ScenarioContext.Current.GetValue<ContainerBuilder>(_builderKey); }
 			set { ScenarioContext.Current[_builderKey] = value; }
 		}
 
 		public static IContainer Container
 		{
-			get { return ScenarioContext.Current.Pull<IContainer>(_containerKey); }
+			get { return ScenarioContext.Current.GetValue<IContainer>(_containerKey); }
 			set { ScenarioContext.Current[_containerKey] = value; }
 		}
 

@@ -87,10 +87,10 @@ this.ScenarioSetup(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Logging Interceptor with Exception")]
-        public virtual void LoggingInterceptorWithException()
+        [NUnit.Framework.DescriptionAttribute("Logging Interceptor with no return")]
+        public virtual void LoggingInterceptorWithNoReturn()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Logging Interceptor with Exception", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Logging Interceptor with no return", ((string[])(null)));
 #line 21
 this.ScenarioSetup(scenarioInfo);
 #line 22
@@ -98,12 +98,35 @@ this.ScenarioSetup(scenarioInfo);
 #line 23
  testRunner.And("I have created a LoggingInterceptor instance", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 24
- testRunner.And("I have configured my mock IInvocation instance to throw an error when proceeding", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.When("I tell the interceptor to intercept an invocation with no return value", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 25
- testRunner.When("I tell the interceptor to intercept an invocation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.Then("the ILog instance should be called as expected using the happy path for no return" +
+                    "s", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 26
+ testRunner.And("the IInvocation instance should be called as expected using the path for no retur" +
+                    "ns", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Logging Interceptor with Exception")]
+        public virtual void LoggingInterceptorWithException()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Logging Interceptor with Exception", ((string[])(null)));
+#line 28
+this.ScenarioSetup(scenarioInfo);
+#line 29
+ testRunner.Given("I have a fresh mock container", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 30
+ testRunner.And("I have created a LoggingInterceptor instance", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 31
+ testRunner.And("I have configured my mock IInvocation instance to throw an error when proceeding", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 32
+ testRunner.When("I tell the interceptor to intercept an invocation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 33
  testRunner.Then("the IInvocation instance should be called as expected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 27
+#line 34
  testRunner.And("the ILog instance should be called as expected using the error path", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -114,14 +137,14 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void ManualLoggingInterceptor()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Manual Logging Interceptor", ((string[])(null)));
-#line 29
+#line 36
 this.ScenarioSetup(scenarioInfo);
-#line 30
+#line 37
  testRunner.Given("I have created a manual interceptor proxy to a test type, using the LoggingInterc" +
                     "eptor", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 31
+#line 38
  testRunner.When("I call a method on the test type", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 32
+#line 39
  testRunner.Then("the ILog instance should be called as expected using the happy path", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -132,14 +155,14 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void ManualLoggingInterceptorWithException()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Manual Logging Interceptor with Exception", ((string[])(null)));
-#line 34
+#line 41
 this.ScenarioSetup(scenarioInfo);
-#line 35
+#line 42
  testRunner.Given("I have created a manual interceptor proxy to a test type, using the LoggingInterc" +
                     "eptor", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 36
+#line 43
  testRunner.When("I call a volatile method on the test type", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 37
+#line 44
  testRunner.Then("the ILog instance should be called as expected using the error path", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -150,19 +173,19 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void AutofacInterceptor()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Autofac Interceptor", ((string[])(null)));
-#line 44
+#line 51
 this.ScenarioSetup(scenarioInfo);
-#line 45
+#line 52
  testRunner.Given("I have created a new container builder", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 46
+#line 53
  testRunner.And("I have registered the LoggingModule", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 47
+#line 54
  testRunner.And("I have registered an intercepted test type", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 48
+#line 55
  testRunner.And("I have resolved an instance of the test type", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 49
+#line 56
  testRunner.When("I call a method on the test type", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 50
+#line 57
  testRunner.Then("the ILog instance should be called as expected using the happy path", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -173,19 +196,19 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void AutofacInterceptorWithException()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Autofac Interceptor with Exception", ((string[])(null)));
-#line 52
+#line 59
 this.ScenarioSetup(scenarioInfo);
-#line 53
+#line 60
  testRunner.Given("I have created a new container builder", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 54
+#line 61
  testRunner.And("I have registered the LoggingModule", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 55
+#line 62
  testRunner.And("I have registered an intercepted test type", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 56
+#line 63
  testRunner.And("I have resolved an instance of the test type", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 57
+#line 64
  testRunner.When("I call a method on the test type", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 58
+#line 65
  testRunner.Then("the ILog instance should be called as expected using the error path", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -196,19 +219,19 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void AutofacILogProvider()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Autofac ILog Provider", ((string[])(null)));
-#line 63
+#line 70
 this.ScenarioSetup(scenarioInfo);
-#line 64
+#line 71
  testRunner.Given("I have created a new container builder", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 65
+#line 72
  testRunner.And("I have registered the LoggingModule", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 66
+#line 73
  testRunner.And("I have registered a test type with a dependency on ILog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 67
+#line 74
  testRunner.And("I have resolved an instance of the test type", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 68
+#line 75
  testRunner.When("I inspect the ILog instance the test type is using", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 69
+#line 76
  testRunner.Then("the ILog instance should be configured correctly for the test type", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();

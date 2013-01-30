@@ -27,6 +27,8 @@ using System;
 using System.Diagnostics;
 using System.Reflection;
 
+using Autofac;
+
 using Castle.DynamicProxy;
 
 using Common.Logging;
@@ -46,13 +48,11 @@ namespace Patterns.Specifications.Steps.Logging
 	[Scope(Feature = "Logging")]
 	public class LoggingSteps
 	{
-		private static readonly string _loggingInterceptorKey = ScenarioContext.Current.NewKey();
-
 		#region Given
 		[Given(@"I have created a new container builder")]
 		public void ConfigureContainer()
 		{
-			ScenarioContext.Current.Pending();
+			ScenarioContext.Current.SetValue(new ContainerBuilder());
 		}
 
 		[Given(@"I have registered the LoggingModule")]
@@ -87,7 +87,7 @@ namespace Patterns.Specifications.Steps.Logging
 			mockLog.Setup(log => log.Debug(It.IsAny<Action<FormatMessageHandler>>())).Callback(GetLoggingHandlerAction());
 			mockLog.Setup(log => log.Info(It.IsAny<Action<FormatMessageHandler>>())).Callback(GetLoggingHandlerAction());
 			mockLog.Setup(log => log.Error(It.IsAny<Action<FormatMessageHandler>>())).Callback(GetLoggingHandlerAction());
-			ScenarioContext.Current[_loggingInterceptorKey] = new LoggingInterceptor(true, type => mockLog.Object);
+			ScenarioContext.Current.SetValue<IInterceptor>(new LoggingInterceptor(true, type => mockLog.Object));
 		}
 
 		[Given(@"I have configured my mock IInvocation instance to throw an error when proceeding")]
@@ -127,7 +127,7 @@ namespace Patterns.Specifications.Steps.Logging
 			mockInvocation.SetupGet(call => call.Arguments).Returns(new object[] {});
 			mockInvocation.SetupGet(call => call.ReturnValue).Returns("THIS IS A TEST");
 
-			var interceptor = ScenarioContext.Current.Pull<IInterceptor>(_loggingInterceptorKey);
+			var interceptor = ScenarioContext.Current.GetValue<IInterceptor>();
 			interceptor.Intercept(mockInvocation.Object);
 		}
 

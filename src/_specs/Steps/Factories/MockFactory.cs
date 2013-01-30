@@ -46,7 +46,7 @@ namespace Patterns.Specifications.Steps.Factories
 
 		public static IMockContainer Mocks
 		{
-			get { return ScenarioContext.Current.Pull<IMockContainer>(_mocksKey); }
+			get { return ScenarioContext.Current.GetValue<IMockContainer>(_mocksKey); }
 			private set { ScenarioContext.Current[_mocksKey] = value; }
 		}
 

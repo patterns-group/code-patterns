@@ -40,7 +40,7 @@ namespace Patterns.Specifications.Steps.Factories
 
 		public static IDateTimeInfo DateTimeInfo
 		{
-			get { return ScenarioContext.Current.Pull<IDateTimeInfo>(_dateTimeInfoKey); }
+			get { return ScenarioContext.Current.GetValue<IDateTimeInfo>(_dateTimeInfoKey); }
 			private set { ScenarioContext.Current[_dateTimeInfoKey] = value; }
 		}
 

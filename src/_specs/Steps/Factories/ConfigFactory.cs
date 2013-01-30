@@ -37,7 +37,7 @@ namespace Patterns.Specifications.Steps.Factories
 
         public static IConfigurationSource ConfigSource
         {
-            get { return ScenarioContext.Current.Pull<IConfigurationSource>(_configSource); }
+            get { return ScenarioContext.Current.GetValue<IConfigurationSource>(_configSource); }
             set { ScenarioContext.Current[_configSource] = value; }
         }
 

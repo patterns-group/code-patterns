@@ -44,13 +44,13 @@ namespace Patterns.Specifications.Steps.Testing.Runtime
 
 		public static IDateTimeInfo DateTimeInfo
 		{
-			get { return ScenarioContext.Current.Pull<IDateTimeInfo>(_dateTimeInfoKey); }
+			get { return ScenarioContext.Current.GetValue<IDateTimeInfo>(_dateTimeInfoKey); }
 			set { ScenarioContext.Current[_dateTimeInfoKey] = value; }
 		}
 
 		public static DateTime GetNowResult
 		{
-			get { return ScenarioContext.Current.Pull<DateTime>(_getNowResultKey); }
+			get { return ScenarioContext.Current.GetValue<DateTime>(_getNowResultKey); }
 			set { ScenarioContext.Current[_getNowResultKey] = value; }
 		}
 
