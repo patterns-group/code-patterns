@@ -55,7 +55,6 @@ ipch/
 
 # ReSharper is a .NET coding add-in
 _ReSharper*
-*.dotsettings
 
 # NCrunch
 *.ncrunch*
