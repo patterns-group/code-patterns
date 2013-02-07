@@ -93,7 +93,8 @@ namespace Patterns.Specifications.Steps.Logging
 		[Given(@"I have configured my mock IInvocation instance to throw an error when proceeding")]
 		public void ConfigureIInvocationThrowException()
 		{
-			ScenarioContext.Current.Pending();
+			Mock<IInvocation> mockInvocation = MockFactory.Mocks.GetMock<IInvocation>();
+			mockInvocation.Setup(invocation => invocation.Proceed()).Throws<Exception>();
 		}
 
 		[Given(@"I have created a manual interceptor proxy to a test type, using the LoggingInterceptor")]
@@ -149,6 +150,7 @@ namespace Patterns.Specifications.Steps.Logging
 		public void AssertILogHappyPathCallPattern()
 		{
 			Mock<ILog> mockLog = MockFactory.Mocks.GetMock<ILog>();
+
 			mockLog.Verify(log => log.Trace(It.IsAny<Action<FormatMessageHandler>>()), Times.Exactly(2));
 			mockLog.Verify(log => log.Debug(It.IsAny<Action<FormatMessageHandler>>()), Times.Exactly(2));
 			mockLog.Verify(log => log.Info(It.IsAny<Action<FormatMessageHandler>>()), Times.Exactly(1));
@@ -157,7 +159,12 @@ namespace Patterns.Specifications.Steps.Logging
 		[Then(@"the ILog instance should be called as expected using the error path")]
 		public void AssertILogErrorPathCallPattern()
 		{
-			ScenarioContext.Current.Pending();
+			Mock<ILog> mockLog = MockFactory.Mocks.GetMock<ILog>();
+
+			mockLog.Verify(log => log.Trace(It.IsAny<Action<FormatMessageHandler>>()), Times.Exactly(2));
+			mockLog.Verify(log => log.Debug(It.IsAny<Action<FormatMessageHandler>>()), Times.Exactly(2));
+			mockLog.Verify(log => log.Info(It.IsAny<Action<FormatMessageHandler>>()), Times.Exactly(1));
+			mockLog.Verify(log => log.Error(It.IsAny<Action<FormatMessageHandler>>()), Times.Exactly(1));
 		}
 
 		[Then(@"the IInvocation instance should be called as expected")]
@@ -167,6 +174,17 @@ namespace Patterns.Specifications.Steps.Logging
 
 			mockInvocation.VerifyGet(call => call.TargetType, Times.Exactly(3));
 			mockInvocation.VerifyGet(call => call.Method, Times.Exactly(5));
+			mockInvocation.VerifyGet(call => call.Arguments, Times.Exactly(1));
+			mockInvocation.VerifyGet(call => call.ReturnValue, Times.Exactly(2));
+		}
+
+		[Then(@"the IInvocation instance should be called as expected using the error path")]
+		public void AssertIInvocationErrorPathCallPattern()
+		{
+			Mock<IInvocation> mockInvocation = MockFactory.Mocks.GetMock<IInvocation>();
+
+			mockInvocation.VerifyGet(call => call.TargetType, Times.Exactly(3));
+			mockInvocation.VerifyGet(call => call.Method, Times.Exactly(6));
 			mockInvocation.VerifyGet(call => call.Arguments, Times.Exactly(1));
 			mockInvocation.VerifyGet(call => call.ReturnValue, Times.Exactly(2));
 		}

@@ -30,7 +30,15 @@ Scenario: Logging Interceptor with Exception
 	And I have created a LoggingInterceptor instance
 	And I have configured my mock IInvocation instance to throw an error when proceeding
 	When I tell the interceptor to intercept an invocation
-	Then the IInvocation instance should be called as expected
+	Then the IInvocation instance should be called as expected using the error path
+	And the ILog instance should be called as expected using the error path
+
+Scenario: Logging Interceptor with Untrapped Exception
+	Given I have a fresh mock container
+	And I have created a LoggingInterceptor instance that does not trap exceptions
+	And I have configured my mock IInvocation instance to throw an error when proceeding
+	When I tell the interceptor to intercept an invocation
+	Then the IInvocation instance should be called as expected using the error path
 	And the ILog instance should be called as expected using the error path
 
 Scenario: Manual Logging Interceptor
