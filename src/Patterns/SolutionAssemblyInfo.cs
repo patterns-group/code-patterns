@@ -28,7 +28,7 @@ using Patterns;
 [assembly: AssemblyConfiguration(ProductStrings.Empty)]
 [assembly: AssemblyCompany(ProductStrings.Author)]
 [assembly: AssemblyProduct(ProductStrings.Product)]
-[assembly: AssemblyCopyright("Copyright ? 2013")]
+[assembly: AssemblyCopyright("Copyright © 2013")]
 [assembly: AssemblyTrademark(ProductStrings.Empty)]
 [assembly: AssemblyCulture(ProductStrings.Empty)]
 [assembly: ComVisible(false)]
