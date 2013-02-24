@@ -1,4 +1,4 @@
-#region FreeBSD
+﻿#region FreeBSD
 
 // Copyright (c) 2013, John Batte
 // All rights reserved.
@@ -20,51 +20,36 @@
 #endregion
 
 using System;
-using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
 
-using Autofac;
-
-using FizzWare.NBuilder;
-
-using Patterns.Collections;
-using Patterns.Specifications.Framework.TestTargets;
-using Patterns.Specifications.Steps.Factories;
-using Patterns.Specifications.Steps.Observations;
-
-using TechTalk.SpecFlow;
-
-namespace Patterns.Specifications.Steps.Automation
+namespace Patterns.Testing.Values
 {
-	[Binding]
-	public class CollectionAutomation
+	public static class Mixins
 	{
-		[When(@"I add (.+) item(s)? to the collection using the AddRange extension")]
-		public void AddRange(int count, string trailingS)
+		public static object GetDefault(this Type type)
 		{
-			IList<TestSubject> testSubjects = count <= 0 ? new List<TestSubject>() : Builder<TestSubject>.CreateListOfSize(count).Build();
+			MethodInfo factoryMethod = typeof (Mixins).GetMethods(BindingFlags.Public | BindingFlags.Static)
+				.Where(method => method.Name.StartsWith("Default") && method.IsGenericMethod)
+				.Select(method => method.GetGenericMethodDefinition().MakeGenericMethod(type))
+				.FirstOrDefault();
 
-			try
-			{
-				TestSubjectFactory.SubjectCollection.AddRange(testSubjects);
-			}
-			catch (ArgumentNullException ex)
-			{
-				TestObservations.CallResult = ex;
-			}
+			Debug.Assert(factoryMethod != null);
+
+			return factoryMethod.Invoke(null, null);
 		}
 
-		[When(@"I add a null set to the collection using the AddRange extension")]
-		public void AddRangeNull()
+		public static TValue Default<TValue>()
 		{
-			TestSubjectFactory.SubjectCollection.AddRange(null);
+			return default(TValue);
 		}
 
-		[When(@"I run my ""add to test bucket"" logic using Each( with parallel set to true)?")]
-		public void AddToTestBucketWithEach(string parallelMode)
+		public static TimeSpan GetDifference(this DateTime left, DateTime right)
 		{
-			bool parallel = !string.IsNullOrEmpty(parallelMode);
-			var bucket = MockFactory.Mocks.Resolve<ITestBucket>();
-			TestSubjectFactory.SubjectSet.Each(subject => TestBucketAutomation.AddToTestBucketLogic(bucket, subject), parallel);
+			var greater = new DateTime(Math.Max(left.Ticks, right.Ticks));
+			var lesser = new DateTime(Math.Min(left.Ticks, right.Ticks));
+			return greater - lesser;
 		}
 	}
 }

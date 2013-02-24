@@ -29,6 +29,7 @@ using Patterns.Runtime;
 using Patterns.Specifications.Framework;
 using Patterns.Specifications.Steps.Factories;
 using Patterns.Specifications.Steps.Observations;
+using Patterns.Testing.Values;
 
 using TechTalk.SpecFlow;
 

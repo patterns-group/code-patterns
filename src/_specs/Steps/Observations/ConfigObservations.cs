@@ -27,6 +27,7 @@ using System;
 using System.Configuration;
 
 using Patterns.Specifications.Framework;
+using Patterns.Testing.SpecFlow;
 
 using TechTalk.SpecFlow;
 

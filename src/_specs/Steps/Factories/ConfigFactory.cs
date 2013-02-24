@@ -25,6 +25,7 @@
 
 using Patterns.Configuration;
 using Patterns.Specifications.Framework;
+using Patterns.Testing.SpecFlow;
 
 using TechTalk.SpecFlow;
 
@@ -44,7 +45,7 @@ namespace Patterns.Specifications.Steps.Factories
         [Given(@"I have a new Configuration Source using the mocked config abstraction")]
         public void CreateConfigSourceWithMocks()
         {
-            ConfigSource = new ConfigurationSource(MockFactory.Mocks.GetMock<IConfigurationManager>().Object,
+            ConfigSource = new ConfigurationSource(MockFactory.Mocks.Mock<IConfigurationManager>().Object,
                 configuration => new ConfigurationWrapper(configuration));
         }
     }

@@ -58,7 +58,7 @@ namespace Patterns.Testing.Moq
 		/// <typeparam name="TService">The type of the service.</typeparam>
 		/// <param name="activator">The optional activator.</param>
 		/// <returns>The service instance.</returns>
-		TService Create<TService>(Func<IMoqContainer, TService> activator = null);
+		TService Create<TService>(Func<IMoqContainer, TService> activator = null) where TService : class;
 
 		/// <summary>
 		/// Updates this instance by registering the implementation type as the service type.
@@ -66,7 +66,7 @@ namespace Patterns.Testing.Moq
 		/// <typeparam name="TService">The type of the service.</typeparam>
 		/// <typeparam name="TImplementation">The type of the implementation.</typeparam>
 		/// <returns>The container.</returns>
-		IMoqContainer Update<TService, TImplementation>();
+		IMoqContainer Update<TService, TImplementation>() where TService : class where TImplementation : TService;
 
 		/// <summary>
 		/// Updates this instance by registering an instance of the specified service.
@@ -74,7 +74,7 @@ namespace Patterns.Testing.Moq
 		/// <typeparam name="TService">The type of the service.</typeparam>
 		/// <param name="instance">The instance.</param>
 		/// <returns>The container.</returns>
-		IMoqContainer Update<TService>(TService instance);
+		IMoqContainer Update<TService>(TService instance) where TService : class;
 
 		/// <summary>
 		/// Updates this instance by registering the specified activator as the service type.
@@ -82,6 +82,6 @@ namespace Patterns.Testing.Moq
 		/// <typeparam name="TService">The type of the service.</typeparam>
 		/// <param name="activator">The activator.</param>
 		/// <returns>The container</returns>
-		IMoqContainer Update<TService>(Func<IMoqContainer, TService> activator);
+		IMoqContainer Update<TService>(Func<IMoqContainer, TService> activator) where TService : class;
 	}
 }

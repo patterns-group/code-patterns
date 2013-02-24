@@ -19,7 +19,7 @@ namespace Patterns.Specifications.Steps.Assertions
 		[Then(@"the mocked config abstraction should have been asked for a Configuration Section named ""(.*)"" exactly (.*) time(?:s)?")]
 		public void VerifyConfigAbstractionGetSection(string sectionName, int numberOfTimes)
 		{
-		    MockFactory.Mocks.GetMock<IConfigurationManager>().Verify(manager => manager.GetSection(sectionName), Times.Exactly(numberOfTimes));
+		    MockFactory.Mocks.Mock<IConfigurationManager>().Verify(manager => manager.GetSection(sectionName), Times.Exactly(numberOfTimes));
 		}
 
 		[Then(@"the Configuration Section I retrieved from the Configuration Source should be the expected section")]

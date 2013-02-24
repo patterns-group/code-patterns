@@ -30,6 +30,7 @@ using Patterns.Specifications.Framework;
 using Patterns.Specifications.Framework.TestTargets;
 using Patterns.Specifications.Steps.Factories;
 using Patterns.Specifications.Steps.State;
+using Patterns.Testing.SpecFlow;
 
 using TechTalk.SpecFlow;
 

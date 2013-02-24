@@ -143,7 +143,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Framework\Extensions.cs" />
     <Compile Include="Framework\TestTargets\AlternateTestConfigSection.cs" />
     <Compile Include="Framework\TestTargets\ITestBucket.cs" />
     <Compile Include="Framework\TestTargets\TemperamentalTestSubject.cs" />

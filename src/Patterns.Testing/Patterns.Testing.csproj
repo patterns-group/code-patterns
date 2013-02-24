@@ -57,6 +57,9 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="TechTalk.SpecFlow">
+      <HintPath>..\packages\SpecFlow.1.9.0\lib\net35\TechTalk.SpecFlow.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\Patterns\SolutionAssemblyInfo.cs">
@@ -67,6 +70,8 @@
     <Compile Include="Moq\MoqRegistrationSource.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Runtime\TestDateTimeInfo.cs" />
+    <Compile Include="SpecFlow\Mixins.cs" />
+    <Compile Include="Values\Mixins.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Patterns.Autofac\Patterns.Autofac.csproj">
@@ -79,6 +84,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
     <None Include="Patterns.Testing.nuspec">
       <AutoGen>True</AutoGen>

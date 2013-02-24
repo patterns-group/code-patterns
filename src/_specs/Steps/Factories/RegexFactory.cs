@@ -26,6 +26,7 @@
 using System.Collections.Generic;
 
 using Patterns.Specifications.Framework;
+using Patterns.Testing.SpecFlow;
 using Patterns.Text.RegularExpressions;
 
 using TechTalk.SpecFlow;

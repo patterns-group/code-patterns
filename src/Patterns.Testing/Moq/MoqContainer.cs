@@ -43,18 +43,17 @@ namespace Patterns.Testing.Moq
 			ComponentRegistry.AddRegistrationSource(new MoqRegistrationSource());
 		}
 
-		public MoqContainer() : this(new ContainerBuilder().Build())
-		{
-		}
+		public MoqContainer() : this(new ContainerBuilder().Build()) {}
 
 		public IServiceLocator Locator { get; private set; }
 
 		public Mock<TService> Mock<TService>() where TService : class
 		{
-			throw new NotImplementedException();
+			var obj = (IMocked<TService>) Create<TService>();
+			return obj.Mock;
 		}
 
-		public TService Create<TService>(Func<IMoqContainer, TService> activator = null)
+		public TService Create<TService>(Func<IMoqContainer, TService> activator = null) where TService : class
 		{
 			Action<ContainerBuilder> defaultRegistration = builder => builder.RegisterType<TService>()
 				.PropertiesAutowired(PropertyWiringOptions.PreserveSetValues);
@@ -65,21 +64,27 @@ namespace Patterns.Testing.Moq
 			return ResolveOrCreate<TService>(activator == null ? defaultRegistration : activatorRegistration);
 		}
 
-		public IMoqContainer Update<TService, TImplementation>()
+		public IMoqContainer Update<TService, TImplementation>() where TService : class where TImplementation : TService
 		{
 			Update(builder => builder.RegisterType<TImplementation>().As<TService>()
 				.PropertiesAutowired(PropertyWiringOptions.PreserveSetValues));
+
+			return this;
 		}
 
-		public IMoqContainer Update<TService>(TService instance)
+		public IMoqContainer Update<TService>(TService instance) where TService : class
 		{
 			Update(builder => builder.RegisterInstance(instance).As<TService>()
 				.PropertiesAutowired(PropertyWiringOptions.PreserveSetValues));
+
+			return this;
 		}
 
-		public IMoqContainer Update<TService>(Func<IMoqContainer, TService> activator)
+		public IMoqContainer Update<TService>(Func<IMoqContainer, TService> activator) where TService : class
 		{
-			Update(builder => builder.Register(c => activator(this)).As<TService>().PropertiesAutowired(PropertyWiringOptions.PreserveSetValues));
+			Update(builder => builder.Register<TService>(c => activator(this)).As<TService>().PropertiesAutowired(PropertyWiringOptions.PreserveSetValues));
+
+			return this;
 		}
 
 		private void Update(Action<ContainerBuilder> registration)

@@ -33,7 +33,7 @@ using Moq;
 
 using Patterns.Autofac.Modules;
 using Patterns.Logging;
-using Patterns.Specifications.Framework;
+using Patterns.Testing.SpecFlow;
 
 using TechTalk.SpecFlow;
 
@@ -81,7 +81,7 @@ namespace Patterns.Specifications.Steps.Logging
 		[Given(@"I have created a LoggingInterceptor instance")]
 		public void CreateLoggingInterceptor()
 		{
-			Mock<ILog> mockLog = MockFactory.Mocks.GetMock<ILog>();
+			Mock<ILog> mockLog = MockFactory.Mocks.Mock<ILog>();
 			mockLog.Setup(log => log.Trace(It.IsAny<Action<FormatMessageHandler>>())).Callback(GetLoggingHandlerAction());
 			mockLog.Setup(log => log.Debug(It.IsAny<Action<FormatMessageHandler>>())).Callback(GetLoggingHandlerAction());
 			mockLog.Setup(log => log.Info(It.IsAny<Action<FormatMessageHandler>>())).Callback(GetLoggingHandlerAction());
@@ -92,7 +92,7 @@ namespace Patterns.Specifications.Steps.Logging
 		[Given(@"I have configured my mock IInvocation instance to throw an error when proceeding")]
 		public void ConfigureIInvocationThrowException()
 		{
-			Mock<IInvocation> mockInvocation = MockFactory.Mocks.GetMock<IInvocation>();
+			Mock<IInvocation> mockInvocation = MockFactory.Mocks.Mock<IInvocation>();
 			mockInvocation.Setup(invocation => invocation.Proceed()).Throws<Exception>();
 		}
 
@@ -121,7 +121,7 @@ namespace Patterns.Specifications.Steps.Logging
 		[When(@"I tell the interceptor to intercept an invocation")]
 		public void InterceptInvocation()
 		{
-			Mock<IInvocation> mockInvocation = MockFactory.Mocks.GetMock<IInvocation>();
+			Mock<IInvocation> mockInvocation = MockFactory.Mocks.Mock<IInvocation>();
 			mockInvocation.SetupGet(call => call.TargetType).Returns(typeof (object));
 			MethodInfo toStringInfo = typeof (object).GetMethod("ToString");
 			Debug.Assert(toStringInfo != null);
@@ -152,7 +152,7 @@ namespace Patterns.Specifications.Steps.Logging
 		[Then(@"the ILog instance should be called as expected using the happy path")]
 		public void AssertILogHappyPathCallPattern()
 		{
-			Mock<ILog> mockLog = MockFactory.Mocks.GetMock<ILog>();
+			Mock<ILog> mockLog = MockFactory.Mocks.Mock<ILog>();
 
 			mockLog.Verify(log => log.Trace(It.IsAny<Action<FormatMessageHandler>>()), Times.Exactly(2));
 			mockLog.Verify(log => log.Debug(It.IsAny<Action<FormatMessageHandler>>()), Times.Exactly(2));
@@ -162,7 +162,7 @@ namespace Patterns.Specifications.Steps.Logging
 		[Then(@"the ILog instance should be called as expected using the error path")]
 		public void AssertILogErrorPathCallPattern()
 		{
-			Mock<ILog> mockLog = MockFactory.Mocks.GetMock<ILog>();
+			Mock<ILog> mockLog = MockFactory.Mocks.Mock<ILog>();
 
 			mockLog.Verify(log => log.Trace(It.IsAny<Action<FormatMessageHandler>>()), Times.Exactly(2));
 			mockLog.Verify(log => log.Debug(It.IsAny<Action<FormatMessageHandler>>()), Times.Exactly(2));
@@ -173,7 +173,7 @@ namespace Patterns.Specifications.Steps.Logging
 		[Then(@"the IInvocation instance should be called as expected")]
 		public void AssertIInvocationCallPattern()
 		{
-			Mock<IInvocation> mockInvocation = MockFactory.Mocks.GetMock<IInvocation>();
+			Mock<IInvocation> mockInvocation = MockFactory.Mocks.Mock<IInvocation>();
 
 			mockInvocation.VerifyGet(call => call.TargetType, Times.Exactly(3));
 			mockInvocation.VerifyGet(call => call.Method, Times.Exactly(5));
@@ -184,7 +184,7 @@ namespace Patterns.Specifications.Steps.Logging
 		[Then(@"the IInvocation instance should be called as expected using the error path")]
 		public void AssertIInvocationErrorPathCallPattern()
 		{
-			Mock<IInvocation> mockInvocation = MockFactory.Mocks.GetMock<IInvocation>();
+			Mock<IInvocation> mockInvocation = MockFactory.Mocks.Mock<IInvocation>();
 
 			mockInvocation.VerifyGet(call => call.TargetType, Times.Exactly(3));
 			mockInvocation.VerifyGet(call => call.Method, Times.Exactly(6));

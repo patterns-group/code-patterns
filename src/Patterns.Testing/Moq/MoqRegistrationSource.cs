@@ -12,7 +12,7 @@ namespace Patterns.Testing.Moq
 {
 	public class MoqRegistrationSource : IRegistrationSource
 	{
-		private static readonly MockRepository _repository = new MockRepository();
+		private static readonly MockRepository _repository = new MockRepository(MockBehavior.Default);
 		private static readonly MethodInfo _createMethod = typeof(MoqRegistrationSource)
 			.GetMethod("CreateUsingRepository", BindingFlags.NonPublic | BindingFlags.Instance)
 			.GetGenericMethodDefinition();
