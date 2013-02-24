@@ -31,13 +31,16 @@ namespace Patterns.ExceptionHandling
 	public static class Try
 	{
 		/// <summary>
-		///    Gets the result of the specified value retriever.
+		/// Gets the result of the specified value retriever.
 		/// </summary>
-		/// <typeparam name="TValue"> The type of the value. </typeparam>
-		/// <param name="retriever"> The retriever. </param>
-		/// <param name="errorHandler"> The error handler. </param>
-		/// <returns> The result of the retriever, or the default value if an exception is thrown but handled. </returns>
-		public static TValue Get<TValue>(Func<TValue> retriever, Func<Exception, ExceptionState> errorHandler = null)
+		/// <typeparam name="TValue">The type of the value.</typeparam>
+		/// <param name="retriever">The retriever.</param>
+		/// <param name="errorHandler">The optional error handler.</param>
+		/// <param name="fallback">The optional fallback retriever.</param>
+		/// <returns>
+		/// The result of the retriever, or the default value if an exception is thrown but handled.
+		/// </returns>
+		public static TValue Get<TValue>(Func<TValue> retriever, Func<Exception, ExceptionState> errorHandler = null, Func<TValue> fallback = null)
 		{
 			try
 			{
@@ -46,7 +49,7 @@ namespace Patterns.ExceptionHandling
 			catch (Exception exception)
 			{
 				ExceptionState state = errorHandler.Apply(exception);
-				if (state.IsHandled) return default(TValue);
+				if (state.IsHandled) return fallback != null ? Get(fallback, errorHandler) : default(TValue);
 				if (!ReferenceEquals(exception, state.Exception) && state.Exception != null) throw state.Exception;
 				throw;
 			}

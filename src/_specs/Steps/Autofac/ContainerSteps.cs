@@ -27,6 +27,7 @@ using Autofac;
 
 using Patterns.Autofac.Modules;
 using Patterns.Specifications.Framework;
+using Patterns.Testing.SpecFlow;
 
 using TechTalk.SpecFlow;
 

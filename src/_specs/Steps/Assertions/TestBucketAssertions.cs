@@ -45,7 +45,7 @@ namespace Patterns.Specifications.Steps.Assertions
 		[Then(@"the mocked test bucket's Add method should have been called (.+) time(s)?")]
 		public void VerifyTestBucketAdd(int count, string trailingS)
 		{
-			MockFactory.Mocks.GetMock<ITestBucket>().Verify(bucket => bucket.Add(It.IsAny<TestSubject>()), Times.Exactly(count));
+			MockFactory.Mocks.Mock<ITestBucket>().Verify(bucket => bucket.Add(It.IsAny<TestSubject>()), Times.Exactly(count));
 		}
 
 		[Then(@"each item in the test bucket should have a thread Id")]

@@ -28,6 +28,7 @@ using System;
 using Patterns.Runtime;
 using Patterns.Specifications.Framework;
 using Patterns.Specifications.Steps.Observations;
+using Patterns.Testing.SpecFlow;
 
 using TechTalk.SpecFlow;
 

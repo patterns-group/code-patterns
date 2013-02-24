@@ -1,4 +1,4 @@
-#region FreeBSD
+﻿#region FreeBSD
 
 // Copyright (c) 2013, John Batte
 // All rights reserved.
@@ -20,51 +20,60 @@
 #endregion
 
 using System;
-using System.Collections.Generic;
+using System.Diagnostics;
 
-using Autofac;
-
-using FizzWare.NBuilder;
-
-using Patterns.Collections;
-using Patterns.Specifications.Framework.TestTargets;
-using Patterns.Specifications.Steps.Factories;
-using Patterns.Specifications.Steps.Observations;
+using Patterns.ExceptionHandling;
+using Patterns.Testing.Moq;
 
 using TechTalk.SpecFlow;
 
-namespace Patterns.Specifications.Steps.Automation
+namespace Patterns.Testing.SpecFlow
 {
-	[Binding]
-	public class CollectionAutomation
+	public static class Mixins
 	{
-		[When(@"I add (.+) item(s)? to the collection using the AddRange extension")]
-		public void AddRange(int count, string trailingS)
+		public static string NewKey(this ScenarioContext context)
 		{
-			IList<TestSubject> testSubjects = count <= 0 ? new List<TestSubject>() : Builder<TestSubject>.CreateListOfSize(count).Build();
+			if (context == null) return null;
 
-			try
+			while (true)
 			{
-				TestSubjectFactory.SubjectCollection.AddRange(testSubjects);
-			}
-			catch (ArgumentNullException ex)
-			{
-				TestObservations.CallResult = ex;
+				string key = Guid.NewGuid().ToString("N");
+				if (!context.ContainsKey(key)) return key;
 			}
 		}
 
-		[When(@"I add a null set to the collection using the AddRange extension")]
-		public void AddRangeNull()
+		public static TValue GetValue<TValue>(this ScenarioContext context, string key = null, Func<TValue> factory = null)
 		{
-			TestSubjectFactory.SubjectCollection.AddRange(null);
+			key = ResolveKey<TValue>(key);
+			bool valueExists = context.ContainsKey(key);
+
+			if (!valueExists && factory != null)
+			{
+				TValue value = factory();
+				context[key] = value;
+				return value;
+			}
+
+			factory = factory ?? (() => default(TValue));
+			return valueExists ? Try.Get(() => context.Get<TValue>(key), exception => new ExceptionState(exception, true), factory) : factory();
 		}
 
-		[When(@"I run my ""add to test bucket"" logic using Each( with parallel set to true)?")]
-		public void AddToTestBucketWithEach(string parallelMode)
+		public static void SetValue<TValue>(this ScenarioContext context, TValue instance, string key = null)
 		{
-			bool parallel = !string.IsNullOrEmpty(parallelMode);
-			var bucket = MockFactory.Mocks.Resolve<ITestBucket>();
-			TestSubjectFactory.SubjectSet.Each(subject => TestBucketAutomation.AddToTestBucketLogic(bucket, subject), parallel);
+			key = ResolveKey<TValue>(key);
+			context[key] = instance;
+		}
+
+		public static IMoqContainer GetContainer(this ScenarioContext context)
+		{
+			return context.GetValue<IMoqContainer>(factory: () => new MoqContainer());
+		}
+
+		private static string ResolveKey<TValue>(string key)
+		{
+			key = String.IsNullOrEmpty(key) ? typeof (TValue).AssemblyQualifiedName : key;
+			Debug.Assert(key != null);
+			return key;
 		}
 	}
 }

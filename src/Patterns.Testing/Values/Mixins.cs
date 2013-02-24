@@ -1,4 +1,4 @@
-#region FreeBSD
+﻿#region FreeBSD
 
 // Copyright (c) 2013, John Batte
 // All rights reserved.
@@ -19,20 +19,37 @@
 
 #endregion
 
+using System;
+using System.Diagnostics;
+using System.Linq;
 using System.Reflection;
-using System.Resources;
-using System.Runtime.InteropServices;
 
-using Patterns;
+namespace Patterns.Testing.Values
+{
+	public static class Mixins
+	{
+		public static object GetDefault(this Type type)
+		{
+			MethodInfo factoryMethod = typeof (Mixins).GetMethods(BindingFlags.Public | BindingFlags.Static)
+				.Where(method => method.Name.StartsWith("Default") && method.IsGenericMethod)
+				.Select(method => method.GetGenericMethodDefinition().MakeGenericMethod(type))
+				.FirstOrDefault();
 
-[assembly: AssemblyConfiguration(ProductStrings.Empty)]
-[assembly: AssemblyCompany(ProductStrings.Author)]
-[assembly: AssemblyProduct(ProductStrings.Product)]
-[assembly: AssemblyCopyright("Copyright ? 2013")]
-[assembly: AssemblyTrademark(ProductStrings.Empty)]
-[assembly: AssemblyCulture(ProductStrings.Empty)]
-[assembly: ComVisible(false)]
-[assembly: NeutralResourcesLanguage("en-US")]
-[assembly: AssemblyVersion("3.3.2")]
-[assembly: AssemblyFileVersion("3.3.2.0")]
-[assembly: AssemblyInformationalVersion("3.3.2-beta")]
+			Debug.Assert(factoryMethod != null);
+
+			return factoryMethod.Invoke(null, null);
+		}
+
+		public static TValue Default<TValue>()
+		{
+			return default(TValue);
+		}
+
+		public static TimeSpan GetDifference(this DateTime left, DateTime right)
+		{
+			var greater = new DateTime(Math.Max(left.Ticks, right.Ticks));
+			var lesser = new DateTime(Math.Min(left.Ticks, right.Ticks));
+			return greater - lesser;
+		}
+	}
+}

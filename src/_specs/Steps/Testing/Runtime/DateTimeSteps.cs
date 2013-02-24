@@ -30,6 +30,7 @@ using FluentAssertions;
 using Patterns.Runtime;
 using Patterns.Specifications.Framework;
 using Patterns.Testing.Runtime;
+using Patterns.Testing.SpecFlow;
 
 using TechTalk.SpecFlow;
 
