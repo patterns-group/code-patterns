@@ -40,19 +40,19 @@ namespace Patterns.Specifications.Steps.Observations
 
         public static ConfigurationSection ExpectedConfig
         {
-            get { return ScenarioContext.Current.Pull<ConfigurationSection>(_expectedConfig); }
+            get { return ScenarioContext.Current.GetValue<ConfigurationSection>(_expectedConfig); }
             set { ScenarioContext.Current[_expectedConfig] = value; }
         }
         
         public static ConfigurationSection ActualConfig
         {
-            get { return ScenarioContext.Current.Pull<ConfigurationSection>(_actualConfig); }
+            get { return ScenarioContext.Current.GetValue<ConfigurationSection>(_actualConfig); }
             set { ScenarioContext.Current[_actualConfig] = value; }
         }
 
         public static Exception ConfigException
         {
-            get { return ScenarioContext.Current.Pull<Exception>(_configException); }
+            get { return ScenarioContext.Current.GetValue<Exception>(_configException); }
             set { ScenarioContext.Current[_configException] = value; }
         }
     }

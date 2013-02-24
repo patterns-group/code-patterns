@@ -42,6 +42,9 @@
     <Reference Include="AutofacContrib.CommonServiceLocator">
       <HintPath>..\packages\Autofac.CommonServiceLocator.Indy.2.6.3.863\lib\net40\AutofacContrib.CommonServiceLocator.dll</HintPath>
     </Reference>
+    <Reference Include="Castle.Core">
+      <HintPath>..\packages\Castle.Core.3.1.0\lib\net40-client\Castle.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Common.Logging, Version=2.1.2.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Common.Logging.2.1.2\lib\net40\Common.Logging.dll</HintPath>
@@ -84,8 +87,8 @@
     <Compile Include="..\Patterns\SolutionAssemblyInfo.cs">
       <Link>Properties\SolutionAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Features\Autofac\CoreModule.feature.cs">
-      <DependentUpon>CoreModule.feature</DependentUpon>
+    <Compile Include="Features\Autofac\RuntimeModule.feature.cs">
+      <DependentUpon>RuntimeModule.feature</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -108,6 +111,11 @@
       <DependentUpon>ExceptionHandling.feature</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Features\Logging\Logging.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Logging.feature</DependentUpon>
     </Compile>
     <Compile Include="Features\Runtime\DateTimeInfo.feature.cs">
       <DependentUpon>DateTimeInfo.feature</DependentUpon>
@@ -162,6 +170,7 @@
     <Compile Include="Steps\Factories\RegexFactory.cs" />
     <Compile Include="Steps\Factories\TestSubjectFactory.cs" />
     <Compile Include="Steps\Factories\TimeFactory.cs" />
+    <Compile Include="Steps\Logging\LoggingSteps.cs" />
     <Compile Include="Steps\Observations\ConfigObservations.cs" />
     <Compile Include="Steps\Observations\RegexObservations.cs" />
     <Compile Include="Steps\Observations\TestObservations.cs" />
@@ -179,9 +188,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Features\Autofac\CoreModule.feature">
+    <None Include="Features\Autofac\RuntimeModule.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>CoreModule.feature.cs</LastGenOutput>
+      <LastGenOutput>RuntimeModule.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Collections\AddRange.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
@@ -198,6 +207,10 @@
     <None Include="Features\ExceptionHandling\ExceptionHandling.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>ExceptionHandling.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Logging\Logging.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Logging.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Runtime\DateTimeInfo.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

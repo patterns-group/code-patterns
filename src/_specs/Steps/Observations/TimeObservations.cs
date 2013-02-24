@@ -39,19 +39,19 @@ namespace Patterns.Specifications.Steps.Observations
 
 		public static TimeSpan DateTimeDelta
 		{
-			get { return ScenarioContext.Current.Pull<TimeSpan>(_dateTimeDeltaKey); }
+			get { return ScenarioContext.Current.GetValue<TimeSpan>(_dateTimeDeltaKey); }
 			set { ScenarioContext.Current[_dateTimeDeltaKey] = value; }
 		}
 
 		public static DateTime SecondaryDateTime
 		{
-			get { return ScenarioContext.Current.Pull<DateTime>(_systemDateTimeKey); }
+			get { return ScenarioContext.Current.GetValue<DateTime>(_systemDateTimeKey); }
 			set { ScenarioContext.Current[_systemDateTimeKey] = value; }
 		}
 
 		public static DateTime PrimaryDateTime
 		{
-			get { return ScenarioContext.Current.Pull<DateTime>(_customDateTimeKey); }
+			get { return ScenarioContext.Current.GetValue<DateTime>(_customDateTimeKey); }
 			set { ScenarioContext.Current[_customDateTimeKey] = value; }
 		}
 	}
