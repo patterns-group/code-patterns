@@ -1,4 +1,4 @@
-#region FreeBSD
+﻿#region FreeBSD
 
 // Copyright (c) 2013, John Batte
 // All rights reserved.
@@ -20,19 +20,8 @@
 #endregion
 
 using System.Reflection;
-using System.Resources;
 using System.Runtime.InteropServices;
 
-using Patterns;
-
-[assembly: AssemblyConfiguration(ProductStrings.Empty)]
-[assembly: AssemblyCompany(ProductStrings.Author)]
-[assembly: AssemblyProduct(ProductStrings.Product)]
-[assembly: AssemblyCopyright("Copyright ? 2013")]
-[assembly: AssemblyTrademark(ProductStrings.Empty)]
-[assembly: AssemblyCulture(ProductStrings.Empty)]
-[assembly: ComVisible(false)]
-[assembly: NeutralResourcesLanguage("en-US")]
-[assembly: AssemblyVersion("3.3.2")]
-[assembly: AssemblyFileVersion("3.3.2.0")]
-[assembly: AssemblyInformationalVersion("3.3.2-beta")]
+[assembly: AssemblyTitle("Patterns.Moq")]
+[assembly: AssemblyDescription("Code Patterns: Extensions for Moq")]
+[assembly: Guid("0d6dcb4c-7a91-420b-9ed1-772bdde00472")]

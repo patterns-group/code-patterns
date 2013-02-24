@@ -7,12 +7,12 @@ output extension=".nuspec" #><?xml version="1.0"?>
 		<authors>$author$</authors>
 		<owners>$author$</owners>
 		<dependencies>
-			<dependency id="Patterns" version="$version$" />
+			<dependency id="Patterns.Autofac" version="$version$" />
 		</dependencies>
 		<id>$id$</id>
 		<title>$id$</title>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>$description$</description>
-		<copyright>Copyright © <#= DateTime.Now.Year + 1 #></copyright>
+		<copyright>Copyright © <#= DateTime.Now.Year #></copyright>
 	</metadata>
 </package>
