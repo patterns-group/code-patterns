@@ -30,6 +30,7 @@ using Patterns.Specifications.Framework;
 using Patterns.Specifications.Framework.TestTargets;
 using Patterns.Specifications.Steps.Factories;
 using Patterns.Specifications.Steps.State;
+using Patterns.Testing.SpecFlow;
 
 using TechTalk.SpecFlow;
 
@@ -51,61 +52,61 @@ namespace Patterns.Specifications.Steps.Observations
 
 		public static List<TestEvent> ReadRequests
 		{
-			get { return ScenarioContext.Current.Pull<List<TestEvent>>(_readRequestKey); }
+			get { return ScenarioContext.Current.GetValue<List<TestEvent>>(_readRequestKey); }
 			private set { ScenarioContext.Current[_readRequestKey] = value; }
 		}
 
 		public static List<TestEvent> ReadResponses
 		{
-			get { return ScenarioContext.Current.Pull<List<TestEvent>>(_readResponseKey); }
+			get { return ScenarioContext.Current.GetValue<List<TestEvent>>(_readResponseKey); }
 			private set { ScenarioContext.Current[_readResponseKey] = value; }
 		}
 
 		public static List<TestEvent> WriteRequests
 		{
-			get { return ScenarioContext.Current.Pull<List<TestEvent>>(_writeRequestKey); }
+			get { return ScenarioContext.Current.GetValue<List<TestEvent>>(_writeRequestKey); }
 			private set { ScenarioContext.Current[_writeRequestKey] = value; }
 		}
 
 		public static List<TestEvent> CallRequests
 		{
-			get { return ScenarioContext.Current.Pull<List<TestEvent>>(_callRequestKey); }
+			get { return ScenarioContext.Current.GetValue<List<TestEvent>>(_callRequestKey); }
 			private set { ScenarioContext.Current[_callRequestKey] = value; }
 		}
 
 		public static List<TestEvent> CallResponses
 		{
-			get { return ScenarioContext.Current.Pull<List<TestEvent>>(_callResponseKey); }
+			get { return ScenarioContext.Current.GetValue<List<TestEvent>>(_callResponseKey); }
 			private set { ScenarioContext.Current[_callResponseKey] = value; }
 		}
 
 		public static int LastCapturedReadRequestCount
 		{
-			get { return ScenarioContext.Current.Pull<int>(_capturedReadRequestCountKey); }
+			get { return ScenarioContext.Current.GetValue<int>(_capturedReadRequestCountKey); }
 			set { ScenarioContext.Current[_capturedReadRequestCountKey] = value; }
 		}
 
 		public static int LastCapturedReadResponseCount
 		{
-			get { return ScenarioContext.Current.Pull<int>(_capturedReadResponseCountKey); }
+			get { return ScenarioContext.Current.GetValue<int>(_capturedReadResponseCountKey); }
 			set { ScenarioContext.Current[_capturedReadResponseCountKey] = value; }
 		}
 
 		public static int LastCapturedWriteRequestCount
 		{
-			get { return ScenarioContext.Current.Pull<int>(_capturedWriteRequestCountKey); }
+			get { return ScenarioContext.Current.GetValue<int>(_capturedWriteRequestCountKey); }
 			set { ScenarioContext.Current[_capturedWriteRequestCountKey] = value; }
 		}
 
 		public static int LastCapturedCallRequestCount
 		{
-			get { return ScenarioContext.Current.Pull<int>(_capturedCallRequestCountKey); }
+			get { return ScenarioContext.Current.GetValue<int>(_capturedCallRequestCountKey); }
 			set { ScenarioContext.Current[_capturedCallRequestCountKey] = value; }
 		}
 
 		public static int LastCapturedCallResponseCount
 		{
-			get { return ScenarioContext.Current.Pull<int>(_capturedCallResponseCountKey); }
+			get { return ScenarioContext.Current.GetValue<int>(_capturedCallResponseCountKey); }
 			set { ScenarioContext.Current[_capturedCallResponseCountKey] = value; }
 		}
 

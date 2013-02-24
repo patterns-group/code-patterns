@@ -28,6 +28,7 @@ using System;
 using Patterns.Runtime;
 using Patterns.Specifications.Framework;
 using Patterns.Specifications.Steps.Observations;
+using Patterns.Testing.SpecFlow;
 
 using TechTalk.SpecFlow;
 
@@ -40,7 +41,7 @@ namespace Patterns.Specifications.Steps.Factories
 
 		public static IDateTimeInfo DateTimeInfo
 		{
-			get { return ScenarioContext.Current.Pull<IDateTimeInfo>(_dateTimeInfoKey); }
+			get { return ScenarioContext.Current.GetValue<IDateTimeInfo>(_dateTimeInfoKey); }
 			private set { ScenarioContext.Current[_dateTimeInfoKey] = value; }
 		}
 

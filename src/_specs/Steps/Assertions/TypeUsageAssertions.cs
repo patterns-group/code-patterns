@@ -29,6 +29,7 @@ using Patterns.Specifications.Framework;
 using Patterns.Specifications.Framework.TestTargets;
 using Patterns.Specifications.Steps.Automation;
 using Patterns.Specifications.Steps.Observations;
+using Patterns.Testing.Values;
 
 using TechTalk.SpecFlow;
 

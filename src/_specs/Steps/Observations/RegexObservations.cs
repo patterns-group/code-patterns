@@ -27,6 +27,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 using Patterns.Specifications.Framework;
+using Patterns.Testing.SpecFlow;
 
 using TechTalk.SpecFlow;
 
@@ -41,25 +42,25 @@ namespace Patterns.Specifications.Steps.Observations
 
 		public static string RegularExpressionExtractedPattern
 		{
-			get { return ScenarioContext.Current.Pull<string>(_regexExtractedPatternKey); }
+			get { return ScenarioContext.Current.GetValue<string>(_regexExtractedPatternKey); }
 			set { ScenarioContext.Current[_regexExtractedPatternKey] = value; }
 		}
 
 		public static IDictionary<string, string> RegularExpressionMatchDictionary
 		{
-			get { return ScenarioContext.Current.Pull<IDictionary<string, string>>(_regexMatchDictionaryKey); }
+			get { return ScenarioContext.Current.GetValue<IDictionary<string, string>>(_regexMatchDictionaryKey); }
 			set { ScenarioContext.Current[_regexMatchDictionaryKey] = value; }
 		}
 
 		public static IEnumerable<Match> RegularExpressionMatches
 		{
-			get { return ScenarioContext.Current.Pull<IEnumerable<Match>>(_regexMatchesKey); }
+			get { return ScenarioContext.Current.GetValue<IEnumerable<Match>>(_regexMatchesKey); }
 			set { ScenarioContext.Current[_regexMatchesKey] = value; }
 		}
 
 		public static RegexOptions RegularExpressionOptions
 		{
-			get { return ScenarioContext.Current.Pull<RegexOptions>(_regexOptionsKey); }
+			get { return ScenarioContext.Current.GetValue<RegexOptions>(_regexOptionsKey); }
 			set { ScenarioContext.Current[_regexOptionsKey] = value; }
 		}
 	}

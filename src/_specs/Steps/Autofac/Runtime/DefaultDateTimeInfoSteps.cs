@@ -29,6 +29,7 @@ using FluentAssertions;
 
 using Patterns.Runtime;
 using Patterns.Specifications.Framework;
+using Patterns.Testing.SpecFlow;
 
 using TechTalk.SpecFlow;
 
@@ -41,7 +42,7 @@ namespace Patterns.Specifications.Steps.Autofac.Runtime
 
 		public static IDateTimeInfo DateTimeInfo
 		{
-			get { return ScenarioContext.Current.Pull<IDateTimeInfo>(_dateTimeInfoKey); }
+			get { return ScenarioContext.Current.GetValue<IDateTimeInfo>(_dateTimeInfoKey); }
 			set { ScenarioContext.Current[_dateTimeInfoKey] = value; }
 		}
 
