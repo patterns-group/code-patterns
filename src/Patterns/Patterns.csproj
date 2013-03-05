@@ -83,6 +83,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Patterns.nuspec">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Patterns.tt</DependentUpon>
+    </None>
+    <None Include="Patterns.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Patterns.nuspec</LastGenOutput>
+    </None>
     <None Include="SolutionAssemblyInfo.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>SolutionAssemblyInfo.cs</LastGenOutput>
