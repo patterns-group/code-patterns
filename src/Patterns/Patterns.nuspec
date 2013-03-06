@@ -5,9 +5,6 @@
 		<authors>$author$</authors>
 		<owners>$author$</owners>
 		<projectUrl>https://github.com/jbatte47/code-patterns</projectUrl>
-		<dependencies>
-			<dependency id="Patterns" version="$version$" />
-		</dependencies>
 		<id>$id$</id>
 		<title>$id$</title>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
