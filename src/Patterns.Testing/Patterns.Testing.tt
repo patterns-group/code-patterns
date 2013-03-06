@@ -6,6 +6,7 @@ output extension=".nuspec" #><?xml version="1.0"?>
 		<version>$version$</version>
 		<authors>$author$</authors>
 		<owners>$author$</owners>
+		<projectUrl>https://github.com/jbatte47/code-patterns</projectUrl>
 		<dependencies>
 			<dependency id="Patterns.Autofac" version="$version$" />
 		</dependencies>
