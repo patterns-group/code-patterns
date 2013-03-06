@@ -28,8 +28,7 @@ using System;
 using FluentAssertions;
 
 using Patterns.Runtime;
-using Patterns.Specifications.Framework;
-using Patterns.Testing.Runtime;
+using Patterns.Specifications.Steps.Factories;
 using Patterns.Testing.SpecFlow;
 
 using TechTalk.SpecFlow;
@@ -58,14 +57,13 @@ namespace Patterns.Specifications.Steps.Testing.Runtime
 		[Given(@"I have a DateTime info provider for testing")]
 		public void CreateDateTimeInfo()
 		{
-			DateTimeInfo = new TestDateTimeInfo();
+			DateTimeInfo = MockFactory.Mocks.Mock<IDateTimeInfo>().Object;
 		}
 
 		[Given(@"I have configured the test DateTime info provider to use a static time")]
 		public void UseStaticTime()
 		{
-			var info = (TestDateTimeInfo) DateTimeInfo;
-			info.SetAlways(StaticTime);
+			MockFactory.Mocks.Mock<IDateTimeInfo>().Setup(info => info.GetNow()).Returns(StaticTime);
 		}
 
 		[When(@"I store the return value of the DateTime info provider's ""GetNow"" method")]
