@@ -43,6 +43,9 @@
     <Reference Include="Autofac.Extras.CommonServiceLocator">
       <HintPath>..\packages\Autofac.Extras.CommonServiceLocator.3.0.0\lib\net40\Autofac.Extras.CommonServiceLocator.dll</HintPath>
     </Reference>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.2.2.1\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation">
       <HintPath>..\packages\CommonServiceLocator.1.0\lib\NET35\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
