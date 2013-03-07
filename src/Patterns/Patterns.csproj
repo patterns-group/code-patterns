@@ -70,6 +70,8 @@
     </Compile>
     <Compile Include="Logging\Mixins.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reflection\Mixins.cs" />
+    <Compile Include="Reflection\PropertyValue.cs" />
     <Compile Include="Runtime\DefaultDateTimeInfo.cs" />
     <Compile Include="Runtime\IDateTimeInfo.cs" />
     <Compile Include="Runtime\TimeExtensions.cs" />
@@ -105,6 +107,7 @@
     <EmbeddedResource Include="Logging\LoggingResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>LoggingResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

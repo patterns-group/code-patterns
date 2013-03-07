@@ -61,7 +61,7 @@ namespace Patterns.Specifications.Steps.Logging
 		}
 
 		[Given(@"I have registered a test type with a dependency on ILog")]
-		public void RegisterILogDependantTestType()
+		public void RegisterILogDependentTestType()
 		{
 			ScenarioContext.Current.Pending();
 		}
