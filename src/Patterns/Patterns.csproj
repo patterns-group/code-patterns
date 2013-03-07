@@ -105,6 +105,7 @@
     <EmbeddedResource Include="Logging\LoggingResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>LoggingResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

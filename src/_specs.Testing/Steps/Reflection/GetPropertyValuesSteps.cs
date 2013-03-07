@@ -1,4 +1,4 @@
-#region FreeBSD
+﻿#region FreeBSD
 
 // Copyright (c) 2013, John Batte
 // All rights reserved.
@@ -19,38 +19,36 @@
 
 #endregion
 
-using System;
-
-using Patterns.Runtime;
-using Patterns.Specifications.Steps.Factories;
-using Patterns.Specifications.Steps.Observations;
-using Patterns.Testing.Values;
+using Patterns.Testing.SpecFlow;
 
 using TechTalk.SpecFlow;
 
-namespace Patterns.Specifications.Steps.Automation
+namespace Patterns.Specifications.Steps.Reflection
 {
 	[Binding]
-	public class TimeAutomation
+	[Scope(Feature = "GetPropertyValues for objects")]
+	public class GetPropertyValuesSteps
 	{
-		[When(@"I store the results of both the DateTime\.Now property and the IDateTimeInfo\.GetNow method")]
-		public void StoreDateTimeNowVsIDateInfoGetNow()
+		private const string _objectKey = "GetPropertyValues::Target";
+		private const string _resultKey = "GetPropertyValues::Result";
+
+		[Given(@"my object is an integer with the value (.*)")]
+		public void SetObjectValue(int value)
 		{
-			TimeObservations.SecondaryDateTime = DateTime.Now;
-			TimeObservations.PrimaryDateTime = TimeFactory.DateTimeInfo.GetNow();
+			ScenarioContext.Current[_objectKey] = value;
 		}
 
-		[When(@"I adjust the accuracy of each DateTime value to one second")]
-		public void AdjustDateTimeAccuracyToOneSecond()
+		[When(@"I get the property values of my object")]
+		public void GetPropertyValues()
 		{
-			TimeObservations.PrimaryDateTime = TimeObservations.PrimaryDateTime.AccurateToOneSecond();
-			TimeObservations.SecondaryDateTime = TimeObservations.SecondaryDateTime.AccurateToOneSecond();
+			var value = ScenarioContext.Current.GetValue<int>(_objectKey);
+			ScenarioContext.Current[_resultKey] = value.GetPropertyValues();
 		}
 
-		[When(@"I compare the DateTime values")]
-		public void CompareDateTimeValues()
+		[Then(@"the property values should be as expected")]
+		public void AssertPropertyValues()
 		{
-			TimeObservations.DateTimeDelta = TimeObservations.PrimaryDateTime.GetDifference(TimeObservations.SecondaryDateTime);
+			ScenarioContext.Current.Pending();
 		}
 	}
 }
