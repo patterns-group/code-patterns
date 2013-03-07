@@ -41,7 +41,7 @@ namespace Patterns.Specifications.Steps.Assertions
             Debug.Assert(ConfigObservations.ActualConfig != null);
             Debug.Assert(ConfigObservations.ExpectedConfig != null);
             var expectedType = ConfigObservations.ExpectedConfig.GetType();
-            expectedType.IsAssignableFrom(ConfigObservations.ActualConfig.GetType()).Should().BeFalse();
+            expectedType.IsInstanceOfType(ConfigObservations.ActualConfig).Should().BeFalse();
         }
 	}
 }

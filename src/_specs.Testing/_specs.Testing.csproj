@@ -45,6 +45,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Autofac.3.0.1\lib\net40\Autofac.Configuration.dll</HintPath>
     </Reference>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.2.2.1\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="Castle.Core, Version=3.2.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Castle.Core.3.2.0\lib\net40-client\Castle.Core.dll</HintPath>
@@ -127,6 +130,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Logging.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\Reflection\GetPropertyValues.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GetPropertyValues.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\Runtime\DateTimeInfo.feature.cs">
       <DependentUpon>DateTimeInfo.feature</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -186,6 +194,7 @@
     <Compile Include="Steps\Observations\TimeObservations.cs" />
     <Compile Include="Steps\Observations\TypeUsageObservations.cs" />
     <Compile Include="Steps\Overrides\TestOverrides.cs" />
+    <Compile Include="Steps\Reflection\GetPropertyValuesSteps.cs" />
     <Compile Include="Steps\State\TestEvent.cs" />
     <Compile Include="Steps\Testing\Runtime\DateTimeSteps.cs" />
   </ItemGroup>
@@ -220,6 +229,10 @@
     <None Include="Features\Logging\Logging.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Logging.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Reflection\GetPropertyValues.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>GetPropertyValues.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Runtime\DateTimeInfo.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
