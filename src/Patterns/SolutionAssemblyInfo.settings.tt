@@ -1,6 +1,6 @@
 ﻿<#+
 public int MajorVersion = 3;
-public int MinorVersion = 4;
-public int Revision = 4;
+public int MinorVersion = 5;
+public int Revision = 0;
 public bool IsPreRelease = true;
 #>
