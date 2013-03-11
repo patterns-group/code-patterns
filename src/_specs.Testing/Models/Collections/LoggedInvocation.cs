@@ -23,35 +23,19 @@
 
 #endregion
 
-using System.Collections.Generic;
-
-using FizzWare.NBuilder;
+using System.Threading;
 
 namespace Patterns.Specifications.Models.Collections
 {
-	public class CollectionContext
+	public class LoggedInvocation
 	{
-		public IEnumerable<object> ObjectSet { get; private set; }
-		public ICollection<object> ObjectCollection { get; private set; }
-
-		public void NullifyObjectCollection()
+		public LoggedInvocation(object state)
 		{
-			ObjectCollection = null;
+			State = state;
+			ThreadId = Thread.CurrentThread.ManagedThreadId;
 		}
 
-		public void InitializeObjectCollection(int itemCount)
-		{
-			ObjectCollection = CreateItemCollection(itemCount);
-		}
-
-		public void InitializeObjectSet(int itemCount)
-		{
-			ObjectSet = CreateItemCollection(itemCount);
-		}
-
-		private static IList<object> CreateItemCollection(int itemCount)
-		{
-			return itemCount > 0 ? Builder<object>.CreateListOfSize(itemCount).Build() : new List<object>();
-		}
+		public object State { get; private set; }
+		public int ThreadId { get; private set; }
 	}
 }

@@ -23,35 +23,36 @@
 
 #endregion
 
-using System.Collections.Generic;
+using Patterns.Collections;
+using Patterns.Specifications.Models.Collections;
 
-using FizzWare.NBuilder;
+using TechTalk.SpecFlow;
 
-namespace Patterns.Specifications.Models.Collections
+namespace Patterns.Specifications.Steps.Collections
 {
-	public class CollectionContext
+	[Binding]
+	public class EachSteps
 	{
-		public IEnumerable<object> ObjectSet { get; private set; }
-		public ICollection<object> ObjectCollection { get; private set; }
+		private readonly EachContext _context;
+		private readonly CollectionContext _collections;
 
-		public void NullifyObjectCollection()
+		public EachSteps(EachContext context, CollectionContext collections)
 		{
-			ObjectCollection = null;
+			_context = context;
+			_collections = collections;
 		}
 
-		public void InitializeObjectCollection(int itemCount)
+		[Given(@"my Each logic for objects logs invocations with Thread IDs")]
+		public void LogInvocationsWithThreadIDs()
 		{
-			ObjectCollection = CreateItemCollection(itemCount);
+			_context.ObjectAction = state => _context.InvocationLog.Add(new LoggedInvocation(state));
 		}
 
-		public void InitializeObjectSet(int itemCount)
+		[When(@"I run my Each logic against each object in the set using Each( with parallel set to true)?")]
+		public void RunEachAgainstObjectSet(string runParallel)
 		{
-			ObjectSet = CreateItemCollection(itemCount);
-		}
-
-		private static IList<object> CreateItemCollection(int itemCount)
-		{
-			return itemCount > 0 ? Builder<object>.CreateListOfSize(itemCount).Build() : new List<object>();
+			bool parallel = !string.IsNullOrEmpty(runParallel);
+			_collections.ObjectSet.Each(_context.ObjectAction, parallel);
 		}
 	}
 }

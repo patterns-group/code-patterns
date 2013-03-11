@@ -152,6 +152,8 @@
     </Compile>
     <Compile Include="Models\Autofac\AutofacContext.cs" />
     <Compile Include="Models\Collections\CollectionContext.cs" />
+    <Compile Include="Models\Collections\EachContext.cs" />
+    <Compile Include="Models\Collections\LoggedInvocation.cs" />
     <Compile Include="Models\ErrorContext.cs" />
     <Compile Include="Models\Runtime\RuntimeContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -162,7 +164,10 @@
     </Compile>
     <Compile Include="Steps\Autofac\AutofacSteps.cs" />
     <Compile Include="Steps\Autofac\Modules\RuntimeModuleSteps.cs" />
+    <Compile Include="Steps\Collections\EachSteps.cs" />
+    <Compile Include="Steps\Collections\InvocationLogSteps.cs" />
     <Compile Include="Steps\Collections\ObjectCollectionSteps.cs" />
+    <Compile Include="Steps\Collections\ObjectSetSteps.cs" />
     <Compile Include="Steps\ErrorSteps.cs" />
     <Compile Include="Steps\Runtime\DateTimeInfoSteps.cs" />
   </ItemGroup>

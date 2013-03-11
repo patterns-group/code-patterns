@@ -23,35 +23,26 @@
 
 #endregion
 
-using System.Collections.Generic;
+using Patterns.Specifications.Models.Collections;
 
-using FizzWare.NBuilder;
+using TechTalk.SpecFlow;
 
-namespace Patterns.Specifications.Models.Collections
+namespace Patterns.Specifications.Steps.Collections
 {
-	public class CollectionContext
+	[Binding]
+	public class ObjectSetSteps
 	{
-		public IEnumerable<object> ObjectSet { get; private set; }
-		public ICollection<object> ObjectCollection { get; private set; }
+		private readonly CollectionContext _context;
 
-		public void NullifyObjectCollection()
+		public ObjectSetSteps(CollectionContext context)
 		{
-			ObjectCollection = null;
+			_context = context;
 		}
 
-		public void InitializeObjectCollection(int itemCount)
+		[Given(@"I have a set of objects with (.*) items")]
+		public void CreateObjectSet(int itemCount)
 		{
-			ObjectCollection = CreateItemCollection(itemCount);
-		}
-
-		public void InitializeObjectSet(int itemCount)
-		{
-			ObjectSet = CreateItemCollection(itemCount);
-		}
-
-		private static IList<object> CreateItemCollection(int itemCount)
-		{
-			return itemCount > 0 ? Builder<object>.CreateListOfSize(itemCount).Build() : new List<object>();
+			_context.InitializeObjectSet(itemCount);
 		}
 	}
 }

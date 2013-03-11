@@ -23,35 +23,42 @@
 
 #endregion
 
-using System.Collections.Generic;
+using System.Linq;
 
-using FizzWare.NBuilder;
+using FluentAssertions;
 
-namespace Patterns.Specifications.Models.Collections
+using Patterns.Specifications.Models.Collections;
+
+using TechTalk.SpecFlow;
+
+namespace Patterns.Specifications.Steps.Collections
 {
-	public class CollectionContext
+	[Binding]
+	public class InvocationLogSteps
 	{
-		public IEnumerable<object> ObjectSet { get; private set; }
-		public ICollection<object> ObjectCollection { get; private set; }
+		private readonly EachContext _context;
 
-		public void NullifyObjectCollection()
+		public InvocationLogSteps(EachContext context)
 		{
-			ObjectCollection = null;
+			_context = context;
 		}
 
-		public void InitializeObjectCollection(int itemCount)
+		[Then(@"the invocation log should contain (.*) items")]
+		public void AssertLogCount(int count)
 		{
-			ObjectCollection = CreateItemCollection(itemCount);
+			_context.InvocationLog.Count.Should().Be(count);
 		}
 
-		public void InitializeObjectSet(int itemCount)
+		[Then(@"there should be more than one unique Thread ID in the invocation log")]
+		public void AssertMultipleThreadsInLog()
 		{
-			ObjectSet = CreateItemCollection(itemCount);
+			_context.InvocationLog.Select(log => log.ThreadId).Distinct().Count().Should().BeGreaterThan(1);
 		}
 
-		private static IList<object> CreateItemCollection(int itemCount)
+		[Then(@"each Thread ID in the invocation log should be the same")]
+		public void AssertSingleThreadInLog()
 		{
-			return itemCount > 0 ? Builder<object>.CreateListOfSize(itemCount).Build() : new List<object>();
+			_context.InvocationLog.Select(log => log.ThreadId).Distinct().Count().Should().Be(1);
 		}
 	}
 }

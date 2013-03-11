@@ -23,35 +23,20 @@
 
 #endregion
 
+using System;
 using System.Collections.Generic;
-
-using FizzWare.NBuilder;
 
 namespace Patterns.Specifications.Models.Collections
 {
-	public class CollectionContext
+	public class EachContext
 	{
-		public IEnumerable<object> ObjectSet { get; private set; }
-		public ICollection<object> ObjectCollection { get; private set; }
-
-		public void NullifyObjectCollection()
+		public EachContext()
 		{
-			ObjectCollection = null;
+			InvocationLog = new List<LoggedInvocation>();
 		}
 
-		public void InitializeObjectCollection(int itemCount)
-		{
-			ObjectCollection = CreateItemCollection(itemCount);
-		}
+		public ICollection<LoggedInvocation> InvocationLog { get; private set; }
 
-		public void InitializeObjectSet(int itemCount)
-		{
-			ObjectSet = CreateItemCollection(itemCount);
-		}
-
-		private static IList<object> CreateItemCollection(int itemCount)
-		{
-			return itemCount > 0 ? Builder<object>.CreateListOfSize(itemCount).Build() : new List<object>();
-		}
+		public Action<object> ObjectAction { get; set; }
 	}
 }
