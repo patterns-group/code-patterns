@@ -11,7 +11,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace Patterns.Specifications.Features.Testing.Runtime
+namespace Patterns.Specifications.Features.Autofac.Modules
 {
     using TechTalk.SpecFlow;
     
@@ -19,22 +19,22 @@ namespace Patterns.Specifications.Features.Testing.Runtime
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "1.9.0.77")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("Using DateTime Values During Unit Tests")]
-    public partial class UsingDateTimeValuesDuringUnitTestsFeature
+    [NUnit.Framework.DescriptionAttribute("Runtime Module")]
+    public partial class RuntimeModuleFeature
     {
         
         private static TechTalk.SpecFlow.ITestRunner testRunner;
         
-#line 1 "DateTimeInfo.feature"
+#line 1 "RuntimeModule.feature"
 #line hidden
         
         [NUnit.Framework.TestFixtureSetUpAttribute()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Using DateTime Values During Unit Tests", "As a developer, I want to be able to initialize a test\r\nimplementation of the Dat" +
-                    "eTime abstraction defined in\r\nPatterns.Runtime that seeds or overrides time-base" +
-                    "d values,\r\nallowing me to simulate time-centric scenarios during tests.", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Runtime Module", "As a developer, I want to be able to register an Autofac module for Patterns.Runt" +
+                    "ime\r\nand get the default implementations of each public interface defined in\r\nth" +
+                    "e Patterns.Runtime namespace.", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -67,22 +67,22 @@ namespace Patterns.Specifications.Features.Testing.Runtime
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Static Time")]
-        public virtual void StaticTime()
+        [NUnit.Framework.DescriptionAttribute("Runtime - IDateTimeInfo")]
+        [NUnit.Framework.CategoryAttribute("autofac")]
+        public virtual void Runtime_IDateTimeInfo()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Static Time", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Runtime - IDateTimeInfo", new string[] {
+                        "autofac"});
 #line 7
 this.ScenarioSetup(scenarioInfo);
 #line 8
- testRunner.Given("I have a fresh mock container", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("I have registered the runtime module", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 9
- testRunner.And("I have a DateTime info provider for testing", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I have created the Autofac container", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 10
- testRunner.And("I have configured the test DateTime info provider to use a static time", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.When("I try to resolve an IDateTimeInfo instance", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 11
- testRunner.When("I store the return value of the DateTime info provider\'s \"GetNow\" method", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 12
- testRunner.Then("the stored DateTime value should be equal to the static time I used", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("the resolved IDateTimeInfo object should be an instance of DefaultDateTimeInfo", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

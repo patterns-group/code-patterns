@@ -23,21 +23,34 @@
 
 #endregion
 
-using Autofac;
+using Patterns.Specifications.Models.Autofac;
 
-using Patterns.Runtime;
+using TechTalk.SpecFlow;
 
-namespace Patterns.Autofac.Modules
+namespace Patterns.Specifications.Steps.Autofac
 {
-	/// <summary>
-	///    Provides packaged registration instructions for default implementations
-	///    of public contracts defined in the Patterns.Runtime namespace.
-	/// </summary>
-	public class RuntimeModule : Module
+	[Binding]
+	public class AutofacSteps
 	{
-		protected override void Load(ContainerBuilder builder)
+		private readonly AutofacContext _context;
+
+		public AutofacSteps(AutofacContext context)
 		{
-			builder.RegisterType<DefaultDateTimeInfo>().As<IDateTimeInfo>();
+			_context = context;
+		}
+
+		[Given(@"I have created the Autofac container")]
+		public void CreateContainer()
+		{
+			_context.Build();
+		}
+
+		[AfterScenario("autofac")]
+		public void TearDown()
+		{
+			if (_context.Container == null) return;
+
+			_context.Container.Dispose();
 		}
 	}
 }

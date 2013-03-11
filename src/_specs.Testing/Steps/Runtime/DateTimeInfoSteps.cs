@@ -25,19 +25,39 @@
 
 using Autofac;
 
-using Patterns.Runtime;
+using FluentAssertions;
 
-namespace Patterns.Autofac.Modules
+using Patterns.Runtime;
+using Patterns.Specifications.Models.Autofac;
+using Patterns.Specifications.Models.Runtime;
+
+using TechTalk.SpecFlow;
+
+namespace Patterns.Specifications.Steps.Runtime
 {
-	/// <summary>
-	///    Provides packaged registration instructions for default implementations
-	///    of public contracts defined in the Patterns.Runtime namespace.
-	/// </summary>
-	public class RuntimeModule : Module
+	[Binding]
+	public class DateTimeInfoSteps
 	{
-		protected override void Load(ContainerBuilder builder)
+		private readonly RuntimeContext _context;
+		private readonly AutofacContext _autofac;
+
+		public DateTimeInfoSteps(RuntimeContext context, AutofacContext autofac)
 		{
-			builder.RegisterType<DefaultDateTimeInfo>().As<IDateTimeInfo>();
+			_context = context;
+			_autofac = autofac;
+		}
+
+		[When(@"I try to resolve an IDateTimeInfo instance")]
+		public void ResolveIDateTimeInfo()
+		{
+			_context.DateTimeInfo = _autofac.Container.Resolve<IDateTimeInfo>();
+		}
+
+		[Then(@"the resolved IDateTimeInfo object should be an instance of DefaultDateTimeInfo")]
+		public void AssertResolvedIDateTimeInfoIsDefault()
+		{
+			_context.DateTimeInfo.Should().NotBeNull();
+			_context.DateTimeInfo.GetType().Should().Be(typeof(DefaultDateTimeInfo));
 		}
 	}
 }

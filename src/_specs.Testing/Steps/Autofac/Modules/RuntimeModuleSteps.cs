@@ -1,4 +1,4 @@
-﻿#region FreeBSD
+#region FreeBSD
 
 // Copyright (c) 2013, John Batte
 // All rights reserved.
@@ -25,19 +25,27 @@
 
 using Autofac;
 
-using Patterns.Runtime;
+using Patterns.Autofac.Modules;
+using Patterns.Specifications.Models.Autofac;
 
-namespace Patterns.Autofac.Modules
+using TechTalk.SpecFlow;
+
+namespace Patterns.Specifications.Steps.Autofac.Modules
 {
-	/// <summary>
-	///    Provides packaged registration instructions for default implementations
-	///    of public contracts defined in the Patterns.Runtime namespace.
-	/// </summary>
-	public class RuntimeModule : Module
+	[Binding]
+	public class RuntimeModuleSteps
 	{
-		protected override void Load(ContainerBuilder builder)
+		private readonly AutofacContext _autofac;
+
+		public RuntimeModuleSteps(AutofacContext autofac)
 		{
-			builder.RegisterType<DefaultDateTimeInfo>().As<IDateTimeInfo>();
+			_autofac = autofac;
+		}
+
+		[Given(@"I have registered the runtime module")]
+		public void RegisterModule()
+		{
+			_autofac.Builder.RegisterModule(new RuntimeModule());
 		}
 	}
 }
