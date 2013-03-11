@@ -23,40 +23,17 @@
 
 #endregion
 
-using System;
-using System.Configuration;
+using Patterns.Testing.Moq;
 
-using FluentAssertions;
-
-using Patterns.Specifications.Models;
-
-using TechTalk.SpecFlow;
-
-namespace Patterns.Specifications.Steps
+namespace Patterns.Specifications.Models.Mocking
 {
-	[Binding]
-	public class ErrorSteps
+	public class MoqContext
 	{
-		private readonly ErrorContext _context;
-
-		public ErrorSteps(ErrorContext context)
+		public MoqContext()
 		{
-			_context = context;
+			Container = new MoqContainer();
 		}
 
-		[Then(@"an ArgumentNullException for the (.+) argument should have been thrown")]
-		public void AssertArgumentNullException(string argumentName)
-		{
-			_context.LastError.Should().NotBeNull();
-			_context.LastError.Should().BeOfType<ArgumentNullException>();
-			_context.LastError.As<ArgumentNullException>().ParamName.Should().Be(argumentName);
-		}
-
-		[Then(@"a configuration exception should have been thrown")]
-		public void AssertConfigurationException()
-		{
-			_context.LastError.Should().NotBeNull();
-			_context.LastError.Should().BeOfType<ConfigurationErrorsException>();
-		}
+		public IMoqContainer Container { get; private set; }
 	}
 }
