@@ -1,4 +1,4 @@
-﻿#region FreeBSD
+#region FreeBSD
 
 // Copyright (c) 2013, John Batte
 // All rights reserved.
@@ -24,51 +24,24 @@
 #endregion
 
 using System;
-using System.Configuration;
 
-using FluentAssertions;
+using Autofac;
 
-using Patterns.Specifications.Models;
+using Patterns.Configuration;
 
-using TechTalk.SpecFlow;
-
-namespace Patterns.Specifications.Steps
+namespace Patterns.Autofac.Configuration
 {
-	[Binding]
-	public class ErrorSteps
+	/// <summary>
+	///    Provides packaged registration instructions for default implementations
+	///    of public contracts defined in the Patterns.Configuration namespace.
+	/// </summary>
+	public class ConfigurationModule : Module
 	{
-		private readonly ErrorContext _context;
-
-		public ErrorSteps(ErrorContext context)
+		protected override void Load(ContainerBuilder builder)
 		{
-			_context = context;
-		}
-
-		[Then(@"an ArgumentNullException for the (.+) argument should have been thrown")]
-		public void AssertArgumentNullException(string argumentName)
-		{
-			_context.LastError.Should().NotBeNull();
-			_context.LastError.Should().BeOfType<ArgumentNullException>();
-			_context.LastError.As<ArgumentNullException>().ParamName.Should().Be(argumentName);
-		}
-
-		[Then(@"a configuration exception should have been thrown")]
-		public void AssertConfigurationException()
-		{
-			_context.LastError.Should().NotBeNull();
-			_context.LastError.Should().BeOfType<ConfigurationErrorsException>();
-		}
-
-		[Then(@"there should be an error")]
-		public void AssertErrorExists()
-		{
-			_context.LastError.Should().NotBeNull();
-		}
-
-		[Then(@"there should not be an error")]
-		public void AssertErrorDoesNotExist()
-		{
-			_context.LastError.Should().BeNull();
+			builder.RegisterType<ConfigurationManagerWrapper>().As<IConfigurationManager>();
+			builder.Register<Func<System.Configuration.Configuration, IConfiguration>>(context => config => new ConfigurationWrapper(config));
+			builder.RegisterType<ConfigurationSource>().As<IConfigurationSource>();
 		}
 	}
 }

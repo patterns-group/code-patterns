@@ -25,23 +25,21 @@
 
 using System;
 
-using Autofac;
+using Patterns.ExceptionHandling;
 
-using Patterns.Configuration;
-
-namespace Patterns.Autofac.Modules
+namespace Patterns.Specifications.Models.ExceptionHandling
 {
-	/// <summary>
-	///    Provides packaged registration instructions for default implementations
-	///    of public contracts defined in the Patterns.Configuration namespace.
-	/// </summary>
-	public class ConfigurationModule : Module
+	public class ExceptionHandlingContext
 	{
-		protected override void Load(ContainerBuilder builder)
+		public ExceptionHandlingContext()
 		{
-			builder.RegisterType<ConfigurationManagerWrapper>().As<IConfigurationManager>();
-			builder.Register<Func<System.Configuration.Configuration, IConfiguration>>(context => config => new ConfigurationWrapper(config));
-			builder.RegisterType<ConfigurationSource>().As<IConfigurationSource>();
+			TestSubject = new ExceptionTestSubject();
 		}
+
+		public ExceptionTestSubject TestSubject { get; private set; }
+
+		public object ReturnValue { get; set; }
+
+		public Func<Exception, ExceptionState> CustomErrorHandler { get; set; }
 	}
 }

@@ -1,4 +1,4 @@
-﻿#region FreeBSD
+#region FreeBSD
 
 // Copyright (c) 2013, John Batte
 // All rights reserved.
@@ -25,17 +25,41 @@ using System.Reactive.Linq;
 
 using Autofac;
 using Autofac.Core;
+using Autofac.Core.Registration;
 
 using Common.Logging;
 
+using Patterns.Autofac.Configuration;
+using Patterns.Configuration;
 using Patterns.Logging;
 
-namespace Patterns.Autofac.Modules
+namespace Patterns.Autofac.Logging
 {
+	/// <summary>
+	/// Provides packaged registration instructions for the Patterns.Logging namespace.
+	/// </summary>
 	public class LoggingModule : Module
 	{
+		/// <summary>
+		/// The default log factory.
+		/// </summary>
+		public static readonly Func<Type, ILog> DefaultLogFactory = type => LogManager.GetLogger(type); 
+
 		protected override void Load(ContainerBuilder builder)
 		{
+			builder.Register(context => DefaultLogFactory);
+			builder.Register(context =>
+			{
+				try
+				{
+					var configSource = context.Resolve<IConfigurationSource>();
+					return configSource.GetSection<LoggingConfig>(LoggingConfig.DefaultSectionName);
+				}
+				catch (ComponentNotRegisteredException registrationError)
+				{
+					throw ErrorBuilder.BuildContainerException(registrationError, ConfigurationResources.MissingConfigSourceErrorHint);
+				}
+			});
 			builder.RegisterType<LoggingInterceptor>();
 		}
 
@@ -48,7 +72,7 @@ namespace Patterns.Autofac.Modules
 					args.Parameters = args.Parameters.Concat(new[]
 					{
 						new ResolvedParameter((info, context) => info.ParameterType == typeof (ILog),
-							(info, context) => LogManager.GetLogger(info.Member.DeclaringType))
+							(info, context) => DefaultLogFactory(info.Member.DeclaringType))
 					});
 				});
 		}

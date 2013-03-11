@@ -24,51 +24,29 @@
 #endregion
 
 using System;
-using System.Configuration;
 
-using FluentAssertions;
-
-using Patterns.Specifications.Models;
-
-using TechTalk.SpecFlow;
-
-namespace Patterns.Specifications.Steps
+namespace Patterns.Specifications.Models.ExceptionHandling
 {
-	[Binding]
-	public class ErrorSteps
+	public class ExceptionTestSubject
 	{
-		private readonly ErrorContext _context;
+		public const string NormalReturnValue = "{E69BA3F3-16FE-4F60-9DB7-F1FE5C32AEFC}";
+		public static readonly Type ReturnType = typeof (string);
 
-		public ErrorSteps(ErrorContext context)
+		public void NormalAction() {}
+
+		public void ActionWithException()
 		{
-			_context = context;
+			throw new Exception();
 		}
 
-		[Then(@"an ArgumentNullException for the (.+) argument should have been thrown")]
-		public void AssertArgumentNullException(string argumentName)
+		public string NormalFunc()
 		{
-			_context.LastError.Should().NotBeNull();
-			_context.LastError.Should().BeOfType<ArgumentNullException>();
-			_context.LastError.As<ArgumentNullException>().ParamName.Should().Be(argumentName);
+			return NormalReturnValue;
 		}
 
-		[Then(@"a configuration exception should have been thrown")]
-		public void AssertConfigurationException()
+		public string FuncWithException()
 		{
-			_context.LastError.Should().NotBeNull();
-			_context.LastError.Should().BeOfType<ConfigurationErrorsException>();
-		}
-
-		[Then(@"there should be an error")]
-		public void AssertErrorExists()
-		{
-			_context.LastError.Should().NotBeNull();
-		}
-
-		[Then(@"there should not be an error")]
-		public void AssertErrorDoesNotExist()
-		{
-			_context.LastError.Should().BeNull();
+			throw new Exception();
 		}
 	}
 }

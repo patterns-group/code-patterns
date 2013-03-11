@@ -24,51 +24,21 @@
 #endregion
 
 using System;
-using System.Configuration;
+using System.Text;
 
-using FluentAssertions;
+using Autofac.Core.Registration;
 
-using Patterns.Specifications.Models;
-
-using TechTalk.SpecFlow;
-
-namespace Patterns.Specifications.Steps
+namespace Patterns.Autofac
 {
-	[Binding]
-	public class ErrorSteps
+	internal class ErrorBuilder
 	{
-		private readonly ErrorContext _context;
-
-		public ErrorSteps(ErrorContext context)
+		public static Exception BuildContainerException(ComponentNotRegisteredException containerError, params string[] hints)
 		{
-			_context = context;
-		}
+			var messageBuilder = new StringBuilder(ContainerResources.MissingDependencies).AppendLine();
 
-		[Then(@"an ArgumentNullException for the (.+) argument should have been thrown")]
-		public void AssertArgumentNullException(string argumentName)
-		{
-			_context.LastError.Should().NotBeNull();
-			_context.LastError.Should().BeOfType<ArgumentNullException>();
-			_context.LastError.As<ArgumentNullException>().ParamName.Should().Be(argumentName);
-		}
+			foreach (string hint in hints) messageBuilder.AppendLine(hint);
 
-		[Then(@"a configuration exception should have been thrown")]
-		public void AssertConfigurationException()
-		{
-			_context.LastError.Should().NotBeNull();
-			_context.LastError.Should().BeOfType<ConfigurationErrorsException>();
-		}
-
-		[Then(@"there should be an error")]
-		public void AssertErrorExists()
-		{
-			_context.LastError.Should().NotBeNull();
-		}
-
-		[Then(@"there should not be an error")]
-		public void AssertErrorDoesNotExist()
-		{
-			_context.LastError.Should().BeNull();
+			return new Exception(messageBuilder.ToString(), containerError);
 		}
 	}
 }

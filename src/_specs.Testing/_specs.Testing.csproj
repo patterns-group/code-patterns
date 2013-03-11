@@ -158,6 +158,8 @@
     <Compile Include="Models\Configuration\InvalidConfigurationSection.cs" />
     <Compile Include="Models\Configuration\TestConfigurationSection.cs" />
     <Compile Include="Models\ErrorContext.cs" />
+    <Compile Include="Models\ExceptionHandling\ExceptionHandlingContext.cs" />
+    <Compile Include="Models\ExceptionHandling\ExceptionTestSubject.cs" />
     <Compile Include="Models\Mocking\MoqContext.cs" />
     <Compile Include="Models\Runtime\RuntimeContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -175,6 +177,7 @@
     <Compile Include="Steps\Configuration\ConfigSourceSteps.cs" />
     <Compile Include="Steps\Configuration\MockedConfigAbstractionSteps.cs" />
     <Compile Include="Steps\ErrorSteps.cs" />
+    <Compile Include="Steps\ExceptionHandling\TrySteps.cs" />
     <Compile Include="Steps\Runtime\DateTimeInfoSteps.cs" />
   </ItemGroup>
   <ItemGroup>

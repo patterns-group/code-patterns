@@ -23,52 +23,37 @@
 
 #endregion
 
-using System;
 using System.Configuration;
 
-using FluentAssertions;
-
-using Patterns.Specifications.Models;
-
-using TechTalk.SpecFlow;
-
-namespace Patterns.Specifications.Steps
+namespace Patterns.Logging
 {
-	[Binding]
-	public class ErrorSteps
+	/// <summary>
+	/// Defines configuration options for the Patterns.Logging namespace.
+	/// </summary>
+	public class LoggingConfig : ConfigurationSection
 	{
-		private readonly ErrorContext _context;
+		/// <summary>
+		/// The default section name.
+		/// </summary>
+		public const string DefaultSectionName = "patterns.logging";
+		private const string _trapExceptionsKey = "trapExceptions";
 
-		public ErrorSteps(ErrorContext context)
+		/// <summary>
+		/// Gets or sets a value indicating whether the logging interceptor should trap exceptions
+		/// (as opposed to allowing them to bubble up).
+		/// </summary>
+		/// <value>
+		///   <c>true</c> if the logging interceptor should trap exceptions; otherwise, <c>false</c>.
+		/// </value>
+		[ConfigurationProperty(_trapExceptionsKey)]
+		public bool TrapExceptions
 		{
-			_context = context;
-		}
-
-		[Then(@"an ArgumentNullException for the (.+) argument should have been thrown")]
-		public void AssertArgumentNullException(string argumentName)
-		{
-			_context.LastError.Should().NotBeNull();
-			_context.LastError.Should().BeOfType<ArgumentNullException>();
-			_context.LastError.As<ArgumentNullException>().ParamName.Should().Be(argumentName);
-		}
-
-		[Then(@"a configuration exception should have been thrown")]
-		public void AssertConfigurationException()
-		{
-			_context.LastError.Should().NotBeNull();
-			_context.LastError.Should().BeOfType<ConfigurationErrorsException>();
-		}
-
-		[Then(@"there should be an error")]
-		public void AssertErrorExists()
-		{
-			_context.LastError.Should().NotBeNull();
-		}
-
-		[Then(@"there should not be an error")]
-		public void AssertErrorDoesNotExist()
-		{
-			_context.LastError.Should().BeNull();
+			get
+			{
+				object value = this[_trapExceptionsKey];
+				return value is bool ? (bool) value : default(bool);
+			}
+			set { this[_trapExceptionsKey] = value; }
 		}
 	}
 }
