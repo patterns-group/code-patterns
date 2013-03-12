@@ -160,6 +160,9 @@
     <Compile Include="Models\ErrorContext.cs" />
     <Compile Include="Models\ExceptionHandling\ExceptionHandlingContext.cs" />
     <Compile Include="Models\ExceptionHandling\ExceptionTestSubject.cs" />
+    <Compile Include="Models\Interception\InterceptionContext.cs" />
+    <Compile Include="Models\Logging\LoggingContext.cs" />
+    <Compile Include="Models\Logging\LoggingTestSubject.cs" />
     <Compile Include="Models\Mocking\MoqContext.cs" />
     <Compile Include="Models\Runtime\RuntimeContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -178,6 +181,10 @@
     <Compile Include="Steps\Configuration\MockedConfigAbstractionSteps.cs" />
     <Compile Include="Steps\ErrorSteps.cs" />
     <Compile Include="Steps\ExceptionHandling\TrySteps.cs" />
+    <Compile Include="Steps\Interception\InvocationSteps.cs" />
+    <Compile Include="Steps\Logging\LoggingContextSteps.cs" />
+    <Compile Include="Steps\Logging\LoggingInterceptorSteps.cs" />
+    <Compile Include="Steps\Logging\MockVerificationSteps.cs" />
     <Compile Include="Steps\Runtime\DateTimeInfoSteps.cs" />
   </ItemGroup>
   <ItemGroup>
