@@ -165,7 +165,8 @@
     <Compile Include="Models\Logging\ManualLoggingContext.cs" />
     <Compile Include="Models\Logging\ManualLoggingTestSubject.cs" />
     <Compile Include="Models\Mocking\MoqContext.cs" />
-    <Compile Include="Models\Runtime\RuntimeContext.cs" />
+    <Compile Include="Models\Runtime\DateTimeInfoContext.cs" />
+    <Compile Include="Models\Runtime\TimeExtensionsContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -193,6 +194,7 @@
     <Compile Include="Steps\Logging\MockVerificationSteps.cs" />
     <Compile Include="Steps\Logging\TestLoggingModule.cs" />
     <Compile Include="Steps\Runtime\DateTimeInfoSteps.cs" />
+    <Compile Include="Steps\Runtime\TimeExtensionsSteps.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">

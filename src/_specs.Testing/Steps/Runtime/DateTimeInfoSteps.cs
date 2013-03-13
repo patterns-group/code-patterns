@@ -23,6 +23,8 @@
 
 #endregion
 
+using System;
+
 using Autofac;
 
 using FluentAssertions;
@@ -38,13 +40,19 @@ namespace Patterns.Specifications.Steps.Runtime
 	[Binding]
 	public class DateTimeInfoSteps
 	{
-		private readonly RuntimeContext _context;
+		private readonly DateTimeInfoContext _context;
 		private readonly AutofacContext _autofac;
 
-		public DateTimeInfoSteps(RuntimeContext context, AutofacContext autofac)
+		public DateTimeInfoSteps(DateTimeInfoContext context, AutofacContext autofac)
 		{
 			_context = context;
 			_autofac = autofac;
+		}
+
+		[Given(@"I have a default DateTime abstraction")]
+		public void CreateDefaultDateTimeInfo()
+		{
+			_context.DateTimeInfo = new DefaultDateTimeInfo();
 		}
 
 		[When(@"I try to resolve an IDateTimeInfo instance")]
@@ -53,11 +61,24 @@ namespace Patterns.Specifications.Steps.Runtime
 			_context.DateTimeInfo = _autofac.Container.Resolve<IDateTimeInfo>();
 		}
 
+		[When(@"I store the results of both the DateTime\.Now property and the IDateTimeInfo\.GetNow method")]
+		public void StoreBothDateTimeResults()
+		{
+			_context.CustomNow = _context.DateTimeInfo.GetNow();
+			_context.SystemNow = DateTime.Now;
+		}
+
 		[Then(@"the resolved IDateTimeInfo object should be an instance of DefaultDateTimeInfo")]
 		public void AssertResolvedIDateTimeInfoIsDefault()
 		{
 			_context.DateTimeInfo.Should().NotBeNull();
 			_context.DateTimeInfo.GetType().Should().Be(typeof(DefaultDateTimeInfo));
+		}
+
+		[Then(@"the results of both ""now"" DateTime values should be equal")]
+		public void BothDateTimeResultsShouldEqual()
+		{
+			_context.CustomNow.Should().Be(_context.SystemNow);
 		}
 	}
 }

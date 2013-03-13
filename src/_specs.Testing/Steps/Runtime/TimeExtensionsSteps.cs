@@ -23,12 +23,56 @@
 
 #endregion
 
-using Patterns.Runtime;
+using System;
 
-namespace Patterns.Specifications.Models.Runtime
+using FluentAssertions;
+
+using Patterns.Runtime;
+using Patterns.Specifications.Models.Runtime;
+
+using TechTalk.SpecFlow;
+
+namespace Patterns.Specifications.Steps.Runtime
 {
-	public class RuntimeContext
+	[Binding]
+	public class TimeExtensionsSteps
 	{
-		public IDateTimeInfo DateTimeInfo { get; set; }
+		private readonly TimeExtensionsContext _context;
+
+		public TimeExtensionsSteps(TimeExtensionsContext context)
+		{
+			_context = context;
+		}
+
+		[Given(@"I have a DateTime value")]
+		public void CreateFirstDateTime()
+		{
+			_context.FirstValue = DateTime.Now;
+		}
+
+		[Given(@"I have a second DateTime value that varies from the first by (.*) milliseconds")]
+		public void CreateSecondDateTime(int millisecondAdjustment)
+		{
+			_context.SecondValue = _context.FirstValue.AddMilliseconds(millisecondAdjustment);
+		}
+
+		[When(@"I adjust the accuracy of each DateTime value to one second")]
+		public void AdjustAccuracyToOneSecond()
+		{
+			_context.FirstValue = _context.FirstValue.AccurateToOneSecond();
+			_context.SecondValue = _context.SecondValue.AccurateToOneSecond();
+		}
+
+		[When(@"I compare the first and second DateTime values")]
+		public void CompareDateTimeValues()
+		{
+			_context.CalculateDifference();
+		}
+
+		[Then(@"the resulting difference should be zero")]
+		public void AssertDifferenceIsZero()
+		{
+			_context.Difference.Should().Be(TimeSpan.Zero);
+		}
 	}
 }
