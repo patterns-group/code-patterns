@@ -188,6 +188,7 @@
     <Compile Include="Steps\Logging\LoggingContextSteps.cs" />
     <Compile Include="Steps\Logging\LoggingInterceptorSteps.cs" />
     <Compile Include="Steps\Logging\ManualLoggingSteps.cs" />
+    <Compile Include="Steps\Logging\ManualTestLoggingModule.cs" />
     <Compile Include="Steps\Logging\MockMixins.cs" />
     <Compile Include="Steps\Logging\MockVerificationSteps.cs" />
     <Compile Include="Steps\Logging\TestLoggingModule.cs" />

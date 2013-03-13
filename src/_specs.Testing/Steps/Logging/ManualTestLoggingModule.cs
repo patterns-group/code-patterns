@@ -23,57 +23,16 @@
 
 #endregion
 
-using Autofac;
+using System;
 
-using FluentAssertions;
+using Common.Logging;
 
 using Patterns.Autofac.Logging;
-using Patterns.Specifications.Models.Autofac;
-using Patterns.Specifications.Models.Logging;
-
-using TechTalk.SpecFlow;
 
 namespace Patterns.Specifications.Steps.Logging
 {
-	[Binding]
-	public class ManualLoggingSteps
+	public class ManualTestLoggingModule : LoggingModule
 	{
-		private readonly AutofacContext _autofac;
-		private readonly ManualLoggingContext _context;
-
-		public ManualLoggingSteps(AutofacContext autofac, ManualLoggingContext context)
-		{
-			_autofac = autofac;
-			_context = context;
-		}
-
-		[Given(@"I have registered the logging module with a trackable log factory")]
-		public void RegisterTrackableLoggingModule()
-		{
-			_autofac.Builder.RegisterModule(new ManualTestLoggingModule(type =>
-			{
-				_context.TypeUsedForLoggerRequest = type;
-				return LoggingModule.DefaultLogFactory(type);
-			}));
-		}
-
-		[Given(@"I have registered the manual logging test subject")]
-		public void RegisterManualLoggingTestSubject()
-		{
-			_autofac.Builder.RegisterType<ManualLoggingTestSubject>();
-		}
-
-		[When(@"I have resolved an instance of the manual logging test subject")]
-		public void ResolveManualLoggingTestSubject()
-		{
-			_context.TestSubject = _autofac.Container.Resolve<ManualLoggingTestSubject>();
-		}
-
-		[Then(@"the resolved ILog should be type-bound to the manual logging test subject")]
-		public void AssertLoggerIsCorrectlyTypeBound()
-		{
-			_context.TestSubject.Log.Should().NotBeNull();
-			_context.TypeUsedForLoggerRequest.Should().Be(typeof (ManualLoggingTestSubject));
-		}
+		public ManualTestLoggingModule(Func<Type, ILog> logFactory) : base(logFactory) {}
 	}
 }

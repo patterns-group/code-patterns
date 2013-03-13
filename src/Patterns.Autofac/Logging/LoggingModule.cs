@@ -44,6 +44,8 @@ namespace Patterns.Autofac.Logging
 	/// </summary>
 	public class LoggingModule : Module
 	{
+		private readonly Func<Type, ILog> _logFactory;
+
 		/// <summary>
 		///    The default log factory.
 		/// </summary>
@@ -54,26 +56,14 @@ namespace Patterns.Autofac.Logging
 		/// </summary>
 		public LoggingModule() : this(DefaultLogFactory) {}
 
-		/// <summary>
-		///    Initializes a new instance of the <see cref="LoggingModule" /> class.
-		/// </summary>
-		/// <param name="logFactory">The log factory.</param>
-		public LoggingModule(Func<Type, ILog> logFactory)
+		protected LoggingModule(Func<Type, ILog> logFactory)
 		{
-			LogFactory = logFactory;
+			_logFactory = logFactory;
 		}
-
-		/// <summary>
-		///    Gets the log factory.
-		/// </summary>
-		/// <value>
-		///    The log factory.
-		/// </value>
-		public Func<Type, ILog> LogFactory { get; private set; }
 
 		protected override void Load(ContainerBuilder builder)
 		{
-			builder.Register(context => LogFactory);
+			builder.Register(context => _logFactory);
 			builder.Register(context =>
 			{
 				try
@@ -98,7 +88,7 @@ namespace Patterns.Autofac.Logging
 					args.Parameters = args.Parameters.Concat(new[]
 					{
 						new ResolvedParameter((info, context) => info.ParameterType == typeof (ILog),
-							(info, context) => LogFactory(info.Member.DeclaringType))
+							(info, context) => _logFactory(info.Member.DeclaringType))
 					});
 				});
 		}
