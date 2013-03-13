@@ -87,24 +87,24 @@ Scenario: Manual Logging Interceptor with trapped Exception
 
 Scenario: Autofac Interceptor
 	Given I have registered the logging module
-	And I have registered a config source that returns a default log config
-	And I have a log factory that returns a mocked ILog
+	And I have registered the default test logging module
+	And I have created the Autofac container
 	And I have resolved an instance of the logging test subject
 	When I call a normal void method on the logging test subject
 	Then the mocked ILog should have been called using the normal no-return execution path
 
 Scenario: Autofac Interceptor with return value
 	Given I have registered the logging module
-	And I have registered a config source that returns a default log config
-	And I have a log factory that returns a mocked ILog
+	And I have registered the default test logging module
+	And I have created the Autofac container
 	And I have resolved an instance of the logging test subject
 	When I call a normal method with a return value on the logging test subject
 	Then the mocked ILog should have been called using the normal execution path
 
 Scenario: Autofac Interceptor with Exception
 	Given I have registered the logging module
-	And I have registered a config source that returns a default log config
-	And I have a log factory that returns a mocked ILog
+	And I have registered the default test logging module
+	And I have created the Autofac container
 	And I have resolved an instance of the logging test subject
 	When I call a method that throws an Exception on the logging test subject
 	Then the mocked ILog should have been called using the broken execution path
@@ -112,8 +112,8 @@ Scenario: Autofac Interceptor with Exception
 
 Scenario: Autofac Interceptor with trapped Exception
 	Given I have registered the logging module
-	And I have registered a config source that returns a log config set to trap errors
-	And I have a log factory that returns a mocked ILog
+	And I have registered the error trapping test logging module
+	And I have created the Autofac container
 	And I have resolved an instance of the logging test subject
 	When I call a method that throws an Exception on the logging test subject
 	Then the mocked ILog should have been called using the trapped-error execution path
@@ -123,6 +123,8 @@ Scenario: Autofac Interceptor with trapped Exception
 # should be correctly type-bound to the requesting components
 
 Scenario: Autofac ILog Provider
-	Given I have registered the logging module
+	Given I have registered the logging module with a trackable log factory
+	And I have registered the manual logging test subject
+	And I have created the Autofac container
 	When I have resolved an instance of the manual logging test subject
 	Then the resolved ILog should be type-bound to the manual logging test subject

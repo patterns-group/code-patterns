@@ -23,37 +23,39 @@
 
 #endregion
 
-using System.Configuration;
+using System;
+using System.Diagnostics;
 
-namespace Patterns.Logging
+using Common.Logging;
+
+using Moq;
+
+using Patterns.Specifications.Models.Mocking;
+
+namespace Patterns.Specifications.Steps.Logging
 {
-	/// <summary>
-	/// Defines configuration options for the Patterns.Logging namespace.
-	/// </summary>
-	public class LoggingConfig : ConfigurationSection
+	public static class MockMixins
 	{
-		/// <summary>
-		/// The default section name.
-		/// </summary>
-		public const string SectionName = "patterns.logging";
-		private const string _trapExceptionsKey = "trapExceptions";
-
-		/// <summary>
-		/// Gets or sets a value indicating whether the logging interceptor should trap exceptions
-		/// (as opposed to allowing them to bubble up).
-		/// </summary>
-		/// <value>
-		///   <c>true</c> if the logging interceptor should trap exceptions; otherwise, <c>false</c>.
-		/// </value>
-		[ConfigurationProperty(_trapExceptionsKey)]
-		public bool TrapExceptions
+		public static Mock<ILog> CreateMockLog(this MoqContext context)
 		{
-			get
+			var mockLog = context.Container.Mock<ILog>();
+			mockLog.Setup(log => log.Info(It.IsAny<Action<FormatMessageHandler>>())).Callback(CreateLogCallback());
+			mockLog.Setup(log => log.Trace(It.IsAny<Action<FormatMessageHandler>>())).Callback(CreateLogCallback());
+			mockLog.Setup(log => log.Debug(It.IsAny<Action<FormatMessageHandler>>())).Callback(CreateLogCallback());
+			mockLog.Setup(log => log.Warn(It.IsAny<Action<FormatMessageHandler>>())).Callback(CreateLogCallback());
+			mockLog.Setup(log => log.Error(It.IsAny<Action<FormatMessageHandler>>())).Callback(CreateLogCallback());
+			mockLog.Setup(log => log.Fatal(It.IsAny<Action<FormatMessageHandler>>())).Callback(CreateLogCallback());
+			return mockLog;
+		}
+
+		private static Action<Action<FormatMessageHandler>> CreateLogCallback()
+		{
+			return action => action((format, args) =>
 			{
-				object value = this[_trapExceptionsKey];
-				return value is bool ? (bool) value : default(bool);
-			}
-			set { this[_trapExceptionsKey] = value; }
+				string message = string.Format(format, args);
+				Debug.WriteLine(message);
+				return message;
+			});
 		}
 	}
 }

@@ -23,37 +23,13 @@
 
 #endregion
 
-using System.Configuration;
+using Patterns.Logging;
 
-namespace Patterns.Logging
+namespace Patterns.Specifications.Steps.Logging
 {
-	/// <summary>
-	/// Defines configuration options for the Patterns.Logging namespace.
-	/// </summary>
-	public class LoggingConfig : ConfigurationSection
+	public static class LoggingConfigs
 	{
-		/// <summary>
-		/// The default section name.
-		/// </summary>
-		public const string SectionName = "patterns.logging";
-		private const string _trapExceptionsKey = "trapExceptions";
-
-		/// <summary>
-		/// Gets or sets a value indicating whether the logging interceptor should trap exceptions
-		/// (as opposed to allowing them to bubble up).
-		/// </summary>
-		/// <value>
-		///   <c>true</c> if the logging interceptor should trap exceptions; otherwise, <c>false</c>.
-		/// </value>
-		[ConfigurationProperty(_trapExceptionsKey)]
-		public bool TrapExceptions
-		{
-			get
-			{
-				object value = this[_trapExceptionsKey];
-				return value is bool ? (bool) value : default(bool);
-			}
-			set { this[_trapExceptionsKey] = value; }
-		}
+		public static readonly LoggingConfig DefaultConfig = new LoggingConfig();
+		public static readonly LoggingConfig ErrorTrappingConfig = new LoggingConfig {TrapExceptions = true};
 	}
 }

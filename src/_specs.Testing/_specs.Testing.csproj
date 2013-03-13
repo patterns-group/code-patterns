@@ -41,9 +41,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Autofac.3.0.1\lib\net40\Autofac.Configuration.dll</HintPath>
     </Reference>
-    <Reference Include="Autofac.Configuration, Version=3.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Autofac.3.0.1\lib\net40\Autofac.Configuration.dll</HintPath>
+    <Reference Include="Autofac.Extras.DynamicProxy2">
+      <HintPath>..\packages\Autofac.Extras.DynamicProxy2.3.0.0\lib\net40\Autofac.Extras.DynamicProxy2.dll</HintPath>
     </Reference>
     <Reference Include="AutoMapper">
       <HintPath>..\packages\AutoMapper.2.2.1\lib\net40\AutoMapper.dll</HintPath>
@@ -163,6 +162,8 @@
     <Compile Include="Models\Interception\InterceptionContext.cs" />
     <Compile Include="Models\Logging\LoggingContext.cs" />
     <Compile Include="Models\Logging\LoggingTestSubject.cs" />
+    <Compile Include="Models\Logging\ManualLoggingContext.cs" />
+    <Compile Include="Models\Logging\ManualLoggingTestSubject.cs" />
     <Compile Include="Models\Mocking\MoqContext.cs" />
     <Compile Include="Models\Runtime\RuntimeContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -182,9 +183,14 @@
     <Compile Include="Steps\ErrorSteps.cs" />
     <Compile Include="Steps\ExceptionHandling\TrySteps.cs" />
     <Compile Include="Steps\Interception\InvocationSteps.cs" />
+    <Compile Include="Steps\Logging\LoggingModuleSteps.cs" />
+    <Compile Include="Steps\Logging\LoggingConfigs.cs" />
     <Compile Include="Steps\Logging\LoggingContextSteps.cs" />
     <Compile Include="Steps\Logging\LoggingInterceptorSteps.cs" />
+    <Compile Include="Steps\Logging\ManualLoggingSteps.cs" />
+    <Compile Include="Steps\Logging\MockMixins.cs" />
     <Compile Include="Steps\Logging\MockVerificationSteps.cs" />
+    <Compile Include="Steps\Logging\TestLoggingModule.cs" />
     <Compile Include="Steps\Runtime\DateTimeInfoSteps.cs" />
   </ItemGroup>
   <ItemGroup>

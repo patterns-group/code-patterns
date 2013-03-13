@@ -24,77 +24,44 @@
 #endregion
 
 using System;
-using System.Diagnostics;
 
 using Autofac;
-
-using Castle.DynamicProxy;
+using Autofac.Extras.DynamicProxy2;
 
 using Common.Logging;
 
 using Moq;
 
+using Patterns.Configuration;
 using Patterns.Logging;
-using Patterns.Specifications.Models.Autofac;
-using Patterns.Specifications.Models.Interception;
 using Patterns.Specifications.Models.Logging;
 using Patterns.Specifications.Models.Mocking;
 
-using TechTalk.SpecFlow;
-
 namespace Patterns.Specifications.Steps.Logging
 {
-	[Binding]
-	public class LoggingContextSteps
+	public class TestLoggingModule : Module
 	{
-		private readonly LoggingContext _context;
-		private readonly InterceptionContext _interception;
 		private readonly MoqContext _moq;
-		private readonly AutofacContext _autofac;
+		private readonly bool _trapExceptions;
 
-		public LoggingContextSteps(LoggingContext context, InterceptionContext interception, MoqContext moq, AutofacContext autofac)
+		public TestLoggingModule(MoqContext moq, bool trapExceptions)
 		{
-			_context = context;
-			_interception = interception;
 			_moq = moq;
-			_autofac = autofac;
+			_trapExceptions = trapExceptions;
 		}
 
-		[Given(@"I have a default log config")]
-		public void CreateDefaultConfig()
+		protected override void Load(ContainerBuilder builder)
 		{
-			_context.Config = LoggingConfigs.DefaultConfig;
-		}
+			Mock<IConfigurationSource> mockSource = _moq.Container.Mock<IConfigurationSource>();
 
-		[Given(@"I have a log config set to trap errors")]
-		public void CreateErrorTrappingConfig()
-		{
-			_context.Config = LoggingConfigs.ErrorTrappingConfig;
-		}
+			LoggingConfig config = _trapExceptions ? LoggingConfigs.ErrorTrappingConfig : LoggingConfigs.DefaultConfig;
+			mockSource.Setup(source => source.GetSection(LoggingConfig.SectionName)).Returns(config);
+			mockSource.Setup(source => source.GetSection<LoggingConfig>(LoggingConfig.SectionName)).Returns(config);
+			builder.RegisterInstance(mockSource.Object);
 
-		[Given(@"I have a log factory that returns a mocked ILog")]
-		public void CreateMockLogFactory()
-		{
-			_context.LogFactory = type => _moq.CreateMockLog().Object;
-		}
+			builder.Register<Func<Type, ILog>>(context => type => _moq.CreateMockLog().Object);
 
-		[Given(@"I have a logging interceptor")]
-		public void CreateLoggingInterceptor()
-		{
-			_interception.Interceptor = new LoggingInterceptor(_context.Config, _context.LogFactory);
-		}
-
-		[Given(@"I have a dynamic proxy to the logging test subject")]
-		public void CreateDynamicProxy()
-		{
-			var generator = new ProxyGenerator();
-			_context.TestSubject = generator.CreateClassProxy<LoggingTestSubject>(_interception.Interceptor);
-		}
-
-		[Given(@"I have resolved an instance of the logging test subject")]
-		public void ResolveTestSubject()
-		{
-			_context.TestSubject = _autofac.Container.Resolve<LoggingTestSubject>();
+			builder.RegisterType<LoggingTestSubject>().EnableClassInterceptors().InterceptedBy(typeof(LoggingInterceptor));
 		}
 	}
 }
