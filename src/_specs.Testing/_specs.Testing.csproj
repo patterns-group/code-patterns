@@ -165,6 +165,9 @@
     <Compile Include="Models\Logging\ManualLoggingContext.cs" />
     <Compile Include="Models\Logging\ManualLoggingTestSubject.cs" />
     <Compile Include="Models\Mocking\MoqContext.cs" />
+    <Compile Include="Models\ObjectContext.cs" />
+    <Compile Include="Models\Reflection\PropertyValueContext.cs" />
+    <Compile Include="Models\Reflection\PropertyValueTestSubject.cs" />
     <Compile Include="Models\Runtime\DateTimeInfoContext.cs" />
     <Compile Include="Models\Runtime\TimeExtensionsContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -193,6 +196,8 @@
     <Compile Include="Steps\Logging\MockMixins.cs" />
     <Compile Include="Steps\Logging\MockVerificationSteps.cs" />
     <Compile Include="Steps\Logging\TestLoggingModule.cs" />
+    <Compile Include="Steps\ObjectSteps.cs" />
+    <Compile Include="Steps\Reflection\PropertyValueSteps.cs" />
     <Compile Include="Steps\Runtime\DateTimeInfoSteps.cs" />
     <Compile Include="Steps\Runtime\TimeExtensionsSteps.cs" />
   </ItemGroup>
