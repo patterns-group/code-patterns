@@ -23,37 +23,23 @@
 
 #endregion
 
-using System.Configuration;
+using System.Collections.Generic;
 
-namespace Patterns.Logging
+namespace Patterns.Specifications.Models.Text.RegularExpressions
 {
-	/// <summary>
-	/// Defines configuration options for the Patterns.Logging namespace.
-	/// </summary>
-	public class LoggingConfig : ConfigurationSection
+	public class TextSamples
 	{
-		/// <summary>
-		/// The default section name.
-		/// </summary>
-		public const string SectionName = "patterns/logging";
-		private const string _trapExceptionsKey = "trapExceptions";
+		public const string SimplePattern = @"(\s+|\d+)+";
 
-		/// <summary>
-		/// Gets or sets a value indicating whether the logging interceptor should trap exceptions
-		/// (as opposed to allowing them to bubble up).
-		/// </summary>
-		/// <value>
-		///   <c>true</c> if the logging interceptor should trap exceptions; otherwise, <c>false</c>.
-		/// </value>
-		[ConfigurationProperty(_trapExceptionsKey)]
-		public bool TrapExceptions
+		public static readonly IEnumerable<string> CharacterPatterns = new[]
 		{
-			get
-			{
-				object value = this[_trapExceptionsKey];
-				return value is bool ? (bool) value : default(bool);
-			}
-			set { this[_trapExceptionsKey] = value; }
-		}
+			"first_person@email.com",
+			"second_person@email.com",
+			"thrid_person@email.com"
+		};
+
+		public const string CharacterPatternCommonString = "@email.com";
+
+		public const string ValidPatternString = @"^\w+@[a-z]{1}(\w+)?\.[a-z]{1}(\w+)?$";
 	}
 }

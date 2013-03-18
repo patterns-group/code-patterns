@@ -23,37 +23,20 @@
 
 #endregion
 
-using System.Configuration;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
+using Patterns.Text.RegularExpressions;
 
-namespace Patterns.Logging
+namespace Patterns.Specifications.Models.Text.RegularExpressions
 {
-	/// <summary>
-	/// Defines configuration options for the Patterns.Logging namespace.
-	/// </summary>
-	public class LoggingConfig : ConfigurationSection
+	public class CompiledRegexContext
 	{
-		/// <summary>
-		/// The default section name.
-		/// </summary>
-		public const string SectionName = "patterns/logging";
-		private const string _trapExceptionsKey = "trapExceptions";
-
-		/// <summary>
-		/// Gets or sets a value indicating whether the logging interceptor should trap exceptions
-		/// (as opposed to allowing them to bubble up).
-		/// </summary>
-		/// <value>
-		///   <c>true</c> if the logging interceptor should trap exceptions; otherwise, <c>false</c>.
-		/// </value>
-		[ConfigurationProperty(_trapExceptionsKey)]
-		public bool TrapExceptions
-		{
-			get
-			{
-				object value = this[_trapExceptionsKey];
-				return value is bool ? (bool) value : default(bool);
-			}
-			set { this[_trapExceptionsKey] = value; }
-		}
+		public IEnumerable<string> CharacterPatternStrings { get; set; }
+		public IEnumerable<Match> CharacterPatternMatches { get; set; }
+		public CompiledRegex Pattern { get; set; }
+		public RegexOptions PatternOptions { get; set; }
+		public string PatternTarget { get; set; }
+		public IDictionary<string, string> DictionaryMatch { get; set; }
+		public string PatternAsString { get; set; }
 	}
 }

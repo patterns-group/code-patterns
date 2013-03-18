@@ -170,6 +170,18 @@
     <Compile Include="Models\Reflection\PropertyValueTestSubject.cs" />
     <Compile Include="Models\Runtime\DateTimeInfoContext.cs" />
     <Compile Include="Models\Runtime\TimeExtensionsContext.cs" />
+    <Compile Include="Models\Text\DictionaryParser.cs" />
+    <Compile Include="Models\Text\DictionaryParserConfig.cs" />
+    <Compile Include="Models\Text\DictionaryParserContext.cs" />
+    <Compile Include="Models\Text\IDictionaryParser.cs" />
+    <Compile Include="Models\Text\ParserOptions.cs" />
+    <Compile Include="Models\Text\RegularExpressions\CompiledRegexContext.cs" />
+    <Compile Include="Models\Text\RegularExpressions\TextSamples.cs" />
+    <Compile Include="Models\Text\TextModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TextModelResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -200,8 +212,14 @@
     <Compile Include="Steps\Reflection\PropertyValueSteps.cs" />
     <Compile Include="Steps\Runtime\DateTimeInfoSteps.cs" />
     <Compile Include="Steps\Runtime\TimeExtensionsSteps.cs" />
+    <Compile Include="Steps\Text\RegularExpressions\CompiledRegexSteps.cs" />
+    <Compile Include="Steps\Text\RegularExpressions\DictionaryMatchSteps.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Models\Text\TextModelResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>TextModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

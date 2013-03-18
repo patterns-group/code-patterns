@@ -23,37 +23,37 @@
 
 #endregion
 
-using System.Configuration;
+using System.Collections.Generic;
+using FluentAssertions;
+using Patterns.Specifications.Models.Text;
+using Patterns.Specifications.Models.Text.RegularExpressions;
+using TechTalk.SpecFlow;
 
-namespace Patterns.Logging
+namespace Patterns.Specifications.Steps.Text.RegularExpressions
 {
-	/// <summary>
-	/// Defines configuration options for the Patterns.Logging namespace.
-	/// </summary>
-	public class LoggingConfig : ConfigurationSection
+	[Binding]
+	public class DictionaryMatchSteps
 	{
-		/// <summary>
-		/// The default section name.
-		/// </summary>
-		public const string SectionName = "patterns/logging";
-		private const string _trapExceptionsKey = "trapExceptions";
+		private readonly CompiledRegexContext _context;
+		private readonly DictionaryParserContext _dictionaries;
 
-		/// <summary>
-		/// Gets or sets a value indicating whether the logging interceptor should trap exceptions
-		/// (as opposed to allowing them to bubble up).
-		/// </summary>
-		/// <value>
-		///   <c>true</c> if the logging interceptor should trap exceptions; otherwise, <c>false</c>.
-		/// </value>
-		[ConfigurationProperty(_trapExceptionsKey)]
-		public bool TrapExceptions
+		public DictionaryMatchSteps(CompiledRegexContext context, DictionaryParserContext dictionaries)
 		{
-			get
-			{
-				object value = this[_trapExceptionsKey];
-				return value is bool ? (bool) value : default(bool);
-			}
-			set { this[_trapExceptionsKey] = value; }
+			_context = context;
+			_dictionaries = dictionaries;
+		}
+
+		[When(@"I retrieve a dictionary match of the string using the CompiledRegex")]
+		public void GetDictionaryMatch()
+		{
+			_context.DictionaryMatch = _context.Pattern.DictionaryMatch(_context.PatternTarget);
+		}
+
+		[Then(@"all expected group values \((.*)\) should be found in the resulting dictionary")]
+		public void AssertGroupValues(string groupValues)
+		{
+			IDictionary<string, string> expected = _dictionaries.Parser.ParseKeyValuePairs(groupValues);
+			_context.DictionaryMatch.ShouldAllBeEquivalentTo(expected);
 		}
 	}
 }

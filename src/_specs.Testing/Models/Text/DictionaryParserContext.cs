@@ -1,4 +1,4 @@
-﻿#region FreeBSD
+#region FreeBSD
 
 // Copyright (c) 2013, John Batte
 // All rights reserved.
@@ -23,37 +23,18 @@
 
 #endregion
 
-using System.Configuration;
+using Patterns.Configuration;
 
-namespace Patterns.Logging
+namespace Patterns.Specifications.Models.Text
 {
-	/// <summary>
-	/// Defines configuration options for the Patterns.Logging namespace.
-	/// </summary>
-	public class LoggingConfig : ConfigurationSection
+	public class DictionaryParserContext
 	{
-		/// <summary>
-		/// The default section name.
-		/// </summary>
-		public const string SectionName = "patterns/logging";
-		private const string _trapExceptionsKey = "trapExceptions";
-
-		/// <summary>
-		/// Gets or sets a value indicating whether the logging interceptor should trap exceptions
-		/// (as opposed to allowing them to bubble up).
-		/// </summary>
-		/// <value>
-		///   <c>true</c> if the logging interceptor should trap exceptions; otherwise, <c>false</c>.
-		/// </value>
-		[ConfigurationProperty(_trapExceptionsKey)]
-		public bool TrapExceptions
+		public DictionaryParserContext(IConfigurationSource configSource)
 		{
-			get
-			{
-				object value = this[_trapExceptionsKey];
-				return value is bool ? (bool) value : default(bool);
-			}
-			set { this[_trapExceptionsKey] = value; }
+			var config = configSource.GetSection<DictionaryParserConfig>(DictionaryParserConfig.SectionName);
+			Parser = new DictionaryParser(config);
 		}
+
+		public IDictionaryParser Parser { get; private set; }
 	}
 }

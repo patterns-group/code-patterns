@@ -25,35 +25,26 @@
 
 using System.Configuration;
 
-namespace Patterns.Logging
+namespace Patterns.Specifications.Models.Text
 {
-	/// <summary>
-	/// Defines configuration options for the Patterns.Logging namespace.
-	/// </summary>
-	public class LoggingConfig : ConfigurationSection
+	public class DictionaryParserConfig : ConfigurationSection
 	{
-		/// <summary>
-		/// The default section name.
-		/// </summary>
-		public const string SectionName = "patterns/logging";
-		private const string _trapExceptionsKey = "trapExceptions";
+		public const string SectionName = "patterns/specifications/dictionaryParser";
+		private const string _rowDelimiterKey = "rowDelimiter";
+		private const string _columnDelimiterKey = "columnDelimiter";
 
-		/// <summary>
-		/// Gets or sets a value indicating whether the logging interceptor should trap exceptions
-		/// (as opposed to allowing them to bubble up).
-		/// </summary>
-		/// <value>
-		///   <c>true</c> if the logging interceptor should trap exceptions; otherwise, <c>false</c>.
-		/// </value>
-		[ConfigurationProperty(_trapExceptionsKey)]
-		public bool TrapExceptions
+		[ConfigurationProperty(_rowDelimiterKey)]
+		public string RowDelimiter
 		{
-			get
-			{
-				object value = this[_trapExceptionsKey];
-				return value is bool ? (bool) value : default(bool);
-			}
-			set { this[_trapExceptionsKey] = value; }
+			get { return this[_rowDelimiterKey] as string; }
+			set { this[_rowDelimiterKey] = value; }
+		}
+
+		[ConfigurationProperty(_columnDelimiterKey)]
+		public string ColumnDelimiter
+		{
+			get { return this[_columnDelimiterKey] as string; }
+			set { this[_columnDelimiterKey] = value; }
 		}
 	}
 }

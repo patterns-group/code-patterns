@@ -24,7 +24,7 @@
 #endregion
 
 using System;
-
+using BoDi;
 using FluentAssertions;
 
 using Patterns.Configuration;
@@ -39,12 +39,14 @@ namespace Patterns.Specifications.Steps.Configuration
 	[Binding]
 	public class ConfigSourceSteps
 	{
+		private readonly IObjectContainer _container;
 		private readonly ConfigSourceContext _context;
 		private readonly MoqContext _moq;
 		private readonly ErrorContext _errors;
 
-		public ConfigSourceSteps(ConfigSourceContext context, MoqContext moq, ErrorContext errors)
+		public ConfigSourceSteps(IObjectContainer container, ConfigSourceContext context, MoqContext moq, ErrorContext errors)
 		{
+			_container = container;
 			_context = context;
 			_moq = moq;
 			_errors = errors;
@@ -86,6 +88,14 @@ namespace Patterns.Specifications.Steps.Configuration
 		{
 			_context.ResolvedSection.Should().NotBeNull();
 			_context.ResolvedSection.GetType().Should().NotBe(typeof (TestConfigurationSection));
+		}
+
+		[BeforeScenario("configured")]
+		public void ProvideConfigurationSource()
+		{
+			var manager = new ConfigurationManagerWrapper();
+			IConfigurationSource source = new ConfigurationSource(manager, config => new ConfigurationWrapper(config));
+			_container.RegisterInstanceAs(source);
 		}
 	}
 }

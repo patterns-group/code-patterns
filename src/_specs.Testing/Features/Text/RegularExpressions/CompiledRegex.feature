@@ -2,27 +2,23 @@ Feature: Compiled Regular Expressions
 	As a developer, I want to be able to easily instantiate a regular expression
 	that takes full advantage of the .NET runtime.
 
-@compiledRegex
 Scenario: All expressions are compiled
 	Given I have created a CompiledRegex using a simple, valid pattern string
 	When I read the options of the CompiledRegex
-	Then the options should include the compiled option
+	Then the options of the CompiledRegex should include the compiled option
 
-@compiledRegex
 Scenario: Build a pattern from a regular string
 	Given I have a set of strings with various character patterns
-	And I have a sample string that contains a pattern that is common to all strings in the set
-	When I use the CompiledRegex.Build method to create a CompiledRegex using the sample string
+	When I use the CompiledRegex.Build method to create a CompiledRegex using a string containing a common pattern
 	And I use the CompiledRegex against each string in the set
 	Then each string in the set should have resulted in a positive match against the pattern
 
-@compiledRegex
 Scenario: Read a pattern back out of a compiled expression
 	Given I have created a CompiledRegex using a valid pattern string
 	When I read the pattern string from the CompiledRegex
-	Then the pattern string I read from the CompiledRegex should match the pattern string used to create it
+	Then the pattern string I read from the CompiledRegex should be the valid pattern string used to create it
 
-@compiledRegex
+@configured
 Scenario Outline: Dictionary Match
 	Given I have created a string equal to: <input>
 	And I have created a CompiledRegex with the pattern: <pattern>
