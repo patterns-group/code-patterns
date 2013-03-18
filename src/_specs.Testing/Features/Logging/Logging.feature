@@ -3,82 +3,128 @@
 	I want a way to automatically log any method call
 	And I want a way to automatically get instances of the logger I should use
 
-# by following the manual path to creating a Castle DynamicProxy2 interceptor
-# and using the LoggingInterceptor type
-# when we intercept instances of classes that we define
-# then we should see that interception takes place as expected
-# this applies to all logical paths that exist within the interceptor
-# therefore, we should mock both the IInvocation instance
-# and the ILog instance. This means that the method used to retrieve an ILog
-# instance should be injected.
-Scenario: Logging Interceptor
-	Given I have a fresh mock container
-	And I have created a LoggingInterceptor instance
-	When I tell the interceptor to intercept an invocation
-	Then the ILog instance should be called as expected using the happy path
-	And the IInvocation instance should be called as expected
+# when an invocation has been mocked, using an interceptor directly 
+# should cause log calls to take place, and the invocation should be
+# instructed to proceed.
 
-Scenario: Logging Interceptor with no return
-	Given I have a fresh mock container
-	And I have created a LoggingInterceptor instance
-	When I tell the interceptor to intercept an invocation with no return value
-	Then the ILog instance should be called as expected using the happy path for no returns
-	And the IInvocation instance should be called as expected using the path for no returns
+Scenario: Logging Interceptor
+	Given I have a default log config
+	And I have a log factory that returns a mocked ILog
+	And I have a mocked invocation
+	And I have a logging interceptor
+	When I call the interceptor directly
+	Then the mocked ILog should have been called using the normal no-return execution path
+	And the mocked invocation should have been instructed to proceed
+
+Scenario: Logging Interceptor with return value
+	Given I have a default log config
+	And I have a log factory that returns a mocked ILog
+	And I have a mocked invocation that returns a value
+	And I have a logging interceptor
+	When I call the interceptor directly
+	Then the mocked ILog should have been called using the normal execution path
+	And the mocked invocation should have been instructed to proceed
 
 Scenario: Logging Interceptor with Exception
-	Given I have a fresh mock container
-	And I have created a LoggingInterceptor instance
-	And I have configured my mock IInvocation instance to throw an error when proceeding
-	When I tell the interceptor to intercept an invocation
-	Then the IInvocation instance should be called as expected using the error path
-	And the ILog instance should be called as expected using the error path
+	Given I have a default log config
+	And I have a log factory that returns a mocked ILog
+	And I have a mocked invocation that throws an Exception
+	And I have a logging interceptor
+	When I call the interceptor directly
+	Then the mocked ILog should have been called using the broken execution path
+	And the mocked invocation should have been instructed to proceed
+	And there should be an error
 
-Scenario: Logging Interceptor with Untrapped Exception
-	Given I have a fresh mock container
-	And I have created a LoggingInterceptor instance that does not trap exceptions
-	And I have configured my mock IInvocation instance to throw an error when proceeding
-	When I tell the interceptor to intercept an invocation
-	Then the IInvocation instance should be called as expected using the error path
-	And the ILog instance should be called as expected using the error path
+Scenario: Logging Interceptor with trapped Exception
+	Given I have a log config set to trap errors
+	And I have a log factory that returns a mocked ILog
+	And I have a mocked invocation that throws an Exception
+	And I have a logging interceptor
+	When I call the interceptor directly
+	Then the mocked ILog should have been called using the trapped-error execution path
+	And the mocked invocation should have been instructed to proceed
+	And there should not be an error
+
+# when a dynamic proxy has been manually created using our interceptor,
+# log calls should take place, and the proxied method should execute.
 
 Scenario: Manual Logging Interceptor
-	Given I have created a manual interceptor proxy to a test type, using the LoggingInterceptor
-	When I call a method on the test type
-	Then the ILog instance should be called as expected using the happy path
+	Given I have a default log config
+	And I have a log factory that returns a mocked ILog
+	And I have a logging interceptor
+	And I have a dynamic proxy to the logging test subject
+	When I call a normal void method on the logging test subject
+	Then the mocked ILog should have been called using the normal no-return execution path
+
+Scenario: Manual Logging Interceptor with return value
+	Given I have a default log config
+	And I have a log factory that returns a mocked ILog
+	And I have a logging interceptor
+	And I have a dynamic proxy to the logging test subject
+	When I call a normal method with a return value on the logging test subject
+	Then the mocked ILog should have been called using the normal execution path
 
 Scenario: Manual Logging Interceptor with Exception
-	Given I have created a manual interceptor proxy to a test type, using the LoggingInterceptor
-	When I call a volatile method on the test type
-	Then the ILog instance should be called as expected using the error path
+	Given I have a default log config
+	And I have a log factory that returns a mocked ILog
+	And I have a logging interceptor
+	And I have a dynamic proxy to the logging test subject
+	When I call a method that throws an Exception on the logging test subject
+	Then the mocked ILog should have been called using the broken execution path
+	And there should be an error
 
-# by using the Autofac path to retrieving an intercepted type
-# when we intercept instances of types that we define
-# then we should see that interception takes place as expected
-# this applies to all logical paths that exist within the interceptor
-# (see above)
+Scenario: Manual Logging Interceptor with trapped Exception
+	Given I have a log config set to trap errors
+	And I have a log factory that returns a mocked ILog
+	And I have a logging interceptor
+	And I have a dynamic proxy to the logging test subject
+	When I call a method that throws an Exception on the logging test subject
+	Then the mocked ILog should have been called using the trapped-error execution path
+	And there should not be an error
+
+# when an intercepted instance has been retrieved,
+# log calls should take place, and the proxied method should execute.
+
 Scenario: Autofac Interceptor
-	Given I have created a new container builder
-	And I have registered the LoggingModule
-	And I have registered an intercepted test type
-	And I have resolved an instance of the test type
-	When I call a method on the test type
-	Then the ILog instance should be called as expected using the happy path
+	Given I have registered the logging module
+	And I have registered the default test logging module
+	And I have created the Autofac container
+	And I have resolved an instance of the logging test subject
+	When I call a normal void method on the logging test subject
+	Then the mocked ILog should have been called using the normal no-return execution path
+
+Scenario: Autofac Interceptor with return value
+	Given I have registered the logging module
+	And I have registered the default test logging module
+	And I have created the Autofac container
+	And I have resolved an instance of the logging test subject
+	When I call a normal method with a return value on the logging test subject
+	Then the mocked ILog should have been called using the normal execution path
 
 Scenario: Autofac Interceptor with Exception
-	Given I have created a new container builder
-	And I have registered the LoggingModule
-	And I have registered an intercepted test type
-	And I have resolved an instance of the test type
-	When I call a method on the test type
-	Then the ILog instance should be called as expected using the error path
+	Given I have registered the logging module
+	And I have registered the default test logging module
+	And I have created the Autofac container
+	And I have resolved an instance of the logging test subject
+	When I call a method that throws an Exception on the logging test subject
+	Then the mocked ILog should have been called using the broken execution path
+	And there should be an error
 
-# by using the Autofac path to retrieving a registered type
-# when we retrieve instances of types that depend on ILog
-# then we should see that the retrieved instances have the expected ILog references
+Scenario: Autofac Interceptor with trapped Exception
+	Given I have registered the logging module
+	And I have registered the error trapping test logging module
+	And I have created the Autofac container
+	And I have resolved an instance of the logging test subject
+	When I call a method that throws an Exception on the logging test subject
+	Then the mocked ILog should have been called using the trapped-error execution path
+	And there should not be an error
+
+# when components ask for ILog directly, the instances retrieved
+# should be correctly type-bound to the requesting components
+
 Scenario: Autofac ILog Provider
-	Given I have created a new container builder
-	And I have registered the LoggingModule
-	And I have registered a test type with a dependency on ILog
-	And I have resolved an instance of the test type
-	When I inspect the ILog instance the test type is using
-	Then the ILog instance should be configured correctly for the test type
+	Given I have registered the logging module with a trackable log factory
+	And I have registered the manual logging test subject
+	And I have created the Autofac container
+	When I have resolved an instance of the manual logging test subject
+	Then the resolved ILog should be type-bound to the manual logging test subject
