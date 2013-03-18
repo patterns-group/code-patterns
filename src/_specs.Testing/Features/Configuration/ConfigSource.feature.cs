@@ -32,8 +32,8 @@ namespace Patterns.Specifications.Features.Configuration
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Configuration Source", "As a developer\nI want to be able to inject my dependencies for configuration\nSo t" +
-                    "hat I can separate my component logic from the act of manually loading config", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Configuration Source", "As a developer\r\nI want to be able to inject my dependencies for configuration\r\nSo" +
+                    " that I can separate my component logic from the act of manually loading config", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -73,20 +73,16 @@ namespace Patterns.Specifications.Features.Configuration
 #line 6
 this.ScenarioSetup(scenarioInfo);
 #line 7
- testRunner.Given("I have a fresh mock container", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("I have set the mocked config abstraction to return a Configuration Section when t" +
+                    "he section name is \"settings\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 8
- testRunner.And("I have a mocked config abstraction", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 9
- testRunner.And("I have set the mocked config abstraction to return a Configuration Section when t" +
-                    "he section name is \"settings\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 10
  testRunner.And("I have a new Configuration Source using the mocked config abstraction", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 11
+#line 9
  testRunner.When("I ask for a Configuration Section named \"settings\" from the Configuration Source", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 12
+#line 10
  testRunner.Then("the mocked config abstraction should have been asked for a Configuration Section " +
                     "named \"settings\" exactly 1 time", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 13
+#line 11
  testRunner.And("the Configuration Section I retrieved from the Configuration Source should be the" +
                     " expected section", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -98,23 +94,19 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void GetSectionMissing()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("GetSection (missing)", ((string[])(null)));
-#line 15
+#line 13
 this.ScenarioSetup(scenarioInfo);
-#line 16
- testRunner.Given("I have a fresh mock container", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 17
- testRunner.And("I have a mocked config abstraction", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 18
- testRunner.And("I have set the mocked config abstraction to return a null Configuration Section w" +
-                    "hen the section name is \"settings\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 19
+#line 14
+ testRunner.Given("I have set the mocked config abstraction to return a null Configuration Section w" +
+                    "hen the section name is \"settings\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 15
  testRunner.And("I have a new Configuration Source using the mocked config abstraction", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 20
+#line 16
  testRunner.When("I ask for a Configuration Section named \"settings\" from the Configuration Source", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 21
+#line 17
  testRunner.Then("the mocked config abstraction should have been asked for a Configuration Section " +
                     "named \"settings\" exactly 1 time", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 22
+#line 18
  testRunner.And("the Configuration Section I retrieved from the Configuration Source should be nul" +
                     "l", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -126,23 +118,19 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void GetSectionWrongType()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("GetSection (wrong type)", ((string[])(null)));
-#line 24
+#line 20
 this.ScenarioSetup(scenarioInfo);
-#line 25
- testRunner.Given("I have a fresh mock container", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 26
- testRunner.And("I have a mocked config abstraction", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 27
- testRunner.And("I have set the mocked config abstraction to return a different Configuration Sect" +
-                    "ion when the section name is \"settings\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 28
+#line 21
+ testRunner.Given("I have set the mocked config abstraction to return a different Configuration Sect" +
+                    "ion when the section name is \"settings\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 22
  testRunner.And("I have a new Configuration Source using the mocked config abstraction", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 29
+#line 23
  testRunner.When("I ask for a Configuration Section named \"settings\" from the Configuration Source", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 30
+#line 24
  testRunner.Then("the mocked config abstraction should have been asked for a Configuration Section " +
                     "named \"settings\" exactly 1 time", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 31
+#line 25
  testRunner.And("the Configuration Section I retrieved from the Configuration Source should not be" +
                     " the expected section", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -154,25 +142,21 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void GetSectionConfigException()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("GetSection (config exception)", ((string[])(null)));
-#line 33
+#line 27
 this.ScenarioSetup(scenarioInfo);
-#line 34
- testRunner.Given("I have a fresh mock container", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 35
- testRunner.And("I have a mocked config abstraction", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 36
- testRunner.And("I have set the mocked config abstraction to throw an exception when asked for a C" +
-                    "onfiguration Section with the section name \"settings\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 37
+#line 28
+ testRunner.Given("I have set the mocked config abstraction to throw an exception when asked for a C" +
+                    "onfiguration Section with the section name \"settings\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 29
  testRunner.And("I have a new Configuration Source using the mocked config abstraction", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 38
+#line 30
  testRunner.When("I ask for a Configuration Section named \"settings\" from the Configuration Source", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 39
+#line 31
  testRunner.Then("the mocked config abstraction should have been asked for a Configuration Section " +
                     "named \"settings\" exactly 1 time", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 40
+#line 32
  testRunner.And("a configuration exception should have been thrown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 41
+#line 33
  testRunner.And("the Configuration Section I retrieved from the Configuration Source should be nul" +
                     "l", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden

@@ -3,101 +3,35 @@ Feature: Exception Handling
 	and I want the ability to either rely on a basic error handling policy,
 	or provide my own logic to respond to exceptions.
 
-Background: 
-	Given I have prepared a test subject
-	And I have subscribed to all observable feeds on the subject
-	And I have set the default error handling behavior to record all errors for the test
-	And I have created an observable feed for test errors
+Scenario: Try.Get (Normal)
+	Given I have mapped the default error strategy to store exceptions
+	When I try to get the return value of a normal function
+	Then the return value should be the expected return value
+	And there should not be an error
 
-@trackReads
-@trackErrors
-@exceptionHandling
-Scenario: normal property read
-	When I try to read a property value from the subject
-	Then the value that I read should be the value I expected
-	And the feed for property read requests should have returned 1 item
-	And the feed for property read responses should have returned 1 item
-	And the feed for errors should have returned 0 items
+Scenario: Try.Get (Exception)
+	Given I have mapped the default error strategy to store exceptions
+	When I try to get the return value of a function that throws an exception
+	Then the return value should be the default value for that type
+	And there should be an error
 
-@trackWrites
-@trackErrors
-@exceptionHandling
-Scenario: normal property write
-	When I try to write to a property value on the subject
-	And I try to read a property value from the subject
-	Then the value that I read should be the value I wrote
-	And the feed for property write requests should have returned 1 item
-	And the feed for errors should have returned 0 items
+Scenario: Try.Get (Exception with Custom Handler)
+	Given I have mapped the custom error strategy to store exceptions
+	When I try to get the return value of a function that throws an exception, providing the custom strategy
+	Then the return value should be the default value for that type
+	And there should be an error
 
-@trackCalls
-@trackErrors
-@exceptionHandling
-Scenario: normal method call
-	When I try to call a method on the subject
-	Then the method call should complete with no errors
-	And the feed for method call requests should have returned 1 item
-	And the feed for method call responses should have returned 1 item
-	And the feed for errors should have returned 0 items
+Scenario: Try.Do (Normal)
+	Given I have mapped the default error strategy to store exceptions
+	When I try to run a normal action
+	Then there should not be an error
 
-@trackReads
-@trackErrors
-@exceptionHandling
-Scenario: angry property read
-	When I try to read a value that throws an exception from the subject
-	Then the value I read should be the default value for the return type
-	And the feed for property read requests should have returned 1 item
-	And the feed for property read responses should have returned 0 items
-	And the feed for errors should have returned 1 item
+Scenario: Try.Do (Exception)
+	Given I have mapped the default error strategy to store exceptions
+	When I try to run an action that throws an exception
+	Then there should be an error
 
-@trackWrites
-@trackErrors
-@exceptionHandling
-Scenario: angry property write
-	When I try to write to a property value that throws an exception on the subject
-	And I try to read a property value from the subject
-	Then the value that I read should be the value I expected
-	And the feed for property write requests should have returned 1 item
-	And the feed for errors should have returned 1 item
-
-@trackCalls
-@trackErrors
-@exceptionHandling
-Scenario: angry method call
-	When I try to call a method that throws an exception on the subject
-	Then the method call should abort
-	And the feed for method call requests should have returned 1 item
-	And the feed for method call responses should have returned 0 items
-	And the feed for errors should have returned 1 item
-
-@trackReads
-@trackErrors
-@exceptionHandling
-Scenario: angry property read with error handling
-	Given I have a custom error handler that does not write to the error feed
-	When I try to read a value that throws an exception from the subject
-	Then the value I read should be the default value for the return type
-	And the feed for property read requests should have returned 1 item
-	And the feed for property read responses should have returned 0 items
-	And the feed for errors should have returned 0 items
-
-@trackWrites
-@trackErrors
-@exceptionHandling
-Scenario: angry property write with error handling
-	Given I have a custom error handler that does not write to the error feed
-	When I try to write to a property value that throws an exception on the subject
-	And I try to read a property value from the subject
-	Then the value that I read should be the value I expected
-	And the feed for property write requests should have returned 1 item
-	And the feed for errors should have returned 0 items
-
-@trackCalls
-@trackErrors
-@exceptionHandling
-Scenario: angry method call with error handling
-	Given I have a custom error handler that does not write to the error feed
-	When I try to call a method that throws an exception on the subject
-	Then the method call should abort
-	And the feed for method call requests should have returned 1 item
-	And the feed for method call responses should have returned 0 items
-	And the feed for errors should have returned 0 items
+Scenario: Try.Do (Exception with Custom Handler)
+	Given I have mapped the custom error strategy to store exceptions
+	When I try to run an action that throws an exception, providing the custom strategy
+	Then there should be an error

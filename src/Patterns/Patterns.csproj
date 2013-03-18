@@ -62,6 +62,7 @@
     <Compile Include="Configuration\IConfigurationSource.cs" />
     <Compile Include="ExceptionHandling\ExceptionState.cs" />
     <Compile Include="ExceptionHandling\Try.cs" />
+    <Compile Include="Logging\LoggingConfig.cs" />
     <Compile Include="Logging\LoggingInterceptor.cs" />
     <Compile Include="Logging\LoggingResources.Designer.cs">
       <AutoGen>True</AutoGen>

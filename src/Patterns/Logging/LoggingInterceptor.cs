@@ -39,19 +39,17 @@ namespace Patterns.Logging
 		private const string _argumentListFormat = "({0})";
 		private const string _argumentListSeparator = ",";
 		private const string _stringDisplayFormat = @"""{0}""";
+		private readonly LoggingConfig _config;
 		private readonly Func<Type, ILog> _logFactory;
-		private readonly bool _trapInterceptedExceptions;
 
 		/// <summary>
-		///    Initializes a new instance of the <see cref="LoggingInterceptor" /> class.
+		/// Initializes a new instance of the <see cref="LoggingInterceptor" /> class.
 		/// </summary>
-		/// <param name="trapInterceptedExceptions">
-		///    if set to <c>true</c>, intercepted exceptions are trapped and do not bubble up.
-		/// </param>
+		/// <param name="config">The config.</param>
 		/// <param name="logFactory">The log factory.</param>
-		public LoggingInterceptor(bool trapInterceptedExceptions, Func<Type, ILog> logFactory)
+		public LoggingInterceptor(LoggingConfig config, Func<Type, ILog> logFactory)
 		{
-			_trapInterceptedExceptions = trapInterceptedExceptions;
+			_config = config;
 			_logFactory = logFactory;
 		}
 
@@ -74,7 +72,7 @@ namespace Patterns.Logging
 			{
 				log.Info(handler => handler(LoggingResources.MethodInfoFormat, invocation.Method.Name, LoggingResources.MethodInfoFail));
 				log.Error(handler => handler(LoggingResources.ExceptionErrorFormat, invocation.Method.Name, error.ToFullString()));
-				if (!_trapInterceptedExceptions) throw;
+				if (!_config.TrapExceptions) throw;
 			}
 
 			log.Trace(handler => handler(LoggingResources.MethodStopTraceFormat, invocation.TargetType, invocation.Method.Name));
