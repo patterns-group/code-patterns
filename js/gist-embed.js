@@ -39,7 +39,7 @@ $(function(){
       $.ajax({
         url: url,
         data: data,
-        dataType: 'jsonp',
+        dataType: 'json',
         timeout: 10000,
         success: function(response){
           //the html payload is in the div property
