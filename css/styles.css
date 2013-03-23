@@ -848,6 +848,10 @@ section #title .credits.right {
   -webkit-border-top-right-radius: 10px;
 }
 
+span.n, span.p {
+  color: #000000;
+}
+
 @media print, screen and (max-width: 720px) {
   #title .credits {
     display: block;
