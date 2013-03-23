@@ -820,6 +820,34 @@ section #title .credits.right {
   float: right;
 }
 
+.gist{
+  margin: 15px 0 !important;
+}
+ 
+.gist-file{
+  border: none !important;
+}
+ 
+.gist-meta{
+  border: 1px solid #D2d2d2 !important;
+  padding: 12px !important;
+  -moz-border-radius-bottomleft: 10px;
+  -webkit-border-bottom-left-radius: 10px;
+  -moz-border-radius-bottomright: 10px;
+  -webkit-border-bottom-right-radius: 10px;
+ 
+}
+ 
+.gist-data{
+  padding: 15px !important;
+  border: 1px solid #D2d2d2 !important;
+  border-bottom: none !important;
+  -moz-border-radius-topleft: 10px;
+  -webkit-border-top-left-radius: 10px;
+  -moz-border-radius-topright: 10px;
+  -webkit-border-top-right-radius: 10px;
+}
+
 @media print, screen and (max-width: 720px) {
   #title .credits {
     display: block;
