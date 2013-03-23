@@ -5,10 +5,10 @@
 .highlight .g { color: #d0d0d0 } /* Generic */
 .highlight .k { color: #6ab825; font-weight: normal } /* Keyword */
 .highlight .l { color: #d0d0d0 } /* Literal */
-.highlight .n { color: #d0d0d0 } /* Name */
+.highlight .n { color: #000000 } /* Name */
 .highlight .o { color: #d0d0d0 } /* Operator */
 .highlight .x { color: #d0d0d0 } /* Other */
-.highlight .p { color: #d0d0d0 } /* Punctuation */
+.highlight .p { color: #000000 } /* Punctuation */
 .highlight .cm { color: #999999; font-style: italic } /* Comment.Multiline */
 .highlight .cp { color: #cd2828; font-weight: normal } /* Comment.Preproc */
 .highlight .c1 { color: #999999; font-style: italic } /* Comment.Single */
