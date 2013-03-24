@@ -149,6 +149,7 @@ textarea {
  */
 body {
   margin: 0;
+  height: 100%;
 }
 
 /* =============================================================================
@@ -606,9 +607,17 @@ strong {
 
 .wrapper {
   max-width: 650px;
-  margin: 0 auto;
   position: relative;
-  padding: 0 20px;
+  /*padding: 0 20px;
+  min-height: 100%;*/
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto -2em;
+}
+
+.footer, .push {
+  height: 2em;
+  text-align: center;
 }
 
 section img {
