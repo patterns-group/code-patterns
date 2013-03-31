@@ -25,62 +25,26 @@
 
 using AutoMapper;
 
-namespace Patterns.Mapping
+using Autofac;
+
+using Patterns.Mapping;
+
+namespace Patterns.Autofac.Mapping
 {
 	/// <summary>
-	/// Provides a DI-driven implementation of <see cref="IMappingServices"/>
+	/// Provides an Autofac module that registers AutoMapper components.
 	/// </summary>
-	public class MappingServices : IMappingServices
+	public class MappingModule : Module
 	{
-		private readonly IConfiguration _configuration;
-		private readonly IConfigurationProvider _configurationProvider;
-		private readonly IMappingEngine _engine;
-
-		/// <summary>
-		///    Initializes a new instance of the <see cref="MappingServices" /> class.
-		/// </summary>
-		/// <param name="engine">The engine.</param>
-		/// <param name="configuration">The configuration.</param>
-		/// <param name="configurationProvider">The configuration provider.</param>
-		public MappingServices(IMappingEngine engine, IConfiguration configuration,
-			IConfigurationProvider configurationProvider)
+		protected override void Load(ContainerBuilder builder)
 		{
-			_engine = engine;
-			_configuration = configuration;
-			_configurationProvider = configurationProvider;
-		}
+			builder.RegisterInstance(Mapper.Engine);
+			builder.RegisterInstance(Mapper.Configuration);
 
-		/// <summary>
-		/// Gets the engine.
-		/// </summary>
-		/// <value>
-		/// The engine.
-		/// </value>
-		public IMappingEngine Engine
-		{
-			get { return _engine; }
-		}
+			var configProvider = Mapper.Configuration as IConfigurationProvider;
+			if (configProvider != null) builder.RegisterInstance(configProvider);
 
-		/// <summary>
-		/// Gets the configuration.
-		/// </summary>
-		/// <value>
-		/// The configuration.
-		/// </value>
-		public IConfiguration Configuration
-		{
-			get { return _configuration; }
-		}
-
-		/// <summary>
-		/// Gets the configuration provider.
-		/// </summary>
-		/// <value>
-		/// The configuration provider.
-		/// </value>
-		public IConfigurationProvider ConfigurationProvider
-		{
-			get { return _configurationProvider; }
+			builder.RegisterType<MappingServices>().As<IMappingServices>();
 		}
 	}
 }
