@@ -12,3 +12,5 @@ This is the primary assembly of the code-patterns project family. Patterns consi
 - [`Patterns.Runtime`](./runtime/namespace)
 - `Patterns.Text`
  - [`Patterns.Text.RegularExpressions`](./text/regular-expressions/namespace)
+
+*generated on 4/13/2013 from Patterns 3.6.0-beta*
