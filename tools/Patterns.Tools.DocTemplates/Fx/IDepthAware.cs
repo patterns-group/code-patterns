@@ -19,17 +19,10 @@
 
 #endregion
 
-using System.Reflection;
-using System.Resources;
-using System.Runtime.InteropServices;
-
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("John Batte")]
-[assembly: AssemblyProduct("Code Patterns")]
-[assembly: AssemblyCopyright("Copyright © 2013")]
-[assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
-[assembly: ComVisible(false)]
-[assembly: NeutralResourcesLanguage("en-US")]
-[assembly: AssemblyVersion("3.7.0")]
-[assembly: AssemblyInformationalVersion("3.7.0-beta")]
+namespace Patterns.Tools.DocTemplates.Fx
+{
+	public interface IDepthAware
+	{
+		int Depth { get; set; }
+	}
+}

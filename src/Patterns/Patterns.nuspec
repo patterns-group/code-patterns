@@ -8,7 +8,7 @@
 		<id>$id$</id>
 		<title>$id$</title>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
-		<description>$description$</description>
+		<description>$description$ -- for 0.x backward compatibility, see $id$.Legacy.</description>
 		<copyright>Copyright © 2013</copyright>
 	</metadata>
 </package>

@@ -1,4 +1,4 @@
-#region FreeBSD
+ï»¿#region FreeBSD
 
 // Copyright (c) 2013, John Batte
 // All rights reserved.
@@ -19,17 +19,19 @@
 
 #endregion
 
-using System.Reflection;
 using System.Resources;
-using System.Runtime.InteropServices;
 
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("John Batte")]
-[assembly: AssemblyProduct("Code Patterns")]
-[assembly: AssemblyCopyright("Copyright © 2013")]
-[assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
-[assembly: ComVisible(false)]
-[assembly: NeutralResourcesLanguage("en-US")]
-[assembly: AssemblyVersion("3.7.0")]
-[assembly: AssemblyInformationalVersion("3.7.0-beta")]
+using Patterns.Specifications.Properties;
+
+namespace Patterns.Specifications.Models
+{
+	public class ResourceContext
+	{
+		private static readonly ResourceManager _resources = new ResourceManager(typeof (Resources));
+
+		public string GetString(string name)
+		{
+			return _resources.GetString(name);
+		}
+	}
+}
