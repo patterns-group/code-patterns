@@ -144,6 +144,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Features\Testing\Configuration\TestConfigSource.feature.cs">
+      <DependentUpon>TestConfigSource.feature</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Features\Text\RegularExpressions\CompiledRegex.feature.cs">
       <DependentUpon>CompiledRegex.feature</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -168,6 +173,7 @@
     <Compile Include="Models\ObjectContext.cs" />
     <Compile Include="Models\Reflection\PropertyValueContext.cs" />
     <Compile Include="Models\Reflection\PropertyValueTestSubject.cs" />
+    <Compile Include="Models\ResourceContext.cs" />
     <Compile Include="Models\Runtime\DateTimeInfoContext.cs" />
     <Compile Include="Models\Runtime\TimeExtensionsContext.cs" />
     <Compile Include="Models\Text\DictionaryParser.cs" />
@@ -263,6 +269,10 @@
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>TimeExtensions.feature.cs</LastGenOutput>
     </None>
+    <None Include="Features\Testing\Configuration\TestConfigSource.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>TestConfigSource.feature.cs</LastGenOutput>
+    </None>
     <None Include="Features\Text\RegularExpressions\CompiledRegex.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>CompiledRegex.feature.cs</LastGenOutput>
@@ -283,7 +293,12 @@
       <Name>Patterns</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\TestConfig1.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Services\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -11,7 +11,7 @@ namespace Patterns.Configuration
 
 		ConfigurationSection GetSection(string sectionName);
 
-		TSection GetSection<TSection>(string sectionName) where TSection : ConfigurationSection;
+		TSection GetSection<TSection>(string sectionName) where TSection : ConfigurationSection, new();
 
 		IConfiguration OpenExeConfiguration(string exePath);
 

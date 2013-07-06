@@ -55,7 +55,7 @@ namespace Patterns.Configuration
 			return _configManager.GetSection(sectionName) as ConfigurationSection;
 		}
 
-		public virtual TSection GetSection<TSection>(string sectionName) where TSection : ConfigurationSection
+		public virtual TSection GetSection<TSection>(string sectionName) where TSection : ConfigurationSection, new()
 		{
 			return _configManager.GetSection(sectionName) as TSection;
 		}
