@@ -1,16 +1,20 @@
-<#@ template debug="false" hostspecific="false" language="C#" #>
-<#@ output extension=".cs" #>
-<#@ include file="SolutionAssemblyInfo.settings.tt" #><#
-var versionFormat = "{0}.{1}.{2}";
-var fileVersionFormat = "{0}.{1}.{2}.0";
-var infoVersionFormat = "{0}.{1}.{2}-beta";
-int year = DateTime.Now.Year;
-string version = string.Format(versionFormat, MajorVersion, MinorVersion, Revision);
-string fileVersion = string.Format(fileVersionFormat, MajorVersion, MinorVersion, Revision);
-string infoVersion = string.Format(infoVersionFormat, MajorVersion, MinorVersion, Revision);
+<#@ template debug="false" hostspecific="false" language="C#" #><#@
+assembly name="System.Core" #><#@
+import namespace="System.Linq" #><#@
+import namespace="System.Text" #><#@
+import namespace="System.Collections.Generic" #><#@
+include file="SolutionAssemblyInfo.settings.tt" #><#@
+output extension=".cs" #><#
+var version = new StringBuilder().AppendFormat("{0}.{1}.{2}", Settings.MajorNumber, Settings.MinorNumber, Settings.PatchNumber);
+var info = new StringBuilder(version.ToString());
+var buildLevel = Settings.BuildLevel ?? BuildLevels.None;
+
+if(buildLevel != BuildLevels.None) info.Append(Settings.BuildLevelSuffix);
+
+if(Settings.BuildNumber.HasValue) info.Append(Settings.BuildNumber);
 #>#region FreeBSD
 
-// Copyright (c) <#= year #>, John Batte
+// Copyright (c) <#= DateTime.Now.Year #>, John Batte
 // All rights reserved.
 // 
 // Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
@@ -33,18 +37,14 @@ using System.Reflection;
 using System.Resources;
 using System.Runtime.InteropServices;
 
-using Patterns;
-
-[assembly: AssemblyConfiguration(ProductStrings.Empty)]
-[assembly: AssemblyCompany(ProductStrings.Author)]
-[assembly: AssemblyProduct(ProductStrings.Product)]
-[assembly: AssemblyCopyright("Copyright © <#= year #>")]
-[assembly: AssemblyTrademark(ProductStrings.Empty)]
-[assembly: AssemblyCulture(ProductStrings.Empty)]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("John Batte")]
+[assembly: AssemblyProduct("Code Patterns")]
+[assembly: AssemblyCopyright("Copyright © <#= DateTime.Now.Year #>")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
 [assembly: NeutralResourcesLanguage("en-US")]
 [assembly: AssemblyVersion("<#= version #>")]
-[assembly: AssemblyFileVersion("<#= fileVersion #>")]
-<# if(IsPreRelease){ #>
-[assembly: AssemblyInformationalVersion("<#= infoVersion #>")]
-<# } #>
+<# if(buildLevel != BuildLevels.None){ #>
+[assembly: AssemblyInformationalVersion("<#= info #>")]<# } #>

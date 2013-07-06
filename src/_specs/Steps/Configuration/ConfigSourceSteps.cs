@@ -24,6 +24,8 @@
 #endregion
 
 using System;
+using System.Xml.Linq;
+
 using BoDi;
 using FluentAssertions;
 
@@ -31,6 +33,7 @@ using Patterns.Configuration;
 using Patterns.Specifications.Models;
 using Patterns.Specifications.Models.Configuration;
 using Patterns.Specifications.Models.Mocking;
+using Patterns.Testing.Configuration;
 
 using TechTalk.SpecFlow;
 
@@ -43,19 +46,27 @@ namespace Patterns.Specifications.Steps.Configuration
 		private readonly ConfigSourceContext _context;
 		private readonly MoqContext _moq;
 		private readonly ErrorContext _errors;
+		private readonly ResourceContext _resources;
 
-		public ConfigSourceSteps(IObjectContainer container, ConfigSourceContext context, MoqContext moq, ErrorContext errors)
+		public ConfigSourceSteps(IObjectContainer container, ConfigSourceContext context, MoqContext moq, ErrorContext errors, ResourceContext resources)
 		{
 			_container = container;
 			_context = context;
 			_moq = moq;
 			_errors = errors;
+			_resources = resources;
 		}
 
 		[Given(@"I have a new Configuration Source using the mocked config abstraction")]
 		public void CreateSourceUsingMockedAbstraction()
 		{
 			_context.ConfigSource = new ConfigurationSource(_moq.Container.Mock<IConfigurationManager>().Object, config => new ConfigurationWrapper(config));
+		}
+
+		[Given(@"I have a new Configuration Source using the canned config called ""(.*)""")]
+		public void CreateSourceUsingCannedConfig(string sectionName)
+		{
+			_context.ConfigSource = new TestConfigurationSource(XElement.Parse(_resources.GetString(sectionName)));
 		}
 
 		[When(@"I ask for a Configuration Section named ""(.*)"" from the Configuration Source")]

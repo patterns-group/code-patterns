@@ -37,22 +37,51 @@ namespace Patterns.Testing.Moq
 	/// </summary>
 	public sealed class MoqContainer : AccessibleContainer, IMoqContainer
 	{
+		/// <summary>
+		///    Initializes a new instance of the <see cref="MoqContainer" /> class.
+		/// </summary>
+		/// <param name="container">The container.</param>
 		public MoqContainer(IContainer container) : base(container)
 		{
 			Locator = new AutofacServiceLocator(this);
 			ComponentRegistry.AddRegistrationSource(new MoqRegistrationSource());
 		}
 
+		/// <summary>
+		///    Initializes a new instance of the <see cref="MoqContainer" /> class.
+		/// </summary>
 		public MoqContainer() : this(new ContainerBuilder().Build()) {}
 
+		/// <summary>
+		///    Gets the locator.
+		/// </summary>
+		/// <value>
+		///    The locator.
+		/// </value>
 		public IServiceLocator Locator { get; private set; }
 
+		/// <summary>
+		///    Retrieves the mock for the specified service type.
+		/// </summary>
+		/// <typeparam name="TService">The type of the service.</typeparam>
+		/// <returns>
+		///    The service mock.
+		/// </returns>
 		public Mock<TService> Mock<TService>() where TService : class
 		{
 			var obj = (IMocked<TService>) Create<TService>();
 			return obj.Mock;
 		}
 
+		/// <summary>
+		///    Creates an instance of the specified service, injecting mocked objects
+		///    for all unregistered dependencies.
+		/// </summary>
+		/// <typeparam name="TService">The type of the service.</typeparam>
+		/// <param name="activator">The optional activator.</param>
+		/// <returns>
+		///    The service instance.
+		/// </returns>
 		public TService Create<TService>(Func<IMoqContainer, TService> activator = null) where TService : class
 		{
 			Action<ContainerBuilder> defaultRegistration = builder => builder.RegisterType<TService>()
@@ -64,6 +93,14 @@ namespace Patterns.Testing.Moq
 			return ResolveOrCreate<TService>(activator == null ? defaultRegistration : activatorRegistration);
 		}
 
+		/// <summary>
+		///    Updates this instance by registering the implementation type as the service type.
+		/// </summary>
+		/// <typeparam name="TService">The type of the service.</typeparam>
+		/// <typeparam name="TImplementation">The type of the implementation.</typeparam>
+		/// <returns>
+		///    The container.
+		/// </returns>
 		public IMoqContainer Update<TService, TImplementation>() where TService : class where TImplementation : TService
 		{
 			Update(builder => builder.RegisterType<TImplementation>().As<TService>()
@@ -72,6 +109,14 @@ namespace Patterns.Testing.Moq
 			return this;
 		}
 
+		/// <summary>
+		///    Updates this instance by registering an instance of the specified service.
+		/// </summary>
+		/// <typeparam name="TService">The type of the service.</typeparam>
+		/// <param name="instance">The instance.</param>
+		/// <returns>
+		///    The container.
+		/// </returns>
 		public IMoqContainer Update<TService>(TService instance) where TService : class
 		{
 			Update(builder => builder.RegisterInstance(instance).As<TService>()
@@ -80,9 +125,18 @@ namespace Patterns.Testing.Moq
 			return this;
 		}
 
+		/// <summary>
+		///    Updates this instance by registering the specified activator as the service type.
+		/// </summary>
+		/// <typeparam name="TService">The type of the service.</typeparam>
+		/// <param name="activator">The activator.</param>
+		/// <returns>
+		///    The container
+		/// </returns>
 		public IMoqContainer Update<TService>(Func<IMoqContainer, TService> activator) where TService : class
 		{
-			Update(builder => builder.Register<TService>(c => activator(this)).As<TService>().PropertiesAutowired(PropertyWiringOptions.PreserveSetValues));
+			Update(builder => builder.Register(c => activator(this)).As<TService>()
+				.PropertiesAutowired(PropertyWiringOptions.PreserveSetValues));
 
 			return this;
 		}

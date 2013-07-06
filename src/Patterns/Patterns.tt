@@ -11,7 +11,7 @@ output extension=".nuspec" #><?xml version="1.0"?>
 		<id>$id$</id>
 		<title>$id$</title>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
-		<description>$description$</description>
+		<description>$description$ -- for 0.x backward compatibility, see $id$.Legacy.</description>
 		<copyright>Copyright © <#= DateTime.Now.Year #></copyright>
 	</metadata>
 </package>

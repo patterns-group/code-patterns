@@ -81,7 +81,6 @@
     <Compile Include="Runtime\DefaultDateTimeInfo.cs" />
     <Compile Include="Runtime\IDateTimeInfo.cs" />
     <Compile Include="Runtime\TimeExtensions.cs" />
-    <Compile Include="ProductStrings.cs" />
     <Compile Include="SolutionAssemblyInfo.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
