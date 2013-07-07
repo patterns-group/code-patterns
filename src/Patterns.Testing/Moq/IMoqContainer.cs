@@ -21,8 +21,6 @@
 
 using System;
 
-using Autofac;
-
 using Microsoft.Practices.ServiceLocation;
 
 using Moq;
@@ -30,11 +28,10 @@ using Moq;
 namespace Patterns.Testing.Moq
 {
 	/// <summary>
-	/// Combines the Autofac IContainer interface with
-	/// additional features for added configurability during tests,
-	/// and for tighter integration with Moq.
+	/// Provides an IoC container designed for maximum configurability
+	/// during tests, and for tight integration with Moq.
 	/// </summary>
-	public interface IMoqContainer : IContainer
+	public interface IMoqContainer
 	{
 		/// <summary>
 		/// Gets the locator.
