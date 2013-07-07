@@ -19,18 +19,9 @@
 
 #endregion
 
-using Patterns.Testing.Autofac;
-using Patterns.Testing.Moq;
+using System.Reflection;
+using System.Runtime.InteropServices;
 
-namespace Patterns.Specifications.Models.Mocking
-{
-	public class MoqContext
-	{
-		public MoqContext()
-		{
-			Container = new AutofacMoqContainer();
-		}
-
-		public IMoqContainer Container { get; private set; }
-	}
-}
+[assembly: AssemblyTitle("Patterns.Testing.Autofac")]
+[assembly: AssemblyDescription("The Autofac Implementation of Patterns.Testing")]
+[assembly: Guid("5353bb55-9865-4b72-8e52-eb5ba03c0834")]

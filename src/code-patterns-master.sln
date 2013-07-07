@@ -23,6 +23,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{AB1B5C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "_specs", "_specs\_specs.csproj", "{5294698C-FC9F-491B-A914-22C5E32B51F6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Patterns.Testing.Autofac", "Patterns.Testing.Autofac\Patterns.Testing.Autofac.csproj", "{88379560-EFAE-4296-BF81-D1809B0F7BD3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,12 +47,16 @@ Global
 		{5294698C-FC9F-491B-A914-22C5E32B51F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5294698C-FC9F-491B-A914-22C5E32B51F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5294698C-FC9F-491B-A914-22C5E32B51F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88379560-EFAE-4296-BF81-D1809B0F7BD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88379560-EFAE-4296-BF81-D1809B0F7BD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88379560-EFAE-4296-BF81-D1809B0F7BD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88379560-EFAE-4296-BF81-D1809B0F7BD3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		CodeStyleEnforcer_RulesLocation = 1
 		CodeStyleEnforcer_Active = -1
+		CodeStyleEnforcer_RulesLocation = 1
 	EndGlobalSection
 EndGlobal

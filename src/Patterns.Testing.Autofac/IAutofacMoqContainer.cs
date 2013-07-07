@@ -19,18 +19,33 @@
 
 #endregion
 
-using Patterns.Testing.Autofac;
+using System;
+
+using Autofac;
+
 using Patterns.Testing.Moq;
 
-namespace Patterns.Specifications.Models.Mocking
+namespace Patterns.Testing.Autofac
 {
-	public class MoqContext
+	/// <summary>
+	/// Augments <see cref="IMoqContainer"/> with Autofac-specific functionality.
+	/// Use this when you are using Autofac as your IoC in a test project, and
+	/// you need to load a Module or run a ContainerBuilder-specific method.
+	/// </summary>
+	public interface IAutofacMoqContainer : IMoqContainer, IContainer
 	{
-		public MoqContext()
-		{
-			Container = new AutofacMoqContainer();
-		}
+		/// <summary>
+		/// Updates the container using the specified module.
+		/// </summary>
+		/// <param name="module">The module.</param>
+		/// <returns>The container.</returns>
+		IAutofacMoqContainer Update(Module module);
 
-		public IMoqContainer Container { get; private set; }
+		/// <summary>
+		/// Updates the container using the specified registration.
+		/// </summary>
+		/// <param name="registration">The registration.</param>
+		/// <returns>The container.</returns>
+		IAutofacMoqContainer Update(Action<ContainerBuilder> registration);
 	}
 }
