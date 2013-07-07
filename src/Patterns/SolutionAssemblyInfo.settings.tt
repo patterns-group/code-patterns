@@ -4,7 +4,7 @@ Settings.Initialize(
 	minorNumber: 7,
 	patchNumber: 1,
 	buildNumber: null,
-	buildLevel: BuildLevels.Beta
+	buildLevel: BuildLevels.None
 );
 #><#+
 public enum BuildLevels
