@@ -97,11 +97,38 @@ namespace Patterns.Specifications.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///&lt;configuration&gt;
+        ///	&lt;configSections&gt;
+        ///		&lt;section name=&quot;settings&quot; type=&quot;Patterns.Specifications.Models.Configuration.TestConfigurationSection, _specs&quot;/&gt;
+        ///	&lt;/configSections&gt;
+        ///	&lt;settings /&gt;
+        ///&lt;/configuration&gt;.
         /// </summary>
         internal static string TestConfig1 {
             get {
                 return ResourceManager.GetString("TestConfig1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///&lt;configuration&gt;
+        ///	&lt;configSections&gt;
+        ///		&lt;section name=&quot;settings&quot; type=&quot;Patterns.Specifications.Models.Configuration.TestConfigurationSection, _specs&quot;/&gt;
+        ///		&lt;sectionGroup name=&quot;test&quot;&gt;
+        ///			&lt;section name=&quot;settings&quot; type=&quot;Patterns.Specifications.Models.Configuration.TestConfigurationSection, _specs&quot; /&gt;
+        ///		&lt;/sectionGroup&gt;
+        ///	&lt;/configSections&gt;
+        ///	&lt;settings /&gt;
+        ///	&lt;test&gt;
+        ///		&lt;settings /&gt;
+        ///	&lt;/test&gt;
+        ///&lt;/configuration&gt;.
+        /// </summary>
+        internal static string TestConfig2 {
+            get {
+                return ResourceManager.GetString("TestConfig2", resourceCulture);
             }
         }
     }

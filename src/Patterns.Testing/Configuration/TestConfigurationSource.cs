@@ -27,6 +27,7 @@ using System.Reflection;
 using System.Xml.Linq;
 
 using Patterns.Configuration;
+using Patterns.Text.RegularExpressions;
 
 namespace Patterns.Testing.Configuration
 {
@@ -37,6 +38,7 @@ namespace Patterns.Testing.Configuration
 	public class TestConfigurationSource : IConfigurationSource
 	{
 		private readonly XContainer _configXml;
+		private readonly CompiledRegex _sectionNamePattern = "[^/]+$";
 
 		/// <summary>
 		///    Initializes a new instance of the <see cref="TestConfigurationSource" /> class.
@@ -149,11 +151,11 @@ namespace Patterns.Testing.Configuration
 			throw new NotSupportedException();
 		}
 
-		private static ConfigurationSection DeserializeSection(XContainer xml, string name)
+		private ConfigurationSection DeserializeSection(XContainer xml, string name)
 		{
 			XElement sectionDefinition = xml.Element("configSections")
-				.Elements("section")
-				.FirstOrDefault(section => section.Attribute("name").Value == name);
+				.Descendants("section")
+				.FirstOrDefault(section => section.Attribute("name").Value == _sectionNamePattern.Match(name).Value);
 
 			if (sectionDefinition == null) return null;
 
@@ -182,7 +184,7 @@ namespace Patterns.Testing.Configuration
 			var config = new TSection();
 			const BindingFlags flags = BindingFlags.Instance | BindingFlags.NonPublic;
 			MethodInfo deserializer = typeof (TSection).GetMethod("DeserializeSection", flags);
-			XElement sectionXml = xml.Element(name);
+			var sectionXml = name.Split('/').Aggregate(xml, (current, part) => current.Element(part));
 			if (sectionXml == null) return null;
 
 			try

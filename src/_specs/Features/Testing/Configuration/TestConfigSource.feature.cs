@@ -68,15 +68,17 @@ namespace Patterns.Specifications.Features.Testing.Configuration
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("GetSection (normal)")]
-        public virtual void GetSectionNormal()
+        [NUnit.Framework.TestCaseAttribute("TestConfig1", "settings", null)]
+        [NUnit.Framework.TestCaseAttribute("TestConfig2", "test/settings", null)]
+        public virtual void GetSectionNormal(string config, string name, string[] exampleTags)
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("GetSection (normal)", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("GetSection (normal)", exampleTags);
 #line 6
 this.ScenarioSetup(scenarioInfo);
 #line 7
- testRunner.Given("I have a new Configuration Source using the canned config called \"TestConfig1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given(string.Format("I have a new Configuration Source using the canned config called \"{0}\"", config), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 8
- testRunner.When("I ask for a Configuration Section named \"settings\" from the Configuration Source", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When(string.Format("I ask for a Configuration Section named \"{0}\" from the Configuration Source", name), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 9
  testRunner.Then("the Configuration Section I retrieved from the Configuration Source should be the" +
                     " expected section", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
