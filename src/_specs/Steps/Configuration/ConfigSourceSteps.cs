@@ -64,9 +64,9 @@ namespace Patterns.Specifications.Steps.Configuration
 		}
 
 		[Given(@"I have a new Configuration Source using the canned config called ""(.*)""")]
-		public void CreateSourceUsingCannedConfig(string sectionName)
+		public void CreateSourceUsingCannedConfig(string configName)
 		{
-			_context.ConfigSource = new TestConfigurationSource(XElement.Parse(_resources.GetString(sectionName)));
+			_context.ConfigSource = new TestConfigurationSource(XElement.Parse(_resources.GetString(configName)));
 		}
 
 		[When(@"I ask for a Configuration Section named ""(.*)"" from the Configuration Source")]
