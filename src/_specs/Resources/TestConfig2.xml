@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+	<configSections>
+		<section name="settings" type="Patterns.Specifications.Models.Configuration.TestConfigurationSection, _specs"/>
+		<sectionGroup name="test">
+			<section name="settings" type="Patterns.Specifications.Models.Configuration.TestConfigurationSection, _specs" />
+		</sectionGroup>
+	</configSections>
+	<settings />
+	<test>
+		<settings />
+	</test>
+</configuration>
