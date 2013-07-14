@@ -31,4 +31,4 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
 [assembly: NeutralResourcesLanguage("en-US")]
-[assembly: AssemblyVersion("3.7.2")]
+[assembly: AssemblyVersion("3.8.0")]

@@ -19,7 +19,7 @@
 
 #endregion
 
-using Patterns.Testing.Autofac;
+using Patterns.Testing.Autofac.Moq;
 using Patterns.Testing.Moq;
 
 namespace Patterns.Specifications.Models.Mocking

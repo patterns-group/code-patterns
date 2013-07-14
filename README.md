@@ -1,10 +1,8 @@
-Code Patterns for .NET
+Welcome!
 =============
 
-# Welcome! #
 ## You've found my .NET utility belt. ##
-## It's constantly growing. ##
-## Its entire goal is to make life easier. ##
+## It's constantly growing, and its entire goal is to make life easier for .NET developers. ##
 
 Here are the highlights:
 
