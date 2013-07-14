@@ -1,4 +1,4 @@
-﻿#region FreeBSD
+#region FreeBSD
 
 // Copyright (c) 2013, John Batte
 // All rights reserved.
@@ -25,7 +25,7 @@ using Autofac;
 
 using Patterns.Testing.Moq;
 
-namespace Patterns.Testing.Autofac
+namespace Patterns.Testing.Autofac.Moq
 {
 	/// <summary>
 	/// Augments <see cref="IMoqContainer"/> with Autofac-specific functionality.

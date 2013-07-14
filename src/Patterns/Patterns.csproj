@@ -57,6 +57,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Collections\CollectionExtensions.cs" />
+    <Compile Include="Collections\DictionaryValueRetriever.cs" />
+    <Compile Include="Collections\IDictionaryValueRetriever.cs" />
+    <Compile Include="Collections\Strategies\ActionStrategies.cs" />
+    <Compile Include="Collections\Strategies\FuncStrategies.cs" />
     <Compile Include="Configuration\ConfigurationManagerWrapper.cs" />
     <Compile Include="Configuration\ConfigurationSource.cs" />
     <Compile Include="Configuration\ConfigurationWrapper.cs" />
