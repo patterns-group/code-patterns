@@ -269,7 +269,7 @@ PRE, CODE, KBD, SAMP
 /*
 * 1. Addresses CSS quotes not supported in IE6/7
 * 2. Addresses quote property not supported in S4
- 
+
 1*/
 Q
 {
@@ -350,7 +350,7 @@ IMG
 }
 /*
 * Corrects overflow displayed oddly in IE9
- 
+
 svg:not(:root)*/
 #INVALID-RULE
 {
@@ -626,7 +626,7 @@ SECTION IMG
 }
 .center IMG
 {
-	background-color: #434343;
+	background-color: #F5F6F7;
 	padding: 25px;
 	border: 2px solid #1A1A1A;
 }
