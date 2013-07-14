@@ -62,9 +62,9 @@
     <Compile Include="..\Patterns\SolutionAssemblyInfo.cs">
       <Link>Properties\SolutionAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="IAutofacMoqContainer.cs" />
-    <Compile Include="AutofacMoqContainer.cs" />
-    <Compile Include="MoqRegistrationSource.cs" />
+    <Compile Include="Moq\AutofacMoqContainer.cs" />
+    <Compile Include="Moq\IAutofacMoqContainer.cs" />
+    <Compile Include="Moq\MoqRegistrationSource.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

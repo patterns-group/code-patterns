@@ -82,5 +82,21 @@ namespace Patterns.Mapping
 		{
 			get { return _configurationProvider; }
 		}
+
+		/// <summary>
+		/// Maps the specified source to the indicated destination.
+		/// </summary>
+		/// <typeparam name="TSource">The type of the source.</typeparam>
+		/// <typeparam name="TDestination">The type of the destination.</typeparam>
+		/// <param name="source">The source.</param>
+		/// <returns></returns>
+		/// <exception cref="System.NotImplementedException"></exception>
+		public TDestination Map<TSource, TDestination>(TSource source)
+		{
+			if (ConfigurationProvider.FindTypeMapFor(typeof (TSource), typeof (TDestination)) == null)
+				Configuration.CreateMap<TSource, TDestination>();
+
+			return Engine.Map<TSource, TDestination>(source);
+		}
 	}
 }

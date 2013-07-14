@@ -100,7 +100,7 @@
     <Compile Include="Mapping\MappingModule.cs" />
     <Compile Include="Modules\RuntimeModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Sources\ResolveAnythingSource.cs" />
+    <Compile Include="Sources\ResolveCreatableSource.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Patterns\Patterns.csproj">

@@ -31,7 +31,7 @@ using Moq;
 using Patterns.Autofac;
 using Patterns.Testing.Moq;
 
-namespace Patterns.Testing.Autofac
+namespace Patterns.Testing.Autofac.Moq
 {
 	/// <summary>
 	///    Provides a default implementation of the <see cref="IMoqContainer" /> interface.

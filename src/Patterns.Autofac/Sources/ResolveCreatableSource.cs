@@ -40,7 +40,7 @@ namespace Patterns.Autofac.Sources
 	/// <remarks>
 	///    Using this class can have unwanted side effects and is intended for fringe scenarios; use with caution.
 	/// </remarks>
-	public class ResolveAnythingSource : IRegistrationSource
+	public class ResolveCreatableSource : IRegistrationSource
 	{
 		#region Implementation of IRegistrationSource
 
@@ -58,8 +58,7 @@ namespace Patterns.Autofac.Sources
 		{
 			var ts = service as TypedService;
 			if (ts == null || ts.ServiceType.IsAbstract || !ts.ServiceType.IsClass) yield break;
-			IRegistrationBuilder<object, ConcreteReflectionActivatorData, SingleRegistrationStyle> rb = RegistrationBuilder.ForType(ts.ServiceType);
-			yield return rb.CreateRegistration();
+			yield return RegistrationBuilder.ForType(ts.ServiceType).CreateRegistration();
 		}
 
 		/// <summary>

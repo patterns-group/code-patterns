@@ -8,7 +8,7 @@ using Autofac.Core;
 
 using Moq;
 
-namespace Patterns.Testing.Autofac
+namespace Patterns.Testing.Autofac.Moq
 {
 	/// <summary>
 	/// Provides a registration source for Autofac using Moq's MockRepository as a service factory.
