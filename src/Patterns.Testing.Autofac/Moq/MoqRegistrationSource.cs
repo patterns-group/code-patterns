@@ -21,6 +21,14 @@ namespace Patterns.Testing.Autofac.Moq
 			.GetGenericMethodDefinition();
 
 		/// <summary>
+		/// Gets the repository.
+		/// </summary>
+		/// <value>
+		/// The repository.
+		/// </value>
+		public static MockRepository Repository { get { return _repository; } }
+
+		/// <summary>
 		/// Retrieve registrations for an unregistered service, to be used
 		/// by the container.
 		/// </summary>
