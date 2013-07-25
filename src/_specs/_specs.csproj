@@ -114,6 +114,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Features\Collections\EqualityComparer.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EqualityComparer.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\Configuration\ConfigSource.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -157,6 +162,7 @@
     <Compile Include="Models\Autofac\AutofacContext.cs" />
     <Compile Include="Models\Collections\CollectionContext.cs" />
     <Compile Include="Models\Collections\EachContext.cs" />
+    <Compile Include="Models\Collections\EqualityComparerContext.cs" />
     <Compile Include="Models\Collections\LoggedInvocation.cs" />
     <Compile Include="Models\Configuration\ConfigSourceContext.cs" />
     <Compile Include="Models\Configuration\InvalidConfigurationSection.cs" />
@@ -197,6 +203,7 @@
     <Compile Include="Steps\Autofac\AutofacSteps.cs" />
     <Compile Include="Steps\Autofac\Modules\RuntimeModuleSteps.cs" />
     <Compile Include="Steps\Collections\EachSteps.cs" />
+    <Compile Include="Steps\Collections\EqualityComparerSteps.cs" />
     <Compile Include="Steps\Collections\InvocationLogSteps.cs" />
     <Compile Include="Steps\Collections\ObjectCollectionSteps.cs" />
     <Compile Include="Steps\Collections\ObjectSetSteps.cs" />
@@ -244,6 +251,10 @@
     <None Include="Features\Collections\Each.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Each.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Collections\EqualityComparer.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>EqualityComparer.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Configuration\ConfigSource.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
