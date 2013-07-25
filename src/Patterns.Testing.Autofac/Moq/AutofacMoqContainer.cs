@@ -34,7 +34,7 @@ using Patterns.Testing.Moq;
 namespace Patterns.Testing.Autofac.Moq
 {
 	/// <summary>
-	///    Provides a default implementation of the <see cref="IMoqContainer" /> interface.
+	///    Provides a default implementation of the <see cref="IAutofacMoqContainer" /> interface.
 	/// </summary>
 	public sealed class AutofacMoqContainer : AccessibleContainer, IAutofacMoqContainer
 	{
@@ -70,8 +70,13 @@ namespace Patterns.Testing.Autofac.Moq
 		/// </returns>
 		public Mock<TService> Mock<TService>() where TService : class
 		{
-			var obj = (IMocked<TService>) Create<TService>();
-			return obj.Mock;
+			var service = Create<TService>();
+			var existingMock = service as IMocked<TService>;
+			if (existingMock != null) return existingMock.Mock;
+
+			var mock = MoqRegistrationSource.Repository.Create<TService>();
+			Update(mock.Object);
+			return mock;
 		}
 
 		/// <summary>
@@ -85,13 +90,11 @@ namespace Patterns.Testing.Autofac.Moq
 		/// </returns>
 		public TService Create<TService>(Func<IMoqContainer, TService> activator = null) where TService : class
 		{
-			Action<ContainerBuilder> defaultRegistration = builder => builder.RegisterType<TService>()
-				.PropertiesAutowired(PropertyWiringOptions.PreserveSetValues);
-
-			Action<ContainerBuilder> activatorRegistration = builder => builder.Register(c => activator(this))
-				.PropertiesAutowired(PropertyWiringOptions.PreserveSetValues);
-
-			return ResolveOrCreate<TService>(activator == null ? defaultRegistration : activatorRegistration);
+			return ResolveOrCreate<TService>(activator == null
+				? (builder => builder.RegisterType<TService>()
+					.PropertiesAutowired(PropertyWiringOptions.PreserveSetValues))
+				: (Action<ContainerBuilder>) (builder => builder.Register(c => activator(this))
+					.PropertiesAutowired(PropertyWiringOptions.PreserveSetValues)));
 		}
 
 		/// <summary>
