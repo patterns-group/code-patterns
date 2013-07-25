@@ -1,8 +1,8 @@
 ﻿<#
 Settings.Initialize(
 	majorNumber: 3,
-	minorNumber: 8,
-	patchNumber: 1,
+	minorNumber: 9,
+	patchNumber: 0,
 	buildNumber: null,
 	buildLevel: BuildLevels.None
 );
