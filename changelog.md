@@ -1,5 +1,18 @@
 ## Patterns Changelog ##
 
+**3.9.0**
+
+- Added `Patterns.Collections.ConfigurableEqualityComparer<TValue>` (Issue #66)
+- Fixed type casting error in `Patterns.Testing.Autofac.Moq.AutofacMoqContainer` (Issue #67)
+- Fixed issue with up-front service type inspection in `Patterns.Testing.Autofac.Moq.MoqRegistrationSource` (Issue #68)
+- Added `IRegexEvaluator` and `RegexEvaluator` to the `Patterns.Text.RegularExpressions` namespace (Issue #69)
+- Added `Evaluator` and `EvaluatorAccessor` to `System.Text.RegularExpressions.CompiledRegex` (Issue #70)
+- Added `Patterns.Runtime.TemporaryScope`
+- Added `ActionValueStrategies<TValue>`
+- Added `FuncValueStrategies<TValue, TOut>`
+
+**3.8.1** - Expanded capabilities of `Patterns.Mapping.IMappingServices` (issue #65)
+
 **3.8.0**
 
 - Renamed `Patterns.Autofac.Sources.ResolveAnythingSource` to `Patterns.Autofac.Sources.ResolveCreatableSource` (issue #43)
