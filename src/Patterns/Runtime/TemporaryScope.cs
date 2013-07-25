@@ -1,4 +1,4 @@
-#region FreeBSD
+ï»¿#region FreeBSD
 
 // Copyright (c) 2013, John Batte
 // All rights reserved.
@@ -19,16 +19,49 @@
 
 #endregion
 
-using System.Reflection;
-using System.Resources;
-using System.Runtime.InteropServices;
+using System;
 
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("John Batte")]
-[assembly: AssemblyProduct("Code Patterns")]
-[assembly: AssemblyCopyright("Copyright © 2013")]
-[assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
-[assembly: ComVisible(false)]
-[assembly: NeutralResourcesLanguage("en-US")]
-[assembly: AssemblyVersion("3.9.0")]
+namespace Patterns.Runtime
+{
+	/// <summary>
+	///    Provides a disposable scope with configurable setup and tear-down actions.
+	/// </summary>
+	public class TemporaryScope : IDisposable
+	{
+		private readonly Action _setup;
+		private readonly Action _tearDown;
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="TemporaryScope" /> class.
+		/// </summary>
+		/// <param name="setup">The setup.</param>
+		/// <param name="tearDown">The tear down.</param>
+		public TemporaryScope(Action setup = null, Action tearDown = null)
+		{
+			_setup = setup;
+			_tearDown = tearDown;
+
+			if (_setup != null) _setup();
+		}
+
+		/// <summary>
+		///    Disposes this scope; if a tear-down method exists, it is executed.
+		/// </summary>
+		public void Dispose()
+		{
+			if(Disposed) throw new ObjectDisposedException(GetType().Name);
+
+			if (_tearDown != null) _tearDown();
+
+			Disposed = true;
+		}
+
+		/// <summary>
+		/// Gets or sets a value indicating whether this <see cref="TemporaryScope"/> is disposed.
+		/// </summary>
+		/// <value>
+		///   <c>true</c> if disposed; otherwise, <c>false</c>.
+		/// </value>
+		public bool Disposed { get; set; }
+	}
+}

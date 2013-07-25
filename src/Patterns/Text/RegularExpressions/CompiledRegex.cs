@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -13,6 +14,13 @@ namespace Patterns.Text.RegularExpressions
 	///</remarks>
 	public class CompiledRegex : Regex
 	{
+		private static readonly IRegexEvaluator _defaultEvaluator = new RegexEvaluator();
+
+		static CompiledRegex()
+		{
+			EvaluatorAccessor = () => _defaultEvaluator;
+		}
+
 		///<summary>
 		///	Initializes a new instance of the <see cref = "CompiledRegex" /> class.
 		///</summary>
@@ -91,6 +99,25 @@ namespace Patterns.Text.RegularExpressions
 			const string whiteSpace = @"\s+";
 			string escapedText = string.Join(whiteSpace, Split(text, whiteSpace).Select(Escape).ToArray());
 			return new CompiledRegex(escapedText, options);
+		}
+
+		/// <summary>
+		/// Gets or sets the evaluator accessor.
+		/// </summary>
+		/// <value>
+		/// The evaluator accessor.
+		/// </value>
+		public static Func<IRegexEvaluator> EvaluatorAccessor { get; set; }
+
+		/// <summary>
+		/// Gets the evaluator.
+		/// </summary>
+		/// <value>
+		/// The evaluator.
+		/// </value>
+		public static IRegexEvaluator Evaluator
+		{
+			get { return EvaluatorAccessor(); }
 		}
 
 		private static RegexOptions GetOptions(RegexOptions originalOptions)

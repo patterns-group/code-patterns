@@ -1,4 +1,4 @@
-#region FreeBSD
+ï»¿#region FreeBSD
 
 // Copyright (c) 2013, John Batte
 // All rights reserved.
@@ -19,16 +19,14 @@
 
 #endregion
 
-using System.Reflection;
-using System.Resources;
-using System.Runtime.InteropServices;
+using System.Collections.Generic;
 
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("John Batte")]
-[assembly: AssemblyProduct("Code Patterns")]
-[assembly: AssemblyCopyright("Copyright © 2013")]
-[assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
-[assembly: ComVisible(false)]
-[assembly: NeutralResourcesLanguage("en-US")]
-[assembly: AssemblyVersion("3.9.0")]
+namespace Patterns.Specifications.Models.Collections
+{
+	public class EqualityComparerContext
+	{
+		public IEqualityComparer<string> StringComparer { get; set; }
+
+		public bool ComparisonResult { get; set; }
+	}
+}

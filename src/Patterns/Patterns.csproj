@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="Collections\CollectionExtensions.cs" />
     <Compile Include="Collections\DictionaryValueRetriever.cs" />
+    <Compile Include="Collections\ConfigurableEqualityComparer.cs" />
     <Compile Include="Collections\IDictionaryValueRetriever.cs" />
     <Compile Include="Collections\Strategies\ActionStrategies.cs" />
     <Compile Include="Collections\Strategies\FuncStrategies.cs" />
@@ -84,6 +85,7 @@
     <Compile Include="Reflection\PropertyValue.cs" />
     <Compile Include="Runtime\DefaultDateTimeInfo.cs" />
     <Compile Include="Runtime\IDateTimeInfo.cs" />
+    <Compile Include="Runtime\TemporaryScope.cs" />
     <Compile Include="Runtime\TimeExtensions.cs" />
     <Compile Include="SolutionAssemblyInfo.cs">
       <AutoGen>True</AutoGen>
@@ -91,6 +93,8 @@
       <DependentUpon>SolutionAssemblyInfo.tt</DependentUpon>
     </Compile>
     <Compile Include="Text\RegularExpressions\CompiledRegex.cs" />
+    <Compile Include="Text\RegularExpressions\IRegexEvaluator.cs" />
+    <Compile Include="Text\RegularExpressions\RegexEvaluator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

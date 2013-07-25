@@ -6,7 +6,11 @@ using System.Reflection;
 using Autofac.Builder;
 using Autofac.Core;
 
+using Common.Logging;
+
 using Moq;
+
+using Patterns.Testing.Autofac.Properties;
 
 namespace Patterns.Testing.Autofac.Moq
 {
@@ -15,10 +19,19 @@ namespace Patterns.Testing.Autofac.Moq
 	/// </summary>
 	public class MoqRegistrationSource : IRegistrationSource
 	{
+		private static readonly ILog _log = LogManager.GetLogger(typeof (MoqRegistrationSource));
 		private static readonly MockRepository _repository = new MockRepository(MockBehavior.Default);
 		private static readonly MethodInfo _createMethod = typeof(MoqRegistrationSource)
 			.GetMethod("CreateUsingRepository", BindingFlags.NonPublic | BindingFlags.Instance)
 			.GetGenericMethodDefinition();
+
+		/// <summary>
+		/// Gets the repository.
+		/// </summary>
+		/// <value>
+		/// The repository.
+		/// </value>
+		public static MockRepository Repository { get { return _repository; } }
 
 		/// <summary>
 		/// Retrieve registrations for an unregistered service, to be used
@@ -41,13 +54,18 @@ namespace Patterns.Testing.Autofac.Moq
 		{
 			if (service == null) throw new ArgumentNullException("service");
 
+			_log.Info(format => format(Resources.MoqRegistrationSource_RegistrationsFor_InfoFormat, service.Description));
+
 			IComponentRegistration[] existingRegistrations = registrationAccessor(service).ToArray();
 			if (existingRegistrations.Length > 0) return existingRegistrations;
 
 			var typedService = service as TypedService;
-			return typedService == null
-				? Enumerable.Empty<IComponentRegistration>()
-				: new[]
+			bool canMock = typedService != null && (typedService.ServiceType.IsInterface || typedService.ServiceType.IsAbstract || !typedService.ServiceType.IsSealed);
+
+			if (canMock)
+			{
+				_log.Debug(format => format(Resources.MoqRegistrationSource_RegistrationsFor_PreMockCreateFormat, service.Description));
+				return new[]
 				{
 					RegistrationBuilder
 						.ForDelegate((context, parameters) =>
@@ -60,6 +78,9 @@ namespace Patterns.Testing.Autofac.Moq
 						.SingleInstance()
 						.CreateRegistration()
 				};
+			}
+			
+			return Enumerable.Empty<IComponentRegistration>();
 		}
 
 		/// <summary>
