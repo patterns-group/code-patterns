@@ -92,6 +92,8 @@
       <DependentUpon>SolutionAssemblyInfo.tt</DependentUpon>
     </Compile>
     <Compile Include="Text\RegularExpressions\CompiledRegex.cs" />
+    <Compile Include="Text\RegularExpressions\IRegexEvaluator.cs" />
+    <Compile Include="Text\RegularExpressions\RegexEvaluator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

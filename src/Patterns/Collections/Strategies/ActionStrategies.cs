@@ -1,8 +1,30 @@
-﻿using System;
+﻿#region FreeBSD
+
+// Copyright (c) 2013, John Batte
+// All rights reserved.
+// 
+// Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+// 
+//  * Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+// 
+//  * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the
+//    documentation and/or other materials provided with the distribution.
+// 
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
+// TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+// CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+// PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+// LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+// SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+#endregion
+
+using System;
 using System.Collections.Generic;
 
 namespace Patterns.Collections.Strategies
 {
+
 	#region Action
 
 	/// <summary>
@@ -98,6 +120,40 @@ namespace Patterns.Collections.Strategies
 		{
 			Action<TIn> strategy = _valueRetriever.Retrieve(key);
 			if (strategy != null) strategy(input);
+		}
+	}
+
+	/// <summary>
+	///    Extends <see cref="ActionStrategies{TKey, TIn}" /> for cases where the input variable is
+	///    also the strategy key.
+	/// </summary>
+	/// <typeparam name="TValue">The type of the value.</typeparam>
+	public class ActionValueStrategies<TValue> : ActionStrategies<TValue, TValue>
+	{
+		/// <summary>
+		///    Initializes a new instance of the <see cref="ActionValueStrategies{TValue}" /> class.
+		/// </summary>
+		/// <param name="throwKeyNotFoundExceptions">
+		///    if set to <c>true</c>, throw KeyNotFoundExceptions for missing keys.
+		/// </param>
+		public ActionValueStrategies(bool throwKeyNotFoundExceptions = false) : base(throwKeyNotFoundExceptions) {}
+
+		/// <summary>
+		///    Initializes a new instance of the <see cref="ActionValueStrategies{TValue}" /> class.
+		/// </summary>
+		/// <param name="keyComparer">The key comparer.</param>
+		/// <param name="throwKeyNotFoundExceptions">
+		///    if set to <c>true</c>, throw KeyNotFoundExceptions for missing keys.
+		/// </param>
+		public ActionValueStrategies(IEqualityComparer<TValue> keyComparer, bool throwKeyNotFoundExceptions = false) : base(keyComparer, throwKeyNotFoundExceptions) {}
+
+		/// <summary>
+		/// Executes the action corresponding with the specified value.
+		/// </summary>
+		/// <param name="value">The value.</param>
+		public virtual void Execute(TValue value)
+		{
+			Execute(value, value);
 		}
 	}
 
@@ -459,8 +515,11 @@ namespace Patterns.Collections.Strategies
 			TIn5 parameter5, TIn6 parameter6, TIn7 parameter7)
 		{
 			Action<TIn1, TIn2, TIn3, TIn4, TIn5, TIn6, TIn7> strategy = _valueRetriever.Retrieve(key);
-			if (strategy != null) strategy(parameter1, parameter2, parameter3, parameter4, parameter5, parameter6,
-							 parameter7);
+			if (strategy != null)
+			{
+				strategy(parameter1, parameter2, parameter3, parameter4, parameter5, parameter6,
+					parameter7);
+			}
 		}
 	}
 
@@ -530,8 +589,11 @@ namespace Patterns.Collections.Strategies
 			TIn5 parameter5, TIn6 parameter6, TIn7 parameter7, TIn8 parameter8)
 		{
 			Action<TIn1, TIn2, TIn3, TIn4, TIn5, TIn6, TIn7, TIn8> strategy = _valueRetriever.Retrieve(key);
-			if (strategy != null) strategy(parameter1, parameter2, parameter3, parameter4, parameter5, parameter6,
-							 parameter7, parameter8);
+			if (strategy != null)
+			{
+				strategy(parameter1, parameter2, parameter3, parameter4, parameter5, parameter6,
+					parameter7, parameter8);
+			}
 		}
 	}
 
@@ -605,8 +667,11 @@ namespace Patterns.Collections.Strategies
 			TIn5 parameter5, TIn6 parameter6, TIn7 parameter7, TIn8 parameter8, TIn9 parameter9)
 		{
 			Action<TIn1, TIn2, TIn3, TIn4, TIn5, TIn6, TIn7, TIn8, TIn9> strategy = _valueRetriever.Retrieve(key);
-			if (strategy != null) strategy(parameter1, parameter2, parameter3, parameter4, parameter5, parameter6,
-							 parameter7, parameter8, parameter9);
+			if (strategy != null)
+			{
+				strategy(parameter1, parameter2, parameter3, parameter4, parameter5, parameter6,
+					parameter7, parameter8, parameter9);
+			}
 		}
 	}
 
@@ -683,8 +748,11 @@ namespace Patterns.Collections.Strategies
 			TIn5 parameter5, TIn6 parameter6, TIn7 parameter7, TIn8 parameter8, TIn9 parameter9, TIn10 parameter10)
 		{
 			Action<TIn1, TIn2, TIn3, TIn4, TIn5, TIn6, TIn7, TIn8, TIn9, TIn10> strategy = _valueRetriever.Retrieve(key);
-			if (strategy != null) strategy(parameter1, parameter2, parameter3, parameter4, parameter5, parameter6,
-							 parameter7, parameter8, parameter9, parameter10);
+			if (strategy != null)
+			{
+				strategy(parameter1, parameter2, parameter3, parameter4, parameter5, parameter6,
+					parameter7, parameter8, parameter9, parameter10);
+			}
 		}
 	}
 
@@ -764,8 +832,11 @@ namespace Patterns.Collections.Strategies
 			TIn11 parameter11)
 		{
 			Action<TIn1, TIn2, TIn3, TIn4, TIn5, TIn6, TIn7, TIn8, TIn9, TIn10, TIn11> strategy = _valueRetriever.Retrieve(key);
-			if (strategy != null) strategy(parameter1, parameter2, parameter3, parameter4, parameter5, parameter6,
-							 parameter7, parameter8, parameter9, parameter10, parameter11);
+			if (strategy != null)
+			{
+				strategy(parameter1, parameter2, parameter3, parameter4, parameter5, parameter6,
+					parameter7, parameter8, parameter9, parameter10, parameter11);
+			}
 		}
 	}
 
@@ -849,8 +920,11 @@ namespace Patterns.Collections.Strategies
 			TIn11 parameter11, TIn12 parameter12)
 		{
 			Action<TIn1, TIn2, TIn3, TIn4, TIn5, TIn6, TIn7, TIn8, TIn9, TIn10, TIn11, TIn12> strategy = _valueRetriever.Retrieve(key);
-			if (strategy != null) strategy(parameter1, parameter2, parameter3, parameter4, parameter5, parameter6,
-							 parameter7, parameter8, parameter9, parameter10, parameter11, parameter12);
+			if (strategy != null)
+			{
+				strategy(parameter1, parameter2, parameter3, parameter4, parameter5, parameter6,
+					parameter7, parameter8, parameter9, parameter10, parameter11, parameter12);
+			}
 		}
 	}
 
@@ -876,10 +950,10 @@ namespace Patterns.Collections.Strategies
 	/// <typeparam name="TIn12">The type of the twelfth action parameter.</typeparam>
 	/// <typeparam name="TIn13">The type of the thirteenth action parameter.</typeparam>
 	public class ActionStrategies<TKey, TIn1, TIn2, TIn3, TIn4, TIn5, TIn6, TIn7, TIn8, TIn9, TIn10, TIn11, TIn12, TIn13> :
-											 Dictionary
-												 <TKey,
-												 Action
-												 <TIn1, TIn2, TIn3, TIn4, TIn5, TIn6, TIn7, TIn8, TIn9, TIn10, TIn11, TIn12, TIn13>>
+		Dictionary
+			<TKey,
+			Action
+			<TIn1, TIn2, TIn3, TIn4, TIn5, TIn6, TIn7, TIn8, TIn9, TIn10, TIn11, TIn12, TIn13>>
 	{
 		private readonly
 			IDictionaryValueRetriever
@@ -939,8 +1013,11 @@ namespace Patterns.Collections.Strategies
 			TIn11 parameter11, TIn12 parameter12, TIn13 parameter13)
 		{
 			Action<TIn1, TIn2, TIn3, TIn4, TIn5, TIn6, TIn7, TIn8, TIn9, TIn10, TIn11, TIn12, TIn13> strategy = _valueRetriever.Retrieve(key);
-			if (strategy != null) strategy(parameter1, parameter2, parameter3, parameter4, parameter5, parameter6,
-							 parameter7, parameter8, parameter9, parameter10, parameter11, parameter12, parameter13);
+			if (strategy != null)
+			{
+				strategy(parameter1, parameter2, parameter3, parameter4, parameter5, parameter6,
+					parameter7, parameter8, parameter9, parameter10, parameter11, parameter12, parameter13);
+			}
 		}
 	}
 
@@ -967,11 +1044,11 @@ namespace Patterns.Collections.Strategies
 	/// <typeparam name="TIn13">The type of the thirteenth action parameter.</typeparam>
 	/// <typeparam name="TIn14">The type of the fourteenth action parameter.</typeparam>
 	public class ActionStrategies<TKey, TIn1, TIn2, TIn3, TIn4, TIn5, TIn6, TIn7, TIn8, TIn9, TIn10, TIn11, TIn12, TIn13,
-										 TIn14> :
-											 Dictionary
-												 <TKey,
-												 Action
-												 <TIn1, TIn2, TIn3, TIn4, TIn5, TIn6, TIn7, TIn8, TIn9, TIn10, TIn11, TIn12, TIn13, TIn14>>
+	                              TIn14> :
+		                              Dictionary
+			                              <TKey,
+			                              Action
+			                              <TIn1, TIn2, TIn3, TIn4, TIn5, TIn6, TIn7, TIn8, TIn9, TIn10, TIn11, TIn12, TIn13, TIn14>>
 	{
 		private readonly
 			IDictionaryValueRetriever
@@ -1033,8 +1110,11 @@ namespace Patterns.Collections.Strategies
 			TIn11 parameter11, TIn12 parameter12, TIn13 parameter13, TIn14 parameter14)
 		{
 			Action<TIn1, TIn2, TIn3, TIn4, TIn5, TIn6, TIn7, TIn8, TIn9, TIn10, TIn11, TIn12, TIn13, TIn14> strategy = _valueRetriever.Retrieve(key);
-			if (strategy != null) strategy(parameter1, parameter2, parameter3, parameter4, parameter5, parameter6,
-							 parameter7, parameter8, parameter9, parameter10, parameter11, parameter12, parameter13, parameter14);
+			if (strategy != null)
+			{
+				strategy(parameter1, parameter2, parameter3, parameter4, parameter5, parameter6,
+					parameter7, parameter8, parameter9, parameter10, parameter11, parameter12, parameter13, parameter14);
+			}
 		}
 	}
 
@@ -1062,7 +1142,7 @@ namespace Patterns.Collections.Strategies
 	/// <typeparam name="TIn14">The type of the fourteenth action parameter.</typeparam>
 	/// <typeparam name="TIn15">The type of the fifteenth action parameter.</typeparam>
 	public class ActionStrategies<TKey, TIn1, TIn2, TIn3, TIn4, TIn5, TIn6, TIn7, TIn8, TIn9, TIn10, TIn11, TIn12, TIn13,
-										 TIn14, TIn15>
+	                              TIn14, TIn15>
 		:
 			Dictionary
 				<TKey, Action<TIn1, TIn2, TIn3, TIn4, TIn5, TIn6, TIn7, TIn8, TIn9, TIn10, TIn11, TIn12, TIn13, TIn14, TIn15>>
@@ -1129,9 +1209,12 @@ namespace Patterns.Collections.Strategies
 			TIn13 parameter13, TIn14 parameter14, TIn15 parameter15)
 		{
 			Action<TIn1, TIn2, TIn3, TIn4, TIn5, TIn6, TIn7, TIn8, TIn9, TIn10, TIn11, TIn12, TIn13, TIn14, TIn15> strategy = _valueRetriever.Retrieve(key);
-			if (strategy != null) strategy(parameter1, parameter2, parameter3, parameter4, parameter5, parameter6,
-							 parameter7, parameter8, parameter9, parameter10, parameter11, parameter12, parameter13, parameter14,
-							 parameter15);
+			if (strategy != null)
+			{
+				strategy(parameter1, parameter2, parameter3, parameter4, parameter5, parameter6,
+					parameter7, parameter8, parameter9, parameter10, parameter11, parameter12, parameter13, parameter14,
+					parameter15);
+			}
 		}
 	}
 
@@ -1160,7 +1243,7 @@ namespace Patterns.Collections.Strategies
 	/// <typeparam name="TIn15">The type of the fifteenth action parameter.</typeparam>
 	/// <typeparam name="TIn16">The type of the sixteenth action parameter.</typeparam>
 	public class ActionStrategies<TKey, TIn1, TIn2, TIn3, TIn4, TIn5, TIn6, TIn7, TIn8, TIn9, TIn10, TIn11, TIn12, TIn13,
-										 TIn14, TIn15, TIn16>
+	                              TIn14, TIn15, TIn16>
 		:
 			Dictionary
 				<TKey,
@@ -1232,10 +1315,13 @@ namespace Patterns.Collections.Strategies
 			TIn13 parameter13, TIn14 parameter14, TIn15 parameter15, TIn16 parameter16)
 		{
 			Action<TIn1, TIn2, TIn3, TIn4, TIn5, TIn6, TIn7, TIn8, TIn9, TIn10, TIn11, TIn12, TIn13, TIn14, TIn15, TIn16> strategy = _valueRetriever.Retrieve(key);
-			if (strategy != null) strategy(parameter1, parameter2, parameter3, parameter4, parameter5, parameter6,
-							 parameter7, parameter8, parameter9, parameter10, parameter11, parameter12, parameter13, parameter14,
-							 parameter15,
-							 parameter16);
+			if (strategy != null)
+			{
+				strategy(parameter1, parameter2, parameter3, parameter4, parameter5, parameter6,
+					parameter7, parameter8, parameter9, parameter10, parameter11, parameter12, parameter13, parameter14,
+					parameter15,
+					parameter16);
+			}
 		}
 	}
 
