@@ -127,8 +127,7 @@ Inheritance diagram for Patterns.Text.RegularExpressions.CompiledRegex:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:aa67e88e497da014ab450772d9d9c6f68"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa67e88e497da014ab450772d9d9c6f68"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d0d/class_patterns_1_1_text_1_1_regular_expressions_1_1_compiled_regex.html#aa67e88e497da014ab450772d9d9c6f68">CompiledRegex</a> (string pattern, RegexOptions options=RegexOptions.None)</td></tr>
-<tr class="memdesc:aa67e88e497da014ab450772d9d9c6f68"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes a new instance of the <a class="el" href="../../dc/d0d/class_patterns_1_1_text_1_1_regular_expressions_1_1_compiled_regex.html" title="Provides a Regex implementation that is easier to instantiate. /summary&gt; remarks&gt; Instances of the Co...">CompiledRegex</a> class. /summary&gt; param name = "pattern"&gt;The regular expression.param name = "options"&gt;The options (optional).<br/></td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>CompiledRegex</b> (string pattern, RegexOptions options=RegexOptions.None)</td></tr>
 <tr class="separator:aa67e88e497da014ab450772d9d9c6f68"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa7c2f37605b65ba40a299b90ded7f7ef"><td class="memItemLeft" align="right" valign="top">IDictionary&lt; string, string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d0d/class_patterns_1_1_text_1_1_regular_expressions_1_1_compiled_regex.html#aa7c2f37605b65ba40a299b90ded7f7ef">DictionaryMatch</a> (string input, bool removeSystemGroups=true)</td></tr>
 <tr class="separator:aa7c2f37605b65ba40a299b90ded7f7ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -151,6 +150,12 @@ Properties</h2></td></tr>
 <tr class="memitem:aa321f170028f03ce74216b6d7ab37797"><td class="memItemLeft" align="right" valign="top">IDictionary&lt; int, string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d0d/class_patterns_1_1_text_1_1_regular_expressions_1_1_compiled_regex.html#aa321f170028f03ce74216b6d7ab37797">GroupDetails</a><code> [get, set]</code></td></tr>
 <tr class="memdesc:aa321f170028f03ce74216b6d7ab37797"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the group details.  <a href="#aa321f170028f03ce74216b6d7ab37797">More...</a><br/></td></tr>
 <tr class="separator:aa321f170028f03ce74216b6d7ab37797"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a716ee74990d3915146685fec193625fd"><td class="memItemLeft" align="right" valign="top">static Func&lt; <a class="el" href="../../d3/d2b/interface_patterns_1_1_text_1_1_regular_expressions_1_1_i_regex_evaluator.html">IRegexEvaluator</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d0d/class_patterns_1_1_text_1_1_regular_expressions_1_1_compiled_regex.html#a716ee74990d3915146685fec193625fd">EvaluatorAccessor</a> \s+&quot;<code> [get, set]</code></td></tr>
+<tr class="memdesc:a716ee74990d3915146685fec193625fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets or sets the evaluator accessor.  <a href="#a716ee74990d3915146685fec193625fd">More...</a><br/></td></tr>
+<tr class="separator:a716ee74990d3915146685fec193625fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c792fff02b4c845e036f6ffde84fb6a"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="../../d3/d2b/interface_patterns_1_1_text_1_1_regular_expressions_1_1_i_regex_evaluator.html">IRegexEvaluator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d0d/class_patterns_1_1_text_1_1_regular_expressions_1_1_compiled_regex.html#a9c792fff02b4c845e036f6ffde84fb6a">Evaluator</a><code> [get]</code></td></tr>
+<tr class="memdesc:a9c792fff02b4c845e036f6ffde84fb6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the evaluator.  <a href="#a9c792fff02b4c845e036f6ffde84fb6a">More...</a><br/></td></tr>
+<tr class="separator:a9c792fff02b4c845e036f6ffde84fb6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Provides a Regex implementation that is easier to instantiate. /summary&gt; remarks&gt; Instances of the <a class="el" href="../../dc/d0d/class_patterns_1_1_text_1_1_regular_expressions_1_1_compiled_regex.html" title="Provides a Regex implementation that is easier to instantiate. /summary&gt; remarks&gt; Instances of the Co...">CompiledRegex</a> type are always "compiled"; that is, their RegexOptions always include the RegexOptions.Compiled option. /remarks&gt; </p>
@@ -229,6 +234,52 @@ Properties</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Property Documentation</h2>
+<a class="anchor" id="a9c792fff02b4c845e036f6ffde84fb6a"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../d3/d2b/interface_patterns_1_1_text_1_1_regular_expressions_1_1_i_regex_evaluator.html">IRegexEvaluator</a> Patterns.Text.RegularExpressions.CompiledRegex.Evaluator</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">get</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the evaluator. </p>
+<p>The evaluator. </p>
+
+</div>
+</div>
+<a class="anchor" id="a716ee74990d3915146685fec193625fd"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Func&lt;<a class="el" href="../../d3/d2b/interface_patterns_1_1_text_1_1_regular_expressions_1_1_i_regex_evaluator.html">IRegexEvaluator</a>&gt; Patterns.Text.RegularExpressions.CompiledRegex.EvaluatorAccessor \s+&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">get</span><span class="mlabel">set</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets or sets the evaluator accessor. </p>
+<p>The evaluator accessor. </p>
+
+</div>
+</div>
 <a class="anchor" id="aa321f170028f03ce74216b6d7ab37797"></a>
 <div class="memitem">
 <div class="memproto">
@@ -262,7 +313,7 @@ Properties</h2></td></tr>
 </div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jul 14 2013 09:08:09 for Code Patterns for .NET by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Jul 25 2013 13:38:11 for Code Patterns for .NET by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.4
 </small></address>

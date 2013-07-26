@@ -2,7 +2,8 @@ var searchData=
 [
   ['collectionextensions',['CollectionExtensions',['../d4/d00/class_patterns_1_1_collections_1_1_collection_extensions.html',1,'Patterns::Collections']]],
   ['compiledregex',['CompiledRegex',['../dc/d0d/class_patterns_1_1_text_1_1_regular_expressions_1_1_compiled_regex.html',1,'Patterns::Text::RegularExpressions']]],
-  ['compiledregex',['CompiledRegex',['../dc/d0d/class_patterns_1_1_text_1_1_regular_expressions_1_1_compiled_regex.html#aa67e88e497da014ab450772d9d9c6f68',1,'Patterns::Text::RegularExpressions::CompiledRegex']]],
+  ['configurableequalitycomparer',['ConfigurableEqualityComparer',['../db/d34/class_patterns_1_1_collections_1_1_configurable_equality_comparer_3_01_t_value_01_4.html#a69115628740b9e216ace76872508051a',1,'Patterns::Collections::ConfigurableEqualityComparer&lt; TValue &gt;']]],
+  ['configurableequalitycomparer_3c_20tvalue_20_3e',['ConfigurableEqualityComparer&lt; TValue &gt;',['../db/d34/class_patterns_1_1_collections_1_1_configurable_equality_comparer_3_01_t_value_01_4.html',1,'Patterns::Collections']]],
   ['configuration',['Configuration',['../d9/df2/interface_patterns_1_1_mapping_1_1_i_mapping_services.html#a2d28273a26b70d6fc917b53917ea57ce',1,'Patterns.Mapping.IMappingServices.Configuration()'],['../dd/d61/class_patterns_1_1_mapping_1_1_mapping_services.html#af4d29cbda675abe4250572bb07adaa0c',1,'Patterns.Mapping.MappingServices.Configuration()']]],
   ['configurationmanagerwrapper',['ConfigurationManagerWrapper',['../da/dc6/class_patterns_1_1_configuration_1_1_configuration_manager_wrapper.html',1,'Patterns::Configuration']]],
   ['configurationmodule',['ConfigurationModule',['../d4/d8c/class_patterns_1_1_autofac_1_1_configuration_1_1_configuration_module.html',1,'Patterns::Autofac::Configuration']]],
