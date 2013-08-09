@@ -21,10 +21,13 @@
 
 using System;
 using System.Linq;
+using System.Web.Script.Serialization;
 
 using Castle.DynamicProxy;
 
 using Common.Logging;
+
+using Patterns.Collections.Strategies;
 
 namespace Patterns.Logging
 {
@@ -41,6 +44,14 @@ namespace Patterns.Logging
 		private const string _stringDisplayFormat = @"""{0}""";
 		private readonly LoggingConfig _config;
 		private readonly Func<Type, ILog> _logFactory;
+
+		private static readonly FuncStrategies<Type, object, object> _displayStrategies
+			= new FuncStrategies<Type, object, object>
+			{
+				{typeof (string), value => string.Format(_stringDisplayFormat, value)}
+			};
+
+		private static readonly JavaScriptSerializer _jsonSerializer = new JavaScriptSerializer();
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="LoggingInterceptor" /> class.
@@ -92,7 +103,11 @@ namespace Patterns.Logging
 		private static object ConvertValueForDisplay(object value)
 		{
 			if (value == null) return _nullArgument;
-			return value is string ? string.Format(_stringDisplayFormat, value) : value;
+
+			Type valueType = value.GetType();
+			object newValue = _displayStrategies.Execute(valueType, value);
+
+			return newValue ?? _jsonSerializer.Serialize(value);
 		}
 	}
 }
