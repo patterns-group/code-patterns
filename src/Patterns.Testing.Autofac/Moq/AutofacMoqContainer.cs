@@ -29,6 +29,7 @@ using Microsoft.Practices.ServiceLocation;
 using Moq;
 
 using Patterns.Autofac;
+using Patterns.ExceptionHandling;
 using Patterns.Testing.Moq;
 
 namespace Patterns.Testing.Autofac.Moq
@@ -70,7 +71,7 @@ namespace Patterns.Testing.Autofac.Moq
 		/// </returns>
 		public Mock<TService> Mock<TService>() where TService : class
 		{
-			var service = Create<TService>();
+			var service = Try.Get(() => Create<TService>());
 			var existingMock = service as IMocked<TService>;
 			if (existingMock != null) return existingMock.Mock;
 
