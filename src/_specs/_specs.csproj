@@ -154,6 +154,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Features\Testing\Moq\Autofac\AutofacMoqContainer.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AutofacMoqContainer.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\Text\RegularExpressions\CompiledRegex.feature.cs">
       <DependentUpon>CompiledRegex.feature</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -182,6 +187,8 @@
     <Compile Include="Models\ResourceContext.cs" />
     <Compile Include="Models\Runtime\DateTimeInfoContext.cs" />
     <Compile Include="Models\Runtime\TimeExtensionsContext.cs" />
+    <Compile Include="Models\Testing\Moq\TestContainerContext.cs" />
+    <Compile Include="Models\Testing\Moq\TestContainerTarget.cs" />
     <Compile Include="Models\Text\DictionaryParser.cs" />
     <Compile Include="Models\Text\DictionaryParserConfig.cs" />
     <Compile Include="Models\Text\DictionaryParserContext.cs" />
@@ -225,6 +232,8 @@
     <Compile Include="Steps\Reflection\PropertyValueSteps.cs" />
     <Compile Include="Steps\Runtime\DateTimeInfoSteps.cs" />
     <Compile Include="Steps\Runtime\TimeExtensionsSteps.cs" />
+    <Compile Include="Steps\Testing\Moq\Autofac\AutofacTestContainerSteps.cs" />
+    <Compile Include="Steps\Testing\Moq\TestContainerSteps.cs" />
     <Compile Include="Steps\Text\RegularExpressions\CompiledRegexSteps.cs" />
     <Compile Include="Steps\Text\RegularExpressions\DictionaryMatchSteps.cs" />
   </ItemGroup>
@@ -283,6 +292,10 @@
     <None Include="Features\Testing\Configuration\TestConfigSource.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>TestConfigSource.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Testing\Moq\Autofac\AutofacMoqContainer.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>AutofacMoqContainer.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Text\RegularExpressions\CompiledRegex.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

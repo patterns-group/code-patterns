@@ -6,6 +6,7 @@
 		<owners>$author$</owners>
 		<projectUrl>https://github.com/jbatte47/code-patterns</projectUrl>
 		<dependencies>
+			<dependency id="Patterns" version="$version$" />
 			<dependency id="Patterns.Autofac" version="$version$" />
 			<dependency id="Patterns.Testing" version="$version$" />
 		</dependencies>
