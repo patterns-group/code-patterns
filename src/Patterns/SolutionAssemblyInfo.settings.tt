@@ -2,7 +2,7 @@
 Settings.Initialize(
 	majorNumber: 3,
 	minorNumber: 9,
-	patchNumber: 2,
+	patchNumber: 3,
 	buildNumber: null,
 	buildLevel: BuildLevels.None
 );
