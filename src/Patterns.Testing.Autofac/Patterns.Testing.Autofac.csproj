@@ -99,6 +99,10 @@
       <Project>{367EAA3A-FABB-4CFB-AF01-AD0A4F0499FD}</Project>
       <Name>Patterns.Testing</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Patterns\Patterns.csproj">
+      <Project>{2BC41806-D0BF-4993-B342-CC7A3EDDF313}</Project>
+      <Name>Patterns</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
