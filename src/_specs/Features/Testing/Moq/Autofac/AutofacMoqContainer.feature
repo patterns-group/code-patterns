@@ -5,26 +5,31 @@
 
 Background: 
 	Given I have an Autofac/Moq test container
+	Then the Autofac/Moq test container should have 0 registrations for my test object
 
 Scenario: Create an unregistered object
 	When I create an object using the test container
 	Then the test container should have given me an object
+	And the Autofac/Moq test container should have 1 registration for my test object
 	And the object retrieved by the test container should be a mock-based type
 
 Scenario: Create a registered object
 	When I register an object with the test container
 	And I create an object using the test container
-	Then the test container should have given me an object
+	Then the Autofac/Moq test container should have 1 registration for my test object
+	And the test container should have given me an object
 	And the object retrieved by the test container should not be a mock-based type
 
 Scenario: Override a registered object
 	When I register an object with the test container
 	And I create an object using the test container
-	Then the test container should have given me an object
+	Then the Autofac/Moq test container should have 1 registration for my test object
+	And the test container should have given me an object
 	And the object retrieved by the test container should not be a mock-based type
 
 	When I create a mock of the object using the test container
 	And I create an object using the test container
-	Then the test container should have given me an object
+	Then the Autofac/Moq test container should have 2 registrations for my test object
+	And the test container should have given me an object
 	And the test container should have given me a mock of the object
 	And the object retrieved by the test container should be a mock-based type

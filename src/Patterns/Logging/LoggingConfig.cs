@@ -30,7 +30,7 @@ namespace Patterns.Logging
 	/// <summary>
 	/// Defines configuration options for the Patterns.Logging namespace.
 	/// </summary>
-	public class LoggingConfig : ConfigurationSection
+	public class LoggingConfig : ConfigurationSection, ILoggingConfig
 	{
 		/// <summary>
 		/// The default section name.
