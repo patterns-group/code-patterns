@@ -42,7 +42,7 @@ namespace Patterns.Logging
 		private const string _argumentListFormat = "({0})";
 		private const string _argumentListSeparator = ",";
 		private const string _stringDisplayFormat = @"""{0}""";
-		private readonly LoggingConfig _config;
+		private readonly ILoggingConfig _config;
 		private readonly Func<Type, ILog> _logFactory;
 
 		private static readonly FuncStrategies<Type, object, object> _displayStrategies
@@ -58,7 +58,7 @@ namespace Patterns.Logging
 		/// </summary>
 		/// <param name="config">The config.</param>
 		/// <param name="logFactory">The log factory.</param>
-		public LoggingInterceptor(LoggingConfig config, Func<Type, ILog> logFactory)
+		public LoggingInterceptor(ILoggingConfig config, Func<Type, ILog> logFactory)
 		{
 			_config = config;
 			_logFactory = logFactory;
