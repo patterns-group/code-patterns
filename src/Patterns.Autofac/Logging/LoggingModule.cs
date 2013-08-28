@@ -68,14 +68,15 @@ namespace Patterns.Autofac.Logging
 			{
 				try
 				{
-					var configSource = context.Resolve<IConfigurationSource>();
-					return configSource.GetSection<LoggingConfig>(LoggingConfig.SectionName);
+					var configSource = context.ResolveOptional<IConfigurationSource>();
+					var config = configSource != null ? configSource.GetSection<LoggingConfig>(LoggingConfig.SectionName) : null;
+					return config ?? new LoggingConfig();
 				}
 				catch (ComponentNotRegisteredException registrationError)
 				{
 					throw ErrorBuilder.BuildContainerException(registrationError, ConfigurationResources.MissingConfigSourceErrorHint);
 				}
-			});
+			}).As<ILoggingConfig>();
 			builder.RegisterType<LoggingInterceptor>();
 		}
 

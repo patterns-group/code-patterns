@@ -57,7 +57,7 @@ namespace Patterns.Testing.Autofac.Moq
 			_log.Info(format => format(Resources.MoqRegistrationSource_RegistrationsFor_InfoFormat, service.Description));
 
 			IComponentRegistration[] existingRegistrations = registrationAccessor(service).ToArray();
-			if (existingRegistrations.Length > 0) return existingRegistrations;
+			if (existingRegistrations.Length > 0) return Enumerable.Empty<IComponentRegistration>();
 
 			var typedService = service as TypedService;
 			bool canMock = typedService != null && (typedService.ServiceType.IsInterface || typedService.ServiceType.IsAbstract || !typedService.ServiceType.IsSealed);
