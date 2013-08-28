@@ -1,4 +1,4 @@
-#region FreeBSD
+ï»¿#region FreeBSD
 
 // Copyright (c) 2013, John Batte
 // All rights reserved.
@@ -19,16 +19,20 @@
 
 #endregion
 
-using System.Reflection;
-using System.Resources;
-using System.Runtime.InteropServices;
-
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("John Batte")]
-[assembly: AssemblyProduct("Code Patterns")]
-[assembly: AssemblyCopyright("Copyright © 2013")]
-[assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
-[assembly: ComVisible(false)]
-[assembly: NeutralResourcesLanguage("en-US")]
-[assembly: AssemblyVersion("3.9.4")]
+namespace Patterns.Logging
+{
+	/// <summary>
+	///    Defines configuration options for the Patterns.Logging namespace.
+	/// </summary>
+	public interface ILoggingConfig
+	{
+		/// <summary>
+		///    Gets or sets a value indicating whether the logging interceptor should trap exceptions
+		///    (as opposed to allowing them to bubble up).
+		/// </summary>
+		/// <value>
+		///    <c>true</c> if the logging interceptor should trap exceptions; otherwise, <c>false</c>.
+		/// </value>
+		bool TrapExceptions { get; set; }
+	}
+}
