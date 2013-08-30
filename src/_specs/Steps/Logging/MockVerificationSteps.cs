@@ -77,7 +77,7 @@ namespace Patterns.Specifications.Steps.Logging
 		public void VerifyLogTrappedErrorExecution()
 		{
 			Mock<ILog> mockLog = _moq.Container.Mock<ILog>();
-			mockLog.Verify(log => log.Trace(It.IsAny<Action<FormatMessageHandler>>()), Times.Exactly(2));
+			mockLog.Verify(log => log.Trace(It.IsAny<Action<FormatMessageHandler>>()), Times.Exactly(1));
 			mockLog.Verify(log => log.Debug(It.IsAny<Action<FormatMessageHandler>>()), Times.Exactly(1));
 			mockLog.Verify(log => log.Info(It.IsAny<Action<FormatMessageHandler>>()), Times.Exactly(1));
 			mockLog.Verify(log => log.Error(It.IsAny<Action<FormatMessageHandler>>()), Times.Exactly(1));
