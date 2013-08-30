@@ -71,6 +71,7 @@
     <Compile Include="Configuration\IConfigurationSource.cs" />
     <Compile Include="ExceptionHandling\ExceptionState.cs" />
     <Compile Include="ExceptionHandling\Try.cs" />
+    <Compile Include="Interception\DelegateInterceptor.cs" />
     <Compile Include="Logging\ILoggingConfig.cs" />
     <Compile Include="Logging\LoggingConfig.cs" />
     <Compile Include="Logging\LoggingInterceptor.cs" />
