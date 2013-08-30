@@ -28,6 +28,8 @@ using Castle.DynamicProxy;
 using Common.Logging;
 
 using Patterns.Collections.Strategies;
+using Patterns.ExceptionHandling;
+using Patterns.Interception;
 
 namespace Patterns.Logging
 {
@@ -36,7 +38,7 @@ namespace Patterns.Logging
 	///    uses <see cref="ILog" /> to log Trace, Debug, Info, and Error
 	///    events throughout the execution of intercepted invocations.
 	/// </summary>
-	public class LoggingInterceptor : IInterceptor
+	public class LoggingInterceptor : DelegateInterceptor
 	{
 		private const string _nullArgument = "[NULL]";
 		private const string _argumentListFormat = "({0})";
@@ -54,53 +56,73 @@ namespace Patterns.Logging
 		private static readonly JavaScriptSerializer _jsonSerializer = new JavaScriptSerializer();
 
 		/// <summary>
+		/// Initializes a new instance of the <see cref="LoggingInterceptor"/> class.
+		/// </summary>
+		/// <param name="config">The config.</param>
+		/// <param name="logFactory">The log factory.</param>
+		public LoggingInterceptor(ILoggingConfig config, Func<Type, ILog> logFactory) : this(config, logFactory, null) {}
+
+		/// <summary>
 		/// Initializes a new instance of the <see cref="LoggingInterceptor" /> class.
 		/// </summary>
 		/// <param name="config">The config.</param>
 		/// <param name="logFactory">The log factory.</param>
-		public LoggingInterceptor(ILoggingConfig config, Func<Type, ILog> logFactory)
+		/// <param name="condition">The intercept condition.</param>
+		public LoggingInterceptor(ILoggingConfig config, Func<Type, ILog> logFactory, Func<IInvocation, bool> condition)
 		{
-			_config = config;
 			_logFactory = logFactory;
+			_config = config;
+			Initialize(condition);
 		}
 
-		/// <summary>
-		///    Intercepts the specified invocation.
-		/// </summary>
-		/// <param name="invocation">The invocation.</param>
-		public void Intercept(IInvocation invocation)
+		private void Initialize(Func<IInvocation, bool> condition)
+		{
+			Condition = condition;
+			Before = LogBefore;
+			After = LogAfter;
+			OnError = LogError;
+			Finally = LogFinally;
+		}
+
+		protected virtual void LogBefore(IInvocation invocation)
 		{
 			ILog log = _logFactory(invocation.TargetType);
 			log.Trace(handler => handler(LoggingResources.MethodStartTraceFormat, invocation.TargetType, invocation.Method.Name));
 			log.Debug(handler => handler(LoggingResources.MethodArgsDebugFormat, invocation.Method.Name, GetMethodArguments(invocation)));
+		}
 
-			try
-			{
-				invocation.Proceed();
-				log.Info(handler => handler(LoggingResources.MethodInfoFormat, invocation.Method.Name, LoggingResources.MethodInfoPass));
-			}
-			catch (Exception error)
-			{
-				log.Info(handler => handler(LoggingResources.MethodInfoFormat, invocation.Method.Name, LoggingResources.MethodInfoFail));
-				log.Error(handler => handler(LoggingResources.ExceptionErrorFormat, invocation.Method.Name, error.ToFullString()));
-				if (!_config.TrapExceptions) throw;
-			}
-
+		protected virtual void LogAfter(IInvocation invocation)
+		{
+			ILog log = _logFactory(invocation.TargetType);
+			log.Info(handler => handler(LoggingResources.MethodInfoFormat, invocation.Method.Name, LoggingResources.MethodInfoPass));
 			log.Trace(handler => handler(LoggingResources.MethodStopTraceFormat, invocation.TargetType, invocation.Method.Name));
+		}
 
+		protected virtual ExceptionState LogError(IInvocation invocation, Exception error)
+		{
+			ILog log = _logFactory(invocation.TargetType);
+			log.Info(handler => handler(LoggingResources.MethodInfoFormat, invocation.Method.Name, LoggingResources.MethodInfoFail));
+			log.Error(handler => handler(LoggingResources.ExceptionErrorFormat, invocation.Method.Name, error.ToFullString()));
+			return new ExceptionState(error, _config.TrapExceptions);
+		}
+
+		protected virtual void LogFinally(IInvocation invocation)
+		{
 			if (invocation.ReturnValue == null) return;
+
+			ILog log = _logFactory(invocation.TargetType);
 
 			object value = ConvertValueForDisplay(invocation.ReturnValue);
 			log.Debug(handler => handler(LoggingResources.MethodReturnDebugFormat, invocation.Method.Name, value));
 		}
 
-		private static string GetMethodArguments(IInvocation invocation)
+		protected static string GetMethodArguments(IInvocation invocation)
 		{
 			object[] arguments = invocation.Arguments.Select(ConvertValueForDisplay).ToArray();
 			return string.Format(_argumentListFormat, string.Join(_argumentListSeparator, arguments));
 		}
 
-		private static object ConvertValueForDisplay(object value)
+		protected static object ConvertValueForDisplay(object value)
 		{
 			if (value == null) return _nullArgument;
 
