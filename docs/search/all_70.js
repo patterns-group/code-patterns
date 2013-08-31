@@ -7,6 +7,7 @@ var searchData=
   ['configuration',['Configuration',['../d9/dfb/namespace_patterns_1_1_configuration.html',1,'Patterns']]],
   ['configuration',['Configuration',['../d4/db5/namespace_patterns_1_1_testing_1_1_configuration.html',1,'Patterns::Testing']]],
   ['exceptionhandling',['ExceptionHandling',['../d2/d28/namespace_patterns_1_1_exception_handling.html',1,'Patterns']]],
+  ['interception',['Interception',['../dd/d95/namespace_patterns_1_1_interception.html',1,'Patterns']]],
   ['logging',['Logging',['../dc/df7/namespace_patterns_1_1_autofac_1_1_logging.html',1,'Patterns::Autofac']]],
   ['logging',['Logging',['../d4/d68/namespace_patterns_1_1_logging.html',1,'Patterns']]],
   ['mapping',['Mapping',['../d5/d2e/namespace_patterns_1_1_autofac_1_1_mapping.html',1,'Patterns::Autofac']]],
