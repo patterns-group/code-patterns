@@ -28,9 +28,9 @@
 	<body>
 		<div id="header">
 			<nav>
-				<li class="fork"><a href="https://github.com/jbatte47/code-patterns">View On GitHub</a></li>
-				<li class="downloads"><a href="https://github.com/jbatte47/code-patterns/zipball/master">ZIP</a></li>
-				<li class="downloads"><a href="https://github.com/jbatte47/code-patterns/tarball/master">TAR</a></li>
+				<li class="fork"><a href="https://github.com/TheTribe/code-patterns">View On GitHub</a></li>
+				<li class="downloads"><a href="https://github.com/TheTribe/code-patterns/zipball/master">ZIP</a></li>
+				<li class="downloads"><a href="https://github.com/TheTribe/code-patterns/tarball/master">TAR</a></li>
 				<li class="title">DOWNLOADS</li>
 			</nav>
 		</div><!-- end header -->
@@ -41,7 +41,7 @@
 					<p></p>
 					<hr>
 					<span class="credits left">
-						Project maintained by <a href="https://github.com/jbatte47">John Batte</a>
+						Project maintained by <a href="https://github.com/TheTribe">The Tribe</a>
 					</span>
 					<span class="credits right">
 						Hosted on GitHub Pages &mdash;
@@ -105,6 +105,9 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pro-static-methods">Static Protected Member Functions</a> &#124;
+<a href="#properties">Properties</a> &#124;
 <a href="../../d6/d7b/class_patterns_1_1_logging_1_1_logging_interceptor-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">Patterns.Logging.LoggingInterceptor Class Reference</div>  </div>
@@ -119,29 +122,76 @@ Inheritance diagram for Patterns.Logging.LoggingInterceptor:</div>
  <div class="center">
   <img src="../../d9/d07/class_patterns_1_1_logging_1_1_logging_interceptor.png" usemap="#Patterns.Logging.LoggingInterceptor_map" alt=""/>
   <map id="Patterns.Logging.LoggingInterceptor_map" name="Patterns.Logging.LoggingInterceptor_map">
+<area href="../../d2/dd6/class_patterns_1_1_interception_1_1_delegate_interceptor.html" title="Provides an interceptor that allows its interception logic to be injected; no-op fall-backs are used ..." alt="Patterns.Interception.DelegateInterceptor" shape="rect" coords="0,56,243,80"/>
 </map>
  </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a7cd1bae75837c177429594808bfb314b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d07/class_patterns_1_1_logging_1_1_logging_interceptor.html#a7cd1bae75837c177429594808bfb314b">LoggingInterceptor</a> (<a class="el" href="../../db/dbc/class_patterns_1_1_logging_1_1_logging_config.html">LoggingConfig</a> config, Func&lt; Type, ILog &gt; logFactory)</td></tr>
-<tr class="memdesc:a7cd1bae75837c177429594808bfb314b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes a new instance of the <a class="el" href="../../d9/d07/class_patterns_1_1_logging_1_1_logging_interceptor.html" title="Provides an IInterceptor implementation that uses ILog to log Trace, Debug, Info, and Error events th...">LoggingInterceptor</a> class.  <a href="#a7cd1bae75837c177429594808bfb314b">More...</a><br/></td></tr>
-<tr class="separator:a7cd1bae75837c177429594808bfb314b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a31ab80f540c10df43e6f4a6de57631a7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d07/class_patterns_1_1_logging_1_1_logging_interceptor.html#a31ab80f540c10df43e6f4a6de57631a7">Intercept</a> (IInvocation invocation)</td></tr>
-<tr class="memdesc:a31ab80f540c10df43e6f4a6de57631a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Intercepts the specified invocation.  <a href="#a31ab80f540c10df43e6f4a6de57631a7">More...</a><br/></td></tr>
-<tr class="separator:a31ab80f540c10df43e6f4a6de57631a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75d54c5cca7be06b1caaa191b68a536f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d07/class_patterns_1_1_logging_1_1_logging_interceptor.html#a75d54c5cca7be06b1caaa191b68a536f">LoggingInterceptor</a> (<a class="el" href="../../d1/d75/interface_patterns_1_1_logging_1_1_i_logging_config.html">ILoggingConfig</a> config, Func&lt; Type, ILog &gt; logFactory)</td></tr>
+<tr class="memdesc:a75d54c5cca7be06b1caaa191b68a536f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes a new instance of the <a class="el" href="../../d9/d07/class_patterns_1_1_logging_1_1_logging_interceptor.html" title="Provides an IInterceptor implementation that uses ILog to log Trace, Debug, Info, and Error events th...">LoggingInterceptor</a> class.  <a href="#a75d54c5cca7be06b1caaa191b68a536f">More...</a><br/></td></tr>
+<tr class="separator:a75d54c5cca7be06b1caaa191b68a536f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a961dd845952a917586c92b2e74596d83"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d07/class_patterns_1_1_logging_1_1_logging_interceptor.html#a961dd845952a917586c92b2e74596d83">LoggingInterceptor</a> (<a class="el" href="../../d1/d75/interface_patterns_1_1_logging_1_1_i_logging_config.html">ILoggingConfig</a> config, Func&lt; Type, ILog &gt; logFactory, Func&lt; IInvocation, bool &gt; condition)</td></tr>
+<tr class="memdesc:a961dd845952a917586c92b2e74596d83"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes a new instance of the <a class="el" href="../../d9/d07/class_patterns_1_1_logging_1_1_logging_interceptor.html" title="Provides an IInterceptor implementation that uses ILog to log Trace, Debug, Info, and Error events th...">LoggingInterceptor</a> class.  <a href="#a961dd845952a917586c92b2e74596d83">More...</a><br/></td></tr>
+<tr class="separator:a961dd845952a917586c92b2e74596d83"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b0d65eda387ae0ac6974cfbfe7a56e5"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/dd6/class_patterns_1_1_interception_1_1_delegate_interceptor.html#a3b0d65eda387ae0ac6974cfbfe7a56e5">Intercept</a> (IInvocation invocation)</td></tr>
+<tr class="memdesc:a3b0d65eda387ae0ac6974cfbfe7a56e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Intercepts the specified invocation.  <a href="#a3b0d65eda387ae0ac6974cfbfe7a56e5">More...</a><br/></td></tr>
+<tr class="separator:a3b0d65eda387ae0ac6974cfbfe7a56e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a6f577a53fc8d8488939765fa1009f49e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6f577a53fc8d8488939765fa1009f49e"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>LogBefore</b> (IInvocation invocation)</td></tr>
+<tr class="separator:a6f577a53fc8d8488939765fa1009f49e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92cc49a4b45b337a314626a6ab7169e8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a92cc49a4b45b337a314626a6ab7169e8"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>LogAfter</b> (IInvocation invocation)</td></tr>
+<tr class="separator:a92cc49a4b45b337a314626a6ab7169e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4630fdd87ce8de3567d257146f832675"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4630fdd87ce8de3567d257146f832675"></a>
+virtual <a class="el" href="../../dc/db0/struct_patterns_1_1_exception_handling_1_1_exception_state.html">ExceptionState</a>&#160;</td><td class="memItemRight" valign="bottom"><b>LogError</b> (IInvocation invocation, Exception error)</td></tr>
+<tr class="separator:a4630fdd87ce8de3567d257146f832675"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2464fcba06f7cfa80835da7d367a8f6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac2464fcba06f7cfa80835da7d367a8f6"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>LogFinally</b> (IInvocation invocation)</td></tr>
+<tr class="separator:ac2464fcba06f7cfa80835da7d367a8f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-static-methods"></a>
+Static Protected Member Functions</h2></td></tr>
+<tr class="memitem:aec3fde6d9b350c14010999b89518c69b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aec3fde6d9b350c14010999b89518c69b"></a>
+static string&#160;</td><td class="memItemRight" valign="bottom"><b>GetMethodArguments</b> (IInvocation invocation)</td></tr>
+<tr class="separator:aec3fde6d9b350c14010999b89518c69b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf1a632f7af85184bb1ad40a682d8bce"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abf1a632f7af85184bb1ad40a682d8bce"></a>
+static object&#160;</td><td class="memItemRight" valign="bottom"><b>ConvertValueForDisplay</b> (object value)</td></tr>
+<tr class="separator:abf1a632f7af85184bb1ad40a682d8bce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="properties"></a>
+Properties</h2></td></tr>
+<tr class="memitem:aeb55b99d165516ff60fee6f177ac3a4f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aeb55b99d165516ff60fee6f177ac3a4f"></a>
+virtual Action&lt; IInvocation &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>After</b><code> [get, set]</code></td></tr>
+<tr class="separator:aeb55b99d165516ff60fee6f177ac3a4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af8ee34cdce6a526b6cc089688e847875"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af8ee34cdce6a526b6cc089688e847875"></a>
+virtual Action&lt; IInvocation &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>Before</b><code> [get, set]</code></td></tr>
+<tr class="separator:af8ee34cdce6a526b6cc089688e847875"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6b50e4a322d243dd6edbdb4a56c8409"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af6b50e4a322d243dd6edbdb4a56c8409"></a>
+virtual Func&lt; IInvocation, bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>Condition</b><code> [get, set]</code></td></tr>
+<tr class="separator:af6b50e4a322d243dd6edbdb4a56c8409"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a713fb07758cee39e79d8a28d04b6e8c7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a713fb07758cee39e79d8a28d04b6e8c7"></a>
+virtual Action&lt; IInvocation &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>Finally</b><code> [get, set]</code></td></tr>
+<tr class="separator:a713fb07758cee39e79d8a28d04b6e8c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0bff289899c31f8d13fe6824cdb88d13"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0bff289899c31f8d13fe6824cdb88d13"></a>
+virtual Func&lt; IInvocation, <br class="typebreak"/>
+Exception, <a class="el" href="../../dc/db0/struct_patterns_1_1_exception_handling_1_1_exception_state.html">ExceptionState</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>OnError</b><code> [get, set]</code></td></tr>
+<tr class="separator:a0bff289899c31f8d13fe6824cdb88d13"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Provides an IInterceptor implementation that uses ILog to log Trace, Debug, Info, and Error events throughout the execution of intercepted invocations. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a7cd1bae75837c177429594808bfb314b"></a>
+<a class="anchor" id="a75d54c5cca7be06b1caaa191b68a536f"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">Patterns.Logging.LoggingInterceptor.LoggingInterceptor </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="../../db/dbc/class_patterns_1_1_logging_1_1_logging_config.html">LoggingConfig</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="../../d1/d75/interface_patterns_1_1_logging_1_1_i_logging_config.html">ILoggingConfig</a>&#160;</td>
           <td class="paramname"><em>config</em>, </td>
         </tr>
         <tr>
@@ -169,19 +219,69 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a31ab80f540c10df43e6f4a6de57631a7"></a>
+<a class="anchor" id="a961dd845952a917586c92b2e74596d83"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void Patterns.Logging.LoggingInterceptor.Intercept </td>
+          <td class="memname">Patterns.Logging.LoggingInterceptor.LoggingInterceptor </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../d1/d75/interface_patterns_1_1_logging_1_1_i_logging_config.html">ILoggingConfig</a>&#160;</td>
+          <td class="paramname"><em>config</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Func&lt; Type, ILog &gt;&#160;</td>
+          <td class="paramname"><em>logFactory</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Func&lt; IInvocation, bool &gt;&#160;</td>
+          <td class="paramname"><em>condition</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initializes a new instance of the <a class="el" href="../../d9/d07/class_patterns_1_1_logging_1_1_logging_interceptor.html" title="Provides an IInterceptor implementation that uses ILog to log Trace, Debug, Info, and Error events th...">LoggingInterceptor</a> class. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">config</td><td>The config.</td></tr>
+    <tr><td class="paramname">logFactory</td><td>The log factory.</td></tr>
+    <tr><td class="paramname">condition</td><td>The intercept condition.</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a3b0d65eda387ae0ac6974cfbfe7a56e5"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void Patterns.Interception.DelegateInterceptor.Intercept </td>
           <td>(</td>
           <td class="paramtype">IInvocation&#160;</td>
           <td class="paramname"><em>invocation</em>)</td><td></td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Intercepts the specified invocation. </p>
@@ -201,12 +301,12 @@ Public Member Functions</h2></td></tr>
 </div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jul 25 2013 13:38:09 for Code Patterns for .NET by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Aug 31 2013 17:33:16 for Code Patterns for .NET by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.4
 </small></address>
 <div class="footer">
-   <p>Copyright &copy; 2013, John Batte</p>
+			<p>Copyright &copy; 2013, The Tribe</p>
 </div>
 </body>
 </html>
