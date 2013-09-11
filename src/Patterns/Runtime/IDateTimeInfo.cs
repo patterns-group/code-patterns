@@ -36,5 +36,11 @@ namespace Patterns.Runtime
 		/// 	Gets the <see cref="DateTime" /> value representing "now".
 		/// </summary>
 		DateTime GetNow();
+
+		/// <summary>
+		/// Gets the Coordinated Universal Time (UTC) <see cref="DateTime"/> value representing "now".
+		/// </summary>
+		/// <returns></returns>
+		DateTime GetUtcNow();
 	}
 }

@@ -40,8 +40,8 @@ namespace Patterns.Specifications.Steps.Runtime
 	[Binding]
 	public class DateTimeInfoSteps
 	{
-		private readonly DateTimeInfoContext _context;
 		private readonly AutofacContext _autofac;
+		private readonly DateTimeInfoContext _context;
 
 		public DateTimeInfoSteps(DateTimeInfoContext context, AutofacContext autofac)
 		{
@@ -68,11 +68,18 @@ namespace Patterns.Specifications.Steps.Runtime
 			_context.SystemNow = DateTime.Now;
 		}
 
+		[When(@"I store the results of both the DateTime\.UtcNow property and the IDateTimeInfo\.GetUtcNow method")]
+		public void StoreBothUtcDateTimeResults()
+		{
+			_context.CustomNow = _context.DateTimeInfo.GetUtcNow();
+			_context.SystemNow = DateTime.UtcNow;
+		}
+
 		[Then(@"the resolved IDateTimeInfo object should be an instance of DefaultDateTimeInfo")]
 		public void AssertResolvedIDateTimeInfoIsDefault()
 		{
 			_context.DateTimeInfo.Should().NotBeNull();
-			_context.DateTimeInfo.GetType().Should().Be(typeof(DefaultDateTimeInfo));
+			_context.DateTimeInfo.GetType().Should().Be(typeof (DefaultDateTimeInfo));
 		}
 
 		[Then(@"the results of both ""now"" DateTime values should be equal")]
