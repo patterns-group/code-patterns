@@ -2,6 +2,12 @@
 
 The following log details the outward-facing changes made to code-patterns since its first migration to GitHub.
 
+## 3.10-beta.2 ##
+
+- Changes made to `Patterns.Runtime.IDateTimeInfo` and `Patterns.Runtime.DefaultDateTimeInfo` ([issue 105](https://github.com/TheTribe/code-patterns/issues/105)):
+ - Added `DateTime GetUtcNow()` to `IDateTimeInfo`
+ - Updated implementation of `DefaultDateTimeInfo`
+
 ## 3.10-beta.1 ##
 
 - Additions / changes made to `Patterns.Logging` and `Patterns.Interception` ([issue 96](https://github.com/TheTribe/code-patterns/issues/96)):
