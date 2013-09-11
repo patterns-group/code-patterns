@@ -43,6 +43,15 @@ namespace Patterns.Runtime
 			return DateTime.Now;
 		}
 
+		/// <summary>
+		/// Gets the Coordinated Universal Time (UTC) <see cref="DateTime" /> value representing "now".
+		/// </summary>
+		/// <returns></returns>
+		public DateTime GetUtcNow()
+		{
+			return DateTime.UtcNow;
+		}
+
 		#endregion
 	}
 }
