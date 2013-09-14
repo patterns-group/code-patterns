@@ -2,6 +2,10 @@
 
 The following log details the outward-facing changes made to code-patterns since its first migration to GitHub.
 
+## 3.10-beta.3 ##
+
+- Extracted `Patterns.Configuration.InMemoryConfigurationSource` from `Patterns.Testing.Configuration.TestConfigurationSource` ([issue 110](https://github.com/TheTribe/code-patterns/issues/110))
+
 ## 3.10-beta.2 ##
 
 - Changes made to `Patterns.Runtime.IDateTimeInfo` and `Patterns.Runtime.DefaultDateTimeInfo` ([issue 105](https://github.com/TheTribe/code-patterns/issues/105)):
