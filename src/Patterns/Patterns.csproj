@@ -69,6 +69,7 @@
     <Compile Include="Configuration\IConfiguration.cs" />
     <Compile Include="Configuration\IConfigurationManager.cs" />
     <Compile Include="Configuration\IConfigurationSource.cs" />
+    <Compile Include="Configuration\InMemoryConfigurationSource.cs" />
     <Compile Include="ExceptionHandling\ExceptionState.cs" />
     <Compile Include="ExceptionHandling\Try.cs" />
     <Compile Include="Interception\DelegateInterceptor.cs" />
