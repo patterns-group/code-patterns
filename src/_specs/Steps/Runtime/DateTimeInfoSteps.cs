@@ -85,7 +85,7 @@ namespace Patterns.Specifications.Steps.Runtime
 		[Then(@"the results of both ""now"" DateTime values should be equal")]
 		public void BothDateTimeResultsShouldEqual()
 		{
-			_context.CustomNow.Should().Be(_context.SystemNow);
+			_context.CustomNow.AccurateToOneSecond().Should().Be(_context.SystemNow.AccurateToOneSecond());
 		}
 	}
 }

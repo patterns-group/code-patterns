@@ -19,15 +19,9 @@
 
 #endregion
 
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Reflection;
 using System.Xml.Linq;
 
 using Patterns.Configuration;
-using Patterns.Text.RegularExpressions;
 
 namespace Patterns.Testing.Configuration
 {
@@ -35,168 +29,15 @@ namespace Patterns.Testing.Configuration
 	///    Provides a configuration source that uses an in-memory configuration rather than a
 	///    file-based one.
 	/// </summary>
-	public class TestConfigurationSource : IConfigurationSource
+	public class TestConfigurationSource : InMemoryConfigurationSource
 	{
-		private readonly XContainer _configXml;
-		private readonly CompiledRegex _sectionNamePattern = "[^/]+$";
-
 		/// <summary>
 		///    Initializes a new instance of the <see cref="TestConfigurationSource" /> class.
 		/// </summary>
 		/// <param name="configXml">The config XML.</param>
 		public TestConfigurationSource(XContainer configXml)
 		{
-			_configXml = configXml;
-			var appSettings = GetSection<AppSettingsSection>("appSettings");
-			if (appSettings != null)
-			{
-				AppSettings = appSettings.Settings.AllKeys
-					.ToDictionary(key => key, key => appSettings.Settings[key].Value);
-			}
-			var connectionStrings = GetSection<ConnectionStringsSection>("connectionStrings");
-			if (connectionStrings != null)
-			{
-				ConnectionStrings = connectionStrings.ConnectionStrings.OfType<ConnectionStringSettings>()
-					.ToDictionary(settings => settings.Name, settings => settings);
-			}
-		}
-
-		/// <summary>
-		///    Gets the app settings.
-		/// </summary>
-		/// <value>
-		///    The app settings.
-		/// </value>
-		public IDictionary<string, string> AppSettings { get; private set; }
-
-		/// <summary>
-		///    Gets the connection strings.
-		/// </summary>
-		/// <value>
-		///    The connection strings.
-		/// </value>
-		public IDictionary<string, ConnectionStringSettings> ConnectionStrings { get; private set; }
-
-		/// <summary>
-		///    Gets the section.
-		/// </summary>
-		/// <param name="sectionName">Name of the section.</param>
-		/// <returns></returns>
-		/// <exception cref="System.NotImplementedException"></exception>
-		public ConfigurationSection GetSection(string sectionName)
-		{
-			return DeserializeSection(_configXml, sectionName);
-		}
-
-		/// <summary>
-		///    Gets the section.
-		/// </summary>
-		/// <typeparam name="TSection">The type of the section.</typeparam>
-		/// <param name="sectionName">Name of the section.</param>
-		/// <returns></returns>
-		/// <exception cref="System.NotImplementedException"></exception>
-		public TSection GetSection<TSection>(string sectionName) where TSection : ConfigurationSection, new()
-		{
-			return DeserializeSection<TSection>(_configXml, sectionName);
-		}
-
-		/// <summary>
-		///    Opens the exe configuration.
-		/// </summary>
-		/// <param name="exePath">The exe path.</param>
-		/// <returns></returns>
-		/// <exception cref="System.NotImplementedException"></exception>
-		public IConfiguration OpenExeConfiguration(string exePath)
-		{
-			throw new NotSupportedException();
-		}
-
-		/// <summary>
-		///    Opens the machine configuration.
-		/// </summary>
-		/// <returns></returns>
-		/// <exception cref="System.NotImplementedException"></exception>
-		public IConfiguration OpenMachineConfiguration()
-		{
-			throw new NotSupportedException();
-		}
-
-		/// <summary>
-		///    Refreshes the section.
-		/// </summary>
-		/// <param name="sectionName">Name of the section.</param>
-		/// <exception cref="System.NotImplementedException"></exception>
-		public void RefreshSection(string sectionName) {}
-
-		/// <summary>
-		///    Opens the mapped exe configuration.
-		/// </summary>
-		/// <param name="fileMap">The file map.</param>
-		/// <param name="userLevel">The user level.</param>
-		/// <returns></returns>
-		/// <exception cref="System.NotImplementedException"></exception>
-		public IConfiguration OpenMappedExeConfiguration(ExeConfigurationFileMap fileMap, ConfigurationUserLevel userLevel)
-		{
-			throw new NotSupportedException();
-		}
-
-		/// <summary>
-		///    Opens the exe configuration.
-		/// </summary>
-		/// <param name="userLevel">The user level.</param>
-		/// <returns></returns>
-		/// <exception cref="System.NotImplementedException"></exception>
-		public IConfiguration OpenExeConfiguration(ConfigurationUserLevel userLevel)
-		{
-			throw new NotSupportedException();
-		}
-
-		private ConfigurationSection DeserializeSection(XContainer xml, string name)
-		{
-			XElement sectionDefinition = xml.Element("configSections")
-				.Descendants("section")
-				.FirstOrDefault(section => section.Attribute("name").Value == _sectionNamePattern.Match(name).Value);
-
-			if (sectionDefinition == null) return null;
-
-			Type sectionType = Type.GetType(sectionDefinition.Attribute("type").Value, false);
-
-			if (sectionType == null) return null;
-
-			const BindingFlags flags = BindingFlags.Static | BindingFlags.NonPublic;
-			MethodInfo genericFlavor = typeof (TestConfigurationSource).GetMethods(flags)
-				.FirstOrDefault(method => method.Name == "DeserializeSection" && method.IsGenericMethod);
-
-			MethodInfo typedGenericFlavor = genericFlavor.MakeGenericMethod(sectionType);
-
-			try
-			{
-				return (ConfigurationSection) typedGenericFlavor.Invoke(null, new object[] {xml, name});
-			}
-			catch (TargetInvocationException error)
-			{
-				throw error.InnerException;
-			}
-		}
-
-		private static TSection DeserializeSection<TSection>(XContainer xml, string name) where TSection : ConfigurationSection, new()
-		{
-			var config = new TSection();
-			const BindingFlags flags = BindingFlags.Instance | BindingFlags.NonPublic;
-			MethodInfo deserializer = typeof (TSection).GetMethod("DeserializeSection", flags);
-			var sectionXml = name.Split('/').Aggregate(xml, (current, part) => current.Element(part));
-			if (sectionXml == null) return null;
-
-			try
-			{
-				deserializer.Invoke(config, new object[] {sectionXml.CreateReader()});
-			}
-			catch (TargetInvocationException error)
-			{
-				throw error.InnerException;
-			}
-
-			return config;
+			SetConfigurationXml(configXml);
 		}
 	}
 }
