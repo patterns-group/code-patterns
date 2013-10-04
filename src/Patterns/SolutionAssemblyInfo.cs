@@ -32,4 +32,4 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 [assembly: NeutralResourcesLanguage("en-US")]
 [assembly: AssemblyVersion("3.10.0")]
-[assembly: AssemblyInformationalVersion("3.10.0-beta3")]
+[assembly: AssemblyInformationalVersion("3.10.0-beta4")]
