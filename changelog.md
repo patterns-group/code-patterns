@@ -2,6 +2,12 @@
 
 The following log details the outward-facing changes made to code-patterns since its first migration to GitHub.
 
+## 3.10-beta.4 ##
+
+- Fixes for `IMoqContainer` ([issue 114](https://github.com/TheTribe/code-patterns/issues/114))
+ - Calls to `Create<TService>` now either return the registered instance, or a mock. No hidden updates.
+ - Calls to `Create<TService, TImplementation>` update the container with the implementation type, and return the newly-registered instance.
+
 ## 3.10-beta.3 ##
 
 - Extracted `Patterns.Configuration.InMemoryConfigurationSource` from `Patterns.Testing.Configuration.TestConfigurationSource` ([issue 110](https://github.com/TheTribe/code-patterns/issues/110))
