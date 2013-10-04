@@ -3,7 +3,7 @@ Settings.Initialize(
 	majorNumber: 3,
 	minorNumber: 10,
 	patchNumber: 0,
-	buildNumber: 3,
+	buildNumber: 4,
 	buildLevel: BuildLevels.Beta
 );
 #><#+
