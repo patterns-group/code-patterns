@@ -4,8 +4,8 @@ namespace Patterns.Specifications.Models.Testing.Moq
 {
 	public class TestContainerContext
 	{
-		public TestContainerTarget Target { get; set; }
+		public ITestContainerTarget Target { get; set; }
 
-		public Mock<TestContainerTarget> TargetMock { get; set; }
+		public Mock<ITestContainerTarget> TargetMock { get; set; }
 	}
 }
