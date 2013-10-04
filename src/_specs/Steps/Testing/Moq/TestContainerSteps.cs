@@ -21,10 +21,16 @@ namespace Patterns.Specifications.Steps.Testing.Moq
 			_moq = moq;
 		}
 
-		[When(@"I create an object using the test container")]
+		[When(@"I create an instance of an interface using the test container")]
+		public void CreateTestContainerInterface()
+		{
+			_context.Target = _moq.Container.Create<ITestContainerTarget>();
+		}
+
+		[When(@"I create an instance of a creatable class using the test container")]
 		public void CreateTestContainerObject()
 		{
-			_context.Target = _moq.Container.Create<TestContainerTarget>();
+			_context.Target = _moq.Container.Create<ITestContainerTarget, TestContainerTarget>();
 		}
 
 		[Then(@"the test container should have given me an object")]
@@ -42,13 +48,13 @@ namespace Patterns.Specifications.Steps.Testing.Moq
 		[When(@"I register an object with the test container")]
 		public void RegisterTestContainerObject()
 		{
-			_moq.Container.Update(new TestContainerTarget());
+			_moq.Container.Update<ITestContainerTarget, TestContainerTarget>();
 		}
 
 		[When(@"I create a mock of the object using the test container")]
 		public void MockTestContainerObject()
 		{
-			_context.TargetMock = _moq.Container.Mock<TestContainerTarget>();
+			_context.TargetMock = _moq.Container.Mock<ITestContainerTarget>();
 		}
 
 		[Then(@"the test container should have given me a mock of the object")]
