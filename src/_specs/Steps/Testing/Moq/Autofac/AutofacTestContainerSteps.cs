@@ -28,13 +28,13 @@ namespace Patterns.Specifications.Steps.Testing.Moq.Autofac
 			_moq.Container.Should().NotBeNull().And.BeOfType<AutofacMoqContainer>();
 		}
 
-		[Then(@"the Autofac/Moq test container should have (.*) registration(?:s)? for my test object")]
+		[Then(@"the Autofac/Moq test container should have (.*) registrations? for my test interface")]
 		public void AssertRegistrationCount(int expectedRegistrations)
 		{
 			IComponentRegistry registry = _moq.Container.As<IAutofacMoqContainer>().ComponentRegistry;
 
 			int registrationCount = registry.Registrations
-				.Count(registration => registration.Services.Any(RegistrationMatchesType<TestContainerTarget>));
+				.Count(registration => registration.Services.Any(RegistrationMatchesType<ITestContainerTarget>));
 
 			registrationCount.Should().Be(expectedRegistrations);
 		}
