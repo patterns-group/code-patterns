@@ -71,11 +71,11 @@ namespace Patterns.Testing.Autofac.Moq
 		/// </returns>
 		public Mock<TService> Mock<TService>() where TService : class
 		{
-			var service = Try.Get(() => Create<TService>());
+			TService service = Try.Get(Create<TService>);
 			var existingMock = service as IMocked<TService>;
 			if (existingMock != null) return existingMock.Mock;
 
-			var mock = MoqRegistrationSource.Repository.Create<TService>();
+			Mock<TService> mock = MoqRegistrationSource.Repository.Create<TService>();
 			Update(mock.Object);
 			return mock;
 		}
@@ -85,17 +85,25 @@ namespace Patterns.Testing.Autofac.Moq
 		///    for all unregistered dependencies.
 		/// </summary>
 		/// <typeparam name="TService">The type of the service.</typeparam>
-		/// <param name="activator">The optional activator.</param>
 		/// <returns>
 		///    The service instance.
 		/// </returns>
-		public TService Create<TService>(Func<IMoqContainer, TService> activator = null) where TService : class
+		public TService Create<TService>() where TService : class
 		{
-			return ResolveOrCreate<TService>(activator == null
-				? (builder => builder.RegisterType<TService>()
-					.PropertiesAutowired(PropertyWiringOptions.PreserveSetValues))
-				: (Action<ContainerBuilder>) (builder => builder.Register(c => activator(this))
-					.PropertiesAutowired(PropertyWiringOptions.PreserveSetValues)));
+			return Container.Resolve<TService>();
+		}
+
+		/// <summary>
+		///    Creates an instance of the specified implementation (as the specified service),
+		///    injecting mocked objects for all unregistered dependencies.
+		/// </summary>
+		/// <typeparam name="TService">The type of the service.</typeparam>
+		/// <typeparam name="TImplementation">The type of the implementation.</typeparam>
+		/// <returns></returns>
+		public TService Create<TService, TImplementation>() where TService : class where TImplementation : TService
+		{
+			Update<TService, TImplementation>();
+			return Create<TService>();
 		}
 
 		/// <summary>
@@ -109,7 +117,7 @@ namespace Patterns.Testing.Autofac.Moq
 		public IMoqContainer Update<TService, TImplementation>() where TService : class where TImplementation : TService
 		{
 			UpdateWithBuilder(builder => builder.RegisterType<TImplementation>().As<TService>()
-				.PropertiesAutowired(PropertyWiringOptions.PreserveSetValues));
+				                             .PropertiesAutowired(PropertyWiringOptions.PreserveSetValues));
 
 			return this;
 		}
@@ -125,7 +133,7 @@ namespace Patterns.Testing.Autofac.Moq
 		public IMoqContainer Update<TService>(TService instance) where TService : class
 		{
 			UpdateWithBuilder(builder => builder.RegisterInstance(instance).As<TService>()
-				.PropertiesAutowired(PropertyWiringOptions.PreserveSetValues));
+				                             .PropertiesAutowired(PropertyWiringOptions.PreserveSetValues));
 
 			return this;
 		}
@@ -141,17 +149,17 @@ namespace Patterns.Testing.Autofac.Moq
 		public IMoqContainer Update<TService>(Func<IMoqContainer, TService> activator) where TService : class
 		{
 			UpdateWithBuilder(builder => builder.Register(c => activator(this)).As<TService>()
-				.PropertiesAutowired(PropertyWiringOptions.PreserveSetValues));
+				                             .PropertiesAutowired(PropertyWiringOptions.PreserveSetValues));
 
 			return this;
 		}
 
 		/// <summary>
-		/// Updates the container using the specified module.
+		///    Updates the container using the specified module.
 		/// </summary>
 		/// <param name="module">The module.</param>
 		/// <returns>
-		/// The container.
+		///    The container.
 		/// </returns>
 		public IAutofacMoqContainer Update(Module module)
 		{
@@ -160,11 +168,11 @@ namespace Patterns.Testing.Autofac.Moq
 		}
 
 		/// <summary>
-		/// Updates the container using the specified registration.
+		///    Updates the container using the specified registration.
 		/// </summary>
 		/// <param name="registration">The registration.</param>
 		/// <returns>
-		/// The container.
+		///    The container.
 		/// </returns>
 		public IAutofacMoqContainer Update(Action<ContainerBuilder> registration)
 		{
@@ -177,12 +185,6 @@ namespace Patterns.Testing.Autofac.Moq
 			var builder = new ContainerBuilder();
 			registration(builder);
 			builder.Update(Container);
-		}
-
-		private T ResolveOrCreate<T>(Action<ContainerBuilder> registration)
-		{
-			if (!Container.IsRegistered<T>()) UpdateWithBuilder(registration);
-			return Container.Resolve<T>();
 		}
 	}
 }
