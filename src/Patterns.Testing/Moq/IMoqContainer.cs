@@ -28,57 +28,59 @@ using Moq;
 namespace Patterns.Testing.Moq
 {
 	/// <summary>
-	/// Provides an IoC container designed for maximum configurability
-	/// during tests, and for tight integration with Moq.
+	///    Provides an IoC container designed for maximum configurability
+	///    during tests, and for tight integration with Moq.
 	/// </summary>
 	public interface IMoqContainer
 	{
 		/// <summary>
-		/// Gets the locator.
+		///    Gets the locator.
 		/// </summary>
 		/// <value>
-		/// The locator.
+		///    The locator.
 		/// </value>
 		IServiceLocator Locator { get; }
 
 		/// <summary>
-		/// Retrieves the mock for the specified service type.
+		///    Retrieves the mock for the specified service type.
 		/// </summary>
 		/// <typeparam name="TService">The type of the service.</typeparam>
-		/// <returns>The service mock.</returns>
 		Mock<TService> Mock<TService>() where TService : class;
 
 		/// <summary>
-		/// Creates an instance of the specified service, injecting mocked objects
-		/// for all unregistered dependencies.
+		///    Creates an instance of the specified service, injecting mocked objects
+		///    for all unregistered dependencies.
 		/// </summary>
 		/// <typeparam name="TService">The type of the service.</typeparam>
-		/// <param name="activator">The optional activator.</param>
-		/// <returns>The service instance.</returns>
-		TService Create<TService>(Func<IMoqContainer, TService> activator = null) where TService : class;
+		TService Create<TService>() where TService : class;
 
 		/// <summary>
-		/// Updates this instance by registering the implementation type as the service type.
+		///    Creates an instance of the specified implementation (as the specified service),
+		///    injecting mocked objects for all unregistered dependencies.
 		/// </summary>
 		/// <typeparam name="TService">The type of the service.</typeparam>
 		/// <typeparam name="TImplementation">The type of the implementation.</typeparam>
-		/// <returns>The container.</returns>
+		TService Create<TService, TImplementation>() where TService : class where TImplementation : TService;
+
+		/// <summary>
+		///    Updates this instance by registering the implementation type as the service type.
+		/// </summary>
+		/// <typeparam name="TService">The type of the service.</typeparam>
+		/// <typeparam name="TImplementation">The type of the implementation.</typeparam>
 		IMoqContainer Update<TService, TImplementation>() where TService : class where TImplementation : TService;
 
 		/// <summary>
-		/// Updates this instance by registering an instance of the specified service.
+		///    Updates this instance by registering an instance of the specified service.
 		/// </summary>
 		/// <typeparam name="TService">The type of the service.</typeparam>
 		/// <param name="instance">The instance.</param>
-		/// <returns>The container.</returns>
 		IMoqContainer Update<TService>(TService instance) where TService : class;
 
 		/// <summary>
-		/// Updates this instance by registering the specified activator as the service type.
+		///    Updates this instance by registering the specified activator as the service type.
 		/// </summary>
 		/// <typeparam name="TService">The type of the service.</typeparam>
 		/// <param name="activator">The activator.</param>
-		/// <returns>The container</returns>
 		IMoqContainer Update<TService>(Func<IMoqContainer, TService> activator) where TService : class;
 	}
 }
