@@ -1,6 +1,6 @@
 ﻿#region FreeBSD
 
-// Copyright (c) 2013, John Batte
+// Copyright (c) 2013, The Tribe
 // All rights reserved.
 // 
 // Redistribution and use in source and binary forms, with or without modification, are permitted provided that
@@ -24,13 +24,15 @@
 #endregion
 
 using System;
+using System.Collections;
+using System.Linq;
 
 using AutoMapper;
 
 namespace Patterns.Mapping
 {
 	/// <summary>
-	/// Provides a DI-driven implementation of <see cref="IMappingServices"/>
+	///    Provides a DI-driven implementation of <see cref="IMappingServices" />
 	/// </summary>
 	public class MappingServices : IMappingServices
 	{
@@ -53,10 +55,10 @@ namespace Patterns.Mapping
 		}
 
 		/// <summary>
-		/// Gets the engine.
+		///    Gets the engine.
 		/// </summary>
 		/// <value>
-		/// The engine.
+		///    The engine.
 		/// </value>
 		public IMappingEngine Engine
 		{
@@ -64,10 +66,10 @@ namespace Patterns.Mapping
 		}
 
 		/// <summary>
-		/// Gets the configuration.
+		///    Gets the configuration.
 		/// </summary>
 		/// <value>
-		/// The configuration.
+		///    The configuration.
 		/// </value>
 		public IConfiguration Configuration
 		{
@@ -75,10 +77,10 @@ namespace Patterns.Mapping
 		}
 
 		/// <summary>
-		/// Gets the configuration provider.
+		///    Gets the configuration provider.
 		/// </summary>
 		/// <value>
-		/// The configuration provider.
+		///    The configuration provider.
 		/// </value>
 		public IConfigurationProvider ConfigurationProvider
 		{
@@ -86,7 +88,7 @@ namespace Patterns.Mapping
 		}
 
 		/// <summary>
-		/// Maps the specified source to the indicated destination.
+		///    Maps the specified source to the indicated destination.
 		/// </summary>
 		/// <typeparam name="TSource">The type of the source.</typeparam>
 		/// <typeparam name="TDestination">The type of the destination.</typeparam>
@@ -166,9 +168,10 @@ namespace Patterns.Mapping
 		/// <param name="destination">The destination.</param>
 		/// <param name="opts">The opts.</param>
 		/// <returns></returns>
-		public TDestination Map<TSource, TDestination>(TSource source, TDestination destination, Action<IMappingOperationOptions> opts)
+		public TDestination Map<TSource, TDestination>(TSource source, TDestination destination,
+			Action<IMappingOperationOptions> opts)
 		{
-			EnsureTypeMapPresence(typeof(TSource), typeof(TDestination));
+			EnsureTypeMapPresence(typeof (TSource), typeof (TDestination));
 
 			return Engine.Map(source, destination, opts);
 		}
@@ -226,7 +229,8 @@ namespace Patterns.Mapping
 		/// <param name="destinationType">Type of the destination.</param>
 		/// <param name="opts">The opts.</param>
 		/// <returns></returns>
-		public object Map(object source, object destination, Type sourceType, Type destinationType, Action<IMappingOperationOptions> opts)
+		public object Map(object source, object destination, Type sourceType, Type destinationType,
+			Action<IMappingOperationOptions> opts)
 		{
 			EnsureTypeMapPresence(sourceType, destinationType);
 
@@ -234,6 +238,21 @@ namespace Patterns.Mapping
 		}
 
 		private void EnsureTypeMapPresence(Type sourceType, Type destinationType)
+		{
+			BuildTypeMapIfMissing(ResolveType(sourceType), ResolveType(destinationType));
+		}
+
+		private static Type ResolveType(Type type)
+		{
+			if (type.IsArray) return type.GetElementType();
+
+			if (typeof (IEnumerable).IsAssignableFrom(type) && type.IsGenericType)
+				return type.GetGenericArguments().FirstOrDefault();
+
+			return type;
+		}
+
+		private void BuildTypeMapIfMissing(Type sourceType, Type destinationType)
 		{
 			if (ConfigurationProvider.FindTypeMapFor(sourceType, destinationType) == null)
 				Configuration.CreateMap(sourceType, destinationType);

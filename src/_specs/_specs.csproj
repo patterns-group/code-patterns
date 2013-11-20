@@ -119,6 +119,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Logging.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\Mapping\MappingServices.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MappingServices.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\Reflection\GetPropertyValues.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -165,6 +170,9 @@
     <Compile Include="Models\Logging\LoggingTestSubject.cs" />
     <Compile Include="Models\Logging\ManualLoggingContext.cs" />
     <Compile Include="Models\Logging\ManualLoggingTestSubject.cs" />
+    <Compile Include="Models\Mapping\MappingContext.cs" />
+    <Compile Include="Models\Mapping\MappingDestination.cs" />
+    <Compile Include="Models\Mapping\MappingSource.cs" />
     <Compile Include="Models\Mocking\MoqContext.cs" />
     <Compile Include="Models\ObjectContext.cs" />
     <Compile Include="Models\Reflection\PropertyValueContext.cs" />
@@ -213,6 +221,7 @@
     <Compile Include="Steps\Logging\MockMixins.cs" />
     <Compile Include="Steps\Logging\MockVerificationSteps.cs" />
     <Compile Include="Steps\Logging\TestLoggingModule.cs" />
+    <Compile Include="Steps\Mapping\MappingSteps.cs" />
     <Compile Include="Steps\ObjectSteps.cs" />
     <Compile Include="Steps\Reflection\PropertyValueSteps.cs" />
     <Compile Include="Steps\Runtime\DateTimeInfoSteps.cs" />
@@ -261,6 +270,10 @@
     <None Include="Features\Logging\Logging.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Logging.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Mapping\MappingServices.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>MappingServices.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Reflection\GetPropertyValues.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
