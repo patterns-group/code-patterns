@@ -51,16 +51,34 @@ namespace Patterns.Specifications.Steps.Testing.Moq
 			_moq.Container.Update<ITestContainerTarget, TestContainerTarget>();
 		}
 
-		[When(@"I create a mock of the object using the test container")]
-		public void MockTestContainerObject()
+		[When(@"I create a mock of the object using the test container(?: with the container's mock behavior)?")]
+		public void MockTestContainerObjectWithContainersBehavior()
 		{
 			_context.TargetMock = _moq.Container.Mock<ITestContainerTarget>();
+		}
+
+		[When(@"I create a mock of the object using the test container with (default|loose|strict) mock behavior")]
+		public void MockTestContainerObject(MockBehavior behavior)
+		{
+			_context.TargetMock = _moq.Container.Mock<ITestContainerTarget>(behavior);
 		}
 
 		[Then(@"the test container should have given me a mock of the object")]
 		public void ThenTheTestContainerShouldHaveGivenMeAMockOfTheObject()
 		{
 			_context.TargetMock.Should().NotBeNull();
+		}
+
+		[Then(@"the object retrieved by the test container should have the container's mock behavior")]
+		public void AssertMockObjectWithContainersBehavior()
+		{
+			_context.TargetMock.Behavior.Should().Be(_moq.Container.DefaultBehavior);
+		}
+
+		[Then(@"the object retrieved by the test container should have (default|loose|strict) mock behavior")]
+		public void AssertMockObjectBehavior(MockBehavior behavior)
+		{
+			_context.TargetMock.Behavior.Should().Be(behavior);
 		}
 	}
 }

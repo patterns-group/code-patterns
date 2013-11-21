@@ -20,14 +20,12 @@
 #endregion
 
 using System;
-
+using System.Collections.Generic;
 using Autofac;
+using Autofac.Core;
 using Autofac.Extras.CommonServiceLocator;
-
 using Microsoft.Practices.ServiceLocation;
-
 using Moq;
-
 using Patterns.Autofac;
 using Patterns.ExceptionHandling;
 using Patterns.Testing.Moq;
@@ -35,58 +33,96 @@ using Patterns.Testing.Moq;
 namespace Patterns.Testing.Autofac.Moq
 {
 	/// <summary>
-	///    Provides a default implementation of the <see cref="IAutofacMoqContainer" /> interface.
+	///	 Provides a default implementation of the <see cref="IAutofacMoqContainer" /> interface.
 	/// </summary>
 	public sealed class AutofacMoqContainer : AccessibleContainer, IAutofacMoqContainer
 	{
+		private readonly MockBehavior _defaultBehavior;
+		private readonly MoqRegistrationSource _registrationSource;
+
 		/// <summary>
-		///    Initializes a new instance of the <see cref="AutofacMoqContainer" /> class.
+		///	 Initializes a new instance of the <see cref="AutofacMoqContainer" /> class with 
 		/// </summary>
-		/// <param name="container">The container.</param>
-		public AutofacMoqContainer(IContainer container) : base(container)
+		/// <param name="defaultBehavior">The default <see cref="MockBehavior"/>.</param>
+		public AutofacMoqContainer(IContainer container, MockBehavior behavior) : base(container)
 		{
+			_defaultBehavior = behavior;
 			Locator = new AutofacServiceLocator(this);
-			ComponentRegistry.AddRegistrationSource(new MoqRegistrationSource());
+			ComponentRegistry.AddRegistrationSource(_registrationSource = new MoqRegistrationSource(_defaultBehavior));
 		}
 
 		/// <summary>
-		///    Initializes a new instance of the <see cref="AutofacMoqContainer" /> class.
+		///	 Initializes a new instance of the <see cref="AutofacMoqContainer" /> class.
 		/// </summary>
-		public AutofacMoqContainer() : this(new ContainerBuilder().Build()) {}
+		/// <param name="container">The container.</param>
+		/// <param name="defaultBehavior">The default <see cref="MockBehavior"/>.</param>
+		public AutofacMoqContainer(IContainer container) : this(container, MockBehavior.Default)
+		{
+		}
 
 		/// <summary>
-		///    Gets the locator.
+		///	 Initializes a new instance of the <see cref="AutofacMoqContainer" /> class.
+		/// </summary>
+		public AutofacMoqContainer() : this(new ContainerBuilder().Build())
+		{
+		}
+
+		/// <summary>
+		///	 Gets the default <see cref="MockBehavior"/>.
 		/// </summary>
 		/// <value>
-		///    The locator.
+		///	 The default <see cref="MockBehavior"/>.
+		/// </value>
+		public MockBehavior DefaultBehavior { get { return _defaultBehavior; } }
+
+		/// <summary>
+		///	 Gets the locator.
+		/// </summary>
+		/// <value>
+		///	 The locator.
 		/// </value>
 		public IServiceLocator Locator { get; private set; }
 
 		/// <summary>
-		///    Retrieves the mock for the specified service type.
+		///	 Retrieves the mock for the specified service type.
 		/// </summary>
 		/// <typeparam name="TService">The type of the service.</typeparam>
 		/// <returns>
-		///    The service mock.
+		///	 The service mock.
 		/// </returns>
 		public Mock<TService> Mock<TService>() where TService : class
 		{
-			TService service = Try.Get(Create<TService>);
+		    return Mock<TService>(_defaultBehavior);
+		}
+
+		/// <summary>
+		///	 Retrieves the mock for the specified service type.
+		/// </summary>
+		/// <typeparam name="TService">The type of the service.</typeparam>
+		/// <param name="mockBehavior">
+		///	 The <see cref="MockBehavior" /> of the mock.
+		/// </param>
+		/// <returns>
+		///	 The service mock.
+		/// </returns>
+		public Mock<TService> Mock<TService>(MockBehavior mockBehavior) where TService : class
+		{
+			TService service = Try.Get<TService>(Create<TService>);
 			var existingMock = service as IMocked<TService>;
 			if (existingMock != null) return existingMock.Mock;
 
-			Mock<TService> mock = MoqRegistrationSource.Repository.Create<TService>();
+			Mock<TService> mock = _registrationSource.Repository.Create<TService>(mockBehavior);
 			Update(mock.Object);
 			return mock;
 		}
 
 		/// <summary>
-		///    Creates an instance of the specified service, injecting mocked objects
-		///    for all unregistered dependencies.
+		///	 Creates an instance of the specified service, injecting mocked objects
+		///	 for all unregistered dependencies.
 		/// </summary>
 		/// <typeparam name="TService">The type of the service.</typeparam>
 		/// <returns>
-		///    The service instance.
+		///	 The service instance.
 		/// </returns>
 		public TService Create<TService>() where TService : class
 		{
@@ -94,8 +130,8 @@ namespace Patterns.Testing.Autofac.Moq
 		}
 
 		/// <summary>
-		///    Creates an instance of the specified implementation (as the specified service),
-		///    injecting mocked objects for all unregistered dependencies.
+		///	 Creates an instance of the specified implementation (as the specified service),
+		///	 injecting mocked objects for all unregistered dependencies.
 		/// </summary>
 		/// <typeparam name="TService">The type of the service.</typeparam>
 		/// <typeparam name="TImplementation">The type of the implementation.</typeparam>
@@ -107,59 +143,59 @@ namespace Patterns.Testing.Autofac.Moq
 		}
 
 		/// <summary>
-		///    Updates this instance by registering the implementation type as the service type.
+		///	 Updates this instance by registering the implementation type as the service type.
 		/// </summary>
 		/// <typeparam name="TService">The type of the service.</typeparam>
 		/// <typeparam name="TImplementation">The type of the implementation.</typeparam>
 		/// <returns>
-		///    The container.
+		///	 The container.
 		/// </returns>
 		public IMoqContainer Update<TService, TImplementation>() where TService : class where TImplementation : TService
 		{
 			UpdateWithBuilder(builder => builder.RegisterType<TImplementation>().As<TService>()
-				                             .PropertiesAutowired(PropertyWiringOptions.PreserveSetValues));
+												.PropertiesAutowired(PropertyWiringOptions.PreserveSetValues));
 
 			return this;
 		}
 
 		/// <summary>
-		///    Updates this instance by registering an instance of the specified service.
+		///	 Updates this instance by registering an instance of the specified service.
 		/// </summary>
 		/// <typeparam name="TService">The type of the service.</typeparam>
 		/// <param name="instance">The instance.</param>
 		/// <returns>
-		///    The container.
+		///	 The container.
 		/// </returns>
 		public IMoqContainer Update<TService>(TService instance) where TService : class
 		{
 			UpdateWithBuilder(builder => builder.RegisterInstance(instance).As<TService>()
-				                             .PropertiesAutowired(PropertyWiringOptions.PreserveSetValues));
+												.PropertiesAutowired(PropertyWiringOptions.PreserveSetValues));
 
 			return this;
 		}
 
 		/// <summary>
-		///    Updates this instance by registering the specified activator as the service type.
+		///	 Updates this instance by registering the specified activator as the service type.
 		/// </summary>
 		/// <typeparam name="TService">The type of the service.</typeparam>
 		/// <param name="activator">The activator.</param>
 		/// <returns>
-		///    The container
+		///	 The container
 		/// </returns>
 		public IMoqContainer Update<TService>(Func<IMoqContainer, TService> activator) where TService : class
 		{
 			UpdateWithBuilder(builder => builder.Register(c => activator(this)).As<TService>()
-				                             .PropertiesAutowired(PropertyWiringOptions.PreserveSetValues));
+												.PropertiesAutowired(PropertyWiringOptions.PreserveSetValues));
 
 			return this;
 		}
 
 		/// <summary>
-		///    Updates the container using the specified module.
+		///	 Updates the container using the specified module.
 		/// </summary>
 		/// <param name="module">The module.</param>
 		/// <returns>
-		///    The container.
+		///	 The container.
 		/// </returns>
 		public IAutofacMoqContainer Update(Module module)
 		{
@@ -168,11 +204,11 @@ namespace Patterns.Testing.Autofac.Moq
 		}
 
 		/// <summary>
-		///    Updates the container using the specified registration.
+		///	 Updates the container using the specified registration.
 		/// </summary>
 		/// <param name="registration">The registration.</param>
 		/// <returns>
-		///    The container.
+		///	 The container.
 		/// </returns>
 		public IAutofacMoqContainer Update(Action<ContainerBuilder> registration)
 		{
