@@ -26,16 +26,24 @@ Scenario: Create a registered object
 	And the test container should have given me an object
 	And the object retrieved by the test container should not be a mock-based type
 
-Scenario: Override a registered object
+Scenario Outline: Override a registered object
 	When I register an object with the test container
 	And I create an instance of an interface using the test container
 	Then the Autofac/Moq test container should have 1 registration for my test interface
 	And the test container should have given me an object
 	And the object retrieved by the test container should not be a mock-based type
 
-	When I create a mock of the object using the test container
+	When I create a mock of the object using the test container with <expected> mock behavior
 	And I create an instance of an interface using the test container
 	Then the Autofac/Moq test container should have 2 registrations for my test interface
 	And the test container should have given me an object
 	And the test container should have given me a mock of the object
 	And the object retrieved by the test container should be a mock-based type
+	And the object retrieved by the test container should have <expected> mock behavior
+
+	Examples:
+	| expected        |
+	| the container's |
+	| default         |
+	| loose           |
+	| strict          |
