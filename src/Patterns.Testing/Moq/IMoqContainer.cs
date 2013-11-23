@@ -20,64 +20,79 @@
 #endregion
 
 using System;
-
 using Microsoft.Practices.ServiceLocation;
-
 using Moq;
 
 namespace Patterns.Testing.Moq
 {
 	/// <summary>
-	///    Provides an IoC container designed for maximum configurability
-	///    during tests, and for tight integration with Moq.
+	///	 Provides an IoC container designed for maximum configurability
+	///	 during tests, and for tight integration with Moq.
 	/// </summary>
 	public interface IMoqContainer
 	{
 		/// <summary>
-		///    Gets the locator.
+		///	 Gets the default <see cref="MockBehavior"/>.
 		/// </summary>
 		/// <value>
-		///    The locator.
+		///	 The default <see cref="MockBehavior"/>.
+		/// </value>
+		MockBehavior DefaultBehavior { get; }
+
+		/// <summary>
+		///	 Gets the locator.
+		/// </summary>
+		/// <value>
+		///	 The locator.
 		/// </value>
 		IServiceLocator Locator { get; }
 
 		/// <summary>
-		///    Retrieves the mock for the specified service type.
+		///	 Retrieves the mock for the specified service type.
 		/// </summary>
 		/// <typeparam name="TService">The type of the service.</typeparam>
 		Mock<TService> Mock<TService>() where TService : class;
 
 		/// <summary>
-		///    Creates an instance of the specified service, injecting mocked objects
-		///    for all unregistered dependencies.
+		///	 Retrieves the mock for the specified service type.
+		/// </summary>
+		/// <typeparam name="TService">The type of the service.</typeparam>
+		/// <param name="mockBehavior">
+		///	 The <see cref="MockBehavior" /> of mock.
+		/// </param>
+		Mock<TService> Mock<TService>(MockBehavior mockBehavior) where TService : class;
+
+		/// <summary>
+		///	 Creates an instance of the specified service, injecting mocked objects
+		///	 for all unregistered dependencies.
 		/// </summary>
 		/// <typeparam name="TService">The type of the service.</typeparam>
 		TService Create<TService>() where TService : class;
 
 		/// <summary>
-		///    Creates an instance of the specified implementation (as the specified service),
-		///    injecting mocked objects for all unregistered dependencies.
+		///	 Creates an instance of the specified implementation (as the specified service),
+		///	 injecting mocked objects for all unregistered dependencies.
 		/// </summary>
 		/// <typeparam name="TService">The type of the service.</typeparam>
 		/// <typeparam name="TImplementation">The type of the implementation.</typeparam>
 		TService Create<TService, TImplementation>() where TService : class where TImplementation : TService;
 
 		/// <summary>
-		///    Updates this instance by registering the implementation type as the service type.
+		///	 Updates this instance by registering the implementation type as the service type.
 		/// </summary>
 		/// <typeparam name="TService">The type of the service.</typeparam>
 		/// <typeparam name="TImplementation">The type of the implementation.</typeparam>
 		IMoqContainer Update<TService, TImplementation>() where TService : class where TImplementation : TService;
 
 		/// <summary>
-		///    Updates this instance by registering an instance of the specified service.
+		///	 Updates this instance by registering an instance of the specified service.
 		/// </summary>
 		/// <typeparam name="TService">The type of the service.</typeparam>
 		/// <param name="instance">The instance.</param>
 		IMoqContainer Update<TService>(TService instance) where TService : class;
 
 		/// <summary>
-		///    Updates this instance by registering the specified activator as the service type.
+		///	 Updates this instance by registering the specified activator as the service type.
 		/// </summary>
 		/// <typeparam name="TService">The type of the service.</typeparam>
 		/// <param name="activator">The activator.</param>
