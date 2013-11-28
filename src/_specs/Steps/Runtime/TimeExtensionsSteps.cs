@@ -44,16 +44,13 @@ namespace Patterns.Specifications.Steps.Runtime
 			_context = context;
 		}
 
-		[Given(@"I have a DateTime value")]
-		public void CreateFirstDateTime()
+		[Given(@"I have a( second)? DateTime representation of (.+)")]
+		public void CreateSpecifiedDateTime(string valueSwitch, DateTime dateTime)
 		{
-			_context.FirstValue = DateTime.Now;
-		}
-
-		[Given(@"I have a second DateTime value that varies from the first by (.*) milliseconds")]
-		public void CreateSecondDateTime(int millisecondAdjustment)
-		{
-			_context.SecondValue = _context.FirstValue.AddMilliseconds(millisecondAdjustment);
+			if (string.IsNullOrWhiteSpace(valueSwitch))
+				_context.FirstValue = dateTime;
+			else
+				_context.SecondValue = dateTime;
 		}
 
 		[When(@"I adjust the accuracy of each DateTime value to one second")]
@@ -69,10 +66,10 @@ namespace Patterns.Specifications.Steps.Runtime
 			_context.CalculateDifference();
 		}
 
-		[Then(@"the resulting difference should be zero")]
-		public void AssertDifferenceIsZero()
+		[Then(@"the resulting difference should be (\d+) seconds")]
+		public void AssertDifference(int seconds)
 		{
-			_context.Difference.Should().Be(TimeSpan.Zero);
+			_context.Difference.Should().Be(TimeSpan.FromSeconds(seconds));
 		}
 	}
 }
