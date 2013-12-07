@@ -1,28 +1,26 @@
-﻿#region FreeBSD
-
-// Copyright (c) 2013, John Batte
+﻿// Copyright (c) 2013, The Tribe
 // All rights reserved.
 // 
-// Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+// Redistribution and use in source and binary forms, with or without modification, are permitted provided that
+// the following conditions are met:
 // 
-//  * Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+//  * Redistributions of source code must retain the above copyright notice, this list of conditions and the
+//    following disclaimer.
 // 
-//  * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the
-//    documentation and/or other materials provided with the distribution.
+//  * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the
+//    following disclaimer in the documentation and/or other materials provided with the distribution.
 // 
-// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
-// TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
-// CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
-// PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-// LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
-// SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
-#endregion
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED
+// WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+// PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR
+// ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+// TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+// HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+// NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+// POSSIBILITY OF SUCH DAMAGE.
 
 using System;
-
 using Castle.DynamicProxy;
-
 using Patterns.ExceptionHandling;
 
 namespace Patterns.Interception
@@ -51,22 +49,64 @@ namespace Patterns.Interception
 		///    whether or not an exception was thrown.
 		/// </param>
 		/// <param name="onError">The function to execute when an error occurs.</param>
+		/// <param name="proceed">The action to execute. Only set this if proceeding as normal is not desired.</param>
 		public DelegateInterceptor(Action<IInvocation> after = null, Action<IInvocation> before = null,
 			Func<IInvocation, bool> condition = null, Action<IInvocation> @finally = null,
-			Func<IInvocation, Exception, ExceptionState> onError = null)
+			Func<IInvocation, Exception, ExceptionState> onError = null, Action<IInvocation> proceed = null)
 		{
-			Initialize(after, before, condition, @finally, onError);
+			Initialize(after, before, condition, @finally, onError, proceed);
 		}
 
-		protected virtual Action<IInvocation> After { get; set; }
+		/// <summary>
+		///    Gets or sets the action to execute. Only set this if proceeding as normal is not desired.
+		/// </summary>
+		/// <value>
+		///    The action to execute.
+		/// </value>
+		public virtual Action<IInvocation> Proceed { get; set; }
 
-		protected virtual Action<IInvocation> Before { get; set; }
+		/// <summary>
+		///    Gets or sets the action to execute after proceeding. This action will not run
+		///    if the invocation throws an exception.
+		/// </summary>
+		/// <value>
+		///    The action to execute after proceeding.
+		/// </value>
+		public virtual Action<IInvocation> After { get; set; }
 
-		protected virtual Func<IInvocation, bool> Condition { get; set; }
+		/// <summary>
+		///    Gets or sets the action to execute before proceeding.
+		/// </summary>
+		/// <value>
+		///    The action to execute before proceeding.
+		/// </value>
+		public virtual Action<IInvocation> Before { get; set; }
 
-		protected virtual Action<IInvocation> Finally { get; set; }
+		/// <summary>
+		///    Gets or sets the interception condition. If this condition returns <c>false</c>,
+		///    the invocation proceeds with no further interception.
+		/// </summary>
+		/// <value>
+		///    The interception condition.
+		/// </value>
+		public virtual Func<IInvocation, bool> Condition { get; set; }
 
-		protected virtual Func<IInvocation, Exception, ExceptionState> OnError { get; set; }
+		/// <summary>
+		///    Gets or sets the action to execute at the end of the interception, regardless of
+		///    whether or not an exception was thrown.
+		/// </summary>
+		/// <value>
+		///    The action to execute at the end of the interception.
+		/// </value>
+		public virtual Action<IInvocation> Finally { get; set; }
+
+		/// <summary>
+		///    Gets or sets the function to execute when an error occurs.
+		/// </summary>
+		/// <value>
+		///    The function to execute when an error occurs.
+		/// </value>
+		public virtual Func<IInvocation, Exception, ExceptionState> OnError { get; set; }
 
 		/// <summary>
 		///    Intercepts the specified invocation.
@@ -84,7 +124,8 @@ namespace Patterns.Interception
 			{
 				if (Before != null) Before(invocation);
 
-				invocation.Proceed();
+				Action<IInvocation> proceed = Proceed ?? (call => call.Proceed());
+				proceed(invocation);
 
 				if (After != null) After(invocation);
 			}
@@ -107,13 +148,14 @@ namespace Patterns.Interception
 		}
 
 		private void Initialize(Action<IInvocation> after, Action<IInvocation> before, Func<IInvocation, bool> condition,
-			Action<IInvocation> @finally, Func<IInvocation, Exception, ExceptionState> onError)
+			Action<IInvocation> @finally, Func<IInvocation, Exception, ExceptionState> onError, Action<IInvocation> proceed)
 		{
 			Condition = condition;
 			Before = before;
 			After = after;
 			Finally = @finally;
 			OnError = onError;
+			Proceed = proceed;
 		}
 	}
 }
