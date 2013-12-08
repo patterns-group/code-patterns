@@ -2,6 +2,14 @@
 
 The following log details the outward-facing changes made to code-patterns since its first migration to GitHub.
 
+## 3.10-beta.5 ##
+
+- Dropped reference to Reactive Extensions ([issue 123](https://github.com/TheTribe/code-patterns/issues/123))
+- Updated MappingServices to use underlying types for collections ([issue 126](https://github.com/TheTribe/code-patterns/issues/126))
+- Added support for overriding mock behavior in `IMoqContainer` ([issue 125](https://github.com/TheTribe/code-patterns/issues/125))
+- Fixed TimeExtensions feature bug ([issue 129](https://github.com/TheTribe/code-patterns/issues/129))
+- Added new `Proceed` pointcut to `DelegateInterceptor` ([issue 135](https://github.com/TheTribe/code-patterns/issues/135))
+
 ## 3.10-beta.4 ##
 
 - Fixes for `IMoqContainer` ([issue 114](https://github.com/TheTribe/code-patterns/issues/114))
