@@ -1,0 +1,119 @@
+<html>
+	<head>
+		<script type="text/javascript" src="../js/coverreport.js">
+
+		</script><script type="text/javascript">
+			RANGES_89 = [
+   [44,3,44,122,'dccv']
+, [45,3,45,4,'dccv']
+, [46,4,46,29,'dccv']
+, [47,4,47,31,'dccv']
+, [48,3,48,4,'dccv']
+, [65,3,65,4,'dccv']
+, [66,4,68,25,'dccv']
+, [69,3,69,4,'dccv']
+, [87,3,87,4,'dcuc']
+, [88,4,90,25,'dcuc']
+, [91,3,91,4,'dcuc']
+];
+		</script><link rel="stylesheet" type="text/css" href="../css/coverreport.css" />
+	</head><body>
+		<code id="src89" class="dotCoverSource"><pre>#region FreeBSD
+
+// Copyright (c) 2013, John Batte
+// All rights reserved.
+// 
+// Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+// 
+//  * Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+// 
+//  * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the
+//    documentation and/or other materials provided with the distribution.
+// 
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
+// TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+// CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+// PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+// LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+// SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+#endregion
+
+using System;
+using System.Collections.Generic;
+
+namespace Patterns.Collections
+{
+	/// &lt;summary&gt;
+	///    Provides an implementation of &lt;see cref=&quot;IEqualityComparer{T}&quot; /&gt; that
+	///    allows default object-based comparison and hash retrieval logic to be
+	///    configured at construction.
+	/// &lt;/summary&gt;
+	/// &lt;typeparam name=&quot;TValue&quot;&gt;The type of the value.&lt;/typeparam&gt;
+	public class ConfigurableEqualityComparer&lt;TValue&gt; : IEqualityComparer&lt;TValue&gt;
+	{
+		private readonly Func&lt;TValue, TValue, bool&gt; _comparison;
+
+		private readonly Func&lt;TValue, int&gt; _hashCreator;
+
+		/// &lt;summary&gt;
+		///    Initializes a new instance of the &lt;see cref=&quot;ConfigurableEqualityComparer{TValue}&quot; /&gt; class.
+		/// &lt;/summary&gt;
+		/// &lt;param name=&quot;comparison&quot;&gt;The optional comparison algorithm.&lt;/param&gt;
+		/// &lt;param name=&quot;hashCreator&quot;&gt;The optional hash code retrieval algorithm.&lt;/param&gt;
+		public ConfigurableEqualityComparer(Func&lt;TValue, TValue, bool&gt; comparison = null, Func&lt;TValue, int&gt; hashCreator = null)
+		{
+			_comparison = comparison;
+			_hashCreator = hashCreator;
+		}
+
+		#region IEqualityComparer&lt;T&gt; Members
+
+		/// &lt;summary&gt;
+		///    Determines whether the specified objects are equal.
+		/// &lt;/summary&gt;
+		/// &lt;returns&gt;
+		///    &lt;c&gt;true&lt;/c&gt; if the specified objects are equal; otherwise, &lt;c&gt;false&lt;/c&gt;.
+		/// &lt;/returns&gt;
+		/// &lt;param name=&quot;x&quot;&gt;
+		///    The first object of type &lt;typeparamref name=&quot;TValue&quot; /&gt; to compare.
+		/// &lt;/param&gt;
+		/// &lt;param name=&quot;y&quot;&gt;
+		///    The second object of type &lt;typeparamref name=&quot;TValue&quot; /&gt; to compare.
+		/// &lt;/param&gt;
+		public virtual bool Equals(TValue x, TValue y)
+		{
+			return _comparison == null
+				? object.Equals(x, y)
+				: _comparison(x, y);
+		}
+
+		/// &lt;summary&gt;
+		///    Returns a hash code for the specified object.
+		/// &lt;/summary&gt;
+		/// &lt;returns&gt;
+		///    A hash code for the specified object.
+		/// &lt;/returns&gt;
+		/// &lt;param name=&quot;obj&quot;&gt;
+		///    The &lt;see cref=&quot;T:System.Object&quot; /&gt; for which a hash code is to be returned.
+		/// &lt;/param&gt;
+		/// &lt;exception cref=&quot;T:System.NullReferenceException&quot;&gt;
+		///    The type of &lt;paramref name=&quot;obj&quot; /&gt; is a reference type and
+		///    &lt;paramref
+		///       name=&quot;obj&quot; /&gt;
+		///    is null.
+		/// &lt;/exception&gt;
+		public virtual int GetHashCode(TValue obj)
+		{
+			return _hashCreator == null
+				? obj.GetHashCode()
+				: _hashCreator(obj);
+		}
+
+		#endregion
+	}
+}</pre></code><script type="text/javascript">
+			applyranges('src89', RANGES_89)
+		</script>
+	</body>
+</html>

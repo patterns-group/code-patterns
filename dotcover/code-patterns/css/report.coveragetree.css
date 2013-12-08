@@ -1,0 +1,20 @@
+ul.dynatree-container img.percent-image 
+{
+  height: auto;
+  width: auto;
+  vertical-align: middle;
+  margin-left: 3px;
+  margin-right: 3px;
+}
+
+ul.dynatree-container a.coverage-node
+{
+  vertical-align:middle;
+}
+
+ul.dynatree-container a.clickable-coverage-node 
+{
+  vertical-align: middle;
+  color: #0066cc;
+  text-decoration: underline;
+}

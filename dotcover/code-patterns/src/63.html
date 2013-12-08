@@ -1,0 +1,131 @@
+<html>
+	<head>
+		<script type="text/javascript" src="../js/coverreport.js">
+
+		</script><script type="text/javascript">
+			RANGES_63 = [
+   [43,3,43,112,'dccv']
+, [44,3,44,4,'dccv']
+, [45,4,45,23,'dccv']
+, [46,4,46,33,'dccv']
+, [47,4,47,21,'dccv']
+, [48,3,48,4,'dccv']
+, [52,3,52,4,'dccv']
+, [54,4,54,5,'dccv']
+, [55,5,55,67,'dccv']
+, [56,4,56,5,'dccv']
+, [57,4,57,27,'dccv']
+, [58,4,58,5,'dccv']
+, [59,5,59,31,'dccv']
+, [60,4,60,5,'dccv']
+, [61,3,61,4,'dccv']
+, [65,3,65,4,'dccv']
+, [66,4,66,44,'dccv']
+, [67,3,67,4,'dccv']
+, [71,3,71,4,'dccv']
+, [72,4,72,40,'dccv']
+, [73,3,73,4,'dccv']
+, [77,3,77,4,'dccv']
+, [79,4,79,5,'dccv']
+, [80,5,80,46,'dccv']
+, [81,4,81,5,'dccv']
+, [82,4,82,27,'dccv']
+, [83,4,83,5,'dccv']
+, [84,5,84,31,'dccv']
+, [85,4,85,5,'dccv']
+, [86,3,86,4,'dccv']
+];
+		</script><link rel="stylesheet" type="text/css" href="../css/coverreport.css" />
+	</head><body>
+		<code id="src63" class="dotCoverSource"><pre>#region FreeBSD
+
+// Copyright (c) 2013, John Batte
+// All rights reserved.
+// 
+// Redistribution and use in source and binary forms, with or without modification, are permitted provided that
+// the following conditions are met:
+// 
+//  * Redistributions of source code must retain the above copyright notice, this list of conditions and the
+//    following disclaimer.
+// 
+//  * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the
+//    following disclaimer in the documentation and/or other materials provided with the distribution.
+// 
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED
+// WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+// PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR
+// ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+// TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+// HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+// NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+// POSSIBILITY OF SUCH DAMAGE.
+
+#endregion
+
+using System;
+
+using Patterns.Specifications.Models;
+using Patterns.Specifications.Models.Interception;
+using Patterns.Specifications.Models.Logging;
+
+using TechTalk.SpecFlow;
+
+namespace Patterns.Specifications.Steps.Logging
+{
+	[Binding]
+	public class LoggingInterceptorSteps
+	{
+		private readonly LoggingContext _logging;
+		private readonly InterceptionContext _interception;
+		private readonly ErrorContext _errors;
+
+		public LoggingInterceptorSteps(LoggingContext logging, InterceptionContext interception, ErrorContext errors)
+		{
+			_logging = logging;
+			_interception = interception;
+			_errors = errors;
+		}
+
+		[When(@&quot;I call the interceptor directly&quot;)]
+		public void DirectIntercept()
+		{
+			try
+			{
+				_interception.Interceptor.Intercept(_interception.Invocation);
+			}
+			catch (Exception error)
+			{
+				_errors.LastError = error;
+			}
+		}
+
+		[When(@&quot;I call a normal void method on the logging test subject&quot;)]
+		public void CallNormalVoid()
+		{
+			_logging.TestSubject.NormalVoidMethod();
+		}
+
+		[When(@&quot;I call a normal method with a return value on the logging test subject&quot;)]
+		public void CallNormalWithReturn()
+		{
+			_logging.TestSubject.NormalMethod();
+		}
+
+		[When(@&quot;I call a method that throws an Exception on the logging test subject&quot;)]
+		public void CallMethodWithError()
+		{
+			try
+			{
+				_logging.TestSubject.ExceptionalMethod();
+			}
+			catch (Exception error)
+			{
+				_errors.LastError = error;
+			}
+		}
+	}
+}</pre></code><script type="text/javascript">
+			applyranges('src63', RANGES_63)
+		</script>
+	</body>
+</html>

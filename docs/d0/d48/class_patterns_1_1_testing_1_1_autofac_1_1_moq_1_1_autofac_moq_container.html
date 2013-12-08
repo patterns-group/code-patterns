@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.4"/>
-<title>Code Patterns for .NET: Patterns.Testing.Autofac.Moq.AutofacMoqContainer Class Reference</title>
+<title>code-patterns: Patterns.Testing.Autofac.Moq.AutofacMoqContainer Class Reference</title>
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../jquery.js"></script>
 <script type="text/javascript" src="../../dynsections.js"></script>
@@ -129,6 +129,9 @@ Inheritance diagram for Patterns.Testing.Autofac.Moq.AutofacMoqContainer:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a615e675ce0a825c92176fed63e1ea30e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d48/class_patterns_1_1_testing_1_1_autofac_1_1_moq_1_1_autofac_moq_container.html#a615e675ce0a825c92176fed63e1ea30e">AutofacMoqContainer</a> (IContainer container, MockBehavior behavior)</td></tr>
+<tr class="memdesc:a615e675ce0a825c92176fed63e1ea30e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes a new instance of the <a class="el" href="../../d0/d48/class_patterns_1_1_testing_1_1_autofac_1_1_moq_1_1_autofac_moq_container.html" title="Provides a default implementation of the IAutofacMoqContainer interface. ">AutofacMoqContainer</a> class with  <a href="#a615e675ce0a825c92176fed63e1ea30e">More...</a><br/></td></tr>
+<tr class="separator:a615e675ce0a825c92176fed63e1ea30e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a83ada7f5f8a6055cc459cc2aae6a050c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d48/class_patterns_1_1_testing_1_1_autofac_1_1_moq_1_1_autofac_moq_container.html#a83ada7f5f8a6055cc459cc2aae6a050c">AutofacMoqContainer</a> (IContainer container)</td></tr>
 <tr class="memdesc:a83ada7f5f8a6055cc459cc2aae6a050c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes a new instance of the <a class="el" href="../../d0/d48/class_patterns_1_1_testing_1_1_autofac_1_1_moq_1_1_autofac_moq_container.html" title="Provides a default implementation of the IAutofacMoqContainer interface. ">AutofacMoqContainer</a> class.  <a href="#a83ada7f5f8a6055cc459cc2aae6a050c">More...</a><br/></td></tr>
 <tr class="separator:a83ada7f5f8a6055cc459cc2aae6a050c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -138,9 +141,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a650c2f94b63aabe081bbb55e497a0160"><td class="memItemLeft" align="right" valign="top">Mock&lt; TService &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d48/class_patterns_1_1_testing_1_1_autofac_1_1_moq_1_1_autofac_moq_container.html#a650c2f94b63aabe081bbb55e497a0160">Mock&lt; TService &gt;</a> ()</td></tr>
 <tr class="memdesc:a650c2f94b63aabe081bbb55e497a0160"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the mock for the specified service type.  <a href="#a650c2f94b63aabe081bbb55e497a0160">More...</a><br/></td></tr>
 <tr class="separator:a650c2f94b63aabe081bbb55e497a0160"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad7c6892ee8efdbdbf488034fae5f2b27"><td class="memItemLeft" align="right" valign="top">TService&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d48/class_patterns_1_1_testing_1_1_autofac_1_1_moq_1_1_autofac_moq_container.html#ad7c6892ee8efdbdbf488034fae5f2b27">Create&lt; TService &gt;</a> (Func&lt; <a class="el" href="../../da/dd0/interface_patterns_1_1_testing_1_1_moq_1_1_i_moq_container.html">IMoqContainer</a>, TService &gt; activator=null)</td></tr>
-<tr class="memdesc:ad7c6892ee8efdbdbf488034fae5f2b27"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an instance of the specified service, injecting mocked objects for all unregistered dependencies.  <a href="#ad7c6892ee8efdbdbf488034fae5f2b27">More...</a><br/></td></tr>
-<tr class="separator:ad7c6892ee8efdbdbf488034fae5f2b27"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa119319560bb33e45711381fb8d3a2db"><td class="memItemLeft" align="right" valign="top">Mock&lt; TService &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d48/class_patterns_1_1_testing_1_1_autofac_1_1_moq_1_1_autofac_moq_container.html#aa119319560bb33e45711381fb8d3a2db">Mock&lt; TService &gt;</a> (MockBehavior mockBehavior)</td></tr>
+<tr class="memdesc:aa119319560bb33e45711381fb8d3a2db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the mock for the specified service type.  <a href="#aa119319560bb33e45711381fb8d3a2db">More...</a><br/></td></tr>
+<tr class="separator:aa119319560bb33e45711381fb8d3a2db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a56435ed3d8fc553a0fde721028fb753f"><td class="memItemLeft" align="right" valign="top">TService&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d48/class_patterns_1_1_testing_1_1_autofac_1_1_moq_1_1_autofac_moq_container.html#a56435ed3d8fc553a0fde721028fb753f">Create&lt; TService &gt;</a> ()</td></tr>
+<tr class="memdesc:a56435ed3d8fc553a0fde721028fb753f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an instance of the specified service, injecting mocked objects for all unregistered dependencies.  <a href="#a56435ed3d8fc553a0fde721028fb753f">More...</a><br/></td></tr>
+<tr class="separator:a56435ed3d8fc553a0fde721028fb753f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a907807c2f44744eefffd6d090f474439"><td class="memItemLeft" align="right" valign="top">TService&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d48/class_patterns_1_1_testing_1_1_autofac_1_1_moq_1_1_autofac_moq_container.html#a907807c2f44744eefffd6d090f474439">Create&lt; TService, TImplementation &gt;</a> ()</td></tr>
+<tr class="memdesc:a907807c2f44744eefffd6d090f474439"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an instance of the specified implementation (as the specified service), injecting mocked objects for all unregistered dependencies.  <a href="#a907807c2f44744eefffd6d090f474439">More...</a><br/></td></tr>
+<tr class="separator:a907807c2f44744eefffd6d090f474439"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a31bc49b242467e2870031f2c6d10f9bb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../da/dd0/interface_patterns_1_1_testing_1_1_moq_1_1_i_moq_container.html">IMoqContainer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d48/class_patterns_1_1_testing_1_1_autofac_1_1_moq_1_1_autofac_moq_container.html#a31bc49b242467e2870031f2c6d10f9bb">Update&lt; TService, TImplementation &gt;</a> ()</td></tr>
 <tr class="memdesc:a31bc49b242467e2870031f2c6d10f9bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates this instance by registering the implementation type as the service type.  <a href="#a31bc49b242467e2870031f2c6d10f9bb">More...</a><br/></td></tr>
 <tr class="separator:a31bc49b242467e2870031f2c6d10f9bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -183,6 +192,9 @@ readonly IContainer&#160;</td><td class="memItemRight" valign="bottom"><b>Contai
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="properties"></a>
 Properties</h2></td></tr>
+<tr class="memitem:a91675ed3f6ab8638d062e2985d034438"><td class="memItemLeft" align="right" valign="top">MockBehavior&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d48/class_patterns_1_1_testing_1_1_autofac_1_1_moq_1_1_autofac_moq_container.html#a91675ed3f6ab8638d062e2985d034438">DefaultBehavior</a><code> [get]</code></td></tr>
+<tr class="memdesc:a91675ed3f6ab8638d062e2985d034438"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the default MockBehavior.  <a href="#a91675ed3f6ab8638d062e2985d034438">More...</a><br/></td></tr>
+<tr class="separator:a91675ed3f6ab8638d062e2985d034438"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a291fc0d969e10d342790d469c4befd3b"><td class="memItemLeft" align="right" valign="top">IServiceLocator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d48/class_patterns_1_1_testing_1_1_autofac_1_1_moq_1_1_autofac_moq_container.html#a291fc0d969e10d342790d469c4befd3b">Locator</a><code> [get, set]</code></td></tr>
 <tr class="memdesc:a291fc0d969e10d342790d469c4befd3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the locator.  <a href="#a291fc0d969e10d342790d469c4befd3b">More...</a><br/></td></tr>
 <tr class="separator:a291fc0d969e10d342790d469c4befd3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -211,6 +223,40 @@ virtual EventHandler<br class="typebreak"/>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Provides a default implementation of the <a class="el" href="../../dd/d0a/interface_patterns_1_1_testing_1_1_autofac_1_1_moq_1_1_i_autofac_moq_container.html" title="Augments IMoqContainer with Autofac-specific functionality. Use this when you are using Autofac as yo...">IAutofacMoqContainer</a> interface. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a615e675ce0a825c92176fed63e1ea30e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Patterns.Testing.Autofac.Moq.AutofacMoqContainer.AutofacMoqContainer </td>
+          <td>(</td>
+          <td class="paramtype">IContainer&#160;</td>
+          <td class="paramname"><em>container</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">MockBehavior&#160;</td>
+          <td class="paramname"><em>behavior</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initializes a new instance of the <a class="el" href="../../d0/d48/class_patterns_1_1_testing_1_1_autofac_1_1_moq_1_1_autofac_moq_container.html" title="Provides a default implementation of the IAutofacMoqContainer interface. ">AutofacMoqContainer</a> class with </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">defaultBehavior</td><td>The default MockBehavior.</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a class="anchor" id="a83ada7f5f8a6055cc459cc2aae6a050c"></a>
 <div class="memitem">
 <div class="memproto">
@@ -229,6 +275,7 @@ virtual EventHandler<br class="typebreak"/>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">container</td><td>The container.</td></tr>
+    <tr><td class="paramname">defaultBehavior</td><td>The default MockBehavior.</td></tr>
   </table>
   </dd>
 </dl>
@@ -253,15 +300,14 @@ virtual EventHandler<br class="typebreak"/>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="ad7c6892ee8efdbdbf488034fae5f2b27"></a>
+<a class="anchor" id="a56435ed3d8fc553a0fde721028fb753f"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">TService Patterns.Testing.Autofac.Moq.AutofacMoqContainer.Create&lt; TService &gt; </td>
           <td>(</td>
-          <td class="paramtype">Func&lt; <a class="el" href="../../da/dd0/interface_patterns_1_1_testing_1_1_moq_1_1_i_moq_container.html">IMoqContainer</a>, TService &gt;&#160;</td>
-          <td class="paramname"><em>activator</em> = <code>null</code>)</td><td></td>
+          <td class="paramname">)</td><td></td>
           <td></td>
         </tr>
       </table>
@@ -274,19 +320,48 @@ virtual EventHandler<br class="typebreak"/>
   </table>
   </dd>
 </dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">activator</td><td>The optional activator.</td></tr>
-  </table>
-  </dd>
-</dl>
 <dl class="section return"><dt>Returns</dt><dd>The service instance. </dd></dl>
 
-<p>Implements <a class="el" href="../../da/dd0/interface_patterns_1_1_testing_1_1_moq_1_1_i_moq_container.html#a867d620fe745c5c3142c8d0c59e82b3f">Patterns.Testing.Moq.IMoqContainer</a>.</p>
+<p>Implements <a class="el" href="../../da/dd0/interface_patterns_1_1_testing_1_1_moq_1_1_i_moq_container.html#aea0842fbdc254aecf32b00ca2d106e97">Patterns.Testing.Moq.IMoqContainer</a>.</p>
 <div class="typeconstraint">
 <dl><dt><b>Type Constraints</b><dt><dd>
 <table border="0" cellspacing="2" cellpadding="0">
 <tr><td valign="top"><em>TService</em></td><td>&#160;:</td><td valign="top"><em>class</em></td><td>&#160;</td></tr>
+</table>
+</dl>
+</div>
+
+</div>
+</div>
+<a class="anchor" id="a907807c2f44744eefffd6d090f474439"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">TService Patterns.Testing.Autofac.Moq.AutofacMoqContainer.Create&lt; TService, TImplementation &gt; </td>
+          <td>(</td>
+          <td class="paramname">)</td><td></td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Creates an instance of the specified implementation (as the specified service), injecting mocked objects for all unregistered dependencies. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">TService</td><td>The type of the service.</td></tr>
+    <tr><td class="paramname">TImplementation</td><td>The type of the implementation.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+<p>Implements <a class="el" href="../../da/dd0/interface_patterns_1_1_testing_1_1_moq_1_1_i_moq_container.html#a9d7d3bd2fa56466e41b7d5df68b35381">Patterns.Testing.Moq.IMoqContainer</a>.</p>
+<div class="typeconstraint">
+<dl><dt><b>Type Constraints</b><dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td valign="top"><em>TService</em></td><td>&#160;:</td><td valign="top"><em>class</em></td><td>&#160;</td></tr>
+<tr><td valign="top"><em>TImplementation</em></td><td>&#160;:</td><td valign="top"><em>TService</em></td><td>&#160;</td></tr>
 </table>
 </dl>
 </div>
@@ -316,6 +391,46 @@ virtual EventHandler<br class="typebreak"/>
 <dl class="section return"><dt>Returns</dt><dd>The service mock. </dd></dl>
 
 <p>Implements <a class="el" href="../../da/dd0/interface_patterns_1_1_testing_1_1_moq_1_1_i_moq_container.html#acceea2be6e77f333d3f8aebb5548b8f2">Patterns.Testing.Moq.IMoqContainer</a>.</p>
+<div class="typeconstraint">
+<dl><dt><b>Type Constraints</b><dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td valign="top"><em>TService</em></td><td>&#160;:</td><td valign="top"><em>class</em></td><td>&#160;</td></tr>
+</table>
+</dl>
+</div>
+
+</div>
+</div>
+<a class="anchor" id="aa119319560bb33e45711381fb8d3a2db"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Mock&lt;TService&gt; Patterns.Testing.Autofac.Moq.AutofacMoqContainer.Mock&lt; TService &gt; </td>
+          <td>(</td>
+          <td class="paramtype">MockBehavior&#160;</td>
+          <td class="paramname"><em>mockBehavior</em>)</td><td></td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Retrieves the mock for the specified service type. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">TService</td><td>The type of the service.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mockBehavior</td><td>The MockBehavior of the mock. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The service mock. </dd></dl>
+
+<p>Implements <a class="el" href="../../da/dd0/interface_patterns_1_1_testing_1_1_moq_1_1_i_moq_container.html#ac831f68454a6a43af3a262609c781a7d">Patterns.Testing.Moq.IMoqContainer</a>.</p>
 <div class="typeconstraint">
 <dl><dt><b>Type Constraints</b><dt><dd>
 <table border="0" cellspacing="2" cellpadding="0">
@@ -496,6 +611,29 @@ virtual EventHandler<br class="typebreak"/>
 </div>
 </div>
 <h2 class="groupheader">Property Documentation</h2>
+<a class="anchor" id="a91675ed3f6ab8638d062e2985d034438"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">MockBehavior Patterns.Testing.Autofac.Moq.AutofacMoqContainer.DefaultBehavior</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">get</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the default MockBehavior. </p>
+<p>The default MockBehavior. </p>
+
+</div>
+</div>
 <a class="anchor" id="a291fc0d969e10d342790d469c4befd3b"></a>
 <div class="memitem">
 <div class="memproto">
@@ -526,7 +664,7 @@ virtual EventHandler<br class="typebreak"/>
 </div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Aug 31 2013 17:33:16 for Code Patterns for .NET by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Dec 7 2013 12:03:04 for code-patterns by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.4
 </small></address>

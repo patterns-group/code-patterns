@@ -1,0 +1,137 @@
+<html>
+	<head>
+		<script type="text/javascript" src="../js/coverreport.js">
+
+		</script><script type="text/javascript">
+			RANGES_83 = [
+   [55,3,55,51,'dccv']
+, [55,52,55,53,'dccv']
+, [55,53,55,54,'dccv']
+, [57,3,57,55,'dccv']
+, [58,3,58,4,'dccv']
+, [59,4,59,29,'dccv']
+, [60,3,60,4,'dccv']
+, [63,3,63,4,'dccv']
+, [64,4,64,32,'dccv']
+, [64,43,64,45,'dccv']
+, [65,4,66,4,'dccv']
+, [75,121,77,28,'dccv']
+, [78,4,78,47,'dccv']
+, [79,3,79,4,'dccv']
+, [82,3,82,4,'dccv']
+, [83,4,83,48,'dccv']
+, [86,63,87,7,'dccv']
+, [88,3,88,4,'dccv']
+, [66,4,66,5,'dccv']
+, [68,5,68,6,'dccv']
+, [69,6,69,73,'dccv']
+, [70,6,70,115,'dccv']
+, [71,6,71,43,'dccv']
+, [83,48,85,46,'dccv']
+, [86,63,87,6,'dccv']
+, [85,46,85,81,'dccv']
+, [86,25,86,63,'dccv']
+, [50,3,50,71,'dccv']
+, [50,97,50,98,'dccv']
+, [50,71,50,97,'dccv']
+, [64,32,64,43,'dcuc']
+, [73,5,73,62,'dcuc']
+, [74,5,74,6,'dcuc']
+, [75,6,75,121,'dcuc']
+];
+		</script><link rel="stylesheet" type="text/css" href="../css/coverreport.css" />
+	</head><body>
+		<code id="src83" class="dotCoverSource"><pre>#region FreeBSD
+
+// Copyright (c) 2013, John Batte
+// All rights reserved.
+// 
+// Redistribution and use in source and binary forms, with or without modification, are permitted provided that
+// the following conditions are met:
+// 
+//  * Redistributions of source code must retain the above copyright notice, this list of conditions and the
+//    following disclaimer.
+// 
+//  * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the
+//    following disclaimer in the documentation and/or other materials provided with the distribution.
+// 
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED
+// WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+// PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR
+// ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+// TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+// HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+// NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+// POSSIBILITY OF SUCH DAMAGE.
+
+#endregion
+
+using System;
+using System.Linq;
+using Autofac;
+using Autofac.Core;
+using Autofac.Core.Registration;
+
+using Common.Logging;
+
+using Patterns.Autofac.Configuration;
+using Patterns.Configuration;
+using Patterns.Logging;
+
+namespace Patterns.Autofac.Logging
+{
+	/// &lt;summary&gt;
+	///    Provides packaged registration instructions for the Patterns.Logging namespace.
+	/// &lt;/summary&gt;
+	public class LoggingModule : Module
+	{
+		private readonly Func&lt;Type, ILog&gt; _logFactory;
+
+		/// &lt;summary&gt;
+		///    The default log factory.
+		/// &lt;/summary&gt;
+		public static readonly Func&lt;Type, ILog&gt; DefaultLogFactory = type =&gt; LogManager.GetLogger(type);
+
+		/// &lt;summary&gt;
+		///    Initializes a new instance of the &lt;see cref=&quot;LoggingModule&quot; /&gt; class.
+		/// &lt;/summary&gt;
+		public LoggingModule() : this(DefaultLogFactory) {}
+
+		protected LoggingModule(Func&lt;Type, ILog&gt; logFactory)
+		{
+			_logFactory = logFactory;
+		}
+
+		protected override void Load(ContainerBuilder builder)
+		{
+			builder.Register(context =&gt; _logFactory);
+			builder.Register(context =&gt;
+			{
+				try
+				{
+					var configSource = context.ResolveOptional&lt;IConfigurationSource&gt;();
+					var config = configSource != null ? configSource.GetSection&lt;LoggingConfig&gt;(LoggingConfig.SectionName) : null;
+					return config ?? new LoggingConfig();
+				}
+				catch (ComponentNotRegisteredException registrationError)
+				{
+					throw ErrorBuilder.BuildContainerException(registrationError, ConfigurationResources.MissingConfigSourceErrorHint);
+				}
+			}).As&lt;ILoggingConfig&gt;();
+			builder.RegisterType&lt;LoggingInterceptor&gt;();
+		}
+
+		protected override void AttachToComponentRegistration(IComponentRegistry componentRegistry, IComponentRegistration registration)
+		{
+			registration.Preparing += (sender, args) =&gt; args.Parameters = args.Parameters.Concat(new[]
+			{
+				new ResolvedParameter((info, context) =&gt; info.ParameterType == typeof (ILog),
+					(info, context) =&gt; _logFactory(info.Member.DeclaringType))
+			});
+		}
+	}
+}</pre></code><script type="text/javascript">
+			applyranges('src83', RANGES_83)
+		</script>
+	</body>
+</html>

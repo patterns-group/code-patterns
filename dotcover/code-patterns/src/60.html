@@ -1,0 +1,93 @@
+<html>
+	<head>
+		<script type="text/javascript" src="../js/coverreport.js">
+
+		</script><script type="text/javascript">
+			RANGES_60 = [
+   [42,3,42,68,'dccv']
+, [43,3,43,4,'dccv']
+, [44,4,44,23,'dccv']
+, [45,4,45,15,'dccv']
+, [46,3,46,4,'dccv']
+, [50,3,50,4,'dccv']
+, [51,4,51,57,'dccv']
+, [52,3,52,4,'dccv']
+, [56,3,56,4,'dccv']
+, [57,4,57,72,'dccv']
+, [58,3,58,4,'dccv']
+, [62,3,62,4,'dccv']
+, [63,4,63,71,'dccv']
+, [64,3,64,4,'dccv']
+];
+		</script><link rel="stylesheet" type="text/css" href="../css/coverreport.css" />
+	</head><body>
+		<code id="src60" class="dotCoverSource"><pre>#region FreeBSD
+
+// Copyright (c) 2013, John Batte
+// All rights reserved.
+// 
+// Redistribution and use in source and binary forms, with or without modification, are permitted provided that
+// the following conditions are met:
+// 
+//  * Redistributions of source code must retain the above copyright notice, this list of conditions and the
+//    following disclaimer.
+// 
+//  * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the
+//    following disclaimer in the documentation and/or other materials provided with the distribution.
+// 
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED
+// WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+// PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR
+// ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+// TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+// HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+// NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+// POSSIBILITY OF SUCH DAMAGE.
+
+#endregion
+
+using Autofac;
+
+using Patterns.Autofac.Logging;
+using Patterns.Specifications.Models.Autofac;
+using Patterns.Specifications.Models.Mocking;
+
+using TechTalk.SpecFlow;
+
+namespace Patterns.Specifications.Steps.Logging
+{
+	[Binding]
+	public class LoggingModuleSteps
+	{
+		private readonly AutofacContext _context;
+		private readonly MoqContext _moq;
+
+		public LoggingModuleSteps(AutofacContext context, MoqContext moq)
+		{
+			_context = context;
+			_moq = moq;
+		}
+
+		[Given(@&quot;I have registered the logging module&quot;)]
+		public void RegisterLoggingModule()
+		{
+			_context.Builder.RegisterModule(new LoggingModule());
+		}
+
+		[Given(@&quot;I have registered the default test logging module&quot;)]
+		public void RegisterDefaultTestLoggingModule()
+		{
+			_context.Builder.RegisterModule(new TestLoggingModule(_moq, false));
+		}
+
+		[Given(@&quot;I have registered the error trapping test logging module&quot;)]
+		public void RegisterErrorTrappingLoggingModule()
+		{
+			_context.Builder.RegisterModule(new TestLoggingModule(_moq, true));
+		}
+	}
+}</pre></code><script type="text/javascript">
+			applyranges('src60', RANGES_60)
+		</script>
+	</body>
+</html>

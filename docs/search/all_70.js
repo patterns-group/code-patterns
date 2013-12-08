@@ -16,6 +16,7 @@ var searchData=
   ['moq',['Moq',['../dc/db2/namespace_patterns_1_1_testing_1_1_autofac_1_1_moq.html',1,'Patterns::Testing::Autofac']]],
   ['moq',['Moq',['../d3/d61/namespace_patterns_1_1_testing_1_1_moq.html',1,'Patterns::Testing']]],
   ['patterns',['Patterns',['../d1/d46/namespace_patterns.html',1,'']]],
+  ['proceed',['Proceed',['../d2/dd6/class_patterns_1_1_interception_1_1_delegate_interceptor.html#adf3f83d093a7bc8436f4fbe7a37544cc',1,'Patterns::Interception::DelegateInterceptor']]],
   ['properties',['Properties',['../d4/da3/namespace_patterns_1_1_testing_1_1_autofac_1_1_properties.html',1,'Patterns::Testing::Autofac']]],
   ['propertyvalue',['PropertyValue',['../d0/d1d/class_patterns_1_1_reflection_1_1_property_value.html',1,'Patterns::Reflection']]],
   ['reflection',['Reflection',['../dd/d57/namespace_patterns_1_1_reflection.html',1,'Patterns']]],

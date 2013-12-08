@@ -1,0 +1,77 @@
+<html>
+	<head>
+		<script type="text/javascript" src="../js/coverreport.js">
+
+		</script><script type="text/javascript">
+			RANGES_12 = [
+   [6,1,6,34,'dccv']
+, [7,2,7,146,'dccv']
+, [8,2,8,134,'dccv']
+, [9,2,9,136,'dccv']
+, [10,2,10,110,'dccv']
+, [12,1,12,34,'dccv']
+, [13,2,13,146,'dccv']
+, [14,2,14,152,'dccv']
+, [15,2,15,142,'dccv']
+, [16,2,16,106,'dccv']
+, [18,1,18,34,'dccv']
+, [19,2,19,145,'dccv']
+, [20,2,21,2,'dccv']
+, [21,2,21,142,'dccv']
+, [22,2,22,106,'dccv']
+, [24,1,24,34,'dccv']
+, [25,2,25,146,'dccv']
+, [26,2,26,112,'dccv']
+, [27,2,27,112,'dccv']
+, [29,1,29,34,'dccv']
+, [30,2,30,146,'dccv']
+, [31,2,31,131,'dccv']
+, [32,2,32,108,'dccv']
+, [34,1,34,34,'dccv']
+, [35,2,35,145,'dccv']
+, [36,2,36,162,'dccv']
+, [37,2,37,108,'dccv']
+];
+		</script><link rel="stylesheet" type="text/css" href="../css/coverreport.css" />
+	</head><body>
+		<code id="src12" class="dotCoverSource"><pre>Feature: Exception Handling
+	As a developer, I want to be able to isolate the scope of error-prone code,
+	and I want the ability to either rely on a basic error handling policy,
+	or provide my own logic to respond to exceptions.
+
+Scenario: Try.Get (Normal)
+	Given I have mapped the default error strategy to store exceptions
+	When I try to get the return value of a normal function
+	Then the return value should be the expected return value
+	And there should not be an error
+
+Scenario: Try.Get (Exception)
+	Given I have mapped the default error strategy to store exceptions
+	When I try to get the return value of a function that throws an exception
+	Then the return value should be the default value for that type
+	And there should be an error
+
+Scenario: Try.Get (Exception with Custom Handler)
+	Given I have mapped the custom error strategy to store exceptions
+	When I try to get the return value of a function that throws an exception, providing the custom strategy
+	Then the return value should be the default value for that type
+	And there should be an error
+
+Scenario: Try.Do (Normal)
+	Given I have mapped the default error strategy to store exceptions
+	When I try to run a normal action
+	Then there should not be an error
+
+Scenario: Try.Do (Exception)
+	Given I have mapped the default error strategy to store exceptions
+	When I try to run an action that throws an exception
+	Then there should be an error
+
+Scenario: Try.Do (Exception with Custom Handler)
+	Given I have mapped the custom error strategy to store exceptions
+	When I try to run an action that throws an exception, providing the custom strategy
+	Then there should be an error</pre></code><script type="text/javascript">
+			applyranges('src12', RANGES_12)
+		</script>
+	</body>
+</html>

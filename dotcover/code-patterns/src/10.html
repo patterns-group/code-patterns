@@ -1,0 +1,71 @@
+<html>
+	<head>
+		<script type="text/javascript" src="../js/coverreport.js">
+
+		</script><script type="text/javascript">
+			RANGES_10 = [
+   [6,1,6,34,'dccv']
+, [7,2,8,2,'dccv']
+, [8,2,8,151,'dccv']
+, [9,2,9,166,'dccv']
+, [10,2,11,2,'dccv']
+, [11,2,12,103,'dccv']
+, [13,1,13,34,'dccv']
+, [14,2,15,2,'dccv']
+, [15,2,15,151,'dccv']
+, [16,2,16,166,'dccv']
+, [17,2,18,2,'dccv']
+, [18,2,19,87,'dccv']
+, [20,1,20,34,'dccv']
+, [21,2,22,2,'dccv']
+, [22,2,22,151,'dccv']
+, [23,2,23,166,'dccv']
+, [24,2,25,2,'dccv']
+, [25,2,26,107,'dccv']
+, [27,1,27,34,'dccv']
+, [28,2,29,2,'dccv']
+, [29,2,29,151,'dccv']
+, [30,2,30,166,'dccv']
+, [31,2,32,2,'dccv']
+, [32,2,32,131,'dccv']
+, [33,2,34,87,'dccv']
+];
+		</script><link rel="stylesheet" type="text/css" href="../css/coverreport.css" />
+	</head><body>
+		<code id="src10" class="dotCoverSource"><pre>Feature: Configuration Source
+	As a developer
+	I want to be able to inject my dependencies for configuration
+	So that I can separate my component logic from the act of manually loading config
+
+Scenario: GetSection (normal)
+	Given I have set the mocked config abstraction to return a Configuration Section when the section name is &quot;settings&quot;
+	And I have a new Configuration Source using the mocked config abstraction
+	When I ask for a Configuration Section named &quot;settings&quot; from the Configuration Source
+	Then the mocked config abstraction should have been asked for a Configuration Section named &quot;settings&quot; exactly 1 time
+	And the Configuration Section I retrieved from the Configuration Source should be the expected section
+
+Scenario: GetSection (missing)
+	Given I have set the mocked config abstraction to return a null Configuration Section when the section name is &quot;settings&quot;
+	And I have a new Configuration Source using the mocked config abstraction
+	When I ask for a Configuration Section named &quot;settings&quot; from the Configuration Source
+	Then the mocked config abstraction should have been asked for a Configuration Section named &quot;settings&quot; exactly 1 time
+	And the Configuration Section I retrieved from the Configuration Source should be null
+
+Scenario: GetSection (wrong type)
+	Given I have set the mocked config abstraction to return a different Configuration Section when the section name is &quot;settings&quot;
+	And I have a new Configuration Source using the mocked config abstraction
+	When I ask for a Configuration Section named &quot;settings&quot; from the Configuration Source
+	Then the mocked config abstraction should have been asked for a Configuration Section named &quot;settings&quot; exactly 1 time
+	And the Configuration Section I retrieved from the Configuration Source should not be the expected section
+
+Scenario: GetSection (config exception)
+	Given I have set the mocked config abstraction to throw an exception when asked for a Configuration Section with the section name &quot;settings&quot;
+	And I have a new Configuration Source using the mocked config abstraction
+	When I ask for a Configuration Section named &quot;settings&quot; from the Configuration Source
+	Then the mocked config abstraction should have been asked for a Configuration Section named &quot;settings&quot; exactly 1 time
+	And a configuration exception should have been thrown
+	And the Configuration Section I retrieved from the Configuration Source should be null</pre></code><script type="text/javascript">
+			applyranges('src10', RANGES_10)
+		</script>
+	</body>
+</html>

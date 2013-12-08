@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.4"/>
-<title>Code Patterns for .NET: Class Members</title>
+<title>code-patterns: Class Members</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -105,6 +105,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="functions_0x6d.html#index_m"><span>m</span></a></li>
       <li><a href="functions_0x6e.html#index_n"><span>n</span></a></li>
       <li><a href="functions_0x6f.html#index_o"><span>o</span></a></li>
+      <li><a href="functions_0x70.html#index_p"><span>p</span></a></li>
       <li><a href="functions_0x72.html#index_r"><span>r</span></a></li>
       <li><a href="functions_0x73.html#index_s"><span>s</span></a></li>
       <li><a href="functions_0x74.html#index_t"><span>t</span></a></li>
@@ -131,23 +132,30 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="textblock">Here is a list of all documented class members with links to the class documentation for each member:</div>
 
 <h3><a class="anchor" id="index_c"></a>- c -</h3><ul>
+<li>Condition
+: <a class="el" href="d2/dd6/class_patterns_1_1_interception_1_1_delegate_interceptor.html#af6b50e4a322d243dd6edbdb4a56c8409">Patterns.Interception.DelegateInterceptor</a>
+</li>
 <li>ConfigurableEqualityComparer()
 : <a class="el" href="db/d34/class_patterns_1_1_collections_1_1_configurable_equality_comparer_3_01_t_value_01_4.html#a69115628740b9e216ace76872508051a">Patterns.Collections.ConfigurableEqualityComparer&lt; TValue &gt;</a>
 </li>
 <li>Configuration
-: <a class="el" href="d9/df2/interface_patterns_1_1_mapping_1_1_i_mapping_services.html#a2d28273a26b70d6fc917b53917ea57ce">Patterns.Mapping.IMappingServices</a>
-, <a class="el" href="dd/d61/class_patterns_1_1_mapping_1_1_mapping_services.html#af4d29cbda675abe4250572bb07adaa0c">Patterns.Mapping.MappingServices</a>
+: <a class="el" href="dd/d61/class_patterns_1_1_mapping_1_1_mapping_services.html#af4d29cbda675abe4250572bb07adaa0c">Patterns.Mapping.MappingServices</a>
+, <a class="el" href="d9/df2/interface_patterns_1_1_mapping_1_1_i_mapping_services.html#a2d28273a26b70d6fc917b53917ea57ce">Patterns.Mapping.IMappingServices</a>
 </li>
 <li>ConfigurationProvider
 : <a class="el" href="d9/df2/interface_patterns_1_1_mapping_1_1_i_mapping_services.html#a55eb68336a42735118f267c50e172e22">Patterns.Mapping.IMappingServices</a>
 , <a class="el" href="dd/d61/class_patterns_1_1_mapping_1_1_mapping_services.html#a037e26e2cf251d38dd5b14c639964848">Patterns.Mapping.MappingServices</a>
 </li>
 <li>ConnectionStrings
-: <a class="el" href="d2/d07/class_patterns_1_1_testing_1_1_configuration_1_1_test_configuration_source.html#ab9385fe90c7b421a6f8a3784d56589e1">Patterns.Testing.Configuration.TestConfigurationSource</a>
+: <a class="el" href="d0/db1/class_patterns_1_1_configuration_1_1_in_memory_configuration_source.html#a75ad2ef15a78cee86459c075aa1fdfcf">Patterns.Configuration.InMemoryConfigurationSource</a>
 </li>
 <li>Create&lt; TService &gt;()
-: <a class="el" href="d0/d48/class_patterns_1_1_testing_1_1_autofac_1_1_moq_1_1_autofac_moq_container.html#ad7c6892ee8efdbdbf488034fae5f2b27">Patterns.Testing.Autofac.Moq.AutofacMoqContainer</a>
-, <a class="el" href="da/dd0/interface_patterns_1_1_testing_1_1_moq_1_1_i_moq_container.html#a867d620fe745c5c3142c8d0c59e82b3f">Patterns.Testing.Moq.IMoqContainer</a>
+: <a class="el" href="da/dd0/interface_patterns_1_1_testing_1_1_moq_1_1_i_moq_container.html#aea0842fbdc254aecf32b00ca2d106e97">Patterns.Testing.Moq.IMoqContainer</a>
+, <a class="el" href="d0/d48/class_patterns_1_1_testing_1_1_autofac_1_1_moq_1_1_autofac_moq_container.html#a56435ed3d8fc553a0fde721028fb753f">Patterns.Testing.Autofac.Moq.AutofacMoqContainer</a>
+</li>
+<li>Create&lt; TService, TImplementation &gt;()
+: <a class="el" href="d0/d48/class_patterns_1_1_testing_1_1_autofac_1_1_moq_1_1_autofac_moq_container.html#a907807c2f44744eefffd6d090f474439">Patterns.Testing.Autofac.Moq.AutofacMoqContainer</a>
+, <a class="el" href="da/dd0/interface_patterns_1_1_testing_1_1_moq_1_1_i_moq_container.html#a9d7d3bd2fa56466e41b7d5df68b35381">Patterns.Testing.Moq.IMoqContainer</a>
 </li>
 </ul>
 </div><!-- contents -->
@@ -157,7 +165,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Aug 31 2013 17:33:17 for Code Patterns for .NET by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Dec 7 2013 12:03:05 for code-patterns by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.4
 </small></address>

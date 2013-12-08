@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['refreshsection',['RefreshSection',['../d2/d07/class_patterns_1_1_testing_1_1_configuration_1_1_test_configuration_source.html#a34e66a7ff927a77e3145f16f1b28eb5e',1,'Patterns::Testing::Configuration::TestConfigurationSource']]],
+  ['refreshsection',['RefreshSection',['../d0/db1/class_patterns_1_1_configuration_1_1_in_memory_configuration_source.html#ad3fbdfde02d5abf67641d612432d75f4',1,'Patterns::Configuration::InMemoryConfigurationSource']]],
   ['regexevaluator',['RegexEvaluator',['../d0/de1/class_patterns_1_1_text_1_1_regular_expressions_1_1_regex_evaluator.html',1,'Patterns::Text::RegularExpressions']]],
   ['registrationsfor',['RegistrationsFor',['../d9/dc7/class_patterns_1_1_autofac_1_1_sources_1_1_resolve_creatable_source.html#a1eb2c1465b62df3ba8c47f090f414f7b',1,'Patterns.Autofac.Sources.ResolveCreatableSource.RegistrationsFor()'],['../d9/de3/class_patterns_1_1_testing_1_1_autofac_1_1_moq_1_1_moq_registration_source.html#a41603a033d517f939032b24f60a1c64f',1,'Patterns.Testing.Autofac.Moq.MoqRegistrationSource.RegistrationsFor()']]],
   ['replace',['Replace',['../d3/d2b/interface_patterns_1_1_text_1_1_regular_expressions_1_1_i_regex_evaluator.html#ab5e261fcdef8117f14844597082e6c2b',1,'Patterns.Text.RegularExpressions.IRegexEvaluator.Replace()'],['../d0/de1/class_patterns_1_1_text_1_1_regular_expressions_1_1_regex_evaluator.html#a9bb72aa46156b7bafbd5a6265057f381',1,'Patterns.Text.RegularExpressions.RegexEvaluator.Replace()']]],

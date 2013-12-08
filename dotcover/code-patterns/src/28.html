@@ -1,0 +1,61 @@
+<html>
+	<head>
+		<script type="text/javascript" src="../js/coverreport.js">
+
+		</script><script type="text/javascript">
+			RANGES_28 = [
+   [5,1,5,34,'dccv']
+, [6,2,6,153,'dccv']
+, [7,2,7,123,'dccv']
+, [8,2,8,151,'dccv']
+, [10,1,10,34,'dccv']
+, [11,2,11,141,'dccv']
+, [12,2,13,2,'dccv']
+, [13,2,13,136,'dccv']
+, [14,2,15,89,'dccv']
+, [16,1,16,34,'dccv']
+, [17,2,17,145,'dccv']
+, [18,2,18,132,'dccv']
+, [19,2,20,107,'dccv']
+, [22,1,22,34,'dccv']
+, [23,2,23,145,'dccv']
+, [24,2,24,158,'dccv']
+, [25,2,25,151,'dccv']
+, [26,2,26,195,'dccv']
+];
+		</script><link rel="stylesheet" type="text/css" href="../css/coverreport.css" />
+	</head><body>
+		<code id="src28" class="dotCoverSource"><pre>Feature: Compiled Regular Expressions
+	As a developer, I want to be able to easily instantiate a regular expression
+	that takes full advantage of the .NET runtime.
+
+Scenario: All expressions are compiled
+	Given I have created a CompiledRegex using a simple, valid pattern string
+	When I read the options of the CompiledRegex
+	Then the options of the CompiledRegex should include the compiled option
+
+Scenario: Build a pattern from a regular string
+	Given I have a set of strings with various character patterns
+	When I use the CompiledRegex.Build method to create a CompiledRegex using a string containing a common pattern
+	And I use the CompiledRegex against each string in the set
+	Then each string in the set should have resulted in a positive match against the pattern
+
+Scenario: Read a pattern back out of a compiled expression
+	Given I have created a CompiledRegex using a valid pattern string
+	When I read the pattern string from the CompiledRegex
+	Then the pattern string I read from the CompiledRegex should be the valid pattern string used to create it
+
+@configured
+Scenario Outline: Dictionary Match
+	Given I have created a string equal to: &lt;input&gt;
+	And I have created a CompiledRegex with the pattern: &lt;pattern&gt;
+	When I retrieve a dictionary match of the string using the CompiledRegex
+	Then all expected group values (&lt;expected group values&gt;) should be found in the resulting dictionary
+Examples:
+	| input   | pattern                           | expected group values |
+	| abc123  | (?&lt;alpha&gt;[a-z]+)(?&lt;numeric&gt;\d+)   | alpha:abc;numeric:123 |
+	| 456.def | (?&lt;numeric&gt;\d+)\.(?&lt;alpha&gt;[a-z]+) | numeric:456;alpha:def |</pre></code><script type="text/javascript">
+			applyranges('src28', RANGES_28)
+		</script>
+	</body>
+</html>

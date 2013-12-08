@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.4"/>
-<title>Code Patterns for .NET: Patterns.Testing.Configuration.TestConfigurationSource Class Reference</title>
+<title>code-patterns: Patterns.Testing.Configuration.TestConfigurationSource Class Reference</title>
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../jquery.js"></script>
 <script type="text/javascript" src="../../dynsections.js"></script>
@@ -105,6 +105,9 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pro-static-methods">Static Protected Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="#properties">Properties</a> &#124;
 <a href="../../db/d43/class_patterns_1_1_testing_1_1_configuration_1_1_test_configuration_source-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -120,6 +123,7 @@ Inheritance diagram for Patterns.Testing.Configuration.TestConfigurationSource:<
  <div class="center">
   <img src="../../d2/d07/class_patterns_1_1_testing_1_1_configuration_1_1_test_configuration_source.png" usemap="#Patterns.Testing.Configuration.TestConfigurationSource_map" alt=""/>
   <map id="Patterns.Testing.Configuration.TestConfigurationSource_map" name="Patterns.Testing.Configuration.TestConfigurationSource_map">
+<area href="../../d0/db1/class_patterns_1_1_configuration_1_1_in_memory_configuration_source.html" title="Provides a configuration source that uses an in-memory configuration rather than a file-based one..." alt="Patterns.Configuration.InMemoryConfigurationSource" shape="rect" coords="0,56,326,80"/>
 <area href="../../d4/d67/interface_patterns_1_1_configuration_1_1_i_configuration_source.html" alt="Patterns.Configuration.IConfigurationSource" shape="rect" coords="0,0,326,24"/>
 </map>
  </div></div>
@@ -129,37 +133,83 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a48b445b123b4f5c24c90559f72d0bd41"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d07/class_patterns_1_1_testing_1_1_configuration_1_1_test_configuration_source.html#a48b445b123b4f5c24c90559f72d0bd41">TestConfigurationSource</a> (XContainer configXml)</td></tr>
 <tr class="memdesc:a48b445b123b4f5c24c90559f72d0bd41"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes a new instance of the <a class="el" href="../../d2/d07/class_patterns_1_1_testing_1_1_configuration_1_1_test_configuration_source.html" title="Provides a configuration source that uses an in-memory configuration rather than a file-based one...">TestConfigurationSource</a> class.  <a href="#a48b445b123b4f5c24c90559f72d0bd41">More...</a><br/></td></tr>
 <tr class="separator:a48b445b123b4f5c24c90559f72d0bd41"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af629359d5dac9f0794b16afaea80ae02"><td class="memItemLeft" align="right" valign="top">ConfigurationSection&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d07/class_patterns_1_1_testing_1_1_configuration_1_1_test_configuration_source.html#af629359d5dac9f0794b16afaea80ae02">GetSection</a> (string sectionName)</td></tr>
-<tr class="memdesc:af629359d5dac9f0794b16afaea80ae02"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the section.  <a href="#af629359d5dac9f0794b16afaea80ae02">More...</a><br/></td></tr>
-<tr class="separator:af629359d5dac9f0794b16afaea80ae02"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a10fe3e18540b0e009f8bd2818630c91f"><td class="memItemLeft" align="right" valign="top">TSection&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d07/class_patterns_1_1_testing_1_1_configuration_1_1_test_configuration_source.html#a10fe3e18540b0e009f8bd2818630c91f">GetSection&lt; TSection &gt;</a> (string sectionName)</td></tr>
-<tr class="memdesc:a10fe3e18540b0e009f8bd2818630c91f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the section.  <a href="#a10fe3e18540b0e009f8bd2818630c91f">More...</a><br/></td></tr>
-<tr class="separator:a10fe3e18540b0e009f8bd2818630c91f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab9f7eb86a8c5209fef143ed14a1a2a19"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d8/d61/interface_patterns_1_1_configuration_1_1_i_configuration.html">IConfiguration</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d07/class_patterns_1_1_testing_1_1_configuration_1_1_test_configuration_source.html#ab9f7eb86a8c5209fef143ed14a1a2a19">OpenExeConfiguration</a> (string exePath)</td></tr>
-<tr class="memdesc:ab9f7eb86a8c5209fef143ed14a1a2a19"><td class="mdescLeft">&#160;</td><td class="mdescRight">Opens the exe configuration.  <a href="#ab9f7eb86a8c5209fef143ed14a1a2a19">More...</a><br/></td></tr>
-<tr class="separator:ab9f7eb86a8c5209fef143ed14a1a2a19"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2a90ad25632019d6d461e6c0de406c7e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d8/d61/interface_patterns_1_1_configuration_1_1_i_configuration.html">IConfiguration</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d07/class_patterns_1_1_testing_1_1_configuration_1_1_test_configuration_source.html#a2a90ad25632019d6d461e6c0de406c7e">OpenMachineConfiguration</a> ()</td></tr>
-<tr class="memdesc:a2a90ad25632019d6d461e6c0de406c7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Opens the machine configuration.  <a href="#a2a90ad25632019d6d461e6c0de406c7e">More...</a><br/></td></tr>
-<tr class="separator:a2a90ad25632019d6d461e6c0de406c7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a34e66a7ff927a77e3145f16f1b28eb5e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d07/class_patterns_1_1_testing_1_1_configuration_1_1_test_configuration_source.html#a34e66a7ff927a77e3145f16f1b28eb5e">RefreshSection</a> (string sectionName)</td></tr>
-<tr class="memdesc:a34e66a7ff927a77e3145f16f1b28eb5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Refreshes the section.  <a href="#a34e66a7ff927a77e3145f16f1b28eb5e">More...</a><br/></td></tr>
-<tr class="separator:a34e66a7ff927a77e3145f16f1b28eb5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a647b20292c981f0ae9fe12f7c5c07ab9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d8/d61/interface_patterns_1_1_configuration_1_1_i_configuration.html">IConfiguration</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d07/class_patterns_1_1_testing_1_1_configuration_1_1_test_configuration_source.html#a647b20292c981f0ae9fe12f7c5c07ab9">OpenMappedExeConfiguration</a> (ExeConfigurationFileMap fileMap, ConfigurationUserLevel userLevel)</td></tr>
-<tr class="memdesc:a647b20292c981f0ae9fe12f7c5c07ab9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Opens the mapped exe configuration.  <a href="#a647b20292c981f0ae9fe12f7c5c07ab9">More...</a><br/></td></tr>
-<tr class="separator:a647b20292c981f0ae9fe12f7c5c07ab9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae123822a6b6a60e74699036c7cc17b88"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d8/d61/interface_patterns_1_1_configuration_1_1_i_configuration.html">IConfiguration</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d07/class_patterns_1_1_testing_1_1_configuration_1_1_test_configuration_source.html#ae123822a6b6a60e74699036c7cc17b88">OpenExeConfiguration</a> (ConfigurationUserLevel userLevel)</td></tr>
-<tr class="memdesc:ae123822a6b6a60e74699036c7cc17b88"><td class="mdescLeft">&#160;</td><td class="mdescRight">Opens the exe configuration.  <a href="#ae123822a6b6a60e74699036c7cc17b88">More...</a><br/></td></tr>
-<tr class="separator:ae123822a6b6a60e74699036c7cc17b88"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8dafcb95f4fc66ece0b53458faa6816"><td class="memItemLeft" align="right" valign="top">virtual ConfigurationSection&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/db1/class_patterns_1_1_configuration_1_1_in_memory_configuration_source.html#ac8dafcb95f4fc66ece0b53458faa6816">GetSection</a> (string sectionName)</td></tr>
+<tr class="memdesc:ac8dafcb95f4fc66ece0b53458faa6816"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the section.  <a href="#ac8dafcb95f4fc66ece0b53458faa6816">More...</a><br/></td></tr>
+<tr class="separator:ac8dafcb95f4fc66ece0b53458faa6816"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf436f2e6ae547188ea17a54dc3c16eb"><td class="memItemLeft" align="right" valign="top">virtual TSection&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/db1/class_patterns_1_1_configuration_1_1_in_memory_configuration_source.html#acf436f2e6ae547188ea17a54dc3c16eb">GetSection&lt; TSection &gt;</a> (string sectionName)</td></tr>
+<tr class="memdesc:acf436f2e6ae547188ea17a54dc3c16eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the section.  <a href="#acf436f2e6ae547188ea17a54dc3c16eb">More...</a><br/></td></tr>
+<tr class="separator:acf436f2e6ae547188ea17a54dc3c16eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff515cbfd49db28ba73c6506a961a8ba"><td class="memItemLeft" align="right" valign="top">virtual IConfiguration&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/db1/class_patterns_1_1_configuration_1_1_in_memory_configuration_source.html#aff515cbfd49db28ba73c6506a961a8ba">OpenExeConfiguration</a> (string exePath)</td></tr>
+<tr class="memdesc:aff515cbfd49db28ba73c6506a961a8ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Opens the exe configuration.  <a href="#aff515cbfd49db28ba73c6506a961a8ba">More...</a><br/></td></tr>
+<tr class="separator:aff515cbfd49db28ba73c6506a961a8ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4b614a951fc766054f7becb2c476784"><td class="memItemLeft" align="right" valign="top">virtual IConfiguration&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/db1/class_patterns_1_1_configuration_1_1_in_memory_configuration_source.html#af4b614a951fc766054f7becb2c476784">OpenExeConfiguration</a> (ConfigurationUserLevel userLevel)</td></tr>
+<tr class="memdesc:af4b614a951fc766054f7becb2c476784"><td class="mdescLeft">&#160;</td><td class="mdescRight">Opens the exe configuration.  <a href="#af4b614a951fc766054f7becb2c476784">More...</a><br/></td></tr>
+<tr class="separator:af4b614a951fc766054f7becb2c476784"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad89ee1daebf2e3c7bdd0738ef2e0d5f"><td class="memItemLeft" align="right" valign="top">virtual IConfiguration&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/db1/class_patterns_1_1_configuration_1_1_in_memory_configuration_source.html#aad89ee1daebf2e3c7bdd0738ef2e0d5f">OpenMachineConfiguration</a> ()</td></tr>
+<tr class="memdesc:aad89ee1daebf2e3c7bdd0738ef2e0d5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Opens the machine configuration.  <a href="#aad89ee1daebf2e3c7bdd0738ef2e0d5f">More...</a><br/></td></tr>
+<tr class="separator:aad89ee1daebf2e3c7bdd0738ef2e0d5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3fbdfde02d5abf67641d612432d75f4"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/db1/class_patterns_1_1_configuration_1_1_in_memory_configuration_source.html#ad3fbdfde02d5abf67641d612432d75f4">RefreshSection</a> (string sectionName)</td></tr>
+<tr class="memdesc:ad3fbdfde02d5abf67641d612432d75f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Refreshes the section.  <a href="#ad3fbdfde02d5abf67641d612432d75f4">More...</a><br/></td></tr>
+<tr class="separator:ad3fbdfde02d5abf67641d612432d75f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a946b620ea46216f6dae06e6c982c4cc2"><td class="memItemLeft" align="right" valign="top">virtual IConfiguration&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/db1/class_patterns_1_1_configuration_1_1_in_memory_configuration_source.html#a946b620ea46216f6dae06e6c982c4cc2">OpenMappedExeConfiguration</a> (ExeConfigurationFileMap fileMap, ConfigurationUserLevel userLevel)</td></tr>
+<tr class="memdesc:a946b620ea46216f6dae06e6c982c4cc2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Opens the mapped exe configuration.  <a href="#a946b620ea46216f6dae06e6c982c4cc2">More...</a><br/></td></tr>
+<tr class="separator:a946b620ea46216f6dae06e6c982c4cc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a6490009df896b9effd99ee0bf02d11f3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6490009df896b9effd99ee0bf02d11f3"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>SetConfigurationXml</b> (XContainer configXml)</td></tr>
+<tr class="separator:a6490009df896b9effd99ee0bf02d11f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17a5ba3667650cd1006aee3ee63abd76"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a17a5ba3667650cd1006aee3ee63abd76"></a>
+virtual ConfigurationSection&#160;</td><td class="memItemRight" valign="bottom"><b>DeserializeSection</b> (XContainer xml, string name)</td></tr>
+<tr class="separator:a17a5ba3667650cd1006aee3ee63abd76"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-static-methods"></a>
+Static Protected Member Functions</h2></td></tr>
+<tr class="memitem:a473ab328dc97ffa824f39ff48ad28160"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a473ab328dc97ffa824f39ff48ad28160"></a>
+static TSection&#160;</td><td class="memItemRight" valign="bottom"><b>DeserializeSection&lt; TSection &gt;</b> (XContainer xml, string name)</td></tr>
+<tr class="separator:a473ab328dc97ffa824f39ff48ad28160"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:adffbe6eeb5e12726a30779de6bd09599"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adffbe6eeb5e12726a30779de6bd09599"></a>
+const string&#160;</td><td class="memItemRight" valign="bottom"><b>AppSettingsSectionName</b> = &quot;appSettings&quot;</td></tr>
+<tr class="separator:adffbe6eeb5e12726a30779de6bd09599"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0129d341a97bc4458387e95ef3c372ff"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0129d341a97bc4458387e95ef3c372ff"></a>
+const string&#160;</td><td class="memItemRight" valign="bottom"><b>ConnectionStringsSectionName</b> = &quot;connectionStrings&quot;</td></tr>
+<tr class="separator:a0129d341a97bc4458387e95ef3c372ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4ae51989e199260c19f8d5b85181e13"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad4ae51989e199260c19f8d5b85181e13"></a>
+const string&#160;</td><td class="memItemRight" valign="bottom"><b>ConfigSectionsElementName</b> = &quot;configSections&quot;</td></tr>
+<tr class="separator:ad4ae51989e199260c19f8d5b85181e13"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52e78a2247e8595467611e3f448d0fae"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a52e78a2247e8595467611e3f448d0fae"></a>
+const string&#160;</td><td class="memItemRight" valign="bottom"><b>SectionElementName</b> = &quot;section&quot;</td></tr>
+<tr class="separator:a52e78a2247e8595467611e3f448d0fae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a311f554ae2d5d850b8f17ae2ddf11176"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a311f554ae2d5d850b8f17ae2ddf11176"></a>
+const string&#160;</td><td class="memItemRight" valign="bottom"><b>NameAttributeName</b> = &quot;name&quot;</td></tr>
+<tr class="separator:a311f554ae2d5d850b8f17ae2ddf11176"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a887b34beccddae41df3bc028c4fccd06"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a887b34beccddae41df3bc028c4fccd06"></a>
+const string&#160;</td><td class="memItemRight" valign="bottom"><b>TypeAttributeName</b> = &quot;type&quot;</td></tr>
+<tr class="separator:a887b34beccddae41df3bc028c4fccd06"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f0c45feaf91b2f26f0075715c270c64"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3f0c45feaf91b2f26f0075715c270c64"></a>
+const string&#160;</td><td class="memItemRight" valign="bottom"><b>DeserializeSectionMethodName</b> = &quot;DeserializeSection&quot;</td></tr>
+<tr class="separator:a3f0c45feaf91b2f26f0075715c270c64"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8935dbf5d2ad2da06834766efe1d5a89"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8935dbf5d2ad2da06834766efe1d5a89"></a>
+const char&#160;</td><td class="memItemRight" valign="bottom"><b>PathSeparator</b> = '/'</td></tr>
+<tr class="separator:a8935dbf5d2ad2da06834766efe1d5a89"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac3fdca7b14a77df6696030cc2f9bf09c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac3fdca7b14a77df6696030cc2f9bf09c"></a>
+readonly <a class="el" href="../../dc/d0d/class_patterns_1_1_text_1_1_regular_expressions_1_1_compiled_regex.html">CompiledRegex</a>&#160;</td><td class="memItemRight" valign="bottom"><b>SectionNamePattern</b> = &quot;[^/]+$&quot;</td></tr>
+<tr class="separator:ac3fdca7b14a77df6696030cc2f9bf09c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="properties"></a>
 Properties</h2></td></tr>
-<tr class="memitem:a66f4864a4032fb254f5109cd5b1c0077"><td class="memItemLeft" align="right" valign="top">IDictionary&lt; string, string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d07/class_patterns_1_1_testing_1_1_configuration_1_1_test_configuration_source.html#a66f4864a4032fb254f5109cd5b1c0077">AppSettings</a><code> [get, set]</code></td></tr>
-<tr class="memdesc:a66f4864a4032fb254f5109cd5b1c0077"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the app settings.  <a href="#a66f4864a4032fb254f5109cd5b1c0077">More...</a><br/></td></tr>
-<tr class="separator:a66f4864a4032fb254f5109cd5b1c0077"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab9385fe90c7b421a6f8a3784d56589e1"><td class="memItemLeft" align="right" valign="top">IDictionary&lt; string, <br class="typebreak"/>
-ConnectionStringSettings &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d07/class_patterns_1_1_testing_1_1_configuration_1_1_test_configuration_source.html#ab9385fe90c7b421a6f8a3784d56589e1">ConnectionStrings</a><code> [get, set]</code></td></tr>
-<tr class="memdesc:ab9385fe90c7b421a6f8a3784d56589e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the connection strings.  <a href="#ab9385fe90c7b421a6f8a3784d56589e1">More...</a><br/></td></tr>
-<tr class="separator:ab9385fe90c7b421a6f8a3784d56589e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaaf7d0299f428a1192fb45bb98e9bdf8"><td class="memItemLeft" align="right" valign="top">virtual IDictionary&lt; string, <br class="typebreak"/>
+string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/db1/class_patterns_1_1_configuration_1_1_in_memory_configuration_source.html#aaaf7d0299f428a1192fb45bb98e9bdf8">AppSettings</a><code> [get, set]</code></td></tr>
+<tr class="memdesc:aaaf7d0299f428a1192fb45bb98e9bdf8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the app settings.  <a href="#aaaf7d0299f428a1192fb45bb98e9bdf8">More...</a><br/></td></tr>
+<tr class="separator:aaaf7d0299f428a1192fb45bb98e9bdf8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75ad2ef15a78cee86459c075aa1fdfcf"><td class="memItemLeft" align="right" valign="top">virtual IDictionary&lt; string, <br class="typebreak"/>
+ConnectionStringSettings &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/db1/class_patterns_1_1_configuration_1_1_in_memory_configuration_source.html#a75ad2ef15a78cee86459c075aa1fdfcf">ConnectionStrings</a><code> [get, set]</code></td></tr>
+<tr class="memdesc:a75ad2ef15a78cee86459c075aa1fdfcf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the connection strings.  <a href="#a75ad2ef15a78cee86459c075aa1fdfcf">More...</a><br/></td></tr>
+<tr class="separator:a75ad2ef15a78cee86459c075aa1fdfcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Provides a configuration source that uses an in-memory configuration rather than a file-based one. </p>
@@ -189,18 +239,26 @@ ConnectionStringSettings &gt;&#160;</td><td class="memItemRight" valign="bottom"
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="af629359d5dac9f0794b16afaea80ae02"></a>
+<a class="anchor" id="ac8dafcb95f4fc66ece0b53458faa6816"></a>
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">ConfigurationSection Patterns.Testing.Configuration.TestConfigurationSource.GetSection </td>
+          <td class="memname">virtual ConfigurationSection Patterns.Configuration.InMemoryConfigurationSource.GetSection </td>
           <td>(</td>
           <td class="paramtype">string&#160;</td>
           <td class="paramname"><em>sectionName</em>)</td><td></td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Gets the section. </p>
@@ -222,18 +280,26 @@ ConnectionStringSettings &gt;&#160;</td><td class="memItemRight" valign="bottom"
 
 </div>
 </div>
-<a class="anchor" id="a10fe3e18540b0e009f8bd2818630c91f"></a>
+<a class="anchor" id="acf436f2e6ae547188ea17a54dc3c16eb"></a>
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">TSection <a class="el" href="../../d2/d07/class_patterns_1_1_testing_1_1_configuration_1_1_test_configuration_source.html#af629359d5dac9f0794b16afaea80ae02">Patterns.Testing.Configuration.TestConfigurationSource.GetSection</a>&lt; TSection &gt; </td>
+          <td class="memname">virtual TSection <a class="el" href="../../d0/db1/class_patterns_1_1_configuration_1_1_in_memory_configuration_source.html#ac8dafcb95f4fc66ece0b53458faa6816">Patterns.Configuration.InMemoryConfigurationSource.GetSection</a>&lt; TSection &gt; </td>
           <td>(</td>
           <td class="paramtype">string&#160;</td>
           <td class="paramname"><em>sectionName</em>)</td><td></td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Gets the section. </p>
@@ -269,18 +335,26 @@ ConnectionStringSettings &gt;&#160;</td><td class="memItemRight" valign="bottom"
 
 </div>
 </div>
-<a class="anchor" id="ab9f7eb86a8c5209fef143ed14a1a2a19"></a>
+<a class="anchor" id="aff515cbfd49db28ba73c6506a961a8ba"></a>
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="../../d8/d61/interface_patterns_1_1_configuration_1_1_i_configuration.html">IConfiguration</a> Patterns.Testing.Configuration.TestConfigurationSource.OpenExeConfiguration </td>
+          <td class="memname">virtual IConfiguration Patterns.Configuration.InMemoryConfigurationSource.OpenExeConfiguration </td>
           <td>(</td>
           <td class="paramtype">string&#160;</td>
           <td class="paramname"><em>exePath</em>)</td><td></td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Opens the exe configuration. </p>
@@ -302,18 +376,26 @@ ConnectionStringSettings &gt;&#160;</td><td class="memItemRight" valign="bottom"
 
 </div>
 </div>
-<a class="anchor" id="ae123822a6b6a60e74699036c7cc17b88"></a>
+<a class="anchor" id="af4b614a951fc766054f7becb2c476784"></a>
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="../../d8/d61/interface_patterns_1_1_configuration_1_1_i_configuration.html">IConfiguration</a> Patterns.Testing.Configuration.TestConfigurationSource.OpenExeConfiguration </td>
+          <td class="memname">virtual IConfiguration Patterns.Configuration.InMemoryConfigurationSource.OpenExeConfiguration </td>
           <td>(</td>
           <td class="paramtype">ConfigurationUserLevel&#160;</td>
           <td class="paramname"><em>userLevel</em>)</td><td></td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Opens the exe configuration. </p>
@@ -335,17 +417,25 @@ ConnectionStringSettings &gt;&#160;</td><td class="memItemRight" valign="bottom"
 
 </div>
 </div>
-<a class="anchor" id="a2a90ad25632019d6d461e6c0de406c7e"></a>
+<a class="anchor" id="aad89ee1daebf2e3c7bdd0738ef2e0d5f"></a>
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="../../d8/d61/interface_patterns_1_1_configuration_1_1_i_configuration.html">IConfiguration</a> Patterns.Testing.Configuration.TestConfigurationSource.OpenMachineConfiguration </td>
+          <td class="memname">virtual IConfiguration Patterns.Configuration.InMemoryConfigurationSource.OpenMachineConfiguration </td>
           <td>(</td>
           <td class="paramname">)</td><td></td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Opens the machine configuration. </p>
@@ -361,12 +451,15 @@ ConnectionStringSettings &gt;&#160;</td><td class="memItemRight" valign="bottom"
 
 </div>
 </div>
-<a class="anchor" id="a647b20292c981f0ae9fe12f7c5c07ab9"></a>
+<a class="anchor" id="a946b620ea46216f6dae06e6c982c4cc2"></a>
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="../../d8/d61/interface_patterns_1_1_configuration_1_1_i_configuration.html">IConfiguration</a> Patterns.Testing.Configuration.TestConfigurationSource.OpenMappedExeConfiguration </td>
+          <td class="memname">virtual IConfiguration Patterns.Configuration.InMemoryConfigurationSource.OpenMappedExeConfiguration </td>
           <td>(</td>
           <td class="paramtype">ExeConfigurationFileMap&#160;</td>
           <td class="paramname"><em>fileMap</em>, </td>
@@ -383,6 +476,11 @@ ConnectionStringSettings &gt;&#160;</td><td class="memItemRight" valign="bottom"
           <td></td><td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Opens the mapped exe configuration. </p>
@@ -405,18 +503,26 @@ ConnectionStringSettings &gt;&#160;</td><td class="memItemRight" valign="bottom"
 
 </div>
 </div>
-<a class="anchor" id="a34e66a7ff927a77e3145f16f1b28eb5e"></a>
+<a class="anchor" id="ad3fbdfde02d5abf67641d612432d75f4"></a>
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void Patterns.Testing.Configuration.TestConfigurationSource.RefreshSection </td>
+          <td class="memname">virtual void Patterns.Configuration.InMemoryConfigurationSource.RefreshSection </td>
           <td>(</td>
           <td class="paramtype">string&#160;</td>
           <td class="paramname"><em>sectionName</em>)</td><td></td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Refreshes the section. </p>
@@ -438,7 +544,7 @@ ConnectionStringSettings &gt;&#160;</td><td class="memItemRight" valign="bottom"
 </div>
 </div>
 <h2 class="groupheader">Property Documentation</h2>
-<a class="anchor" id="a66f4864a4032fb254f5109cd5b1c0077"></a>
+<a class="anchor" id="aaaf7d0299f428a1192fb45bb98e9bdf8"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -446,12 +552,12 @@ ConnectionStringSettings &gt;&#160;</td><td class="memItemRight" valign="bottom"
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">IDictionary&lt;string, string&gt; Patterns.Testing.Configuration.TestConfigurationSource.AppSettings</td>
+          <td class="memname">virtual IDictionary&lt;string, string&gt; Patterns.Configuration.InMemoryConfigurationSource.AppSettings</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">get</span><span class="mlabel">set</span></span>  </td>
+<span class="mlabels"><span class="mlabel">get</span><span class="mlabel">set</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -461,7 +567,7 @@ ConnectionStringSettings &gt;&#160;</td><td class="memItemRight" valign="bottom"
 
 </div>
 </div>
-<a class="anchor" id="ab9385fe90c7b421a6f8a3784d56589e1"></a>
+<a class="anchor" id="a75ad2ef15a78cee86459c075aa1fdfcf"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -469,12 +575,12 @@ ConnectionStringSettings &gt;&#160;</td><td class="memItemRight" valign="bottom"
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">IDictionary&lt;string, ConnectionStringSettings&gt; Patterns.Testing.Configuration.TestConfigurationSource.ConnectionStrings</td>
+          <td class="memname">virtual IDictionary&lt;string, ConnectionStringSettings&gt; Patterns.Configuration.InMemoryConfigurationSource.ConnectionStrings</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">get</span><span class="mlabel">set</span></span>  </td>
+<span class="mlabels"><span class="mlabel">get</span><span class="mlabel">set</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -491,7 +597,7 @@ ConnectionStringSettings &gt;&#160;</td><td class="memItemRight" valign="bottom"
 </div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Aug 31 2013 17:33:16 for Code Patterns for .NET by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Dec 7 2013 12:03:04 for code-patterns by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.4
 </small></address>

@@ -1,0 +1,107 @@
+<html>
+	<head>
+		<script type="text/javascript" src="../js/coverreport.js">
+
+		</script><script type="text/javascript">
+			RANGES_73 = [
+   [42,3,42,60,'dccv']
+, [43,3,43,4,'dccv']
+, [44,4,44,23,'dccv']
+, [45,3,45,4,'dccv']
+, [49,3,49,4,'dccv']
+, [50,4,50,47,'dccv']
+, [51,5,51,36,'dccv']
+, [53,5,53,37,'dccv']
+, [54,3,54,4,'dccv']
+, [58,3,58,4,'dccv']
+, [59,4,59,68,'dccv']
+, [60,4,60,70,'dccv']
+, [61,3,61,4,'dccv']
+, [65,3,65,4,'dccv']
+, [66,4,66,35,'dccv']
+, [67,3,67,4,'dccv']
+, [71,3,71,4,'dccv']
+, [72,4,72,67,'dccv']
+, [73,3,73,4,'dccv']
+];
+		</script><link rel="stylesheet" type="text/css" href="../css/coverreport.css" />
+	</head><body>
+		<code id="src73" class="dotCoverSource"><pre>#region FreeBSD
+
+// Copyright (c) 2013, John Batte
+// All rights reserved.
+// 
+// Redistribution and use in source and binary forms, with or without modification, are permitted provided that
+// the following conditions are met:
+// 
+//  * Redistributions of source code must retain the above copyright notice, this list of conditions and the
+//    following disclaimer.
+// 
+//  * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the
+//    following disclaimer in the documentation and/or other materials provided with the distribution.
+// 
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED
+// WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+// PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR
+// ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+// TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+// HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+// NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+// POSSIBILITY OF SUCH DAMAGE.
+
+#endregion
+
+using System;
+
+using FluentAssertions;
+
+using Patterns.Runtime;
+using Patterns.Specifications.Models.Runtime;
+
+using TechTalk.SpecFlow;
+
+namespace Patterns.Specifications.Steps.Runtime
+{
+	[Binding]
+	public class TimeExtensionsSteps
+	{
+		private readonly TimeExtensionsContext _context;
+
+		public TimeExtensionsSteps(TimeExtensionsContext context)
+		{
+			_context = context;
+		}
+
+		[Given(@&quot;I have a( second)? DateTime representation of (.+)&quot;)]
+		public void CreateSpecifiedDateTime(string valueSwitch, DateTime dateTime)
+		{
+			if (string.IsNullOrWhiteSpace(valueSwitch))
+				_context.FirstValue = dateTime;
+			else
+				_context.SecondValue = dateTime;
+		}
+
+		[When(@&quot;I adjust the accuracy of each DateTime value to one second&quot;)]
+		public void AdjustAccuracyToOneSecond()
+		{
+			_context.FirstValue = _context.FirstValue.AccurateToOneSecond();
+			_context.SecondValue = _context.SecondValue.AccurateToOneSecond();
+		}
+
+		[When(@&quot;I compare the first and second DateTime values&quot;)]
+		public void CompareDateTimeValues()
+		{
+			_context.CalculateDifference();
+		}
+
+		[Then(@&quot;the resulting difference should be (\d+) seconds&quot;)]
+		public void AssertDifference(int seconds)
+		{
+			_context.Difference.Should().Be(TimeSpan.FromSeconds(seconds));
+		}
+	}
+}</pre></code><script type="text/javascript">
+			applyranges('src73', RANGES_73)
+		</script>
+	</body>
+</html>

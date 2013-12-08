@@ -1,0 +1,159 @@
+<html>
+	<head>
+		<script type="text/javascript" src="../js/coverreport.js">
+
+		</script><script type="text/javascript">
+			RANGES_58 = [
+   [43,3,43,79,'dccv']
+, [44,3,44,4,'dccv']
+, [45,4,45,23,'dccv']
+, [46,4,46,33,'dccv']
+, [47,3,47,4,'dccv']
+, [51,3,51,4,'dccv']
+, [52,4,53,4,'dccv']
+, [55,48,56,6,'dccv']
+, [57,3,57,4,'dccv']
+, [61,3,61,4,'dccv']
+, [62,4,63,4,'dccv']
+, [65,48,66,6,'dccv']
+, [67,3,67,4,'dccv']
+, [71,3,71,4,'dccv']
+, [72,4,72,51,'dccv']
+, [73,4,73,98,'dccv']
+, [74,3,74,4,'dccv']
+, [78,3,78,4,'dccv']
+, [79,4,79,46,'dccv']
+, [80,3,80,4,'dccv']
+, [84,3,84,4,'dccv']
+, [85,4,85,51,'dccv']
+, [86,4,86,120,'dccv']
+, [87,3,87,4,'dccv']
+, [91,3,91,4,'dccv']
+, [92,4,92,68,'dccv']
+, [93,3,93,4,'dccv']
+, [97,3,97,4,'dccv']
+, [98,4,98,83,'dccv']
+, [99,3,99,4,'dccv']
+, [103,3,103,4,'dccv']
+, [104,4,104,77,'dccv']
+, [105,3,105,4,'dccv']
+, [53,4,53,5,'dccv']
+, [54,5,54,41,'dccv']
+, [55,5,55,48,'dccv']
+, [63,4,63,5,'dccv']
+, [64,5,64,41,'dccv']
+, [65,5,65,48,'dccv']
+];
+		</script><link rel="stylesheet" type="text/css" href="../css/coverreport.css" />
+	</head><body>
+		<code id="src58" class="dotCoverSource"><pre>#region FreeBSD
+
+// Copyright (c) 2013, John Batte
+// All rights reserved.
+// 
+// Redistribution and use in source and binary forms, with or without modification, are permitted provided that
+// the following conditions are met:
+// 
+//  * Redistributions of source code must retain the above copyright notice, this list of conditions and the
+//    following disclaimer.
+// 
+//  * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the
+//    following disclaimer in the documentation and/or other materials provided with the distribution.
+// 
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED
+// WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+// PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR
+// ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+// TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+// HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+// NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+// POSSIBILITY OF SUCH DAMAGE.
+
+#endregion
+
+using FluentAssertions;
+
+using Patterns.ExceptionHandling;
+using Patterns.Specifications.Models;
+using Patterns.Specifications.Models.ExceptionHandling;
+using Patterns.Testing.Values;
+
+using TechTalk.SpecFlow;
+
+namespace Patterns.Specifications.Steps.ExceptionHandling
+{
+	[Binding]
+	public class TrySteps
+	{
+		private readonly ExceptionHandlingContext _context;
+		private readonly ErrorContext _errorContext;
+
+		public TrySteps(ExceptionHandlingContext context, ErrorContext errorContext)
+		{
+			_context = context;
+			_errorContext = errorContext;
+		}
+
+		[Given(@&quot;I have mapped the default error strategy to store exceptions&quot;)]
+		public void DefaultStrategyStoreExceptions()
+		{
+			Try.HandleErrors.DefaultStrategy = exception =&gt;
+			{
+				_errorContext.LastError = exception;
+				return new ExceptionState(exception, true);
+			};
+		}
+
+		[Given(@&quot;I have mapped the custom error strategy to store exceptions&quot;)]
+		public void CustomStrategyStoreExceptions()
+		{
+			_context.CustomErrorHandler = exception =&gt;
+			{
+				_errorContext.LastError = exception;
+				return new ExceptionState(exception, true);
+			};
+		}
+
+		[When(@&quot;I try to run an action that throws an exception(, providing the custom strategy)?&quot;)]
+		public void RunExceptionalAction(string useCustom)
+		{
+			bool custom = !string.IsNullOrEmpty(useCustom);
+			Try.Do(_context.TestSubject.ActionWithException, custom ? _context.CustomErrorHandler : null);
+		}
+
+		[When(@&quot;I try to run a normal action&quot;)]
+		public void RunNormalAction()
+		{
+			Try.Do(_context.TestSubject.NormalAction);
+		}
+
+		[When(@&quot;I try to get the return value of a function that throws an exception(, providing the custom strategy)?&quot;)]
+		public void RunExceptionalFunction(string useCustom)
+		{
+			bool custom = !string.IsNullOrEmpty(useCustom);
+			_context.ReturnValue = Try.Get(_context.TestSubject.FuncWithException, custom ? _context.CustomErrorHandler : null);
+		}
+
+		[When(@&quot;I try to get the return value of a normal function&quot;)]
+		public void RunNormalFunction()
+		{
+			_context.ReturnValue = Try.Get(_context.TestSubject.NormalFunc);
+		}
+
+		[Then(@&quot;the return value should be the default value for that type&quot;)]
+		public void AssertDefaultReturnValue()
+		{
+			_context.ReturnValue.Should().Be(ExceptionTestSubject.ReturnType.GetDefault());
+		}
+
+		[Then(@&quot;the return value should be the expected return value&quot;)]
+		public void AssertReturnValue()
+		{
+			_context.ReturnValue.Should().Be(ExceptionTestSubject.NormalReturnValue);
+		}
+	}
+}</pre></code><script type="text/javascript">
+			applyranges('src58', RANGES_58)
+		</script>
+	</body>
+</html>

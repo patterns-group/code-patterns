@@ -1,0 +1,132 @@
+<html>
+	<head>
+		<script type="text/javascript" src="../js/coverreport.js">
+
+		</script><script type="text/javascript">
+			RANGES_75 = [
+   [18,3,18,74,'dccv']
+, [19,3,19,4,'dccv']
+, [20,4,20,23,'dccv']
+, [21,4,21,15,'dccv']
+, [22,3,22,4,'dccv']
+, [26,3,26,4,'dccv']
+, [27,4,27,68,'dccv']
+, [28,3,28,4,'dccv']
+, [32,3,32,4,'dccv']
+, [33,4,33,89,'dccv']
+, [34,3,34,4,'dccv']
+, [38,3,38,4,'dccv']
+, [39,4,39,41,'dccv']
+, [40,3,40,4,'dccv']
+, [44,3,44,4,'dccv']
+, [45,4,45,106,'dccv']
+, [46,3,46,4,'dccv']
+, [50,3,50,4,'dccv']
+, [51,4,51,71,'dccv']
+, [52,3,52,4,'dccv']
+, [56,3,56,4,'dccv']
+, [57,4,57,70,'dccv']
+, [58,3,58,4,'dccv']
+, [62,3,62,4,'dccv']
+, [63,4,63,78,'dccv']
+, [64,3,64,4,'dccv']
+, [68,3,68,4,'dccv']
+, [69,4,69,45,'dccv']
+, [70,3,70,4,'dccv']
+, [74,3,74,4,'dccv']
+, [75,4,75,77,'dccv']
+, [76,3,76,4,'dccv']
+, [80,3,80,4,'dccv']
+, [81,4,81,55,'dccv']
+, [82,3,82,4,'dccv']
+];
+		</script><link rel="stylesheet" type="text/css" href="../css/coverreport.css" />
+	</head><body>
+		<code id="src75" class="dotCoverSource"><pre>using FluentAssertions;
+
+using Moq;
+
+using Patterns.Specifications.Models.Mocking;
+using Patterns.Specifications.Models.Testing.Moq;
+
+using TechTalk.SpecFlow;
+
+namespace Patterns.Specifications.Steps.Testing.Moq
+{
+	[Binding]
+	public class TestContainerSteps
+	{
+		private readonly TestContainerContext _context;
+		private readonly MoqContext _moq;
+
+		public TestContainerSteps(TestContainerContext context, MoqContext moq)
+		{
+			_context = context;
+			_moq = moq;
+		}
+
+		[When(@&quot;I create an instance of an interface using the test container&quot;)]
+		public void CreateTestContainerInterface()
+		{
+			_context.Target = _moq.Container.Create&lt;ITestContainerTarget&gt;();
+		}
+
+		[When(@&quot;I create an instance of a creatable class using the test container&quot;)]
+		public void CreateTestContainerObject()
+		{
+			_context.Target = _moq.Container.Create&lt;ITestContainerTarget, TestContainerTarget&gt;();
+		}
+
+		[Then(@&quot;the test container should have given me an object&quot;)]
+		public void AssertTestContainerObjectExists()
+		{
+			_context.Target.Should().NotBeNull();
+		}
+
+		[Then(@&quot;the object retrieved by the test container should (.+)?be a mock-based type&quot;)]
+		public void AssertTestContainerObjectMockness(string notModifier)
+		{
+			_context.Target.GetType().Implements(typeof (IMocked)).Should().Be(string.IsNullOrEmpty(notModifier));
+		}
+
+		[When(@&quot;I register an object with the test container&quot;)]
+		public void RegisterTestContainerObject()
+		{
+			_moq.Container.Update&lt;ITestContainerTarget, TestContainerTarget&gt;();
+		}
+
+		[When(@&quot;I create a mock of the object using the test container(?: with the container&#39;s mock behavior)?&quot;)]
+		public void MockTestContainerObjectWithContainersBehavior()
+		{
+			_context.TargetMock = _moq.Container.Mock&lt;ITestContainerTarget&gt;();
+		}
+
+		[When(@&quot;I create a mock of the object using the test container with (default|loose|strict) mock behavior&quot;)]
+		public void MockTestContainerObject(MockBehavior behavior)
+		{
+			_context.TargetMock = _moq.Container.Mock&lt;ITestContainerTarget&gt;(behavior);
+		}
+
+		[Then(@&quot;the test container should have given me a mock of the object&quot;)]
+		public void ThenTheTestContainerShouldHaveGivenMeAMockOfTheObject()
+		{
+			_context.TargetMock.Should().NotBeNull();
+		}
+
+		[Then(@&quot;the object retrieved by the test container should have the container&#39;s mock behavior&quot;)]
+		public void AssertMockObjectWithContainersBehavior()
+		{
+			_context.TargetMock.Behavior.Should().Be(_moq.Container.DefaultBehavior);
+		}
+
+		[Then(@&quot;the object retrieved by the test container should have (default|loose|strict) mock behavior&quot;)]
+		public void AssertMockObjectBehavior(MockBehavior behavior)
+		{
+			_context.TargetMock.Behavior.Should().Be(behavior);
+		}
+	}
+}</pre></code><script type="text/javascript">
+			applyranges('src75', RANGES_75)
+		</script>
+	</body>
+</html>

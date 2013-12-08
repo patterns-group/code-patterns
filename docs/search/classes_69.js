@@ -9,5 +9,6 @@ var searchData=
   ['iloggingconfig',['ILoggingConfig',['../d1/d75/interface_patterns_1_1_logging_1_1_i_logging_config.html',1,'Patterns::Logging']]],
   ['imappingservices',['IMappingServices',['../d9/df2/interface_patterns_1_1_mapping_1_1_i_mapping_services.html',1,'Patterns::Mapping']]],
   ['imoqcontainer',['IMoqContainer',['../da/dd0/interface_patterns_1_1_testing_1_1_moq_1_1_i_moq_container.html',1,'Patterns::Testing::Moq']]],
+  ['inmemoryconfigurationsource',['InMemoryConfigurationSource',['../d0/db1/class_patterns_1_1_configuration_1_1_in_memory_configuration_source.html',1,'Patterns::Configuration']]],
   ['iregexevaluator',['IRegexEvaluator',['../d3/d2b/interface_patterns_1_1_text_1_1_regular_expressions_1_1_i_regex_evaluator.html',1,'Patterns::Text::RegularExpressions']]]
 ];

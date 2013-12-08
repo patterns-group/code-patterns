@@ -1,0 +1,92 @@
+<html>
+	<head>
+		<script type="text/javascript" src="../js/coverreport.js">
+
+		</script><script type="text/javascript">
+			RANGES_96 = [
+   [42,3,42,4,'dccv']
+, [43,4,43,27,'dccv']
+, [44,4,44,27,'dccv']
+, [45,3,45,4,'dccv']
+, [55,8,55,9,'dccv']
+, [55,10,55,28,'dccv']
+, [55,29,55,30,'dccv']
+, [66,8,66,9,'dccv']
+, [66,10,66,28,'dccv']
+, [66,29,66,30,'dccv']
+];
+		</script><link rel="stylesheet" type="text/css" href="../css/coverreport.css" />
+	</head><body>
+		<code id="src96" class="dotCoverSource"><pre>#region FreeBSD
+
+// Copyright (c) 2013, John Batte
+// All rights reserved.
+// 
+// Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+// 
+//  * Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+// 
+//  * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the
+//    documentation and/or other materials provided with the distribution.
+// 
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
+// TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+// CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+// PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+// LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+// SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+#endregion
+
+using System;
+
+namespace Patterns.ExceptionHandling
+{
+	/// &lt;summary&gt;
+	///    Encapsulates the state of an exception being handled by the &lt;see cref=&quot;Try&quot; /&gt; class.
+	/// &lt;/summary&gt;
+	public struct ExceptionState
+	{
+		private readonly Exception _exception;
+		private readonly bool _isHandled;
+
+		/// &lt;summary&gt;
+		///    Initializes a new instance of the &lt;see cref=&quot;ExceptionState&quot; /&gt; class.
+		/// &lt;/summary&gt;
+		/// &lt;param name=&quot;exception&quot;&gt; The exception. &lt;/param&gt;
+		/// &lt;param name=&quot;isHandled&quot;&gt;
+		///    if set to &lt;c&gt;true&lt;/c&gt; , the exception is handled.
+		/// &lt;/param&gt;
+		public ExceptionState(Exception exception, bool isHandled)
+		{
+			_exception = exception;
+			_isHandled = isHandled;
+		}
+
+		/// &lt;summary&gt;
+		/// Gets the exception.
+		/// &lt;/summary&gt;
+		/// &lt;value&gt;
+		/// The exception.
+		/// &lt;/value&gt;
+		public Exception Exception
+		{
+			get { return _exception; }
+		}
+
+		/// &lt;summary&gt;
+		/// Gets a value indicating whether the exception is handled.
+		/// &lt;/summary&gt;
+		/// &lt;value&gt;
+		/// &lt;c&gt;true&lt;/c&gt; if the exception is handled; otherwise, &lt;c&gt;false&lt;/c&gt;.
+		/// &lt;/value&gt;
+		public bool IsHandled
+		{
+			get { return _isHandled; }
+		}
+	}
+}</pre></code><script type="text/javascript">
+			applyranges('src96', RANGES_96)
+		</script>
+	</body>
+</html>

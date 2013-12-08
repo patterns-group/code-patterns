@@ -1,0 +1,141 @@
+<html>
+	<head>
+		<script type="text/javascript" src="../js/coverreport.js">
+
+		</script><script type="text/javascript">
+			RANGES_62 = [
+   [55,3,55,127,'dccv']
+, [56,3,56,4,'dccv']
+, [57,4,57,23,'dccv']
+, [58,4,58,33,'dccv']
+, [59,4,59,15,'dccv']
+, [60,4,60,23,'dccv']
+, [61,3,61,4,'dccv']
+, [65,3,65,4,'dccv']
+, [66,4,66,51,'dccv']
+, [67,3,67,4,'dccv']
+, [71,3,71,4,'dccv']
+, [72,4,72,57,'dccv']
+, [73,3,73,4,'dccv']
+, [77,3,77,4,'dccv']
+, [78,4,78,34,'dccv']
+, [78,61,78,62,'dccv']
+, [79,3,79,4,'dccv']
+, [83,3,83,4,'dccv']
+, [84,4,84,93,'dccv']
+, [85,3,85,4,'dccv']
+, [89,3,89,4,'dccv']
+, [90,4,90,41,'dccv']
+, [91,4,91,101,'dccv']
+, [92,3,92,4,'dccv']
+, [96,3,96,4,'dccv']
+, [97,4,97,76,'dccv']
+, [98,3,98,4,'dccv']
+, [78,34,78,61,'dccv']
+];
+		</script><link rel="stylesheet" type="text/css" href="../css/coverreport.css" />
+	</head><body>
+		<code id="src62" class="dotCoverSource"><pre>#region FreeBSD
+
+// Copyright (c) 2013, John Batte
+// All rights reserved.
+// 
+// Redistribution and use in source and binary forms, with or without modification, are permitted provided that
+// the following conditions are met:
+// 
+//  * Redistributions of source code must retain the above copyright notice, this list of conditions and the
+//    following disclaimer.
+// 
+//  * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the
+//    following disclaimer in the documentation and/or other materials provided with the distribution.
+// 
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED
+// WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+// PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR
+// ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+// TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+// HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+// NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+// POSSIBILITY OF SUCH DAMAGE.
+
+#endregion
+
+using System;
+using System.Diagnostics;
+
+using Autofac;
+
+using Castle.DynamicProxy;
+
+using Common.Logging;
+
+using Moq;
+
+using Patterns.Logging;
+using Patterns.Specifications.Models.Autofac;
+using Patterns.Specifications.Models.Interception;
+using Patterns.Specifications.Models.Logging;
+using Patterns.Specifications.Models.Mocking;
+
+using TechTalk.SpecFlow;
+
+namespace Patterns.Specifications.Steps.Logging
+{
+	[Binding]
+	public class LoggingContextSteps
+	{
+		private readonly LoggingContext _context;
+		private readonly InterceptionContext _interception;
+		private readonly MoqContext _moq;
+		private readonly AutofacContext _autofac;
+
+		public LoggingContextSteps(LoggingContext context, InterceptionContext interception, MoqContext moq, AutofacContext autofac)
+		{
+			_context = context;
+			_interception = interception;
+			_moq = moq;
+			_autofac = autofac;
+		}
+
+		[Given(@&quot;I have a default log config&quot;)]
+		public void CreateDefaultConfig()
+		{
+			_context.Config = LoggingConfigs.DefaultConfig;
+		}
+
+		[Given(@&quot;I have a log config set to trap errors&quot;)]
+		public void CreateErrorTrappingConfig()
+		{
+			_context.Config = LoggingConfigs.ErrorTrappingConfig;
+		}
+
+		[Given(@&quot;I have a log factory that returns a mocked ILog&quot;)]
+		public void CreateMockLogFactory()
+		{
+			_context.LogFactory = type =&gt; _moq.CreateMockLog().Object;
+		}
+
+		[Given(@&quot;I have a logging interceptor&quot;)]
+		public void CreateLoggingInterceptor()
+		{
+			_interception.Interceptor = new LoggingInterceptor(_context.Config, _context.LogFactory);
+		}
+
+		[Given(@&quot;I have a dynamic proxy to the logging test subject&quot;)]
+		public void CreateDynamicProxy()
+		{
+			var generator = new ProxyGenerator();
+			_context.TestSubject = generator.CreateClassProxy&lt;LoggingTestSubject&gt;(_interception.Interceptor);
+		}
+
+		[Given(@&quot;I have resolved an instance of the logging test subject&quot;)]
+		public void ResolveTestSubject()
+		{
+			_context.TestSubject = _autofac.Container.Resolve&lt;LoggingTestSubject&gt;();
+		}
+	}
+}</pre></code><script type="text/javascript">
+			applyranges('src62', RANGES_62)
+		</script>
+	</body>
+</html>

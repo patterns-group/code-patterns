@@ -1,0 +1,77 @@
+<html>
+	<head>
+		<script type="text/javascript" src="../js/coverreport.js">
+
+		</script><script type="text/javascript">
+			RANGES_74 = [
+   [20,3,20,51,'dccv']
+, [21,3,21,4,'dccv']
+, [22,4,22,15,'dccv']
+, [23,3,23,4,'dccv']
+, [27,3,27,4,'dccv']
+, [28,4,28,76,'dccv']
+, [29,3,29,4,'dccv']
+, [33,3,33,4,'dccv']
+, [34,4,34,94,'dccv']
+, [36,4,37,28,'dccv']
+, [37,100,37,102,'dccv']
+, [39,4,39,57,'dccv']
+, [40,3,40,4,'dccv']
+, [43,3,43,4,'dccv']
+, [44,4,44,94,'dccv']
+, [45,3,45,4,'dccv']
+, [37,28,37,100,'dccv']
+];
+		</script><link rel="stylesheet" type="text/css" href="../css/coverreport.css" />
+	</head><body>
+		<code id="src74" class="dotCoverSource"><pre>using System.Linq;
+
+using Autofac.Core;
+
+using FluentAssertions;
+
+using Patterns.Specifications.Models.Mocking;
+using Patterns.Specifications.Models.Testing.Moq;
+using Patterns.Testing.Autofac.Moq;
+
+using TechTalk.SpecFlow;
+
+namespace Patterns.Specifications.Steps.Testing.Moq.Autofac
+{
+	[Binding]
+	public class AutofacTestContainerSteps
+	{
+		private readonly MoqContext _moq;
+
+		public AutofacTestContainerSteps(MoqContext moq)
+		{
+			_moq = moq;
+		}
+
+		[Given(@&quot;I have an Autofac/Moq test container&quot;)]
+		public void AssertMoqContainerIsAutofac()
+		{
+			_moq.Container.Should().NotBeNull().And.BeOfType&lt;AutofacMoqContainer&gt;();
+		}
+
+		[Then(@&quot;the Autofac/Moq test container should have (.*) registrations? for my test interface&quot;)]
+		public void AssertRegistrationCount(int expectedRegistrations)
+		{
+			IComponentRegistry registry = _moq.Container.As&lt;IAutofacMoqContainer&gt;().ComponentRegistry;
+
+			int registrationCount = registry.Registrations
+				.Count(registration =&gt; registration.Services.Any(RegistrationMatchesType&lt;ITestContainerTarget&gt;));
+
+			registrationCount.Should().Be(expectedRegistrations);
+		}
+
+		private static bool RegistrationMatchesType&lt;TService&gt;(Service service)
+		{
+			return service is TypedService &amp;&amp; ((TypedService)service).ServiceType == typeof(TService);
+		}
+	}
+}</pre></code><script type="text/javascript">
+			applyranges('src74', RANGES_74)
+		</script>
+	</body>
+</html>

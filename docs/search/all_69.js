@@ -9,6 +9,7 @@ var searchData=
   ['iloggingconfig',['ILoggingConfig',['../d1/d75/interface_patterns_1_1_logging_1_1_i_logging_config.html',1,'Patterns::Logging']]],
   ['imappingservices',['IMappingServices',['../d9/df2/interface_patterns_1_1_mapping_1_1_i_mapping_services.html',1,'Patterns::Mapping']]],
   ['imoqcontainer',['IMoqContainer',['../da/dd0/interface_patterns_1_1_testing_1_1_moq_1_1_i_moq_container.html',1,'Patterns::Testing::Moq']]],
+  ['inmemoryconfigurationsource',['InMemoryConfigurationSource',['../d0/db1/class_patterns_1_1_configuration_1_1_in_memory_configuration_source.html',1,'Patterns::Configuration']]],
   ['intercept',['Intercept',['../d2/dd6/class_patterns_1_1_interception_1_1_delegate_interceptor.html#a3b0d65eda387ae0ac6974cfbfe7a56e5',1,'Patterns::Interception::DelegateInterceptor']]],
   ['iregexevaluator',['IRegexEvaluator',['../d3/d2b/interface_patterns_1_1_text_1_1_regular_expressions_1_1_i_regex_evaluator.html',1,'Patterns::Text::RegularExpressions']]],
   ['isadapterforindividualcomponents',['IsAdapterForIndividualComponents',['../d9/dc7/class_patterns_1_1_autofac_1_1_sources_1_1_resolve_creatable_source.html#afc25d78e7e65540fabc1db8cd43fdf3d',1,'Patterns.Autofac.Sources.ResolveCreatableSource.IsAdapterForIndividualComponents()'],['../d9/de3/class_patterns_1_1_testing_1_1_autofac_1_1_moq_1_1_moq_registration_source.html#a0482dea12d5efb7bb54145b8035b7c79',1,'Patterns.Testing.Autofac.Moq.MoqRegistrationSource.IsAdapterForIndividualComponents()']]],

@@ -1,0 +1,63 @@
+<html>
+	<head>
+		<script type="text/javascript" src="../js/coverreport.js">
+
+		</script><script type="text/javascript">
+			RANGES_107 = [
+   [43,3,43,4,'dccv']
+, [44,4,44,100,'dccv']
+, [45,3,45,4,'dccv']
+];
+		</script><link rel="stylesheet" type="text/css" href="../css/coverreport.css" />
+	</head><body>
+		<code id="src107" class="dotCoverSource"><pre>#region New BSD License
+
+// Copyright (c) 2012, John Batte
+// All rights reserved.
+// 
+// Redistribution and use in source and binary forms, with or without modification, are permitted
+// provided that the following conditions are met:
+// 
+// Redistributions of source code must retain the above copyright notice, this list of conditions
+// and the following disclaimer.
+// 
+// Redistributions in binary form must reproduce the above copyright notice, this list of conditions
+// and the following disclaimer in the documentation and/or other materials provided with the distribution.
+// 
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED
+// WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+// PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR
+// ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+// TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+// HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+// NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+// POSSIBILITY OF SUCH DAMAGE.
+
+#endregion
+
+using System;
+
+namespace Patterns.Runtime
+{
+	/// &lt;summary&gt;
+	/// 	Provides extensions for accessing and manipulating time-oriented constructs like &lt;see cref=&quot;DateTime&quot; /&gt; and &lt;see
+	///  	cref=&quot;TimeSpan&quot; /&gt; .
+	/// &lt;/summary&gt;
+	public static class TimeExtensions
+	{
+		/// &lt;summary&gt;
+		/// 	Returns a &lt;see cref=&quot;DateTime&quot; /&gt; with the same &lt;see cref=&quot;DateTime.Year&quot; /&gt; , &lt;see cref=&quot;DateTime.Month&quot; /&gt; , &lt;see
+		///  	cref=&quot;DateTime.Day&quot; /&gt; , &lt;see cref=&quot;DateTime.Hour&quot; /&gt; , &lt;see cref=&quot;DateTime.Minute&quot; /&gt; , and &lt;see
+		///  	cref=&quot;DateTime.Second&quot; /&gt; values.
+		/// &lt;/summary&gt;
+		/// &lt;param name=&quot;value&quot;&gt; The value. &lt;/param&gt;
+		public static DateTime AccurateToOneSecond(this DateTime value)
+		{
+			return new DateTime(value.Year, value.Month, value.Day, value.Hour, value.Minute, value.Second);
+		}
+	}
+}</pre></code><script type="text/javascript">
+			applyranges('src107', RANGES_107)
+		</script>
+	</body>
+</html>
