@@ -1,6 +1,6 @@
 ﻿#region FreeBSD
 
-// Copyright (c) 2013, John Batte
+// Copyright (c) 2013, The Tribe
 // All rights reserved.
 // 
 // Redistribution and use in source and binary forms, with or without modification, are permitted provided that
@@ -23,53 +23,11 @@
 
 #endregion
 
-using System;
-
-using FluentAssertions;
-
-using Patterns.Runtime;
-using Patterns.Specifications.Models.Runtime;
-
-using TechTalk.SpecFlow;
-
-namespace Patterns.Specifications.Steps.Runtime
+namespace Patterns.Specifications.Models.Mapping
 {
-	[Binding]
-	public class TimeExtensionsSteps
+	public class MappingDestination
 	{
-		private readonly TimeExtensionsContext _context;
-
-		public TimeExtensionsSteps(TimeExtensionsContext context)
-		{
-			_context = context;
-		}
-
-		[Given(@"I have a( second)? DateTime representation of (.+)")]
-		public void CreateSpecifiedDateTime(string valueSwitch, DateTime dateTime)
-		{
-			if (string.IsNullOrWhiteSpace(valueSwitch))
-				_context.FirstValue = dateTime;
-			else
-				_context.SecondValue = dateTime;
-		}
-
-		[When(@"I adjust the accuracy of each DateTime value to one second")]
-		public void AdjustAccuracyToOneSecond()
-		{
-			_context.FirstValue = _context.FirstValue.AccurateToOneSecond();
-			_context.SecondValue = _context.SecondValue.AccurateToOneSecond();
-		}
-
-		[When(@"I compare the first and second DateTime values")]
-		public void CompareDateTimeValues()
-		{
-			_context.CalculateDifference();
-		}
-
-		[Then(@"the resulting difference should be (\d+) seconds")]
-		public void AssertDifference(int seconds)
-		{
-			_context.Difference.Should().Be(TimeSpan.FromSeconds(seconds));
-		}
+		public string Id { get; set; }
+		public string Data { get; set; }
 	}
 }

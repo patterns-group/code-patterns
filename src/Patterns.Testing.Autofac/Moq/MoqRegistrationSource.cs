@@ -20,10 +20,27 @@ namespace Patterns.Testing.Autofac.Moq
 	public class MoqRegistrationSource : IRegistrationSource
 	{
 		private static readonly ILog _log = LogManager.GetLogger(typeof (MoqRegistrationSource));
-		private static readonly MockRepository _repository = new MockRepository(MockBehavior.Default);
-		private static readonly MethodInfo _createMethod = typeof(MoqRegistrationSource)
-			.GetMethod("CreateUsingRepository", BindingFlags.NonPublic | BindingFlags.Instance)
-			.GetGenericMethodDefinition();
+		private static readonly MethodInfo _createMethod = typeof (MoqRegistrationSource)
+				.GetMethod("CreateUsingRepository", BindingFlags.NonPublic | BindingFlags.Instance)
+				.GetGenericMethodDefinition();
+
+		private readonly MockRepository _repository;
+
+		/// <summary>
+		///	 Initializes an instance of <see cref="MoqRegistrationSource" /> with the specified <see cref="MockBehavior"/> behavior.
+		/// </summary>
+		/// <param name="defaultBehavior">The default <see cref="MockBehavior"/>.</param>
+		public MoqRegistrationSource(MockBehavior defaultBehavior)
+		{
+			_repository = new MockRepository(defaultBehavior);
+		}
+
+		/// <summary>
+		///	 Initializes an instance of <see cref="MoqRegistrationSource" /> with the <see cref="MockBehavior.Default"/> behavior.
+		/// </summary>
+		public MoqRegistrationSource() : this(MockBehavior.Default)
+		{
+		}
 
 		/// <summary>
 		/// Gets the repository.
@@ -31,7 +48,7 @@ namespace Patterns.Testing.Autofac.Moq
 		/// <value>
 		/// The repository.
 		/// </value>
-		public static MockRepository Repository { get { return _repository; } }
+		public MockRepository Repository { get { return _repository; } }
 
 		/// <summary>
 		/// Retrieve registrations for an unregistered service, to be used

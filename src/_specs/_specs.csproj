@@ -35,18 +35,22 @@
   <ItemGroup>
     <Reference Include="Autofac, Version=3.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Autofac.3.1.1\lib\net40\Autofac.dll</HintPath>
+      <HintPath>..\packages\Autofac.3.1.5\lib\net40\Autofac.dll</HintPath>
     </Reference>
     <Reference Include="Autofac.Extras.DynamicProxy2, Version=3.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Autofac.Extras.DynamicProxy2.3.0.2\lib\net40\Autofac.Extras.DynamicProxy2.dll</HintPath>
     </Reference>
-    <Reference Include="AutoMapper">
-      <HintPath>..\packages\AutoMapper.2.2.1\lib\net40\AutoMapper.dll</HintPath>
+    <Reference Include="AutoMapper, Version=3.1.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\AutoMapper.3.1.0\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper.Net4">
+      <HintPath>..\packages\AutoMapper.3.1.0\lib\net40\AutoMapper.Net4.dll</HintPath>
     </Reference>
     <Reference Include="Castle.Core, Version=3.2.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Castle.Core.3.2.0\lib\net40-client\Castle.Core.dll</HintPath>
+      <HintPath>..\packages\Castle.Core.3.2.2\lib\net40-client\Castle.Core.dll</HintPath>
     </Reference>
     <Reference Include="Common.Logging, Version=2.1.2.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -62,8 +66,9 @@
     <Reference Include="Microsoft.Practices.ServiceLocation">
       <HintPath>..\packages\CommonServiceLocator.1.0\lib\NET35\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
-    <Reference Include="Moq">
-      <HintPath>..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
+    <Reference Include="Moq, Version=4.1.1311.615, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Moq.4.1.1311.0615\lib\net40\Moq.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework, Version=2.6.2.12296, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <HintPath>..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
@@ -71,18 +76,6 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Reactive.Core">
-      <HintPath>..\packages\Rx-Core.2.1.30214.0\lib\Net40\System.Reactive.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Reactive.Interfaces">
-      <HintPath>..\packages\Rx-Interfaces.2.1.30214.0\lib\Net40\System.Reactive.Interfaces.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Reactive.Linq">
-      <HintPath>..\packages\Rx-Linq.2.1.30214.0\lib\Net40\System.Reactive.Linq.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Reactive.PlatformServices">
-      <HintPath>..\packages\Rx-PlatformServices.2.1.30214.0\lib\Net40\System.Reactive.PlatformServices.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -131,6 +124,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Logging.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\Mapping\MappingServices.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MappingServices.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\Reflection\GetPropertyValues.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -177,6 +175,9 @@
     <Compile Include="Models\Logging\LoggingTestSubject.cs" />
     <Compile Include="Models\Logging\ManualLoggingContext.cs" />
     <Compile Include="Models\Logging\ManualLoggingTestSubject.cs" />
+    <Compile Include="Models\Mapping\MappingContext.cs" />
+    <Compile Include="Models\Mapping\MappingDestination.cs" />
+    <Compile Include="Models\Mapping\MappingSource.cs" />
     <Compile Include="Models\Mocking\MoqContext.cs" />
     <Compile Include="Models\ObjectContext.cs" />
     <Compile Include="Models\Reflection\PropertyValueContext.cs" />
@@ -225,6 +226,7 @@
     <Compile Include="Steps\Logging\MockMixins.cs" />
     <Compile Include="Steps\Logging\MockVerificationSteps.cs" />
     <Compile Include="Steps\Logging\TestLoggingModule.cs" />
+    <Compile Include="Steps\Mapping\MappingSteps.cs" />
     <Compile Include="Steps\ObjectSteps.cs" />
     <Compile Include="Steps\Reflection\PropertyValueSteps.cs" />
     <Compile Include="Steps\Runtime\DateTimeInfoSteps.cs" />
@@ -273,6 +275,10 @@
     <None Include="Features\Logging\Logging.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Logging.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Mapping\MappingServices.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>MappingServices.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Reflection\GetPropertyValues.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
@@ -328,6 +334,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\TestConfig2.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\packages\AutoMapper.3.1.0\lib\net40\AutoMapper.Net4.dll">
+      <Link>AutoMapper.Net4.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />

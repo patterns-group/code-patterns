@@ -25,8 +25,6 @@
 
 using System;
 using System.Linq;
-using System.Reactive.Linq;
-
 using Autofac;
 using Autofac.Core;
 using Autofac.Core.Registration;
@@ -82,16 +80,11 @@ namespace Patterns.Autofac.Logging
 
 		protected override void AttachToComponentRegistration(IComponentRegistry componentRegistry, IComponentRegistration registration)
 		{
-			Observable.FromEventPattern<PreparingEventArgs>(handler => registration.Preparing += handler, handler => registration.Preparing -= handler)
-				.Subscribe(@event =>
-				{
-					PreparingEventArgs args = @event.EventArgs;
-					args.Parameters = args.Parameters.Concat(new[]
-					{
-						new ResolvedParameter((info, context) => info.ParameterType == typeof (ILog),
-							(info, context) => _logFactory(info.Member.DeclaringType))
-					});
-				});
+			registration.Preparing += (sender, args) => args.Parameters = args.Parameters.Concat(new[]
+			{
+				new ResolvedParameter((info, context) => info.ParameterType == typeof (ILog),
+					(info, context) => _logFactory(info.Member.DeclaringType))
+			});
 		}
 	}
 }
