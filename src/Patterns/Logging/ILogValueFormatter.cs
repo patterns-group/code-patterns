@@ -1,4 +1,4 @@
-#region FreeBSD
+ï»¿#region FreeBSD
 
 // Copyright (c) 2013, The Tribe
 // All rights reserved.
@@ -23,16 +23,23 @@
 
 #endregion
 
-using System.Reflection;
-using System.Resources;
-using System.Runtime.InteropServices;
+namespace Patterns.Logging
+{
+	/// <summary>
+	///    Defines a formatter for log values.
+	/// </summary>
+	public interface ILogValueFormatter
+	{
+		/// <summary>
+		///    Formats the specified value.
+		/// </summary>
+		/// <param name="value">The value.</param>
+		string Format(object value);
 
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("The Tribe")]
-[assembly: AssemblyProduct("Code Patterns")]
-[assembly: AssemblyCopyright("Copyright © 2013")]
-[assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
-[assembly: ComVisible(false)]
-[assembly: NeutralResourcesLanguage("en-US")]
-[assembly: AssemblyVersion("3.10.0")]
+		/// <summary>
+		///    Formats the specified values.
+		/// </summary>
+		/// <param name="values">The values.</param>
+		string Format(object[] values);
+	}
+}
