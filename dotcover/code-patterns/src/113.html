@@ -4,54 +4,175 @@
 
 		</script><script type="text/javascript">
 			RANGES_113 = [
-   [38,3,38,55,'dccv']
-, [39,3,39,4,'dccv']
-, [40,4,40,35,'dccv']
-, [41,3,41,4,'dccv']
+   [33,3,33,61,'dccv']
+, [34,3,34,4,'dccv']
+, [35,4,35,54,'dccv']
+, [36,3,36,4,'dccv']
+, [51,42,51,43,'dccv']
+, [51,44,51,63,'dccv']
+, [51,64,51,65,'dccv']
+, [71,3,71,4,'dccv']
+, [72,4,72,24,'dccv']
+, [74,4,74,24,'dccv']
+, [74,112,74,114,'dccv']
+, [76,4,76,93,'dccv']
+, [77,4,77,41,'dccv']
+, [77,42,77,92,'dccv']
+, [79,4,79,47,'dccv']
+, [80,4,80,159,'dccv']
+, [82,4,82,16,'dccv']
+, [83,4,83,5,'dccv']
+, [84,5,84,26,'dccv']
+, [84,123,84,125,'dccv']
+, [85,5,89,7,'dccv']
+, [92,27,97,7,'dccv']
+, [100,4,100,54,'dccv']
+, [101,3,101,4,'dccv']
+, [109,8,109,9,'dccv']
+, [109,10,109,23,'dccv']
+, [109,24,109,25,'dccv']
+, [121,3,121,4,'dccv']
+, [122,4,122,35,'dccv']
+, [123,3,123,4,'dccv']
+, [22,3,22,92,'dccv']
+, [23,3,25,35,'dccv']
+, [89,7,89,8,'dccv']
+, [90,8,90,99,'dccv']
+, [91,8,91,57,'dccv']
+, [92,8,92,27,'dccv']
+, [41,3,41,62,'dcuc']
+, [42,3,42,4,'dcuc']
+, [43,3,43,4,'dcuc']
+, [72,25,72,68,'dcuc']
+, [74,24,74,112,'dcuc']
+, [84,26,84,123,'dcuc']
 ];
 		</script><link rel="stylesheet" type="text/css" href="../css/coverreport.css" />
 	</head><body>
-		<code id="src113" class="dotCoverSource"><pre>#region FreeBSD
+		<code id="src113" class="dotCoverSource"><pre>using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 
-// Copyright (c) 2013, John Batte
-// All rights reserved.
-// 
-// Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
-// 
-//  * Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
-// 
-//  * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the
-//    documentation and/or other materials provided with the distribution.
-// 
-// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
-// TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
-// CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
-// PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-// LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
-// SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+using Autofac.Builder;
+using Autofac.Core;
 
-#endregion
+using Common.Logging;
 
-using System.Xml.Linq;
+using Moq;
 
-using Patterns.Configuration;
+using Patterns.Testing.Autofac.Properties;
 
-namespace Patterns.Testing.Configuration
+namespace Patterns.Testing.Autofac.Moq
 {
 	/// &lt;summary&gt;
-	///    Provides a configuration source that uses an in-memory configuration rather than a
-	///    file-based one.
+	/// Provides a registration source for Autofac using Moq&#39;s MockRepository as a service factory.
 	/// &lt;/summary&gt;
-	public class TestConfigurationSource : InMemoryConfigurationSource
+	public class MoqRegistrationSource : IRegistrationSource
 	{
+		private static readonly ILog _log = LogManager.GetLogger(typeof (MoqRegistrationSource));
+		private static readonly MethodInfo _createMethod = typeof (MoqRegistrationSource)
+				.GetMethod(&quot;CreateUsingRepository&quot;, BindingFlags.NonPublic | BindingFlags.Instance)
+				.GetGenericMethodDefinition();
+
+		private readonly MockRepository _repository;
+
 		/// &lt;summary&gt;
-		///    Initializes a new instance of the &lt;see cref=&quot;TestConfigurationSource&quot; /&gt; class.
+		///	 Initializes an instance of &lt;see cref=&quot;MoqRegistrationSource&quot; /&gt; with the specified &lt;see cref=&quot;MockBehavior&quot;/&gt; behavior.
 		/// &lt;/summary&gt;
-		/// &lt;param name=&quot;configXml&quot;&gt;The config XML.&lt;/param&gt;
-		public TestConfigurationSource(XContainer configXml)
+		/// &lt;param name=&quot;defaultBehavior&quot;&gt;The default &lt;see cref=&quot;MockBehavior&quot;/&gt;.&lt;/param&gt;
+		public MoqRegistrationSource(MockBehavior defaultBehavior)
 		{
-			SetConfigurationXml(configXml);
+			_repository = new MockRepository(defaultBehavior);
 		}
+
+		/// &lt;summary&gt;
+		///	 Initializes an instance of &lt;see cref=&quot;MoqRegistrationSource&quot; /&gt; with the &lt;see cref=&quot;MockBehavior.Default&quot;/&gt; behavior.
+		/// &lt;/summary&gt;
+		public MoqRegistrationSource() : this(MockBehavior.Default)
+		{
+		}
+
+		/// &lt;summary&gt;
+		/// Gets the repository.
+		/// &lt;/summary&gt;
+		/// &lt;value&gt;
+		/// The repository.
+		/// &lt;/value&gt;
+		public MockRepository Repository { get { return _repository; } }
+
+		/// &lt;summary&gt;
+		/// Retrieve registrations for an unregistered service, to be used
+		/// by the container.
+		/// &lt;/summary&gt;
+		/// &lt;param name=&quot;service&quot;&gt;The service that was requested.&lt;/param&gt;
+		/// &lt;param name=&quot;registrationAccessor&quot;&gt;A function that will return existing registrations for a service.&lt;/param&gt;
+		/// &lt;returns&gt;
+		/// Registrations providing the service.
+		/// &lt;/returns&gt;
+		/// &lt;exception cref=&quot;System.ArgumentNullException&quot;&gt;service&lt;/exception&gt;
+		/// &lt;remarks&gt;
+		/// If the source is queried for service s, and it returns a component that implements both s and s&#39;, then it
+		/// will not be queried again for either s or s&#39;. This means that if the source can return other implementations
+		/// of s&#39;, it should return these, plus the transitive closure of other components implementing their
+		/// additional services, along with the implementation of s. It is not an error to return components
+		/// that do not implement &lt;paramref name=&quot;service&quot; /&gt;.
+		/// &lt;/remarks&gt;
+		public IEnumerable&lt;IComponentRegistration&gt; RegistrationsFor(Service service, Func&lt;Service, IEnumerable&lt;IComponentRegistration&gt;&gt; registrationAccessor)
+		{
+			if (service == null) throw new ArgumentNullException(&quot;service&quot;);
+
+			_log.Info(format =&gt; format(Resources.MoqRegistrationSource_RegistrationsFor_InfoFormat, service.Description));
+
+			IComponentRegistration[] existingRegistrations = registrationAccessor(service).ToArray();
+			if (existingRegistrations.Length &gt; 0) return Enumerable.Empty&lt;IComponentRegistration&gt;();
+
+			var typedService = service as TypedService;
+			bool canMock = typedService != null &amp;&amp; (typedService.ServiceType.IsInterface || typedService.ServiceType.IsAbstract || !typedService.ServiceType.IsSealed);
+
+			if (canMock)
+			{
+				_log.Debug(format =&gt; format(Resources.MoqRegistrationSource_RegistrationsFor_PreMockCreateFormat, service.Description));
+				return new[]
+				{
+					RegistrationBuilder
+						.ForDelegate((context, parameters) =&gt;
+						{
+							MethodInfo typedMethod = _createMethod.MakeGenericMethod(new[] {typedService.ServiceType});
+							var mock = (Mock) typedMethod.Invoke(this, null);
+							return mock.Object;
+						})
+						.As(typedService)
+						.SingleInstance()
+						.CreateRegistration()
+				};
+			}
+			
+			return Enumerable.Empty&lt;IComponentRegistration&gt;();
+		}
+
+		/// &lt;summary&gt;
+		/// Gets whether the registrations provided by this source are 1:1 adapters on top
+		/// of other components (I.e. like Meta, Func or Owned.)
+		/// &lt;/summary&gt;
+		public bool IsAdapterForIndividualComponents
+		{
+			get { return false; }
+		}
+
+		// ReSharper disable UnusedMember.Local
+		/// &lt;summary&gt;
+		/// Creates the desired mock using repository logic. This abstraction exists to simplify the process of using
+		/// reflection to call a generic method; the repository Create method has several overloads that would cause
+		/// the resulting reflection code to be more complex.
+		/// &lt;/summary&gt;
+		/// &lt;typeparam name=&quot;T&quot;&gt;&lt;/typeparam&gt;
+		/// &lt;returns&gt;&lt;/returns&gt;
+		private Mock&lt;T&gt; CreateUsingRepository&lt;T&gt;() where T : class
+		{
+			return _repository.Create&lt;T&gt;();
+		}
+		// ReSharper restore UnusedMember.Local
 	}
 }</pre></code><script type="text/javascript">
 			applyranges('src113', RANGES_113)

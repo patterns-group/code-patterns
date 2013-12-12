@@ -3,6 +3,7 @@ var searchData=
   ['defaultbehavior',['DefaultBehavior',['../da/dd0/interface_patterns_1_1_testing_1_1_moq_1_1_i_moq_container.html#a6761ffb2d6fbedb215b86da3f33a24c9',1,'Patterns.Testing.Moq.IMoqContainer.DefaultBehavior()'],['../d0/d48/class_patterns_1_1_testing_1_1_autofac_1_1_moq_1_1_autofac_moq_container.html#a91675ed3f6ab8638d062e2985d034438',1,'Patterns.Testing.Autofac.Moq.AutofacMoqContainer.DefaultBehavior()']]],
   ['defaultdatetimeinfo',['DefaultDateTimeInfo',['../d6/dc4/class_patterns_1_1_runtime_1_1_default_date_time_info.html',1,'Patterns::Runtime']]],
   ['defaultlogfactory',['DefaultLogFactory',['../d4/d70/class_patterns_1_1_autofac_1_1_logging_1_1_logging_module.html#ac696f2b77e411fd4f2307ab91a0b4d3c',1,'Patterns::Autofac::Logging::LoggingModule']]],
+  ['defaultrecursionlimit',['DefaultRecursionLimit',['../d8/db5/class_patterns_1_1_logging_1_1_json_log_value_formatter.html#a8d30ab2be35d313da782f8e9fcf7a0e8',1,'Patterns::Logging::JsonLogValueFormatter']]],
   ['defaultstrategy',['DefaultStrategy',['../d3/da6/class_patterns_1_1_exception_handling_1_1_try_1_1_handle_errors.html#a880ef9e1f2c4d5e0895aee632e13c547',1,'Patterns::ExceptionHandling::Try::HandleErrors']]],
   ['delegateinterceptor',['DelegateInterceptor',['../d2/dd6/class_patterns_1_1_interception_1_1_delegate_interceptor.html',1,'Patterns::Interception']]],
   ['delegateinterceptor',['DelegateInterceptor',['../d2/dd6/class_patterns_1_1_interception_1_1_delegate_interceptor.html#a929517f6d4c5cca49f774e3a72f2aeee',1,'Patterns::Interception::DelegateInterceptor']]],

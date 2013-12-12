@@ -1,0 +1,84 @@
+<html>
+	<head>
+		<script type="text/javascript" src="../js/coverreport.js">
+
+		</script><script type="text/javascript">
+			RANGES_116 = [
+   [32,3,32,4,'dccv']
+, [33,4,34,22,'dccv']
+, [35,82,36,23,'dccv']
+, [38,4,38,40,'dccv']
+, [40,4,40,44,'dccv']
+, [41,3,41,4,'dccv']
+, [44,3,44,4,'dccv']
+, [45,4,45,27,'dccv']
+, [46,3,46,4,'dccv']
+, [34,22,34,81,'dccv']
+, [35,23,35,82,'dccv']
+, [49,3,49,4,'dcuc']
+, [50,4,50,66,'dcuc']
+, [51,4,51,65,'dcuc']
+, [52,4,52,28,'dcuc']
+, [53,3,53,4,'dcuc']
+];
+		</script><link rel="stylesheet" type="text/css" href="../css/coverreport.css" />
+	</head><body>
+		<code id="src116" class="dotCoverSource"><pre>#region FreeBSD
+
+// Copyright (c) 2013, John Batte
+// All rights reserved.
+// 
+// Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+// 
+//  * Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+// 
+//  * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the
+//    documentation and/or other materials provided with the distribution.
+// 
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
+// TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+// CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+// PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+// LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+// SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+#endregion
+
+using System;
+using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
+
+namespace Patterns.Testing.Values
+{
+	public static class Mixins
+	{
+		public static object GetDefault(this Type type)
+		{
+			MethodInfo factoryMethod = typeof (Mixins).GetMethods(BindingFlags.Public | BindingFlags.Static)
+				.Where(method =&gt; method.Name.StartsWith(&quot;Default&quot;) &amp;&amp; method.IsGenericMethod)
+				.Select(method =&gt; method.GetGenericMethodDefinition().MakeGenericMethod(type))
+				.FirstOrDefault();
+
+			Debug.Assert(factoryMethod != null);
+
+			return factoryMethod.Invoke(null, null);
+		}
+
+		public static TValue Default&lt;TValue&gt;()
+		{
+			return default(TValue);
+		}
+
+		public static TimeSpan GetDifference(this DateTime left, DateTime right)
+		{
+			var greater = new DateTime(Math.Max(left.Ticks, right.Ticks));
+			var lesser = new DateTime(Math.Min(left.Ticks, right.Ticks));
+			return greater - lesser;
+		}
+	}
+}</pre></code><script type="text/javascript">
+			applyranges('src116', RANGES_116)
+		</script>
+	</body>
+</html>

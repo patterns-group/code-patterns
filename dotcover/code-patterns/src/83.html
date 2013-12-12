@@ -16,21 +16,22 @@
 , [64,43,64,45,'dccv']
 , [65,4,66,4,'dccv']
 , [75,121,77,28,'dccv']
-, [78,4,78,47,'dccv']
-, [79,3,79,4,'dccv']
-, [82,3,82,4,'dccv']
-, [83,4,83,48,'dccv']
-, [86,63,87,7,'dccv']
-, [88,3,88,4,'dccv']
+, [78,4,78,83,'dccv']
+, [79,4,79,47,'dccv']
+, [80,3,80,4,'dccv']
+, [83,3,83,4,'dccv']
+, [84,4,84,48,'dccv']
+, [87,63,88,7,'dccv']
+, [89,3,89,4,'dccv']
 , [66,4,66,5,'dccv']
 , [68,5,68,6,'dccv']
 , [69,6,69,73,'dccv']
 , [70,6,70,115,'dccv']
 , [71,6,71,43,'dccv']
-, [83,48,85,46,'dccv']
-, [86,63,87,6,'dccv']
-, [85,46,85,81,'dccv']
-, [86,25,86,63,'dccv']
+, [84,48,86,46,'dccv']
+, [87,63,88,6,'dccv']
+, [86,46,86,81,'dccv']
+, [87,25,87,63,'dccv']
 , [50,3,50,71,'dccv']
 , [50,97,50,98,'dccv']
 , [50,71,50,97,'dccv']
@@ -118,6 +119,7 @@ namespace Patterns.Autofac.Logging
 					throw ErrorBuilder.BuildContainerException(registrationError, ConfigurationResources.MissingConfigSourceErrorHint);
 				}
 			}).As&lt;ILoggingConfig&gt;();
+			builder.RegisterInstance(new JsonLogValueFormatter()).As&lt;ILogValueFormatter&gt;();
 			builder.RegisterType&lt;LoggingInterceptor&gt;();
 		}
 

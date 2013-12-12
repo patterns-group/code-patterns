@@ -4,11 +4,12 @@
 
 		</script><script type="text/javascript">
 			RANGES_104 = [
-   [42,3,42,4,'dccv']
-, [43,4,43,63,'dccv']
-, [47,5,47,7,'dccv']
-, [48,3,48,4,'dccv']
-, [43,63,47,5,'dccv']
+   [39,3,39,4,'dccv']
+, [40,4,42,35,'dccv']
+, [44,4,44,37,'dccv']
+, [46,4,46,30,'dccv']
+, [47,3,47,4,'dccv']
+, [44,38,44,135,'dcuc']
 ];
 		</script><link rel="stylesheet" type="text/css" href="../css/coverreport.css" />
 	</head><body>
@@ -17,48 +18,47 @@
 // Copyright (c) 2013, John Batte
 // All rights reserved.
 // 
-// Redistribution and use in source and binary forms, with or without modification, are permitted provided that
-// the following conditions are met:
+// Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
 // 
-//  * Redistributions of source code must retain the above copyright notice, this list of conditions and the
-//    following disclaimer.
+//  * Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
 // 
-//  * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the
-//    following disclaimer in the documentation and/or other materials provided with the distribution.
+//  * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the
+//    documentation and/or other materials provided with the distribution.
 // 
-// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED
-// WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
-// PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR
-// ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
-// TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
-// HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-// NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-// POSSIBILITY OF SUCH DAMAGE.
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
+// TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+// CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+// PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+// LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+// SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #endregion
 
-using System.Collections.Generic;
-using System.Linq;
+using System;
+using System.Text;
 
-namespace Patterns.Reflection
+namespace Patterns.Logging
 {
 	/// &lt;summary&gt;
-	///    Provides extensions for ease-of-use during Reflection-based operations.
+	///    Provides type mixins designed to aid in logging operations.
 	/// &lt;/summary&gt;
 	public static class Mixins
 	{
 		/// &lt;summary&gt;
-		///    Gets the property values.
+		///    Creates an aggregated exception message that includes
+		///    messages from all inner exceptions.
 		/// &lt;/summary&gt;
-		/// &lt;param name=&quot;source&quot;&gt;The source.&lt;/param&gt;
-		/// &lt;returns&gt;&lt;/returns&gt;
-		public static IEnumerable&lt;PropertyValue&gt; GetPropertyValues(this object source)
+		/// &lt;param name=&quot;error&quot;&gt;The error.&lt;/param&gt;
+		/// &lt;returns&gt;The aggregated exception message.&lt;/returns&gt;
+		public static string ToFullString(this Exception error)
 		{
-			return source.GetType().GetProperties().Select(property =&gt; new PropertyValue
-			{
-				Name = property.Name,
-				Value = property.GetValue(source, null)
-			});
+			StringBuilder builder = new StringBuilder(error.Message)
+				.AppendLine()
+				.AppendLine(error.StackTrace);
+
+			if (error.InnerException != null) builder.AppendFormat(LoggingResources.InnerExceptionFormat, error.InnerException.ToFullString());
+
+			return builder.ToString();
 		}
 	}
 }</pre></code><script type="text/javascript">

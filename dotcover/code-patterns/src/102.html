@@ -4,61 +4,173 @@
 
 		</script><script type="text/javascript">
 			RANGES_102 = [
-   [39,3,39,4,'dccv']
-, [40,4,42,35,'dccv']
-, [44,4,44,37,'dccv']
-, [46,4,46,30,'dccv']
-, [47,3,47,4,'dccv']
-, [44,38,44,135,'dcuc']
+   [54,3,55,47,'dccv']
+, [55,48,55,49,'dccv']
+, [55,49,55,50,'dccv']
+, [64,3,65,38,'dccv']
+, [66,3,66,4,'dccv']
+, [67,4,67,29,'dccv']
+, [68,4,68,27,'dccv']
+, [69,4,69,21,'dccv']
+, [70,4,70,26,'dccv']
+, [71,3,71,4,'dccv']
+, [74,3,74,4,'dccv']
+, [75,4,75,26,'dccv']
+, [76,4,76,23,'dccv']
+, [77,4,77,21,'dccv']
+, [78,4,78,23,'dccv']
+, [79,4,79,25,'dccv']
+, [80,3,80,4,'dccv']
+, [83,3,83,4,'dccv']
+, [84,4,84,50,'dccv']
+, [85,4,85,25,'dccv']
+, [85,120,85,122,'dccv']
+, [86,4,86,25,'dccv']
+, [86,137,86,139,'dccv']
+, [87,3,87,4,'dccv']
+, [90,3,90,4,'dccv']
+, [91,4,91,50,'dccv']
+, [92,4,92,24,'dccv']
+, [92,123,92,125,'dccv']
+, [93,4,93,25,'dccv']
+, [93,119,93,121,'dccv']
+, [94,3,94,4,'dccv']
+, [97,3,97,4,'dccv']
+, [98,4,98,50,'dccv']
+, [99,4,99,24,'dccv']
+, [99,123,99,125,'dccv']
+, [100,4,100,25,'dccv']
+, [100,117,100,119,'dccv']
+, [101,4,101,61,'dccv']
+, [102,3,102,4,'dccv']
+, [105,3,105,4,'dccv']
+, [106,4,106,39,'dccv']
+, [106,40,106,47,'dccv']
+, [108,4,108,50,'dccv']
+, [110,4,110,25,'dccv']
+, [111,71,111,73,'dccv']
+, [112,3,112,4,'dccv']
+, [85,25,85,120,'dccv']
+, [86,25,86,137,'dccv']
+, [92,24,92,123,'dccv']
+, [93,25,93,119,'dccv']
+, [99,24,99,123,'dccv']
+, [100,25,100,117,'dccv']
+, [110,25,111,71,'dccv']
 ];
 		</script><link rel="stylesheet" type="text/css" href="../css/coverreport.css" />
 	</head><body>
 		<code id="src102" class="dotCoverSource"><pre>#region FreeBSD
 
-// Copyright (c) 2013, John Batte
+// Copyright (c) 2013, The Tribe
 // All rights reserved.
 // 
-// Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+// Redistribution and use in source and binary forms, with or without modification, are permitted provided that
+// the following conditions are met:
 // 
-//  * Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+//  * Redistributions of source code must retain the above copyright notice, this list of conditions and the
+//    following disclaimer.
 // 
-//  * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the
-//    documentation and/or other materials provided with the distribution.
+//  * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the
+//    following disclaimer in the documentation and/or other materials provided with the distribution.
 // 
-// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
-// TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
-// CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
-// PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-// LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
-// SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED
+// WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+// PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR
+// ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+// TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+// HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+// NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+// POSSIBILITY OF SUCH DAMAGE.
 
 #endregion
 
 using System;
-using System.Text;
+
+using Castle.DynamicProxy;
+
+using Common.Logging;
+
+using Patterns.ExceptionHandling;
+using Patterns.Interception;
 
 namespace Patterns.Logging
 {
 	/// &lt;summary&gt;
-	///    Provides type mixins designed to aid in logging operations.
+	///    Provides an &lt;see cref=&quot;IInterceptor&quot; /&gt; implementation that
+	///    uses &lt;see cref=&quot;ILog&quot; /&gt; to log Trace, Debug, Info, and Error
+	///    events throughout the execution of intercepted invocations.
 	/// &lt;/summary&gt;
-	public static class Mixins
+	public class LoggingInterceptor : DelegateInterceptor
 	{
+		private readonly ILoggingConfig _config;
+		private readonly ILogValueFormatter _formatter;
+		private readonly Func&lt;Type, ILog&gt; _logFactory;
+
 		/// &lt;summary&gt;
-		///    Creates an aggregated exception message that includes
-		///    messages from all inner exceptions.
+		///    Initializes a new instance of the &lt;see cref=&quot;LoggingInterceptor&quot; /&gt; class.
 		/// &lt;/summary&gt;
-		/// &lt;param name=&quot;error&quot;&gt;The error.&lt;/param&gt;
-		/// &lt;returns&gt;The aggregated exception message.&lt;/returns&gt;
-		public static string ToFullString(this Exception error)
+		/// &lt;param name=&quot;config&quot;&gt;The config.&lt;/param&gt;
+		/// &lt;param name=&quot;logFactory&quot;&gt;The log factory.&lt;/param&gt;
+		/// &lt;param name=&quot;formatter&quot;&gt;The formatter.&lt;/param&gt;
+		public LoggingInterceptor(ILoggingConfig config, Func&lt;Type, ILog&gt; logFactory, ILogValueFormatter formatter)
+			: this(config, logFactory, formatter, null) {}
+
+		/// &lt;summary&gt;
+		///    Initializes a new instance of the &lt;see cref=&quot;LoggingInterceptor&quot; /&gt; class.
+		/// &lt;/summary&gt;
+		/// &lt;param name=&quot;config&quot;&gt;The config.&lt;/param&gt;
+		/// &lt;param name=&quot;logFactory&quot;&gt;The log factory.&lt;/param&gt;
+		/// &lt;param name=&quot;formatter&quot;&gt;The formatter.&lt;/param&gt;
+		/// &lt;param name=&quot;condition&quot;&gt;The intercept condition.&lt;/param&gt;
+		public LoggingInterceptor(ILoggingConfig config, Func&lt;Type, ILog&gt; logFactory, ILogValueFormatter formatter,
+			Func&lt;IInvocation, bool&gt; condition)
 		{
-			StringBuilder builder = new StringBuilder(error.Message)
-				.AppendLine()
-				.AppendLine(error.StackTrace);
+			_logFactory = logFactory;
+			_formatter = formatter;
+			_config = config;
+			Initialize(condition);
+		}
 
-			if (error.InnerException != null) builder.AppendFormat(LoggingResources.InnerExceptionFormat, error.InnerException.ToFullString());
+		private void Initialize(Func&lt;IInvocation, bool&gt; condition)
+		{
+			Condition = condition;
+			Before = LogBefore;
+			After = LogAfter;
+			OnError = LogError;
+			Finally = LogFinally;
+		}
 
-			return builder.ToString();
+		protected virtual void LogBefore(IInvocation invocation)
+		{
+			ILog log = _logFactory(invocation.TargetType);
+			log.Trace(handler =&gt; handler(LoggingResources.MethodStartTraceFormat, invocation.TargetType, invocation.Method.Name));
+			log.Debug(handler =&gt; handler(LoggingResources.MethodArgsDebugFormat, invocation.Method.Name, _formatter.Format(invocation.Arguments)));
+		}
+
+		protected virtual void LogAfter(IInvocation invocation)
+		{
+			ILog log = _logFactory(invocation.TargetType);
+			log.Info(handler =&gt; handler(LoggingResources.MethodInfoFormat, invocation.Method.Name, LoggingResources.MethodInfoPass));
+			log.Trace(handler =&gt; handler(LoggingResources.MethodStopTraceFormat, invocation.TargetType, invocation.Method.Name));
+		}
+
+		protected virtual ExceptionState LogError(IInvocation invocation, Exception error)
+		{
+			ILog log = _logFactory(invocation.TargetType);
+			log.Info(handler =&gt; handler(LoggingResources.MethodInfoFormat, invocation.Method.Name, LoggingResources.MethodInfoFail));
+			log.Error(handler =&gt; handler(LoggingResources.ExceptionErrorFormat, invocation.Method.Name, error.ToFullString()));
+			return new ExceptionState(error, _config.TrapExceptions);
+		}
+
+		protected virtual void LogFinally(IInvocation invocation)
+		{
+			if (invocation.ReturnValue == null) return;
+
+			ILog log = _logFactory(invocation.TargetType);
+
+			log.Debug(handler =&gt; handler(LoggingResources.MethodReturnDebugFormat,
+				invocation.Method.Name, _formatter.Format(invocation.ReturnValue)));
 		}
 	}
 }</pre></code><script type="text/javascript">

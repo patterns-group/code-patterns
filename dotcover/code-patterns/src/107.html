@@ -4,9 +4,12 @@
 
 		</script><script type="text/javascript">
 			RANGES_107 = [
-   [43,3,43,4,'dccv']
-, [44,4,44,100,'dccv']
-, [45,3,45,4,'dccv']
+   [42,3,42,4,'dccv']
+, [43,4,43,24,'dccv']
+, [44,3,44,4,'dccv']
+, [51,3,51,4,'dccv']
+, [52,4,52,27,'dccv']
+, [53,3,53,4,'dccv']
 ];
 		</script><link rel="stylesheet" type="text/css" href="../css/coverreport.css" />
 	</head><body>
@@ -40,21 +43,31 @@ using System;
 namespace Patterns.Runtime
 {
 	/// &lt;summary&gt;
-	/// 	Provides extensions for accessing and manipulating time-oriented constructs like &lt;see cref=&quot;DateTime&quot; /&gt; and &lt;see
-	///  	cref=&quot;TimeSpan&quot; /&gt; .
+	/// 	Defines a default implementation of the &lt;see cref=&quot;IDateTimeInfo&quot; /&gt; interface.
 	/// &lt;/summary&gt;
-	public static class TimeExtensions
+	public class DefaultDateTimeInfo : IDateTimeInfo
 	{
+		#region IDateTimeInfo Members
+
 		/// &lt;summary&gt;
-		/// 	Returns a &lt;see cref=&quot;DateTime&quot; /&gt; with the same &lt;see cref=&quot;DateTime.Year&quot; /&gt; , &lt;see cref=&quot;DateTime.Month&quot; /&gt; , &lt;see
-		///  	cref=&quot;DateTime.Day&quot; /&gt; , &lt;see cref=&quot;DateTime.Hour&quot; /&gt; , &lt;see cref=&quot;DateTime.Minute&quot; /&gt; , and &lt;see
-		///  	cref=&quot;DateTime.Second&quot; /&gt; values.
+		/// 	Gets the &lt;see cref=&quot;DateTime&quot; /&gt; value representing &quot;now&quot;.
 		/// &lt;/summary&gt;
-		/// &lt;param name=&quot;value&quot;&gt; The value. &lt;/param&gt;
-		public static DateTime AccurateToOneSecond(this DateTime value)
+		/// &lt;returns&gt; &lt;/returns&gt;
+		public DateTime GetNow()
 		{
-			return new DateTime(value.Year, value.Month, value.Day, value.Hour, value.Minute, value.Second);
+			return DateTime.Now;
 		}
+
+		/// &lt;summary&gt;
+		/// Gets the Coordinated Universal Time (UTC) &lt;see cref=&quot;DateTime&quot; /&gt; value representing &quot;now&quot;.
+		/// &lt;/summary&gt;
+		/// &lt;returns&gt;&lt;/returns&gt;
+		public DateTime GetUtcNow()
+		{
+			return DateTime.UtcNow;
+		}
+
+		#endregion
 	}
 }</pre></code><script type="text/javascript">
 			applyranges('src107', RANGES_107)

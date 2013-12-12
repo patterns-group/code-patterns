@@ -4,20 +4,11 @@
 
 		</script><script type="text/javascript">
 			RANGES_106 = [
-   [39,3,39,69,'dcuc']
-, [40,3,40,4,'dcuc']
-, [41,4,41,19,'dcuc']
-, [42,4,42,25,'dcuc']
-, [44,4,44,23,'dcuc']
-, [44,24,44,33,'dcuc']
-, [45,3,45,4,'dcuc']
-, [51,3,51,4,'dcuc']
-, [52,4,52,16,'dcuc']
-, [52,17,52,67,'dcuc']
-, [54,4,54,26,'dcuc']
-, [54,27,54,39,'dcuc']
-, [56,4,56,20,'dcuc']
-, [57,3,57,4,'dcuc']
+   [42,3,42,4,'dccv']
+, [43,4,43,63,'dccv']
+, [47,5,47,7,'dccv']
+, [48,3,48,4,'dccv']
+, [43,63,47,5,'dccv']
 ];
 		</script><link rel="stylesheet" type="text/css" href="../css/coverreport.css" />
 	</head><body>
@@ -26,66 +17,49 @@
 // Copyright (c) 2013, John Batte
 // All rights reserved.
 // 
-// Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+// Redistribution and use in source and binary forms, with or without modification, are permitted provided that
+// the following conditions are met:
 // 
-//  * Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+//  * Redistributions of source code must retain the above copyright notice, this list of conditions and the
+//    following disclaimer.
 // 
-//  * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the
-//    documentation and/or other materials provided with the distribution.
+//  * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the
+//    following disclaimer in the documentation and/or other materials provided with the distribution.
 // 
-// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
-// TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
-// CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
-// PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-// LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
-// SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED
+// WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+// PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR
+// ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+// TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+// HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+// NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+// POSSIBILITY OF SUCH DAMAGE.
 
 #endregion
 
-using System;
+using System.Collections.Generic;
+using System.Linq;
 
-namespace Patterns.Runtime
+namespace Patterns.Reflection
 {
 	/// &lt;summary&gt;
-	///    Provides a disposable scope with configurable setup and tear-down actions.
+	///    Provides extensions for ease-of-use during Reflection-based operations.
 	/// &lt;/summary&gt;
-	public class TemporaryScope : IDisposable
+	public static class Mixins
 	{
-		private readonly Action _setup;
-		private readonly Action _tearDown;
-
 		/// &lt;summary&gt;
-		/// Initializes a new instance of the &lt;see cref=&quot;TemporaryScope&quot; /&gt; class.
+		///    Gets the property values.
 		/// &lt;/summary&gt;
-		/// &lt;param name=&quot;setup&quot;&gt;The setup.&lt;/param&gt;
-		/// &lt;param name=&quot;tearDown&quot;&gt;The tear down.&lt;/param&gt;
-		public TemporaryScope(Action setup = null, Action tearDown = null)
+		/// &lt;param name=&quot;source&quot;&gt;The source.&lt;/param&gt;
+		/// &lt;returns&gt;&lt;/returns&gt;
+		public static IEnumerable&lt;PropertyValue&gt; GetPropertyValues(this object source)
 		{
-			_setup = setup;
-			_tearDown = tearDown;
-
-			if (_setup != null) _setup();
+			return source.GetType().GetProperties().Select(property =&gt; new PropertyValue
+			{
+				Name = property.Name,
+				Value = property.GetValue(source, null)
+			});
 		}
-
-		/// &lt;summary&gt;
-		///    Disposes this scope; if a tear-down method exists, it is executed.
-		/// &lt;/summary&gt;
-		public void Dispose()
-		{
-			if(Disposed) throw new ObjectDisposedException(GetType().Name);
-
-			if (_tearDown != null) _tearDown();
-
-			Disposed = true;
-		}
-
-		/// &lt;summary&gt;
-		/// Gets or sets a value indicating whether this &lt;see cref=&quot;TemporaryScope&quot;/&gt; is disposed.
-		/// &lt;/summary&gt;
-		/// &lt;value&gt;
-		///   &lt;c&gt;true&lt;/c&gt; if disposed; otherwise, &lt;c&gt;false&lt;/c&gt;.
-		/// &lt;/value&gt;
-		public bool Disposed { get; set; }
 	}
 }</pre></code><script type="text/javascript">
 			applyranges('src106', RANGES_106)

@@ -4,121 +4,56 @@
 
 		</script><script type="text/javascript">
 			RANGES_109 = [
-   [40,3,40,4,'dcuc']
-, [41,4,41,34,'dcuc']
-, [42,3,42,4,'dcuc']
-, [53,3,53,4,'dcuc']
-, [54,4,54,32,'dcuc']
-, [55,3,55,4,'dcuc']
-, [67,3,67,4,'dcuc']
-, [68,4,68,34,'dcuc']
-, [69,3,69,4,'dcuc']
-, [83,3,83,4,'dcuc']
-, [84,4,84,47,'dcuc']
-, [85,3,85,4,'dcuc']
-, [96,3,96,4,'dcuc']
-, [97,4,97,32,'dcuc']
-, [98,3,98,4,'dcuc']
+   [43,3,43,4,'dccv']
+, [44,4,44,100,'dccv']
+, [45,3,45,4,'dccv']
 ];
 		</script><link rel="stylesheet" type="text/css" href="../css/coverreport.css" />
 	</head><body>
-		<code id="src109" class="dotCoverSource"><pre>#region FreeBSD
+		<code id="src109" class="dotCoverSource"><pre>#region New BSD License
 
-// Copyright (c) 2013, John Batte
+// Copyright (c) 2012, John Batte
 // All rights reserved.
 // 
-// Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+// Redistribution and use in source and binary forms, with or without modification, are permitted
+// provided that the following conditions are met:
 // 
-//  * Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+// Redistributions of source code must retain the above copyright notice, this list of conditions
+// and the following disclaimer.
 // 
-//  * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the
-//    documentation and/or other materials provided with the distribution.
+// Redistributions in binary form must reproduce the above copyright notice, this list of conditions
+// and the following disclaimer in the documentation and/or other materials provided with the distribution.
 // 
-// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
-// TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
-// CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
-// PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-// LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
-// SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED
+// WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+// PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR
+// ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+// TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+// HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+// NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+// POSSIBILITY OF SUCH DAMAGE.
 
 #endregion
 
-using System.Text.RegularExpressions;
+using System;
 
-namespace Patterns.Text.RegularExpressions
+namespace Patterns.Runtime
 {
 	/// &lt;summary&gt;
-	/// Defines a default implementation of the &lt;see cref=&quot;IRegexEvaluator&quot;/&gt; interface.
+	/// 	Provides extensions for accessing and manipulating time-oriented constructs like &lt;see cref=&quot;DateTime&quot; /&gt; and &lt;see
+	///  	cref=&quot;TimeSpan&quot; /&gt; .
 	/// &lt;/summary&gt;
-	public class RegexEvaluator : IRegexEvaluator
+	public static class TimeExtensions
 	{
 		/// &lt;summary&gt;
-		/// Indicates whether the regular expression finds a match in the input string.
+		/// 	Returns a &lt;see cref=&quot;DateTime&quot; /&gt; with the same &lt;see cref=&quot;DateTime.Year&quot; /&gt; , &lt;see cref=&quot;DateTime.Month&quot; /&gt; , &lt;see
+		///  	cref=&quot;DateTime.Day&quot; /&gt; , &lt;see cref=&quot;DateTime.Hour&quot; /&gt; , &lt;see cref=&quot;DateTime.Minute&quot; /&gt; , and &lt;see
+		///  	cref=&quot;DateTime.Second&quot; /&gt; values.
 		/// &lt;/summary&gt;
-		/// &lt;param name=&quot;input&quot;&gt;The string to search for a match.&lt;/param&gt;
-		/// &lt;param name=&quot;pattern&quot;&gt;The regular expression pattern to match.&lt;/param&gt;
-		/// &lt;returns&gt;
-		///   &lt;c&gt;true&lt;/c&gt; if the regular expression finds a match; otherwise, &lt;c&gt;false&lt;/c&gt;.
-		/// &lt;/returns&gt;
-		public bool IsMatch(string input, CompiledRegex pattern)
+		/// &lt;param name=&quot;value&quot;&gt; The value. &lt;/param&gt;
+		public static DateTime AccurateToOneSecond(this DateTime value)
 		{
-			return pattern.IsMatch(input);
-		}
-
-		/// &lt;summary&gt;
-		/// Searches the specified input string for the first occurrence of the specified regular expression.
-		/// &lt;/summary&gt;
-		/// &lt;param name=&quot;input&quot;&gt;The string to search for a match.&lt;/param&gt;
-		/// &lt;param name=&quot;pattern&quot;&gt;The regular expression pattern to match.&lt;/param&gt;
-		/// &lt;returns&gt;
-		/// An object that contains information about the match.
-		/// &lt;/returns&gt;
-		public Match Match(string input, CompiledRegex pattern)
-		{
-			return pattern.Match(input);
-		}
-
-		/// &lt;summary&gt;
-		/// Searches the specified input string for all occurrences of a specified regular expression.
-		/// &lt;/summary&gt;
-		/// &lt;param name=&quot;input&quot;&gt;The string to search for a match.&lt;/param&gt;
-		/// &lt;param name=&quot;pattern&quot;&gt;The regular expression pattern to match.&lt;/param&gt;
-		/// &lt;returns&gt;
-		/// A collection of the &lt;see cref=&quot;Match&quot; /&gt; objects found by the search.
-		/// If no matches are found, the method returns an empty collection object.
-		/// &lt;/returns&gt;
-		public MatchCollection Matches(string input, CompiledRegex pattern)
-		{
-			return pattern.Matches(input);
-		}
-
-		/// &lt;summary&gt;
-		/// In a specified input string, replaces all strings that match a specified
-		/// regular expression with a specified replacement string.
-		/// &lt;/summary&gt;
-		/// &lt;param name=&quot;input&quot;&gt;The string to search for a match.&lt;/param&gt;
-		/// &lt;param name=&quot;pattern&quot;&gt;The regular expression pattern to match.&lt;/param&gt;
-		/// &lt;param name=&quot;replacement&quot;&gt;The replacement string.&lt;/param&gt;
-		/// &lt;returns&gt;
-		/// A new string that is identical to the input string, except that the replacement
-		/// string takes the place of each matched string.
-		/// &lt;/returns&gt;
-		public string Replace(string input, CompiledRegex pattern, string replacement)
-		{
-			return pattern.Replace(input, replacement);
-		}
-
-		/// &lt;summary&gt;
-		/// Splits an input string into an array of substrings at the positions defined by a regular expression pattern.
-		/// &lt;/summary&gt;
-		/// &lt;param name=&quot;input&quot;&gt;The string to search for a match.&lt;/param&gt;
-		/// &lt;param name=&quot;pattern&quot;&gt;The regular expression pattern to match.&lt;/param&gt;
-		/// &lt;returns&gt;
-		/// An array of strings.
-		/// &lt;/returns&gt;
-		public string[] Split(string input, CompiledRegex pattern)
-		{
-			return pattern.Split(input);
+			return new DateTime(value.Year, value.Month, value.Day, value.Hour, value.Minute, value.Second);
 		}
 	}
 }</pre></code><script type="text/javascript">

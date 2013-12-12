@@ -22,7 +22,7 @@
 , [78,61,78,62,'dccv']
 , [79,3,79,4,'dccv']
 , [83,3,83,4,'dccv']
-, [84,4,84,93,'dccv']
+, [84,4,84,122,'dccv']
 , [85,3,85,4,'dccv']
 , [89,3,89,4,'dccv']
 , [90,4,90,41,'dccv']
@@ -118,7 +118,7 @@ namespace Patterns.Specifications.Steps.Logging
 		[Given(@&quot;I have a logging interceptor&quot;)]
 		public void CreateLoggingInterceptor()
 		{
-			_interception.Interceptor = new LoggingInterceptor(_context.Config, _context.LogFactory);
+			_interception.Interceptor = new LoggingInterceptor(_context.Config, _context.LogFactory, new JsonLogValueFormatter());
 		}
 
 		[Given(@&quot;I have a dynamic proxy to the logging test subject&quot;)]
