@@ -75,6 +75,7 @@ namespace Patterns.Autofac.Logging
 					throw ErrorBuilder.BuildContainerException(registrationError, ConfigurationResources.MissingConfigSourceErrorHint);
 				}
 			}).As<ILoggingConfig>();
+			builder.RegisterInstance(new JsonLogValueFormatter()).As<ILogValueFormatter>();
 			builder.RegisterType<LoggingInterceptor>();
 		}
 

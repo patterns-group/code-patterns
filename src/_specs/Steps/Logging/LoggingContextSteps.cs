@@ -81,7 +81,7 @@ namespace Patterns.Specifications.Steps.Logging
 		[Given(@"I have a logging interceptor")]
 		public void CreateLoggingInterceptor()
 		{
-			_interception.Interceptor = new LoggingInterceptor(_context.Config, _context.LogFactory);
+			_interception.Interceptor = new LoggingInterceptor(_context.Config, _context.LogFactory, new JsonLogValueFormatter());
 		}
 
 		[Given(@"I have a dynamic proxy to the logging test subject")]
