@@ -2,6 +2,14 @@
 
 The following log details the outward-facing changes made to code-patterns since its first migration to GitHub.
 
+## 3.10 ##
+
+- Provided greater flexibility in `LoggingInterceptor` by making the argument and return value formatter injectable ([issue 139](https://github.com/TheTribe/code-patterns/issues/139))
+ - introduced new interface: `ILogValueFormatter`
+ - new base type for value formatters: `LogValueFormatterBase`
+ - new formatter type: `JsonLogValueFormatter`
+ - updated tests and modules to include the new types
+
 ## 3.10-beta.5 ##
 
 - Dropped reference to Reactive Extensions ([issue 123](https://github.com/TheTribe/code-patterns/issues/123))
