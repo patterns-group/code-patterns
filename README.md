@@ -1,0 +1,1 @@
+## markdown posts for the code-patterns blog
