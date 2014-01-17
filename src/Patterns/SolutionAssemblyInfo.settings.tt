@@ -1,10 +1,10 @@
 ﻿<#
 Settings.Initialize(
 	majorNumber: 3,
-	minorNumber: 10,
+	minorNumber: 11,
 	patchNumber: 0,
-	buildNumber: null,
-	buildLevel: BuildLevels.None
+	buildNumber: 1,
+	buildLevel: BuildLevels.Beta
 );
 #><#+
 public enum BuildLevels
