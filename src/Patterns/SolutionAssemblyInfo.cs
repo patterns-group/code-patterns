@@ -1,6 +1,6 @@
 #region FreeBSD
 
-// Copyright (c) 2013, The Tribe
+// Copyright (c) 2014, The Tribe
 // All rights reserved.
 // 
 // Redistribution and use in source and binary forms, with or without modification, are permitted provided that
@@ -30,9 +30,10 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("The Tribe")]
 [assembly: AssemblyProduct("Code Patterns")]
-[assembly: AssemblyCopyright("Copyright © 2013")]
+[assembly: AssemblyCopyright("Copyright © 2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
 [assembly: NeutralResourcesLanguage("en-US")]
-[assembly: AssemblyVersion("3.10.0")]
+[assembly: AssemblyVersion("3.11.0")]
+[assembly: AssemblyInformationalVersion("3.11.0-beta1")]
