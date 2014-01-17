@@ -1,0 +1,28 @@
+var searchData=
+[
+  ['autofac',['Autofac',['../namespace_patterns_1_1_autofac.html',1,'Patterns']]],
+  ['autofac',['Autofac',['../namespace_patterns_1_1_testing_1_1_autofac.html',1,'Patterns::Testing']]],
+  ['collections',['Collections',['../namespace_patterns_1_1_collections.html',1,'Patterns']]],
+  ['configuration',['Configuration',['../namespace_patterns_1_1_configuration.html',1,'Patterns']]],
+  ['configuration',['Configuration',['../namespace_patterns_1_1_testing_1_1_configuration.html',1,'Patterns::Testing']]],
+  ['configuration',['Configuration',['../namespace_patterns_1_1_autofac_1_1_configuration.html',1,'Patterns::Autofac']]],
+  ['exceptionhandling',['ExceptionHandling',['../namespace_patterns_1_1_exception_handling.html',1,'Patterns']]],
+  ['interception',['Interception',['../namespace_patterns_1_1_interception.html',1,'Patterns']]],
+  ['logging',['Logging',['../namespace_patterns_1_1_autofac_1_1_logging.html',1,'Patterns::Autofac']]],
+  ['logging',['Logging',['../namespace_patterns_1_1_logging.html',1,'Patterns']]],
+  ['mapping',['Mapping',['../namespace_patterns_1_1_autofac_1_1_mapping.html',1,'Patterns::Autofac']]],
+  ['mapping',['Mapping',['../namespace_patterns_1_1_mapping.html',1,'Patterns']]],
+  ['modules',['Modules',['../namespace_patterns_1_1_autofac_1_1_modules.html',1,'Patterns::Autofac']]],
+  ['moq',['Moq',['../namespace_patterns_1_1_testing_1_1_autofac_1_1_moq.html',1,'Patterns::Testing::Autofac']]],
+  ['moq',['Moq',['../namespace_patterns_1_1_testing_1_1_moq.html',1,'Patterns::Testing']]],
+  ['patterns',['Patterns',['../namespace_patterns.html',1,'']]],
+  ['properties',['Properties',['../namespace_patterns_1_1_testing_1_1_autofac_1_1_properties.html',1,'Patterns::Testing::Autofac']]],
+  ['reflection',['Reflection',['../namespace_patterns_1_1_reflection.html',1,'Patterns']]],
+  ['regularexpressions',['RegularExpressions',['../namespace_patterns_1_1_text_1_1_regular_expressions.html',1,'Patterns::Text']]],
+  ['runtime',['Runtime',['../namespace_patterns_1_1_runtime.html',1,'Patterns']]],
+  ['sources',['Sources',['../namespace_patterns_1_1_autofac_1_1_sources.html',1,'Patterns::Autofac']]],
+  ['strategies',['Strategies',['../namespace_patterns_1_1_collections_1_1_strategies.html',1,'Patterns::Collections']]],
+  ['testing',['Testing',['../namespace_patterns_1_1_testing.html',1,'Patterns']]],
+  ['text',['Text',['../namespace_patterns_1_1_text.html',1,'Patterns']]],
+  ['values',['Values',['../namespace_patterns_1_1_testing_1_1_values.html',1,'Patterns::Testing']]]
+];
