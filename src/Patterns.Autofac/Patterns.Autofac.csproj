@@ -33,6 +33,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\Patterns.Autofac.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Autofac, Version=3.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
@@ -64,10 +65,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\Patterns\SolutionAssemblyInfo.cs">
-      <Link>Properties\SolutionAssemblyInfo.cs</Link>
-    </Compile>
     <Compile Include="AccessibleContainer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <DependentUpon>AssemblyInfo.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Configuration\ConfigurationModule.cs" />
     <Compile Include="Configuration\ConfigurationResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -83,7 +86,6 @@
     <Compile Include="Logging\LoggingModule.cs" />
     <Compile Include="Mapping\MappingModule.cs" />
     <Compile Include="Modules\RuntimeModule.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sources\ResolveCreatableSource.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -93,6 +95,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Properties\AssemblyInfo.settings.tt" />
+    <None Include="Properties\AssemblyInfo.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>AssemblyInfo.cs</LastGenOutput>
+    </None>
     <None Include="packages.config" />
     <None Include="Patterns.Autofac.nuspec">
       <AutoGen>True</AutoGen>

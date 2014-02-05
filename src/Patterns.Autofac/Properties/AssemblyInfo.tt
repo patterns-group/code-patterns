@@ -1,6 +1,20 @@
-#region FreeBSD
+<#@ template debug="false" hostspecific="false" language="C#" #><#@
+assembly name="System.Core" #><#@
+import namespace="System.Linq" #><#@
+import namespace="System.Text" #><#@
+import namespace="System.Collections.Generic" #><#@
+include file="AssemblyInfo.settings.tt" #><#@
+output extension=".cs" #><#
+var version = new StringBuilder().AppendFormat("{0}.{1}.{2}", Settings.MajorNumber, Settings.MinorNumber, Settings.PatchNumber);
+var info = new StringBuilder(version.ToString());
+var buildLevel = Settings.BuildLevel ?? BuildLevels.None;
 
-// Copyright (c) 2014, The Tribe
+if(buildLevel != BuildLevels.None) info.Append(Settings.BuildLevelSuffix);
+
+if(Settings.BuildNumber.HasValue) info.Append(Settings.BuildNumber);
+#>#region FreeBSD
+
+// Copyright (c) <#= DateTime.Now.Year #>, The Tribe
 // All rights reserved.
 // 
 // Redistribution and use in source and binary forms, with or without modification, are permitted provided that
@@ -27,15 +41,17 @@ using System.Reflection;
 using System.Resources;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("Patterns.Testing")]
-[assembly: AssemblyDescription("Code Patterns: Testing Tools")]
-[assembly: Guid("7b96c78b-97af-4015-b604-362b037b7624")]
+[assembly: AssemblyTitle("Patterns.Autofac")]
+[assembly: AssemblyDescription("Code Patterns: Extensions for Autofac")]
+[assembly: Guid("c3e30d99-0b30-4784-9111-c3f30de4fedf")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("The Tribe")]
 [assembly: AssemblyProduct("Code Patterns")]
-[assembly: AssemblyCopyright("Copyright © 2014")]
+[assembly: AssemblyCopyright("Copyright © <#= DateTime.Now.Year #>")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
 [assembly: NeutralResourcesLanguage("en-US")]
-[assembly: AssemblyVersion("3.11.0")]
+[assembly: AssemblyVersion("<#= version #>")]
+<# if(buildLevel != BuildLevels.None){ #>
+[assembly: AssemblyInformationalVersion("<#= info #>")]<# } #>

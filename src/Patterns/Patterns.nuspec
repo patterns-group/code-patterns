@@ -9,6 +9,6 @@
 		<title>$id$</title>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>$description$ -- for 0.x backward compatibility, see $id$.Legacy.</description>
-		<copyright>Copyright © 2013</copyright>
+		<copyright>Copyright © 2014</copyright>
 	</metadata>
 </package>
