@@ -2,6 +2,10 @@
 
 The following log details the outward-facing changes made to code-patterns since its first migration to GitHub.
 
+## 3.11 ##
+
+- Updated resources to reflect new versioning/deployment plans (stable-only on NuGet/CI builds on MyGet)
+
 ## 3.11-beta.1 ##
 
 - Bumped Autofac dependencies to version 3.3.0 ([issue 143](https://github.com/TheTribe/code-patterns/issues/143))

@@ -3,8 +3,8 @@ Settings.Initialize(
 	majorNumber: 3,
 	minorNumber: 11,
 	patchNumber: 0,
-	buildNumber: 1,
-	buildLevel: BuildLevels.Beta
+	buildNumber: 0,
+	buildLevel: BuildLevels.None
 );
 #><#+
 public enum BuildLevels
