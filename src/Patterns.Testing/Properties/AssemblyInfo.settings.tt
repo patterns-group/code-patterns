@@ -1,0 +1,52 @@
+﻿<#
+Settings.Initialize(
+	majorNumber: 3,
+	minorNumber: 11,
+	patchNumber: 0,
+	buildNumber: 0,
+	buildLevel: BuildLevels.None
+);
+#><#+
+public enum BuildLevels
+{
+	None, // no build level tag needed
+	Alpha, // feature incomplete testing
+	Beta, // feature complete testing
+	Build, // internal, feature incomplete, release
+	PreRelease, // publicly available, feature complete, potential final release
+	ReleaseCandidate // internal, feature complete, potential final release
+}
+
+public static class Settings
+{
+	private static readonly IDictionary<BuildLevels, string> _buildLevelSuffixes
+		= new Dictionary<BuildLevels, string>
+		{
+			{ BuildLevels.Alpha, "-alpha" },
+			{ BuildLevels.Beta, "-beta" },
+			{ BuildLevels.Build, "-build" },
+			{ BuildLevels.PreRelease, "-pr" },
+			{ BuildLevels.ReleaseCandidate, "-rc" }
+		};
+
+	public static int MajorNumber{ get; private set; }
+	public static int MinorNumber{ get; private set; }
+	public static int PatchNumber{ get; private set; }
+	public static int? BuildNumber{ get; private set; }
+	public static BuildLevels? BuildLevel{ get; private set; }
+	public static string BuildLevelSuffix{ get; private set; }
+
+	public static void Initialize(int majorNumber = 0, int minorNumber = 0, int patchNumber = 0,
+		int? buildNumber = null, BuildLevels? buildLevel = null)
+	{
+		MajorNumber = majorNumber;
+		MinorNumber = minorNumber;
+		PatchNumber = patchNumber;
+		BuildNumber = buildNumber;
+		BuildLevel = buildLevel;
+		BuildLevelSuffix = buildLevel.HasValue && _buildLevelSuffixes.ContainsKey(buildLevel.Value)
+			? _buildLevelSuffixes[buildLevel.Value]
+			: null;
+	}
+}
+#>
