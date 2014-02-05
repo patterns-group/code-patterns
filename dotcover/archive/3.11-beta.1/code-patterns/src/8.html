@@ -1,0 +1,34 @@
+<html>
+	<head>
+		<script type="text/javascript" src="../js/coverreport.js">
+
+		</script><script type="text/javascript">
+			RANGES_8 = [
+   [6,1,6,34,'dccv']
+, [7,2,7,184,'dccv']
+, [8,2,8,154,'dccv']
+, [9,2,9,161,'dccv']
+];
+		</script><link rel="stylesheet" type="text/css" href="../css/coverreport.css" />
+	</head><body>
+		<code id="src8" class="dotCoverSource"><pre>Feature: Equality Comparer
+	In order to avoid the need to create new equality comparer types for niche use cases
+	As a developer
+	I want to be able to use a comparer that lets me override its default behavior
+
+Scenario Outline: String Comparisons
+	Given I have created a new equality comparer for strings using the &lt;strategy&gt; strategy
+	When I compare the &lt;left&gt; string to the &lt;right&gt; string
+	Then the result of the &quot;is equal&quot; operation should be &lt;result&gt;
+Examples: 
+	| strategy         | left  | right | result |
+	| default          | hello | HELLO | false  |
+	| default          | hello | hello | true   |
+	| case sensitive   | hello | HELLO | false  |
+	| case sensitive   | hello | hello | true   |
+	| case insensitive | hello | HELLO | true   |
+	| case insensitive | hello | hello | true   |</pre></code><script type="text/javascript">
+			applyranges('src8', RANGES_8)
+		</script>
+	</body>
+</html>

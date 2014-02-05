@@ -1,0 +1,279 @@
+<html>
+	<head>
+		<script type="text/javascript" src="../js/coverreport.js">
+
+		</script><script type="text/javascript">
+			RANGES_95 = [
+   [52,3,52,4,'dccv']
+, [53,4,53,55,'dccv']
+, [54,3,54,4,'dccv']
+, [64,3,64,4,'dccv']
+, [65,4,65,65,'dccv']
+, [66,3,66,4,'dccv']
+, [121,3,121,4,'dccv']
+, [122,4,122,27,'dccv']
+, [123,4,123,77,'dccv']
+, [124,4,124,28,'dccv']
+, [129,4,129,95,'dccv']
+, [130,4,130,34,'dccv']
+, [135,3,135,4,'dccv']
+, [138,3,138,4,'dccv']
+, [139,4,139,63,'dccv']
+, [140,4,140,25,'dccv']
+, [142,4,144,32,'dccv']
+, [144,114,144,116,'dccv']
+, [146,4,146,34,'dccv']
+, [148,4,148,97,'dccv']
+, [150,4,150,28,'dccv']
+, [153,4,154,31,'dccv']
+, [154,100,154,102,'dccv']
+, [155,4,155,30,'dccv']
+, [157,4,157,81,'dccv']
+, [160,4,160,5,'dccv']
+, [161,5,161,93,'dccv']
+, [167,3,167,4,'dccv']
+, [171,3,171,4,'dccv']
+, [172,4,172,32,'dccv']
+, [174,4,174,95,'dccv']
+, [175,4,175,88,'dccv']
+, [175,109,175,111,'dccv']
+, [176,4,176,27,'dccv']
+, [176,28,176,40,'dccv']
+, [179,4,179,5,'dccv']
+, [180,5,180,75,'dccv']
+, [181,4,181,5,'dccv']
+, [187,4,187,18,'dccv']
+, [188,3,188,4,'dccv']
+, [26,3,26,66,'dccv']
+, [154,31,154,100,'dccv']
+, [175,88,175,109,'dccv']
+, [144,32,144,114,'dccv']
+, [75,3,75,4,'dcuc']
+, [76,4,76,38,'dcuc']
+, [85,3,85,4,'dcuc']
+, [86,4,86,38,'dcuc']
+, [94,58,94,59,'dcuc']
+, [94,59,94,60,'dcuc']
+, [105,3,105,4,'dcuc']
+, [106,4,106,38,'dcuc']
+, [116,3,116,4,'dcuc']
+, [117,4,117,38,'dcuc']
+, [125,4,125,5,'dcuc']
+, [126,5,127,27,'dcuc']
+, [127,70,127,72,'dcuc']
+, [128,4,128,5,'dcuc']
+, [131,4,131,5,'dcuc']
+, [132,5,133,32,'dcuc']
+, [133,67,133,69,'dcuc']
+, [134,4,134,5,'dcuc']
+, [140,26,140,38,'dcuc']
+, [146,35,146,47,'dcuc']
+, [150,29,150,41,'dcuc']
+, [155,31,155,43,'dcuc']
+, [163,4,163,43,'dcuc']
+, [164,4,164,5,'dcuc']
+, [165,5,165,32,'dcuc']
+, [182,4,182,43,'dcuc']
+, [183,4,183,5,'dcuc']
+, [184,5,184,32,'dcuc']
+, [127,27,127,30,'dcuc']
+, [133,32,133,45,'dcuc']
+, [133,59,133,67,'dcuc']
+, [127,39,127,70,'dcuc']
+];
+		</script><link rel="stylesheet" type="text/css" href="../css/coverreport.css" />
+	</head><body>
+		<code id="src95" class="dotCoverSource"><pre>using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Linq;
+using System.Reflection;
+using System.Xml.Linq;
+
+using Patterns.Text.RegularExpressions;
+
+namespace Patterns.Configuration
+{
+	/// &lt;summary&gt;
+	///    Provides a configuration source that uses an in-memory configuration rather than a
+	///    file-based one.
+	/// &lt;/summary&gt;
+	public abstract class InMemoryConfigurationSource : IConfigurationSource
+	{
+		protected const string AppSettingsSectionName = &quot;appSettings&quot;;
+		protected const string ConnectionStringsSectionName = &quot;connectionStrings&quot;;
+		protected const string ConfigSectionsElementName = &quot;configSections&quot;;
+		protected const string SectionElementName = &quot;section&quot;;
+		protected const string NameAttributeName = &quot;name&quot;;
+		protected const string TypeAttributeName = &quot;type&quot;;
+		protected const string DeserializeSectionMethodName = &quot;DeserializeSection&quot;;
+		protected const char PathSeparator = &#39;/&#39;;
+		protected readonly CompiledRegex SectionNamePattern = &quot;[^/]+$&quot;;
+		private XContainer _configXml;
+
+		/// &lt;summary&gt;
+		///    Gets the app settings.
+		/// &lt;/summary&gt;
+		/// &lt;value&gt;
+		///    The app settings.
+		/// &lt;/value&gt;
+		public virtual IDictionary&lt;string, string&gt; AppSettings { get; private set; }
+
+		/// &lt;summary&gt;
+		///    Gets the connection strings.
+		/// &lt;/summary&gt;
+		/// &lt;value&gt;
+		///    The connection strings.
+		/// &lt;/value&gt;
+		public virtual IDictionary&lt;string, ConnectionStringSettings&gt; ConnectionStrings { get; private set; }
+
+		/// &lt;summary&gt;
+		///    Gets the section.
+		/// &lt;/summary&gt;
+		/// &lt;param name=&quot;sectionName&quot;&gt;Name of the section.&lt;/param&gt;
+		/// &lt;returns&gt;&lt;/returns&gt;
+		/// &lt;exception cref=&quot;System.NotImplementedException&quot;&gt;&lt;/exception&gt;
+		public virtual ConfigurationSection GetSection(string sectionName)
+		{
+			return DeserializeSection(_configXml, sectionName);
+		}
+
+		/// &lt;summary&gt;
+		///    Gets the section.
+		/// &lt;/summary&gt;
+		/// &lt;typeparam name=&quot;TSection&quot;&gt;The type of the section.&lt;/typeparam&gt;
+		/// &lt;param name=&quot;sectionName&quot;&gt;Name of the section.&lt;/param&gt;
+		/// &lt;returns&gt;&lt;/returns&gt;
+		/// &lt;exception cref=&quot;System.NotImplementedException&quot;&gt;&lt;/exception&gt;
+		public virtual TSection GetSection&lt;TSection&gt;(string sectionName) where TSection : ConfigurationSection, new()
+		{
+			return DeserializeSection&lt;TSection&gt;(_configXml, sectionName);
+		}
+
+		/// &lt;summary&gt;
+		///    Opens the exe configuration.
+		/// &lt;/summary&gt;
+		/// &lt;param name=&quot;exePath&quot;&gt;The exe path.&lt;/param&gt;
+		/// &lt;returns&gt;&lt;/returns&gt;
+		/// &lt;exception cref=&quot;System.NotImplementedException&quot;&gt;&lt;/exception&gt;
+		public virtual IConfiguration OpenExeConfiguration(string exePath)
+		{
+			throw new NotSupportedException();
+		}
+
+		/// &lt;summary&gt;
+		///    Opens the machine configuration.
+		/// &lt;/summary&gt;
+		/// &lt;returns&gt;&lt;/returns&gt;
+		/// &lt;exception cref=&quot;System.NotImplementedException&quot;&gt;&lt;/exception&gt;
+		public virtual IConfiguration OpenMachineConfiguration()
+		{
+			throw new NotSupportedException();
+		}
+
+		/// &lt;summary&gt;
+		///    Refreshes the section.
+		/// &lt;/summary&gt;
+		/// &lt;param name=&quot;sectionName&quot;&gt;Name of the section.&lt;/param&gt;
+		/// &lt;exception cref=&quot;System.NotImplementedException&quot;&gt;&lt;/exception&gt;
+		public virtual void RefreshSection(string sectionName) {}
+
+		/// &lt;summary&gt;
+		///    Opens the mapped exe configuration.
+		/// &lt;/summary&gt;
+		/// &lt;param name=&quot;fileMap&quot;&gt;The file map.&lt;/param&gt;
+		/// &lt;param name=&quot;userLevel&quot;&gt;The user level.&lt;/param&gt;
+		/// &lt;returns&gt;&lt;/returns&gt;
+		/// &lt;exception cref=&quot;System.NotImplementedException&quot;&gt;&lt;/exception&gt;
+		public virtual IConfiguration OpenMappedExeConfiguration(ExeConfigurationFileMap fileMap,
+			ConfigurationUserLevel userLevel)
+		{
+			throw new NotSupportedException();
+		}
+
+		/// &lt;summary&gt;
+		///    Opens the exe configuration.
+		/// &lt;/summary&gt;
+		/// &lt;param name=&quot;userLevel&quot;&gt;The user level.&lt;/param&gt;
+		/// &lt;returns&gt;&lt;/returns&gt;
+		/// &lt;exception cref=&quot;System.NotImplementedException&quot;&gt;&lt;/exception&gt;
+		public virtual IConfiguration OpenExeConfiguration(ConfigurationUserLevel userLevel)
+		{
+			throw new NotSupportedException();
+		}
+
+		protected void SetConfigurationXml(XContainer configXml)
+		{
+			_configXml = configXml;
+			var appSettings = GetSection&lt;AppSettingsSection&gt;(AppSettingsSectionName);
+			if (appSettings != null)
+			{
+				AppSettings = appSettings.Settings.AllKeys
+					.ToDictionary(key =&gt; key, key =&gt; appSettings.Settings[key].Value);
+			}
+			var connectionStrings = GetSection&lt;ConnectionStringsSection&gt;(ConnectionStringsSectionName);
+			if (connectionStrings != null)
+			{
+				ConnectionStrings = connectionStrings.ConnectionStrings.OfType&lt;ConnectionStringSettings&gt;()
+					.ToDictionary(settings =&gt; settings.Name, settings =&gt; settings);
+			}
+		}
+
+		protected virtual ConfigurationSection DeserializeSection(XContainer xml, string name)
+		{
+			XElement sections = xml.Element(ConfigSectionsElementName);
+			if (sections == null) return null;
+
+			XElement sectionDefinition = sections
+				.Descendants(SectionElementName)
+				.FirstOrDefault(section =&gt; section.Attribute(NameAttributeName).Value == SectionNamePattern.Match(name).Value);
+
+			if (sectionDefinition == null) return null;
+
+			Type sectionType = Type.GetType(sectionDefinition.Attribute(TypeAttributeName).Value, false);
+
+			if (sectionType == null) return null;
+
+			const BindingFlags flags = BindingFlags.Static | BindingFlags.NonPublic;
+			MethodInfo genericFlavor = typeof (InMemoryConfigurationSource).GetMethods(flags)
+				.FirstOrDefault(method =&gt; method.Name == DeserializeSectionMethodName &amp;&amp; method.IsGenericMethod);
+			if (genericFlavor == null) return null;
+
+			MethodInfo typedGenericFlavor = genericFlavor.MakeGenericMethod(sectionType);
+
+			try
+			{
+				return (ConfigurationSection) typedGenericFlavor.Invoke(null, new object[] {xml, name});
+			}
+			catch (TargetInvocationException error)
+			{
+				throw error.InnerException;
+			}
+		}
+
+		protected static TSection DeserializeSection&lt;TSection&gt;(XContainer xml, string name)
+			where TSection : ConfigurationSection, new()
+		{
+			var config = new TSection();
+			const BindingFlags flags = BindingFlags.Instance | BindingFlags.NonPublic;
+			MethodInfo deserializer = typeof (TSection).GetMethod(DeserializeSectionMethodName, flags);
+			XContainer sectionXml = name.Split(PathSeparator).Aggregate(xml, (current, part) =&gt; current.Element(part));
+			if (sectionXml == null) return null;
+
+			try
+			{
+				deserializer.Invoke(config, new object[] {sectionXml.CreateReader()});
+			}
+			catch (TargetInvocationException error)
+			{
+				throw error.InnerException;
+			}
+
+			return config;
+		}
+	}
+}</pre></code><script type="text/javascript">
+			applyranges('src95', RANGES_95)
+		</script>
+	</body>
+</html>

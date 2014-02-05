@@ -1,0 +1,94 @@
+<html>
+	<head>
+		<script type="text/javascript" src="../js/coverreport.js">
+
+		</script><script type="text/javascript">
+			RANGES_52 = [
+   [41,3,41,49,'dccv']
+, [42,3,42,4,'dccv']
+, [43,4,43,23,'dccv']
+, [44,3,44,4,'dccv']
+, [48,3,48,4,'dccv']
+, [49,4,49,52,'dccv']
+, [50,3,50,4,'dccv']
+, [54,3,54,4,'dccv']
+, [55,4,55,41,'dccv']
+, [55,53,55,100,'dccv']
+, [56,3,56,4,'dccv']
+, [60,3,60,4,'dccv']
+, [61,4,61,41,'dccv']
+, [61,53,61,89,'dccv']
+, [62,3,62,4,'dccv']
+, [55,41,55,53,'dccv']
+, [61,41,61,53,'dccv']
+];
+		</script><link rel="stylesheet" type="text/css" href="../css/coverreport.css" />
+	</head><body>
+		<code id="src52" class="dotCoverSource"><pre>#region FreeBSD
+
+// Copyright (c) 2013, John Batte
+// All rights reserved.
+// 
+// Redistribution and use in source and binary forms, with or without modification, are permitted provided that
+// the following conditions are met:
+// 
+//  * Redistributions of source code must retain the above copyright notice, this list of conditions and the
+//    following disclaimer.
+// 
+//  * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the
+//    following disclaimer in the documentation and/or other materials provided with the distribution.
+// 
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED
+// WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+// PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR
+// ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+// TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+// HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+// NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+// POSSIBILITY OF SUCH DAMAGE.
+
+#endregion
+
+using System.Linq;
+
+using FluentAssertions;
+
+using Patterns.Specifications.Models.Collections;
+
+using TechTalk.SpecFlow;
+
+namespace Patterns.Specifications.Steps.Collections
+{
+	[Binding]
+	public class InvocationLogSteps
+	{
+		private readonly EachContext _context;
+
+		public InvocationLogSteps(EachContext context)
+		{
+			_context = context;
+		}
+
+		[Then(@&quot;the invocation log should contain (.*) items&quot;)]
+		public void AssertLogCount(int count)
+		{
+			_context.InvocationLog.Count.Should().Be(count);
+		}
+
+		[Then(@&quot;there should be more than one unique Thread ID in the invocation log&quot;)]
+		public void AssertMultipleThreadsInLog()
+		{
+			_context.InvocationLog.Select(log =&gt; log.ThreadId).Distinct().Count().Should().BeGreaterThan(1);
+		}
+
+		[Then(@&quot;each Thread ID in the invocation log should be the same&quot;)]
+		public void AssertSingleThreadInLog()
+		{
+			_context.InvocationLog.Select(log =&gt; log.ThreadId).Distinct().Count().Should().Be(1);
+		}
+	}
+}</pre></code><script type="text/javascript">
+			applyranges('src52', RANGES_52)
+		</script>
+	</body>
+</html>

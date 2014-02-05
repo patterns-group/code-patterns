@@ -1,0 +1,37 @@
+<html>
+	<head>
+		<script type="text/javascript" src="../js/coverreport.js">
+
+		</script><script type="text/javascript">
+			RANGES_41 = [
+   [13,3,13,107,'dccv']
+, [14,3,14,4,'dccv']
+, [15,4,15,30,'dccv']
+, [16,4,16,30,'dccv']
+, [17,3,17,4,'dccv']
+];
+		</script><link rel="stylesheet" type="text/css" href="../css/coverreport.css" />
+	</head><body>
+		<code id="src41" class="dotCoverSource"><pre>namespace Patterns.Specifications.Models.Testing.Moq
+{
+	public interface ITestContainerTarget {}
+
+	public interface ITestContainerDependency1{}
+	public interface ITestContainerDependency2{}
+
+	public class TestContainerTarget : ITestContainerTarget
+	{
+		public ITestContainerDependency1 Dependency1 { get; set; }
+		public ITestContainerDependency2 Dependency2 { get; set; }
+
+		public TestContainerTarget(ITestContainerDependency1 dependency1, ITestContainerDependency2 dependency2)
+		{
+			Dependency1 = dependency1;
+			Dependency2 = dependency2;
+		}
+	}
+}</pre></code><script type="text/javascript">
+			applyranges('src41', RANGES_41)
+		</script>
+	</body>
+</html>

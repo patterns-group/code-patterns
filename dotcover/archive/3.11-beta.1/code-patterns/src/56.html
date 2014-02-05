@@ -1,0 +1,110 @@
+<html>
+	<head>
+		<script type="text/javascript" src="../js/coverreport.js">
+
+		</script><script type="text/javascript">
+			RANGES_56 = [
+   [43,3,43,54,'dccv']
+, [44,3,44,4,'dccv']
+, [45,4,45,15,'dccv']
+, [46,3,46,4,'dccv']
+, [50,3,50,4,'dccv']
+, [51,4,51,142,'dccv']
+, [52,3,52,4,'dccv']
+, [56,3,56,4,'dccv']
+, [57,4,57,113,'dccv']
+, [58,3,58,4,'dccv']
+, [62,3,62,4,'dccv']
+, [63,4,63,139,'dccv']
+, [64,3,64,4,'dccv']
+, [68,3,68,4,'dccv']
+, [69,4,69,142,'dccv']
+, [70,3,70,4,'dccv']
+, [74,3,74,4,'dccv']
+, [75,4,75,122,'dccv']
+, [76,3,76,4,'dccv']
+];
+		</script><link rel="stylesheet" type="text/css" href="../css/coverreport.css" />
+	</head><body>
+		<code id="src56" class="dotCoverSource"><pre>#region FreeBSD
+
+// Copyright (c) 2013, John Batte
+// All rights reserved.
+// 
+// Redistribution and use in source and binary forms, with or without modification, are permitted provided that
+// the following conditions are met:
+// 
+//  * Redistributions of source code must retain the above copyright notice, this list of conditions and the
+//    following disclaimer.
+// 
+//  * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the
+//    following disclaimer in the documentation and/or other materials provided with the distribution.
+// 
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED
+// WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+// PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR
+// ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+// TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+// HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+// NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+// POSSIBILITY OF SUCH DAMAGE.
+
+#endregion
+
+using System.Configuration;
+
+using Moq;
+
+using Patterns.Configuration;
+using Patterns.Specifications.Models.Configuration;
+using Patterns.Specifications.Models.Mocking;
+
+using TechTalk.SpecFlow;
+
+namespace Patterns.Specifications.Steps.Configuration
+{
+	[Binding]
+	public class MockedConfigAbstractionSteps
+	{
+		private readonly MoqContext _moq;
+
+		public MockedConfigAbstractionSteps(MoqContext moq)
+		{
+			_moq = moq;
+		}
+
+		[Given(@&quot;I have set the mocked config abstraction to throw an exception when asked for a Configuration Section with the section name &quot;&quot;(.*)&quot;&quot;&quot;)]
+		public void ThrowExceptionForSectionName(string sectionName)
+		{
+			_moq.Container.Mock&lt;IConfigurationManager&gt;().Setup(manager =&gt; manager.GetSection(sectionName)).Throws(new ConfigurationErrorsException());
+		}
+
+		[Given(@&quot;I have set the mocked config abstraction to return a null Configuration Section when the section name is &quot;&quot;(.*)&quot;&quot;&quot;)]
+		public void ReturnNullForSectionName(string sectionName)
+		{
+			_moq.Container.Mock&lt;IConfigurationManager&gt;().Setup(manager =&gt; manager.GetSection(sectionName)).Returns(null);
+		}
+
+		[Given(@&quot;I have set the mocked config abstraction to return a Configuration Section when the section name is &quot;&quot;(.*)&quot;&quot;&quot;)]
+		public void ReturnSectionForSectionName(string sectionName)
+		{
+			_moq.Container.Mock&lt;IConfigurationManager&gt;().Setup(manager =&gt; manager.GetSection(sectionName)).Returns(new TestConfigurationSection());
+		}
+
+		[Given(@&quot;I have set the mocked config abstraction to return a different Configuration Section when the section name is &quot;&quot;(.*)&quot;&quot;&quot;)]
+		public void ReturnWrongSectionForSectionName(string sectionName)
+		{
+			_moq.Container.Mock&lt;IConfigurationManager&gt;().Setup(manager =&gt; manager.GetSection(sectionName)).Returns(new InvalidConfigurationSection());
+		}
+
+		[Then(@&quot;the mocked config abstraction should have been asked for a Configuration Section named &quot;&quot;(.*)&quot;&quot; exactly (.*) time&quot;)]
+		public void VerifyGetSectionCalls(string sectionName, int count)
+		{
+			_moq.Container.Mock&lt;IConfigurationManager&gt;().Verify(manager =&gt; manager.GetSection(sectionName), Times.Exactly(count));
+		}
+	}
+}</pre></code><script type="text/javascript">
+			applyranges('src56', RANGES_56)
+		</script>
+	</body>
+</html>

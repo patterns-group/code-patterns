@@ -1,0 +1,161 @@
+<html>
+	<head>
+		<script type="text/javascript" src="../js/coverreport.js">
+
+		</script><script type="text/javascript">
+			RANGES_97 = [
+   [44,3,44,4,'dccv']
+, [46,4,46,5,'dccv']
+, [47,5,47,24,'dccv']
+, [49,4,49,31,'dccv']
+, [50,4,50,5,'dccv']
+, [51,5,51,58,'dccv']
+, [52,5,52,25,'dccv']
+, [52,26,52,98,'dccv']
+, [56,3,56,4,'dccv']
+, [64,3,64,4,'dccv']
+, [66,4,66,5,'dccv']
+, [67,5,67,14,'dccv']
+, [68,4,68,5,'dccv']
+, [69,4,69,31,'dccv']
+, [70,4,70,5,'dccv']
+, [71,5,71,58,'dccv']
+, [72,5,72,25,'dccv']
+, [72,26,72,33,'dccv']
+, [76,3,76,4,'dccv']
+, [79,3,79,4,'dccv']
+, [80,4,80,91,'dccv']
+, [81,4,81,30,'dccv']
+, [82,3,82,4,'dccv']
+, [91,4,91,75,'dccv']
+, [94,4,94,5,'dccv']
+, [95,5,96,5,'dccv']
+, [98,49,99,7,'dccv']
+, [100,4,100,5,'dccv']
+, [53,5,53,81,'dcuc']
+, [53,82,53,104,'dcuc']
+, [54,5,54,11,'dcuc']
+, [73,5,73,81,'dcuc']
+, [73,82,73,104,'dcuc']
+, [74,5,74,11,'dcuc']
+, [96,5,96,6,'dcuc']
+, [97,6,97,47,'dcuc']
+, [98,6,98,49,'dcuc']
+];
+		</script><link rel="stylesheet" type="text/css" href="../css/coverreport.css" />
+	</head><body>
+		<code id="src97" class="dotCoverSource"><pre>#region FreeBSD
+
+// Copyright (c) 2013, John Batte
+// All rights reserved.
+// 
+// Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+// 
+//  * Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+// 
+//  * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the
+//    documentation and/or other materials provided with the distribution.
+// 
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
+// TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+// CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+// PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+// LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+// SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+#endregion
+
+using System;
+
+using Common.Logging;
+
+namespace Patterns.ExceptionHandling
+{
+	/// &lt;summary&gt;
+	///    Runs delegates within try-catch blocks, thus reducing the amount of repetitive code required to handle exceptions.
+	/// &lt;/summary&gt;
+	public static class Try
+	{
+		/// &lt;summary&gt;
+		/// Gets the result of the specified value retriever.
+		/// &lt;/summary&gt;
+		/// &lt;typeparam name=&quot;TValue&quot;&gt;The type of the value.&lt;/typeparam&gt;
+		/// &lt;param name=&quot;retriever&quot;&gt;The retriever.&lt;/param&gt;
+		/// &lt;param name=&quot;errorHandler&quot;&gt;The optional error handler.&lt;/param&gt;
+		/// &lt;param name=&quot;fallback&quot;&gt;The optional fallback retriever.&lt;/param&gt;
+		/// &lt;returns&gt;
+		/// The result of the retriever, or the default value if an exception is thrown but handled.
+		/// &lt;/returns&gt;
+		public static TValue Get&lt;TValue&gt;(Func&lt;TValue&gt; retriever, Func&lt;Exception, ExceptionState&gt; errorHandler = null, Func&lt;TValue&gt; fallback = null)
+		{
+			try
+			{
+				return retriever();
+			}
+			catch (Exception exception)
+			{
+				ExceptionState state = errorHandler.Apply(exception);
+				if (state.IsHandled) return fallback != null ? Get(fallback, errorHandler) : default(TValue);
+				if (!ReferenceEquals(exception, state.Exception) &amp;&amp; state.Exception != null) throw state.Exception;
+				throw;
+			}
+		}
+
+		/// &lt;summary&gt;
+		///    Executes the specified action.
+		/// &lt;/summary&gt;
+		/// &lt;param name=&quot;action&quot;&gt; The action. &lt;/param&gt;
+		/// &lt;param name=&quot;errorHandler&quot;&gt; The error handler. &lt;/param&gt;
+		public static void Do(Action action, Func&lt;Exception, ExceptionState&gt; errorHandler = null)
+		{
+			try
+			{
+				action();
+			}
+			catch (Exception exception)
+			{
+				ExceptionState state = errorHandler.Apply(exception);
+				if (state.IsHandled) return;
+				if (!ReferenceEquals(exception, state.Exception) &amp;&amp; state.Exception != null) throw state.Exception;
+				throw;
+			}
+		}
+
+		private static ExceptionState Apply(this Func&lt;Exception, ExceptionState&gt; errorHandler, Exception exception)
+		{
+			Func&lt;Exception, ExceptionState&gt; handler = errorHandler ?? HandleErrors.DefaultStrategy;
+			return handler(exception);
+		}
+
+		#region Nested type: HandleErrors
+
+		/// &lt;summary&gt;
+		///    Encapsulates the &lt;see cref=&quot;Try&quot; /&gt; class&#39;s error-handling strategy.
+		/// &lt;/summary&gt;
+		public static class HandleErrors
+		{
+			private static readonly ILog _log = LogManager.GetLogger(typeof (Try));
+
+			static HandleErrors()
+			{
+				DefaultStrategy = exception =&gt;
+				{
+					_log.Error(exception.Message, exception);
+					return new ExceptionState(exception, true);
+				};
+			}
+
+			/// &lt;summary&gt;
+			///    Gets or sets the default strategy.
+			/// &lt;/summary&gt;
+			/// &lt;value&gt; The default strategy. &lt;/value&gt;
+			public static Func&lt;Exception, ExceptionState&gt; DefaultStrategy { get; set; }
+		}
+
+		#endregion
+	}
+}</pre></code><script type="text/javascript">
+			applyranges('src97', RANGES_97)
+		</script>
+	</body>
+</html>

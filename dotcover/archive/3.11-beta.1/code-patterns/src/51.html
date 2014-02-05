@@ -1,0 +1,106 @@
+<html>
+	<head>
+		<script type="text/javascript" src="../js/coverreport.js">
+
+		</script><script type="text/javascript">
+			RANGES_51 = [
+   [48,3,48,64,'dccv']
+, [49,3,49,4,'dccv']
+, [50,4,50,23,'dccv']
+, [51,3,51,4,'dccv']
+, [55,3,55,4,'dccv']
+, [56,4,56,62,'dccv']
+, [57,4,57,76,'dccv']
+, [58,3,58,4,'dccv']
+, [62,3,62,4,'dccv']
+, [63,4,63,76,'dccv']
+, [64,3,64,4,'dccv']
+, [68,3,68,4,'dccv']
+, [69,4,69,52,'dccv']
+, [70,3,70,4,'dccv']
+, [40,3,43,23,'dccv']
+, [45,113,46,6,'dccv']
+, [43,23,43,65,'dccv']
+, [44,30,44,88,'dccv']
+, [44,101,44,102,'dccv']
+, [45,32,45,113,'dccv']
+, [44,88,44,101,'dccv']
+];
+		</script><link rel="stylesheet" type="text/css" href="../css/coverreport.css" />
+	</head><body>
+		<code id="src51" class="dotCoverSource"><pre>#region FreeBSD
+
+// Copyright (c) 2013, John Batte
+// All rights reserved.
+// 
+// Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+// 
+//  * Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+// 
+//  * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the
+//    documentation and/or other materials provided with the distribution.
+// 
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
+// TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+// CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+// PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+// LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+// SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+#endregion
+
+using System;
+using System.Collections.Generic;
+
+using FluentAssertions;
+
+using Patterns.Collections;
+using Patterns.Collections.Strategies;
+using Patterns.Specifications.Models.Collections;
+
+using TechTalk.SpecFlow;
+
+namespace Patterns.Specifications.Steps.Collections
+{
+	[Binding]
+	public class EqualityComparerSteps
+	{
+		private readonly EqualityComparerContext _context;
+
+		private static readonly FuncStrategies&lt;string, IEqualityComparer&lt;string&gt;&gt; _stringComparerConstructors
+			= new FuncStrategies&lt;string, IEqualityComparer&lt;string&gt;&gt;
+			{
+				{&quot;default&quot;, () =&gt; new ConfigurableEqualityComparer&lt;string&gt;()},
+				{&quot;case sensitive&quot;, () =&gt; new ConfigurableEqualityComparer&lt;string&gt;((left, right) =&gt; left == right)},
+				{&quot;case insensitive&quot;, () =&gt; new ConfigurableEqualityComparer&lt;string&gt;(StringComparer.OrdinalIgnoreCase.Equals)}
+			};
+
+		public EqualityComparerSteps(EqualityComparerContext context)
+		{
+			_context = context;
+		}
+
+		[Given(@&quot;I have created a new equality comparer for strings using the (.+) strategy&quot;)]
+		public void CreateStringComparer(string strategy)
+		{
+			_stringComparerConstructors.Should().ContainKey(strategy);
+			_context.StringComparer = _stringComparerConstructors.Execute(strategy);
+		}
+
+		[When(@&quot;I compare the (.+) string to the (.+) string&quot;)]
+		public void CompareStrings(string left, string right)
+		{
+			_context.ComparisonResult = _context.StringComparer.Equals(left, right);
+		}
+
+		[Then(@&quot;the result of the &quot;&quot;is equal&quot;&quot; operation should be (.+)&quot;)]
+		public void AssertComparisonResult(bool expected)
+		{
+			_context.ComparisonResult.Should().Be(expected);
+		}
+	}
+}</pre></code><script type="text/javascript">
+			applyranges('src51', RANGES_51)
+		</script>
+	</body>
+</html>

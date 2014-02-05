@@ -1,0 +1,106 @@
+<html>
+	<head>
+		<script type="text/javascript" src="../js/coverreport.js">
+
+		</script><script type="text/javascript">
+			RANGES_87 = [
+   [40,3,40,4,'dccv']
+, [41,4,41,22,'dccv']
+, [41,23,41,64,'dccv']
+, [42,4,42,25,'dccv']
+, [42,26,42,33,'dccv']
+, [43,4,43,11,'dccv']
+, [43,27,43,35,'dccv']
+, [43,13,43,23,'dccv']
+, [43,37,43,53,'dccv']
+, [43,24,43,26,'dccv']
+, [44,3,44,4,'dccv']
+, [56,3,56,4,'dccv']
+, [57,4,57,17,'dccv']
+, [57,18,57,50,'dccv']
+, [59,4,59,5,'dccv']
+, [60,5,60,12,'dccv']
+, [60,28,60,33,'dccv']
+, [60,14,60,24,'dccv']
+, [61,5,61,6,'dccv']
+, [62,6,62,31,'dccv']
+, [63,6,63,26,'dccv']
+, [64,5,64,6,'dccv']
+, [60,25,60,27,'dccv']
+, [65,4,65,5,'dccv']
+, [66,3,66,4,'dccv']
+];
+		</script><link rel="stylesheet" type="text/css" href="../css/coverreport.css" />
+	</head><body>
+		<code id="src87" class="dotCoverSource"><pre>#region FreeBSD
+
+// Copyright (c) 2013, John Batte
+// All rights reserved.
+// 
+// Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+// 
+//  * Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+// 
+//  * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the
+//    documentation and/or other materials provided with the distribution.
+// 
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
+// TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+// CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+// PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+// LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+// SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+#endregion
+
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace Patterns.Collections
+{
+	/// &lt;summary&gt;
+	///    Provides extensions for common collection types.
+	/// &lt;/summary&gt;
+	public static class CollectionExtensions
+	{
+		/// &lt;summary&gt;
+		///    Adds the specified set of items to the collection.
+		/// &lt;/summary&gt;
+		/// &lt;typeparam name=&quot;TItem&quot;&gt; The type of the item. &lt;/typeparam&gt;
+		/// &lt;param name=&quot;items&quot;&gt; The items. &lt;/param&gt;
+		/// &lt;param name=&quot;newItems&quot;&gt; The new items. &lt;/param&gt;
+		public static void AddRange&lt;TItem&gt;(this ICollection&lt;TItem&gt; items, IEnumerable&lt;TItem&gt; newItems)
+		{
+			if (items == null) throw new ArgumentNullException(&quot;items&quot;);
+			if (newItems == null) return;
+			foreach (TItem item in newItems) items.Add(item);
+		}
+
+		/// &lt;summary&gt;
+		///    Runs the specified action against each item in the set.
+		/// &lt;/summary&gt;
+		/// &lt;typeparam name=&quot;TItem&quot;&gt; The type of the item. &lt;/typeparam&gt;
+		/// &lt;param name=&quot;items&quot;&gt; The items. &lt;/param&gt;
+		/// &lt;param name=&quot;action&quot;&gt; The action. &lt;/param&gt;
+		/// &lt;param name=&quot;parallel&quot;&gt;
+		///    if set to &lt;c&gt;true&lt;/c&gt; , run in parallel.
+		/// &lt;/param&gt;
+		public static void Each&lt;TItem&gt;(this IEnumerable&lt;TItem&gt; items, Action&lt;TItem&gt; action, bool parallel = false)
+		{
+			if (parallel) Parallel.ForEach(items, action);
+			else
+			{
+				foreach (TItem item in items)
+				{
+					TItem currentItem = item;
+					action(currentItem);
+				}
+			}
+		}
+	}
+}</pre></code><script type="text/javascript">
+			applyranges('src87', RANGES_87)
+		</script>
+	</body>
+</html>

@@ -1,0 +1,139 @@
+<html>
+	<head>
+		<script type="text/javascript" src="../js/coverreport.js">
+
+		</script><script type="text/javascript">
+			RANGES_93 = [
+   [39,3,39,138,'dccv']
+, [40,3,40,4,'dccv']
+, [41,4,41,35,'dccv']
+, [42,4,42,35,'dccv']
+, [43,4,43,65,'dccv']
+, [44,4,44,28,'dccv']
+, [44,29,44,83,'dccv']
+, [44,111,44,113,'dccv']
+, [45,4,45,92,'dccv']
+, [46,4,46,34,'dccv']
+, [46,35,46,133,'dccv']
+, [46,168,46,170,'dccv']
+, [47,3,47,4,'dccv']
+, [54,3,54,4,'dccv']
+, [55,4,55,74,'dccv']
+, [56,3,56,4,'dccv']
+, [59,3,59,4,'dccv']
+, [60,4,60,62,'dccv']
+, [61,3,61,4,'dccv']
+, [46,133,46,146,'dccv']
+, [46,160,46,168,'dccv']
+, [64,3,64,4,'dcuc']
+, [65,4,65,72,'dcuc']
+, [66,3,66,4,'dcuc']
+, [69,3,69,4,'dcuc']
+, [70,4,70,74,'dcuc']
+, [71,3,71,4,'dcuc']
+, [74,3,74,4,'dcuc']
+, [75,4,75,69,'dcuc']
+, [76,3,76,4,'dcuc']
+, [79,3,79,4,'dcuc']
+, [80,4,80,89,'dcuc']
+, [81,3,81,4,'dcuc']
+, [84,3,84,4,'dcuc']
+, [85,4,85,47,'dcuc']
+, [86,3,86,4,'dcuc']
+, [44,83,44,86,'dcuc']
+, [44,95,44,111,'dcuc']
+];
+		</script><link rel="stylesheet" type="text/css" href="../css/coverreport.css" />
+	</head><body>
+		<code id="src93" class="dotCoverSource"><pre>#region FreeBSD
+
+// Copyright (c) 2013, John Batte
+// All rights reserved.
+// 
+// Redistribution and use in source and binary forms, with or without modification, are permitted provided that
+// the following conditions are met:
+// 
+//  * Redistributions of source code must retain the above copyright notice, this list of conditions and the
+//    following disclaimer.
+// 
+//  * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the
+//    following disclaimer in the documentation and/or other materials provided with the distribution.
+// 
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED
+// WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+// PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR
+// ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+// TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+// HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+// NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+// POSSIBILITY OF SUCH DAMAGE.
+
+#endregion
+
+using System;
+using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Configuration;
+using System.Linq;
+
+namespace Patterns.Configuration
+{
+	public class ConfigurationSource : IConfigurationSource
+	{
+		private readonly Func&lt;System.Configuration.Configuration, IConfiguration&gt; _configFactory;
+		private readonly IConfigurationManager _configManager;
+
+		public ConfigurationSource(IConfigurationManager configManager, Func&lt;System.Configuration.Configuration, IConfiguration&gt; configFactory)
+		{
+			_configManager = configManager;
+			_configFactory = configFactory;
+			NameValueCollection appSettings = _configManager.AppSettings;
+			if (appSettings != null) AppSettings = appSettings.AllKeys.ToDictionary(key =&gt; key, key =&gt; appSettings[key]);
+			ConnectionStringSettingsCollection connectionStrings = _configManager.ConnectionStrings;
+			if (connectionStrings != null) ConnectionStrings = connectionStrings.OfType&lt;ConnectionStringSettings&gt;().ToDictionary(settings =&gt; settings.Name, settings =&gt; settings);
+		}
+
+		public virtual IDictionary&lt;string, string&gt; AppSettings { get; private set; }
+
+		public virtual IDictionary&lt;string, ConnectionStringSettings&gt; ConnectionStrings { get; private set; }
+
+		public virtual ConfigurationSection GetSection(string sectionName)
+		{
+			return _configManager.GetSection(sectionName) as ConfigurationSection;
+		}
+
+		public virtual TSection GetSection&lt;TSection&gt;(string sectionName) where TSection : ConfigurationSection, new()
+		{
+			return _configManager.GetSection(sectionName) as TSection;
+		}
+
+		public virtual IConfiguration OpenExeConfiguration(string exePath)
+		{
+			return _configFactory(_configManager.OpenExeConfiguration(exePath));
+		}
+
+		public virtual IConfiguration OpenExeConfiguration(ConfigurationUserLevel userLevel)
+		{
+			return _configFactory(_configManager.OpenExeConfiguration(userLevel));
+		}
+
+		public virtual IConfiguration OpenMachineConfiguration()
+		{
+			return _configFactory(_configManager.OpenMachineConfiguration());
+		}
+
+		public virtual IConfiguration OpenMappedExeConfiguration(ExeConfigurationFileMap fileMap, ConfigurationUserLevel userLevel)
+		{
+			return _configFactory(_configManager.OpenMappedExeConfiguration(fileMap, userLevel));
+		}
+
+		public virtual void RefreshSection(string sectionName)
+		{
+			_configManager.RefreshSection(sectionName);
+		}
+	}
+}</pre></code><script type="text/javascript">
+			applyranges('src93', RANGES_93)
+		</script>
+	</body>
+</html>

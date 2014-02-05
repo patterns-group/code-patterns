@@ -1,0 +1,143 @@
+<html>
+	<head>
+		<script type="text/javascript" src="../js/coverreport.js">
+
+		</script><script type="text/javascript">
+			RANGES_69 = [
+   [43,3,43,46,'dccv']
+, [44,3,44,4,'dccv']
+, [45,4,45,23,'dccv']
+, [46,3,46,4,'dccv']
+, [50,3,50,4,'dccv']
+, [51,4,51,71,'dccv']
+, [52,3,52,4,'dccv']
+, [56,3,56,4,'dccv']
+, [57,4,57,105,'dccv']
+, [58,3,58,4,'dccv']
+, [62,3,62,4,'dccv']
+, [63,4,63,72,'dccv']
+, [64,4,64,76,'dccv']
+, [65,3,65,4,'dccv']
+, [69,3,69,4,'dccv']
+, [70,4,70,82,'dccv']
+, [71,3,71,4,'dccv']
+, [75,3,75,4,'dccv']
+, [76,4,76,110,'dccv']
+, [77,3,77,4,'dccv']
+, [81,3,81,4,'dccv']
+, [82,4,82,56,'dccv']
+, [83,3,83,4,'dccv']
+, [87,3,87,4,'dccv']
+, [88,4,88,75,'dccv']
+, [90,9,90,23,'dccv']
+, [91,4,91,5,'dccv']
+, [92,5,92,85,'dccv']
+, [93,5,93,89,'dccv']
+, [94,4,94,5,'dccv']
+, [90,65,90,73,'dccv']
+, [90,24,90,63,'dccv']
+, [95,3,95,4,'dccv']
+];
+		</script><link rel="stylesheet" type="text/css" href="../css/coverreport.css" />
+	</head><body>
+		<code id="src69" class="dotCoverSource"><pre>#region FreeBSD
+
+// Copyright (c) 2013, The Tribe
+// All rights reserved.
+// 
+// Redistribution and use in source and binary forms, with or without modification, are permitted provided that
+// the following conditions are met:
+// 
+//  * Redistributions of source code must retain the above copyright notice, this list of conditions and the
+//    following disclaimer.
+// 
+//  * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the
+//    following disclaimer in the documentation and/or other materials provided with the distribution.
+// 
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED
+// WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+// PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR
+// ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+// TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+// HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+// NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+// POSSIBILITY OF SUCH DAMAGE.
+
+#endregion
+
+using System.Collections.Generic;
+
+using FizzWare.NBuilder;
+
+using FluentAssertions;
+
+using Patterns.Specifications.Models.Mapping;
+
+using TechTalk.SpecFlow;
+
+namespace Patterns.Specifications.Steps.Mapping
+{
+	[Binding]
+	public class MappingSteps
+	{
+		private readonly MappingContext _context;
+
+		public MappingSteps(MappingContext context)
+		{
+			_context = context;
+		}
+
+		[Given(@&quot;I have a source object for mapping&quot;)]
+		public void CreateSingleSourceObject()
+		{
+			_context.SingleSource = Builder&lt;MappingSource&gt;.CreateNew().Build();
+		}
+
+		[When(@&quot;I map the object to a destination type&quot;)]
+		public void MapToDestinationObject()
+		{
+			_context.SingleDestination = _context.MappingServices.Map&lt;MappingDestination&gt;(_context.SingleSource);
+		}
+
+		[Then(@&quot;the original object should have the same values as the mapped object&quot;)]
+		public void AssertSourceMatchesDestination()
+		{
+			_context.SingleDestination.Id.Should().Be(_context.SingleSource.Id);
+			_context.SingleDestination.Data.Should().Be(_context.SingleSource.Data);
+		}
+
+		[Given(@&quot;I have a source object collection with (.*) items for mapping&quot;)]
+		public void CreateSourceObjectCollection(int count)
+		{
+			_context.MultiSource = Builder&lt;MappingSource&gt;.CreateListOfSize(count).Build();
+		}
+
+		[When(@&quot;I map the collection to another type&quot;)]
+		public void MapToDestinationCollection()
+		{
+			_context.MultiDestination = _context.MappingServices.Map&lt;IList&lt;MappingDestination&gt;&gt;(_context.MultiSource);
+		}
+
+		[Then(@&quot;the mapped collection should have (.*) items&quot;)]
+		public void AssertMappedCollectionCount(int count)
+		{
+			_context.MultiDestination.Should().HaveCount(count);
+		}
+
+		[Then(@&quot;all of the original objects should have the same values as the mapped objects&quot;)]
+		public void AssertSourceCollectionMatchesDestination()
+		{
+			_context.MultiDestination.Should().HaveSameCount(_context.MultiSource);
+
+			for (int index = 0; index &lt; _context.MultiDestination.Count; index ++)
+			{
+				_context.MultiDestination[index].Id.Should().Be(_context.MultiSource[index].Id);
+				_context.MultiDestination[index].Data.Should().Be(_context.MultiSource[index].Data);
+			}
+		}
+	}
+}</pre></code><script type="text/javascript">
+			applyranges('src69', RANGES_69)
+		</script>
+	</body>
+</html>

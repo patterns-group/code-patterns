@@ -1,0 +1,127 @@
+<html>
+	<head>
+		<script type="text/javascript" src="../js/coverreport.js">
+
+		</script><script type="text/javascript">
+			RANGES_99 = [
+   [69,3,69,4,'dccv']
+, [70,4,70,59,'dccv']
+, [71,4,71,71,'dccv']
+, [72,3,72,4,'dccv']
+, [79,3,79,4,'dccv']
+, [80,4,80,63,'dccv']
+, [81,4,81,98,'dccv']
+, [82,3,82,4,'dccv']
+, [89,3,89,4,'dccv']
+, [90,4,90,22,'dccv']
+, [92,4,92,37,'dccv']
+, [94,4,94,56,'dccv']
+, [95,3,95,4,'dccv']
+, [58,3,61,32,'dccv']
+, [61,73,62,6,'dccv']
+, [61,32,61,73,'dccv']
+, [90,23,90,111,'dcuc']
+];
+		</script><link rel="stylesheet" type="text/css" href="../css/coverreport.css" />
+	</head><body>
+		<code id="src99" class="dotCoverSource"><pre>#region FreeBSD
+
+// Copyright (c) 2013, The Tribe
+// All rights reserved.
+// 
+// Redistribution and use in source and binary forms, with or without modification, are permitted provided that
+// the following conditions are met:
+// 
+//  * Redistributions of source code must retain the above copyright notice, this list of conditions and the
+//    following disclaimer.
+// 
+//  * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the
+//    following disclaimer in the documentation and/or other materials provided with the distribution.
+// 
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED
+// WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+// PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR
+// ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+// TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+// HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+// NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+// POSSIBILITY OF SUCH DAMAGE.
+
+#endregion
+
+using System;
+using System.Linq;
+
+using Patterns.Collections.Strategies;
+
+namespace Patterns.Logging
+{
+	/// &lt;summary&gt;
+	///    Provides a base class for log value formatters.
+	/// &lt;/summary&gt;
+	public abstract class LogValueFormatterBase : ILogValueFormatter
+	{
+		/// &lt;summary&gt;
+		///    The special value format.
+		/// &lt;/summary&gt;
+		protected const string SpecialValueFormat = &quot;[{0}]&quot;;
+
+		/// &lt;summary&gt;
+		///    The argument list format.
+		/// &lt;/summary&gt;
+		protected const string ArgumentListFormat = &quot;({0})&quot;;
+
+		/// &lt;summary&gt;
+		///    The argument list separator.
+		/// &lt;/summary&gt;
+		protected const string ArgumentListSeparator = &quot;,&quot;;
+
+		/// &lt;summary&gt;
+		///    The string display format.
+		/// &lt;/summary&gt;
+		protected const string StringDisplayFormat = @&quot;&quot;&quot;{0}&quot;&quot;&quot;;
+
+		private static readonly FuncStrategies&lt;Type, object, object&gt; _displayStrategies
+			= new FuncStrategies&lt;Type, object, object&gt;
+			{
+				{typeof (string), value =&gt; string.Format(StringDisplayFormat, value)}
+			};
+
+		/// &lt;summary&gt;
+		/// Formats the specified value.
+		/// &lt;/summary&gt;
+		/// &lt;param name=&quot;value&quot;&gt;The value.&lt;/param&gt;
+		public virtual string Format(object value)
+		{
+			object valueForDisplay = ConvertValueForDisplay(value);
+			return valueForDisplay != null ? valueForDisplay.ToString() : null;
+		}
+
+		/// &lt;summary&gt;
+		/// Formats the specified values.
+		/// &lt;/summary&gt;
+		/// &lt;param name=&quot;values&quot;&gt;The values.&lt;/param&gt;
+		public virtual string Format(object[] values)
+		{
+			string[] convertedValues = values.Select(Format).ToArray();
+			return string.Format(ArgumentListFormat, string.Join(ArgumentListSeparator, convertedValues));
+		}
+
+		/// &lt;summary&gt;
+		///    Converts the value for display.
+		/// &lt;/summary&gt;
+		/// &lt;param name=&quot;value&quot;&gt;The value.&lt;/param&gt;
+		protected virtual object ConvertValueForDisplay(object value)
+		{
+			if (value == null) return string.Format(SpecialValueFormat, LoggingResources.ILogValueFormatter_NullValue);
+
+			Type valueType = value.GetType();
+
+			return _displayStrategies.Execute(valueType, value);
+		}
+	}
+}</pre></code><script type="text/javascript">
+			applyranges('src99', RANGES_99)
+		</script>
+	</body>
+</html>

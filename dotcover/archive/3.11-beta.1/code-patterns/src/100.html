@@ -1,0 +1,105 @@
+<html>
+	<head>
+		<script type="text/javascript" src="../js/coverreport.js">
+
+		</script><script type="text/javascript">
+			RANGES_100 = [
+   [48,3,48,105,'dccv']
+, [49,3,49,4,'dccv']
+, [50,4,54,6,'dccv']
+, [55,3,55,4,'dccv']
+, [62,3,62,4,'dccv']
+, [63,4,63,55,'dccv']
+, [64,3,64,4,'dccv']
+, [67,3,67,4,'dcuc']
+, [69,4,69,5,'dcuc']
+, [70,5,70,45,'dcuc']
+, [72,4,72,37,'dcuc']
+, [73,4,73,5,'dcuc']
+, [74,5,74,97,'dcuc']
+, [76,3,76,4,'dcuc']
+];
+		</script><link rel="stylesheet" type="text/css" href="../css/coverreport.css" />
+	</head><body>
+		<code id="src100" class="dotCoverSource"><pre>#region FreeBSD
+
+// Copyright (c) 2013, The Tribe
+// All rights reserved.
+// 
+// Redistribution and use in source and binary forms, with or without modification, are permitted provided that
+// the following conditions are met:
+// 
+//  * Redistributions of source code must retain the above copyright notice, this list of conditions and the
+//    following disclaimer.
+// 
+//  * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the
+//    following disclaimer in the documentation and/or other materials provided with the distribution.
+// 
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED
+// WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+// PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR
+// ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+// TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+// HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+// NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+// POSSIBILITY OF SUCH DAMAGE.
+
+#endregion
+
+using System;
+using System.Web.Script.Serialization;
+
+namespace Patterns.Logging
+{
+	/// &lt;summary&gt;
+	///    Provides a JSON formatter for log values.
+	/// &lt;/summary&gt;
+	public class JsonLogValueFormatter : LogValueFormatterBase
+	{
+		/// &lt;summary&gt;
+		///    The default recursion limit.
+		/// &lt;/summary&gt;
+		public const int DefaultRecursionLimit = 50;
+
+		private readonly JavaScriptSerializer _jsonSerializer;
+
+		/// &lt;summary&gt;
+		///    Initializes a new instance of the &lt;see cref=&quot;JsonLogValueFormatter&quot; /&gt; class.
+		/// &lt;/summary&gt;
+		/// &lt;param name=&quot;maxLength&quot;&gt;The maximum length.&lt;/param&gt;
+		/// &lt;param name=&quot;recursionLimit&quot;&gt;The recursion limit.&lt;/param&gt;
+		public JsonLogValueFormatter(int maxLength = int.MaxValue, int recursionLimit = DefaultRecursionLimit)
+		{
+			_jsonSerializer = new JavaScriptSerializer
+			{
+				MaxJsonLength = maxLength,
+				RecursionLimit = recursionLimit
+			};
+		}
+
+		/// &lt;summary&gt;
+		///    Formats the specified value.
+		/// &lt;/summary&gt;
+		/// &lt;param name=&quot;value&quot;&gt;The value.&lt;/param&gt;
+		public override string Format(object value)
+		{
+			return base.Format(value) ?? SerializeValue(value);
+		}
+
+		private string SerializeValue(object value)
+		{
+			try
+			{
+				return _jsonSerializer.Serialize(value);
+			}
+			catch (InvalidOperationException)
+			{
+				return string.Format(SpecialValueFormat, LoggingResources.ILogValueFormatter_ValueTooLarge);
+			}
+		}
+	}
+}</pre></code><script type="text/javascript">
+			applyranges('src100', RANGES_100)
+		</script>
+	</body>
+</html>

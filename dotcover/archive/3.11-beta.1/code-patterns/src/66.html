@@ -1,0 +1,94 @@
+<html>
+	<head>
+		<script type="text/javascript" src="../js/coverreport.js">
+
+		</script><script type="text/javascript">
+			RANGES_66 = [
+   [40,3,40,4,'dccv']
+, [41,4,41,49,'dccv']
+, [42,4,42,107,'dccv']
+, [43,4,43,108,'dccv']
+, [44,4,44,108,'dccv']
+, [45,4,45,107,'dccv']
+, [46,4,46,108,'dccv']
+, [47,4,47,108,'dccv']
+, [48,4,48,19,'dccv']
+, [49,3,49,4,'dccv']
+, [52,3,52,4,'dccv']
+, [53,4,53,21,'dccv']
+, [57,20,58,7,'dccv']
+, [59,3,59,4,'dccv']
+, [53,21,54,4,'dccv']
+, [57,20,58,6,'dccv']
+, [54,4,54,5,'dccv']
+, [55,5,55,50,'dccv']
+, [56,5,56,30,'dccv']
+, [57,5,57,20,'dccv']
+];
+		</script><link rel="stylesheet" type="text/css" href="../css/coverreport.css" />
+	</head><body>
+		<code id="src66" class="dotCoverSource"><pre>#region FreeBSD
+
+// Copyright (c) 2013, John Batte
+// All rights reserved.
+// 
+// Redistribution and use in source and binary forms, with or without modification, are permitted provided that
+// the following conditions are met:
+// 
+//  * Redistributions of source code must retain the above copyright notice, this list of conditions and the
+//    following disclaimer.
+// 
+//  * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the
+//    following disclaimer in the documentation and/or other materials provided with the distribution.
+// 
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED
+// WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+// PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR
+// ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+// TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+// HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+// NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+// POSSIBILITY OF SUCH DAMAGE.
+
+#endregion
+
+using System;
+using System.Diagnostics;
+
+using Common.Logging;
+
+using Moq;
+
+using Patterns.Specifications.Models.Mocking;
+
+namespace Patterns.Specifications.Steps.Logging
+{
+	public static class MockMixins
+	{
+		public static Mock&lt;ILog&gt; CreateMockLog(this MoqContext context)
+		{
+			var mockLog = context.Container.Mock&lt;ILog&gt;();
+			mockLog.Setup(log =&gt; log.Info(It.IsAny&lt;Action&lt;FormatMessageHandler&gt;&gt;())).Callback(CreateLogCallback());
+			mockLog.Setup(log =&gt; log.Trace(It.IsAny&lt;Action&lt;FormatMessageHandler&gt;&gt;())).Callback(CreateLogCallback());
+			mockLog.Setup(log =&gt; log.Debug(It.IsAny&lt;Action&lt;FormatMessageHandler&gt;&gt;())).Callback(CreateLogCallback());
+			mockLog.Setup(log =&gt; log.Warn(It.IsAny&lt;Action&lt;FormatMessageHandler&gt;&gt;())).Callback(CreateLogCallback());
+			mockLog.Setup(log =&gt; log.Error(It.IsAny&lt;Action&lt;FormatMessageHandler&gt;&gt;())).Callback(CreateLogCallback());
+			mockLog.Setup(log =&gt; log.Fatal(It.IsAny&lt;Action&lt;FormatMessageHandler&gt;&gt;())).Callback(CreateLogCallback());
+			return mockLog;
+		}
+
+		private static Action&lt;Action&lt;FormatMessageHandler&gt;&gt; CreateLogCallback()
+		{
+			return action =&gt; action((format, args) =&gt;
+			{
+				string message = string.Format(format, args);
+				Debug.WriteLine(message);
+				return message;
+			});
+		}
+	}
+}</pre></code><script type="text/javascript">
+			applyranges('src66', RANGES_66)
+		</script>
+	</body>
+</html>

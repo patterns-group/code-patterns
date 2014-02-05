@@ -1,0 +1,243 @@
+<html>
+	<head>
+		<script type="text/javascript" src="../js/coverreport.js">
+
+		</script><script type="text/javascript">
+			RANGES_14 = [
+   [10,1,10,34,'dccv']
+, [11,2,11,113,'dccv']
+, [12,2,12,129,'dccv']
+, [13,2,13,108,'dccv']
+, [14,2,14,110,'dccv']
+, [15,2,15,115,'dccv']
+, [16,2,17,2,'dccv']
+, [17,2,17,142,'dccv']
+, [19,1,19,34,'dccv']
+, [20,2,20,113,'dccv']
+, [21,2,21,129,'dccv']
+, [22,2,22,129,'dccv']
+, [23,2,23,110,'dccv']
+, [24,2,24,115,'dccv']
+, [25,2,25,155,'dccv']
+, [26,2,26,142,'dccv']
+, [28,1,28,34,'dccv']
+, [29,2,29,113,'dccv']
+, [30,2,30,129,'dccv']
+, [31,2,31,133,'dccv']
+, [32,2,32,110,'dccv']
+, [33,2,33,115,'dccv']
+, [34,2,34,155,'dccv']
+, [35,2,35,142,'dccv']
+, [36,2,36,106,'dccv']
+, [38,1,38,34,'dccv']
+, [39,2,39,124,'dccv']
+, [40,2,40,129,'dccv']
+, [41,2,41,133,'dccv']
+, [42,2,42,110,'dccv']
+, [43,2,43,115,'dccv']
+, [44,2,44,162,'dccv']
+, [45,2,45,142,'dccv']
+, [46,2,46,110,'dccv']
+, [51,1,51,34,'dccv']
+, [52,2,52,113,'dccv']
+, [53,2,53,129,'dccv']
+, [54,2,54,110,'dccv']
+, [55,2,55,132,'dccv']
+, [56,2,56,139,'dccv']
+, [57,2,58,87,'dccv']
+, [59,1,59,34,'dccv']
+, [60,2,60,113,'dccv']
+, [61,2,61,129,'dccv']
+, [62,2,62,110,'dccv']
+, [63,2,63,132,'dccv']
+, [64,2,64,154,'dccv']
+, [65,2,65,155,'dccv']
+, [67,1,67,34,'dccv']
+, [68,2,68,113,'dccv']
+, [69,2,69,129,'dccv']
+, [70,2,70,110,'dccv']
+, [71,2,71,132,'dccv']
+, [72,2,72,152,'dccv']
+, [73,2,73,155,'dccv']
+, [74,2,74,106,'dccv']
+, [76,1,76,34,'dccv']
+, [77,2,77,124,'dccv']
+, [78,2,78,129,'dccv']
+, [79,2,79,110,'dccv']
+, [80,2,80,132,'dccv']
+, [81,2,81,152,'dccv']
+, [82,2,82,162,'dccv']
+, [83,2,83,110,'dccv']
+, [88,1,88,34,'dccv']
+, [89,2,89,122,'dccv']
+, [90,2,90,131,'dccv']
+, [91,2,91,118,'dccv']
+, [92,2,92,137,'dccv']
+, [93,2,93,139,'dccv']
+, [94,2,95,87,'dccv']
+, [96,1,96,34,'dccv']
+, [97,2,97,122,'dccv']
+, [98,2,98,131,'dccv']
+, [99,2,99,118,'dccv']
+, [100,2,100,137,'dccv']
+, [101,2,101,154,'dccv']
+, [102,2,102,155,'dccv']
+, [104,1,104,34,'dccv']
+, [105,2,105,122,'dccv']
+, [106,2,106,131,'dccv']
+, [107,2,107,118,'dccv']
+, [108,2,108,137,'dccv']
+, [109,2,109,152,'dccv']
+, [110,2,110,155,'dccv']
+, [111,2,111,106,'dccv']
+, [113,1,113,34,'dccv']
+, [114,2,114,122,'dccv']
+, [115,2,115,138,'dccv']
+, [116,2,116,118,'dccv']
+, [117,2,117,137,'dccv']
+, [118,2,118,152,'dccv']
+, [119,2,119,162,'dccv']
+, [120,2,120,110,'dccv']
+, [125,1,125,34,'dccv']
+, [126,2,126,151,'dccv']
+, [127,2,127,131,'dccv']
+, [128,2,128,118,'dccv']
+, [129,2,129,146,'dccv']
+, [130,2,130,157,'dccv']
+];
+		</script><link rel="stylesheet" type="text/css" href="../css/coverreport.css" />
+	</head><body>
+		<code id="src14" class="dotCoverSource"><pre>Feature: Logging
+	As a developer
+	I want a way to automatically log any method call
+	And I want a way to automatically get instances of the logger I should use
+
+# when an invocation has been mocked, using an interceptor directly 
+# should cause log calls to take place, and the invocation should be
+# instructed to proceed.
+
+Scenario: Logging Interceptor
+	Given I have a default log config
+	And I have a log factory that returns a mocked ILog
+	And I have a mocked invocation
+	And I have a logging interceptor
+	When I call the interceptor directly
+	Then the mocked ILog should have been called using the normal no-return execution path
+	And the mocked invocation should have been instructed to proceed
+
+Scenario: Logging Interceptor with return value
+	Given I have a default log config
+	And I have a log factory that returns a mocked ILog
+	And I have a mocked invocation that returns a value
+	And I have a logging interceptor
+	When I call the interceptor directly
+	Then the mocked ILog should have been called using the normal execution path
+	And the mocked invocation should have been instructed to proceed
+
+Scenario: Logging Interceptor with Exception
+	Given I have a default log config
+	And I have a log factory that returns a mocked ILog
+	And I have a mocked invocation that throws an Exception
+	And I have a logging interceptor
+	When I call the interceptor directly
+	Then the mocked ILog should have been called using the broken execution path
+	And the mocked invocation should have been instructed to proceed
+	And there should be an error
+
+Scenario: Logging Interceptor with trapped Exception
+	Given I have a log config set to trap errors
+	And I have a log factory that returns a mocked ILog
+	And I have a mocked invocation that throws an Exception
+	And I have a logging interceptor
+	When I call the interceptor directly
+	Then the mocked ILog should have been called using the trapped-error execution path
+	And the mocked invocation should have been instructed to proceed
+	And there should not be an error
+
+# when a dynamic proxy has been manually created using our interceptor,
+# log calls should take place, and the proxied method should execute.
+
+Scenario: Manual Logging Interceptor
+	Given I have a default log config
+	And I have a log factory that returns a mocked ILog
+	And I have a logging interceptor
+	And I have a dynamic proxy to the logging test subject
+	When I call a normal void method on the logging test subject
+	Then the mocked ILog should have been called using the normal no-return execution path
+
+Scenario: Manual Logging Interceptor with return value
+	Given I have a default log config
+	And I have a log factory that returns a mocked ILog
+	And I have a logging interceptor
+	And I have a dynamic proxy to the logging test subject
+	When I call a normal method with a return value on the logging test subject
+	Then the mocked ILog should have been called using the normal execution path
+
+Scenario: Manual Logging Interceptor with Exception
+	Given I have a default log config
+	And I have a log factory that returns a mocked ILog
+	And I have a logging interceptor
+	And I have a dynamic proxy to the logging test subject
+	When I call a method that throws an Exception on the logging test subject
+	Then the mocked ILog should have been called using the broken execution path
+	And there should be an error
+
+Scenario: Manual Logging Interceptor with trapped Exception
+	Given I have a log config set to trap errors
+	And I have a log factory that returns a mocked ILog
+	And I have a logging interceptor
+	And I have a dynamic proxy to the logging test subject
+	When I call a method that throws an Exception on the logging test subject
+	Then the mocked ILog should have been called using the trapped-error execution path
+	And there should not be an error
+
+# when an intercepted instance has been retrieved,
+# log calls should take place, and the proxied method should execute.
+
+Scenario: Autofac Interceptor
+	Given I have registered the logging module
+	And I have registered the default test logging module
+	And I have created the Autofac container
+	And I have resolved an instance of the logging test subject
+	When I call a normal void method on the logging test subject
+	Then the mocked ILog should have been called using the normal no-return execution path
+
+Scenario: Autofac Interceptor with return value
+	Given I have registered the logging module
+	And I have registered the default test logging module
+	And I have created the Autofac container
+	And I have resolved an instance of the logging test subject
+	When I call a normal method with a return value on the logging test subject
+	Then the mocked ILog should have been called using the normal execution path
+
+Scenario: Autofac Interceptor with Exception
+	Given I have registered the logging module
+	And I have registered the default test logging module
+	And I have created the Autofac container
+	And I have resolved an instance of the logging test subject
+	When I call a method that throws an Exception on the logging test subject
+	Then the mocked ILog should have been called using the broken execution path
+	And there should be an error
+
+Scenario: Autofac Interceptor with trapped Exception
+	Given I have registered the logging module
+	And I have registered the error trapping test logging module
+	And I have created the Autofac container
+	And I have resolved an instance of the logging test subject
+	When I call a method that throws an Exception on the logging test subject
+	Then the mocked ILog should have been called using the trapped-error execution path
+	And there should not be an error
+
+# when components ask for ILog directly, the instances retrieved
+# should be correctly type-bound to the requesting components
+
+Scenario: Autofac ILog Provider
+	Given I have registered the logging module with a trackable log factory
+	And I have registered the manual logging test subject
+	And I have created the Autofac container
+	When I have resolved an instance of the manual logging test subject
+	Then the resolved ILog should be type-bound to the manual logging test subject</pre></code><script type="text/javascript">
+			applyranges('src14', RANGES_14)
+		</script>
+	</body>
+</html>

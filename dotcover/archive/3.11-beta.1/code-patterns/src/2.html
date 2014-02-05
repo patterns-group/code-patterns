@@ -1,0 +1,29 @@
+<html>
+	<head>
+		<script type="text/javascript" src="../js/coverreport.js">
+
+		</script><script type="text/javascript">
+			RANGES_2 = [
+   [7,1,7,34,'dccv']
+, [8,2,8,122,'dccv']
+, [9,2,9,118,'dccv']
+, [10,2,10,126,'dccv']
+, [11,2,11,162,'dccv']
+];
+		</script><link rel="stylesheet" type="text/css" href="../css/coverreport.css" />
+	</head><body>
+		<code id="src2" class="dotCoverSource"><pre>Feature: Runtime Module
+	As a developer, I want to be able to register an Autofac module for Patterns.Runtime
+	and get the default implementations of each public interface defined in
+	the Patterns.Runtime namespace.
+
+@autofac
+Scenario: Runtime - IDateTimeInfo
+	Given I have registered the runtime module
+	And I have created the Autofac container
+	When I try to resolve an IDateTimeInfo instance
+	Then the resolved IDateTimeInfo object should be an instance of DefaultDateTimeInfo</pre></code><script type="text/javascript">
+			applyranges('src2', RANGES_2)
+		</script>
+	</body>
+</html>

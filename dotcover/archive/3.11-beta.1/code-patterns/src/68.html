@@ -1,0 +1,97 @@
+<html>
+	<head>
+		<script type="text/javascript" src="../js/coverreport.js">
+
+		</script><script type="text/javascript">
+			RANGES_68 = [
+   [47,3,47,64,'dccv']
+, [48,3,48,4,'dccv']
+, [49,4,49,15,'dccv']
+, [50,4,50,37,'dccv']
+, [51,3,51,4,'dccv']
+, [54,3,54,4,'dccv']
+, [55,4,55,88,'dccv']
+, [57,4,57,111,'dccv']
+, [58,4,58,93,'dccv']
+, [59,4,59,108,'dccv']
+, [60,4,60,48,'dccv']
+, [62,4,62,50,'dccv']
+, [62,85,62,87,'dccv']
+, [64,4,64,115,'dccv']
+, [65,3,65,4,'dccv']
+, [62,50,62,58,'dccv']
+, [62,58,62,85,'dccv']
+];
+		</script><link rel="stylesheet" type="text/css" href="../css/coverreport.css" />
+	</head><body>
+		<code id="src68" class="dotCoverSource"><pre>#region FreeBSD
+
+// Copyright (c) 2013, John Batte
+// All rights reserved.
+// 
+// Redistribution and use in source and binary forms, with or without modification, are permitted provided that
+// the following conditions are met:
+// 
+//  * Redistributions of source code must retain the above copyright notice, this list of conditions and the
+//    following disclaimer.
+// 
+//  * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the
+//    following disclaimer in the documentation and/or other materials provided with the distribution.
+// 
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED
+// WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+// PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR
+// ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+// TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+// HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+// NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+// POSSIBILITY OF SUCH DAMAGE.
+
+#endregion
+
+using System;
+
+using Autofac;
+using Autofac.Extras.DynamicProxy2;
+
+using Common.Logging;
+
+using Moq;
+
+using Patterns.Configuration;
+using Patterns.Logging;
+using Patterns.Specifications.Models.Logging;
+using Patterns.Specifications.Models.Mocking;
+
+namespace Patterns.Specifications.Steps.Logging
+{
+	public class TestLoggingModule : Module
+	{
+		private readonly MoqContext _moq;
+		private readonly bool _trapExceptions;
+
+		public TestLoggingModule(MoqContext moq, bool trapExceptions)
+		{
+			_moq = moq;
+			_trapExceptions = trapExceptions;
+		}
+
+		protected override void Load(ContainerBuilder builder)
+		{
+			Mock&lt;IConfigurationSource&gt; mockSource = _moq.Container.Mock&lt;IConfigurationSource&gt;();
+
+			LoggingConfig config = _trapExceptions ? LoggingConfigs.ErrorTrappingConfig : LoggingConfigs.DefaultConfig;
+			mockSource.Setup(source =&gt; source.GetSection(LoggingConfig.SectionName)).Returns(config);
+			mockSource.Setup(source =&gt; source.GetSection&lt;LoggingConfig&gt;(LoggingConfig.SectionName)).Returns(config);
+			builder.RegisterInstance(mockSource.Object);
+
+			builder.Register&lt;Func&lt;Type, ILog&gt;&gt;(context =&gt; type =&gt; _moq.CreateMockLog().Object);
+
+			builder.RegisterType&lt;LoggingTestSubject&gt;().EnableClassInterceptors().InterceptedBy(typeof(LoggingInterceptor));
+		}
+	}
+}</pre></code><script type="text/javascript">
+			applyranges('src68', RANGES_68)
+		</script>
+	</body>
+</html>

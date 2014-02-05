@@ -1,0 +1,114 @@
+<html>
+	<head>
+		<script type="text/javascript" src="../js/coverreport.js">
+
+		</script><script type="text/javascript">
+			RANGES_64 = [
+   [44,3,44,82,'dccv']
+, [45,3,45,4,'dccv']
+, [46,4,46,23,'dccv']
+, [47,4,47,23,'dccv']
+, [48,3,48,4,'dccv']
+, [52,3,52,4,'dccv']
+, [53,4,54,4,'dccv']
+, [56,50,57,8,'dccv']
+, [58,3,58,4,'dccv']
+, [62,3,62,4,'dccv']
+, [63,4,63,62,'dccv']
+, [64,3,64,4,'dccv']
+, [68,3,68,4,'dccv']
+, [69,4,69,82,'dccv']
+, [70,3,70,4,'dccv']
+, [74,3,74,4,'dccv']
+, [75,4,75,50,'dccv']
+, [76,4,76,85,'dccv']
+, [77,3,77,4,'dccv']
+, [54,4,54,5,'dccv']
+, [55,5,55,46,'dccv']
+, [56,5,56,50,'dccv']
+];
+		</script><link rel="stylesheet" type="text/css" href="../css/coverreport.css" />
+	</head><body>
+		<code id="src64" class="dotCoverSource"><pre>#region FreeBSD
+
+// Copyright (c) 2013, John Batte
+// All rights reserved.
+// 
+// Redistribution and use in source and binary forms, with or without modification, are permitted provided that
+// the following conditions are met:
+// 
+//  * Redistributions of source code must retain the above copyright notice, this list of conditions and the
+//    following disclaimer.
+// 
+//  * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the
+//    following disclaimer in the documentation and/or other materials provided with the distribution.
+// 
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED
+// WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+// PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR
+// ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+// TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+// HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+// NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+// POSSIBILITY OF SUCH DAMAGE.
+
+#endregion
+
+using Autofac;
+
+using FluentAssertions;
+
+using Patterns.Autofac.Logging;
+using Patterns.Specifications.Models.Autofac;
+using Patterns.Specifications.Models.Logging;
+
+using TechTalk.SpecFlow;
+
+namespace Patterns.Specifications.Steps.Logging
+{
+	[Binding]
+	public class ManualLoggingSteps
+	{
+		private readonly AutofacContext _autofac;
+		private readonly ManualLoggingContext _context;
+
+		public ManualLoggingSteps(AutofacContext autofac, ManualLoggingContext context)
+		{
+			_autofac = autofac;
+			_context = context;
+		}
+
+		[Given(@&quot;I have registered the logging module with a trackable log factory&quot;)]
+		public void RegisterTrackableLoggingModule()
+		{
+			_autofac.Builder.RegisterModule(new ManualTestLoggingModule(type =&gt;
+			{
+				_context.TypeUsedForLoggerRequest = type;
+				return LoggingModule.DefaultLogFactory(type);
+			}));
+		}
+
+		[Given(@&quot;I have registered the manual logging test subject&quot;)]
+		public void RegisterManualLoggingTestSubject()
+		{
+			_autofac.Builder.RegisterType&lt;ManualLoggingTestSubject&gt;();
+		}
+
+		[When(@&quot;I have resolved an instance of the manual logging test subject&quot;)]
+		public void ResolveManualLoggingTestSubject()
+		{
+			_context.TestSubject = _autofac.Container.Resolve&lt;ManualLoggingTestSubject&gt;();
+		}
+
+		[Then(@&quot;the resolved ILog should be type-bound to the manual logging test subject&quot;)]
+		public void AssertLoggerIsCorrectlyTypeBound()
+		{
+			_context.TestSubject.Log.Should().NotBeNull();
+			_context.TypeUsedForLoggerRequest.Should().Be(typeof (ManualLoggingTestSubject));
+		}
+	}
+}</pre></code><script type="text/javascript">
+			applyranges('src64', RANGES_64)
+		</script>
+	</body>
+</html>

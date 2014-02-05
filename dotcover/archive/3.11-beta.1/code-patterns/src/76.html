@@ -1,0 +1,176 @@
+<html>
+	<head>
+		<script type="text/javascript" src="../js/coverreport.js">
+
+		</script><script type="text/javascript">
+			RANGES_76 = [
+   [40,3,40,58,'dccv']
+, [41,3,41,4,'dccv']
+, [42,4,42,23,'dccv']
+, [43,3,43,4,'dccv']
+, [47,3,47,4,'dccv']
+, [48,4,48,49,'dccv']
+, [49,3,49,4,'dccv']
+, [53,3,53,4,'dccv']
+, [54,4,54,31,'dccv']
+, [55,3,55,4,'dccv']
+, [59,3,59,4,'dccv']
+, [60,4,60,54,'dccv']
+, [61,3,61,4,'dccv']
+, [65,3,65,4,'dccv']
+, [66,4,66,35,'dccv']
+, [67,3,67,4,'dccv']
+, [71,3,71,4,'dccv']
+, [72,4,72,69,'dccv']
+, [73,3,73,4,'dccv']
+, [77,3,77,4,'dccv']
+, [78,4,78,89,'dccv']
+, [79,3,79,4,'dccv']
+, [83,3,83,4,'dccv']
+, [84,4,84,55,'dccv']
+, [85,3,85,4,'dccv']
+, [89,3,89,4,'dccv']
+, [90,4,90,88,'dccv']
+, [90,117,90,119,'dccv']
+, [91,3,91,4,'dccv']
+, [95,3,95,4,'dccv']
+, [96,4,96,59,'dccv']
+, [97,3,97,4,'dccv']
+, [101,3,101,4,'dccv']
+, [102,4,102,96,'dccv']
+, [103,4,103,33,'dccv']
+, [104,3,104,4,'dccv']
+, [108,3,108,4,'dccv']
+, [109,4,109,50,'dccv']
+, [109,63,109,83,'dccv']
+, [110,3,110,4,'dccv']
+, [114,3,114,4,'dccv']
+, [115,4,115,73,'dccv']
+, [116,3,116,4,'dccv']
+, [90,88,90,117,'dccv']
+, [109,50,109,63,'dccv']
+];
+		</script><link rel="stylesheet" type="text/css" href="../css/coverreport.css" />
+	</head><body>
+		<code id="src76" class="dotCoverSource"><pre>#region FreeBSD
+
+// Copyright (c) 2013, John Batte
+// All rights reserved.
+// 
+// Redistribution and use in source and binary forms, with or without modification, are permitted provided that
+// the following conditions are met:
+// 
+//  * Redistributions of source code must retain the above copyright notice, this list of conditions and the
+//    following disclaimer.
+// 
+//  * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the
+//    following disclaimer in the documentation and/or other materials provided with the distribution.
+// 
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED
+// WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+// PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR
+// ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+// TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+// HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+// NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+// POSSIBILITY OF SUCH DAMAGE.
+
+#endregion
+
+using System.Linq;
+using System.Text.RegularExpressions;
+using FluentAssertions;
+using Patterns.Specifications.Models.Text.RegularExpressions;
+using Patterns.Text.RegularExpressions;
+using TechTalk.SpecFlow;
+
+namespace Patterns.Specifications.Steps.Text.RegularExpressions
+{
+	[Binding]
+	public class CompiledRegexSteps
+	{
+		private readonly CompiledRegexContext _context;
+
+		public CompiledRegexSteps(CompiledRegexContext context)
+		{
+			_context = context;
+		}
+
+		[Given(@&quot;I have created a CompiledRegex using a simple, valid pattern string&quot;)]
+		public void CreateSimpleCompiledRegex()
+		{
+			_context.Pattern = TextSamples.SimplePattern;
+		}
+
+		[Given(@&quot;I have created a CompiledRegex with the pattern: (.*)&quot;)]
+		public void CreateCompiledRegex(string pattern)
+		{
+			_context.Pattern = pattern;
+		}
+
+		[Given(@&quot;I have created a CompiledRegex using a valid pattern string&quot;)]
+		public void CreateValidCompiledRegex()
+		{
+			_context.Pattern = TextSamples.ValidPatternString;
+		}
+
+		[Given(@&quot;I have created a string equal to: (.*)&quot;)]
+		public void SetPatternTarget(string input)
+		{
+			_context.PatternTarget = input;
+		}
+
+		[Given(@&quot;I have a set of strings with various character patterns&quot;)]
+		public void GetCharacterPatternStrings()
+		{
+			_context.CharacterPatternStrings = TextSamples.CharacterPatterns;
+		}
+
+		[When(@&quot;I use the CompiledRegex\.Build method to create a CompiledRegex using a string containing a common pattern&quot;)]
+		public void BuildCommonCompiledRegex()
+		{
+			_context.Pattern = CompiledRegex.BuildFrom(TextSamples.CharacterPatternCommonString);
+		}
+
+		[When(@&quot;I read the options of the CompiledRegex&quot;)]
+		public void ReadCompiledRegexOptions()
+		{
+			_context.PatternOptions = _context.Pattern.Options;
+		}
+
+		[When(@&quot;I use the CompiledRegex against each string in the set&quot;)]
+		public void MatchEachCharacterPattern()
+		{
+			_context.CharacterPatternMatches = _context.CharacterPatternStrings.Select(input =&gt; _context.Pattern.Match(input));
+		}
+
+		[When(@&quot;I read the pattern string from the CompiledRegex&quot;)]
+		public void WhenIReadThePatternStringFromTheCompiledRegex()
+		{
+			_context.PatternAsString = _context.Pattern.ToString();
+		}
+
+		[Then(@&quot;the options of the CompiledRegex should include the compiled option&quot;)]
+		public void AssertPatternIsCompiled()
+		{
+			var isCompiled = (_context.PatternOptions &amp; RegexOptions.Compiled) == RegexOptions.Compiled;
+			isCompiled.Should().BeTrue();
+		}
+
+		[Then(@&quot;each string in the set should have resulted in a positive match against the pattern&quot;)]
+		public void AssertAllPositiveMatches()
+		{
+			_context.CharacterPatternMatches.All(match =&gt; match.Success).Should().BeTrue();
+		}
+
+		[Then(@&quot;the pattern string I read from the CompiledRegex should be the valid pattern string used to create it&quot;)]
+		public void AssertPatternMatchesOriginalPattern()
+		{
+			_context.PatternAsString.Should().Be(TextSamples.ValidPatternString);
+		}
+	}
+}</pre></code><script type="text/javascript">
+			applyranges('src76', RANGES_76)
+		</script>
+	</body>
+</html>

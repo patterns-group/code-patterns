@@ -1,0 +1,100 @@
+<html>
+	<head>
+		<script type="text/javascript" src="../js/coverreport.js">
+
+		</script><script type="text/javascript">
+			RANGES_86 = [
+   [73,8,73,9,'dcuc']
+, [73,10,73,22,'dcuc']
+, [73,23,73,24,'dcuc']
+, [58,3,58,4,'dcuc']
+, [59,4,59,37,'dcuc']
+, [60,4,60,75,'dcuc']
+, [60,76,60,88,'dcuc']
+, [61,4,61,82,'dcuc']
+, [62,3,62,4,'dcuc']
+];
+		</script><link rel="stylesheet" type="text/css" href="../css/coverreport.css" />
+	</head><body>
+		<code id="src86" class="dotCoverSource"><pre>#region FreeBSD
+
+// Copyright (c) 2013, John Batte
+// All rights reserved.
+// 
+// Redistribution and use in source and binary forms, with or without modification, are permitted provided that
+// the following conditions are met:
+// 
+//  * Redistributions of source code must retain the above copyright notice, this list of conditions and the
+//    following disclaimer.
+// 
+//  * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the
+//    following disclaimer in the documentation and/or other materials provided with the distribution.
+// 
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED
+// WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+// PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR
+// ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+// TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+// HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+// NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+// POSSIBILITY OF SUCH DAMAGE.
+
+#endregion
+
+using System;
+using System.Collections.Generic;
+
+using Autofac.Builder;
+using Autofac.Core;
+
+namespace Patterns.Autofac.Sources
+{
+	/// &lt;summary&gt;
+	///    Provides an &lt;see cref=&quot;IRegistrationSource&quot; /&gt; implementation that always
+	///    builds new registrations for creatable types, negating the need to pre-register
+	///    them. Interfaces and abstract classes will still need to be registered in
+	///    the normal way.
+	/// &lt;/summary&gt;
+	/// &lt;remarks&gt;
+	///    Using this class can have unwanted side effects and is intended for fringe scenarios; use with caution.
+	/// &lt;/remarks&gt;
+	public class ResolveCreatableSource : IRegistrationSource
+	{
+		#region Implementation of IRegistrationSource
+
+		/// &lt;summary&gt;
+		///    Retrieves registrations for an unregistered service, to be used
+		///    by the container. If &lt;paramref name=&quot;service&quot; /&gt; is a creatable type, a new registration
+		///    will be created; otherwise, an empty enumerable is returned.
+		/// &lt;/summary&gt;
+		/// &lt;param name=&quot;service&quot;&gt;The service that was requested.&lt;/param&gt;
+		/// &lt;param name=&quot;registrationAccessor&quot;&gt;A function that will return existing registrations for a service.&lt;/param&gt;
+		/// &lt;returns&gt;
+		///    Registrations providing the service.
+		/// &lt;/returns&gt;
+		public IEnumerable&lt;IComponentRegistration&gt; RegistrationsFor(Service service, Func&lt;Service, IEnumerable&lt;IComponentRegistration&gt;&gt; registrationAccessor)
+		{
+			var ts = service as TypedService;
+			if (ts == null || ts.ServiceType.IsAbstract || !ts.ServiceType.IsClass) yield break;
+			yield return RegistrationBuilder.ForType(ts.ServiceType).CreateRegistration();
+		}
+
+		/// &lt;summary&gt;
+		///    Gets whether the registrations provided by this source are 1:1 adapters on top of
+		///    other components (e.g. Meta, Func, Owned).
+		/// &lt;/summary&gt;
+		/// &lt;remarks&gt;
+		///    This implementation always returns true.
+		/// &lt;/remarks&gt;
+		public bool IsAdapterForIndividualComponents
+		{
+			get { return true; }
+		}
+
+		#endregion
+	}
+}</pre></code><script type="text/javascript">
+			applyranges('src86', RANGES_86)
+		</script>
+	</body>
+</html>

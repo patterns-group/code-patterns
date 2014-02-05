@@ -110,9 +110,6 @@ var hierarchy =
     [ "Dictionary< TKey, Func< TOut >>", null, [
       [ "Patterns.Collections.Strategies.FuncStrategies< TKey, TOut >", "class_patterns_1_1_collections_1_1_strategies_1_1_func_strategies_3_01_t_key_00_01_t_out_01_4.html", null ]
     ] ],
-    [ "DisposableObject", null, [
-      [ "Ninject.Syntax.BindingRoot", "class_ninject_1_1_syntax_1_1_binding_root.html", null ]
-    ] ],
     [ "Patterns.ExceptionHandling.ExceptionState", "struct_patterns_1_1_exception_handling_1_1_exception_state.html", null ],
     [ "Patterns.ExceptionHandling.Try.HandleErrors", "class_patterns_1_1_exception_handling_1_1_try_1_1_handle_errors.html", null ],
     [ "Patterns.Configuration.IConfiguration", "interface_patterns_1_1_configuration_1_1_i_configuration.html", [
@@ -147,12 +144,6 @@ var hierarchy =
     [ "IEqualityComparer< TValue >", null, [
       [ "Patterns.Collections.ConfigurableEqualityComparer< TValue >", "class_patterns_1_1_collections_1_1_configurable_equality_comparer_3_01_t_value_01_4.html", null ]
     ] ],
-    [ "IFluentSyntax", null, [
-      [ "Ninject.Syntax.BindingRoot", "class_ninject_1_1_syntax_1_1_binding_root.html", null ],
-      [ "Ninject.Syntax.IBindingRoot", "interface_ninject_1_1_syntax_1_1_i_binding_root.html", [
-        [ "Ninject.Syntax.BindingRoot", "class_ninject_1_1_syntax_1_1_binding_root.html", null ]
-      ] ]
-    ] ],
     [ "IInterceptor", null, [
       [ "Patterns.Interception.DelegateInterceptor", "class_patterns_1_1_interception_1_1_delegate_interceptor.html", [
         [ "Patterns.Logging.LoggingInterceptor", "class_patterns_1_1_logging_1_1_logging_interceptor.html", null ]
@@ -180,8 +171,8 @@ var hierarchy =
       [ "Patterns.Testing.Autofac.Moq.MoqRegistrationSource", "class_patterns_1_1_testing_1_1_autofac_1_1_moq_1_1_moq_registration_source.html", null ]
     ] ],
     [ "Patterns.Logging.Mixins", "class_patterns_1_1_logging_1_1_mixins.html", null ],
-    [ "Patterns.Reflection.Mixins", "class_patterns_1_1_reflection_1_1_mixins.html", null ],
     [ "Patterns.Testing.Values.Mixins", "class_patterns_1_1_testing_1_1_values_1_1_mixins.html", null ],
+    [ "Patterns.Reflection.Mixins", "class_patterns_1_1_reflection_1_1_mixins.html", null ],
     [ "Module", null, [
       [ "Patterns.Autofac.Configuration.ConfigurationModule", "class_patterns_1_1_autofac_1_1_configuration_1_1_configuration_module.html", null ],
       [ "Patterns.Autofac.Logging.LoggingModule", "class_patterns_1_1_autofac_1_1_logging_1_1_logging_module.html", null ],

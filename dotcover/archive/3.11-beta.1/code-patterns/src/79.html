@@ -1,0 +1,68 @@
+<html>
+	<head>
+		<script type="text/javascript" src="../js/coverreport.js">
+
+		</script><script type="text/javascript">
+			RANGES_79 = [
+   [41,3,41,4,'dcuc']
+, [42,4,42,84,'dcuc']
+, [43,4,43,90,'dcuc']
+, [43,132,43,134,'dcuc']
+, [44,4,44,75,'dcuc']
+, [45,3,45,4,'dcuc']
+, [43,90,43,100,'dcuc']
+, [43,100,43,132,'dcuc']
+];
+		</script><link rel="stylesheet" type="text/css" href="../css/coverreport.css" />
+	</head><body>
+		<code id="src79" class="dotCoverSource"><pre>#region FreeBSD
+
+// Copyright (c) 2013, John Batte
+// All rights reserved.
+// 
+// Redistribution and use in source and binary forms, with or without modification, are permitted provided that
+// the following conditions are met:
+// 
+//  * Redistributions of source code must retain the above copyright notice, this list of conditions and the
+//    following disclaimer.
+// 
+//  * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the
+//    following disclaimer in the documentation and/or other materials provided with the distribution.
+// 
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED
+// WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+// PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR
+// ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+// TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+// HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+// NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+// POSSIBILITY OF SUCH DAMAGE.
+
+#endregion
+
+using System;
+
+using Autofac;
+
+using Patterns.Configuration;
+
+namespace Patterns.Autofac.Configuration
+{
+	/// &lt;summary&gt;
+	///    Provides packaged registration instructions for default implementations
+	///    of public contracts defined in the Patterns.Configuration namespace.
+	/// &lt;/summary&gt;
+	public class ConfigurationModule : Module
+	{
+		protected override void Load(ContainerBuilder builder)
+		{
+			builder.RegisterType&lt;ConfigurationManagerWrapper&gt;().As&lt;IConfigurationManager&gt;();
+			builder.Register&lt;Func&lt;System.Configuration.Configuration, IConfiguration&gt;&gt;(context =&gt; config =&gt; new ConfigurationWrapper(config));
+			builder.RegisterType&lt;ConfigurationSource&gt;().As&lt;IConfigurationSource&gt;();
+		}
+	}
+}</pre></code><script type="text/javascript">
+			applyranges('src79', RANGES_79)
+		</script>
+	</body>
+</html>

@@ -1,0 +1,30 @@
+<html>
+	<head>
+		<script type="text/javascript" src="../js/coverreport.js">
+
+		</script><script type="text/javascript">
+			RANGES_24 = [
+   [6,1,6,34,'dccv']
+, [7,2,7,181,'dccv']
+, [8,2,8,182,'dccv']
+, [9,2,10,104,'dccv']
+];
+		</script><link rel="stylesheet" type="text/css" href="../css/coverreport.css" />
+	</head><body>
+		<code id="src24" class="dotCoverSource"><pre>Feature: Test Configuration Source
+	As a developer
+	I want to be able to inject my dependencies for configuration using test values
+	So that I can test my component logic using various configuration scenarios
+
+Scenario Outline: GetSection (normal)
+	Given I have a new Configuration Source using the canned config called &quot;&lt;config&gt;&quot;
+	When I ask for a Configuration Section named &quot;&lt;name&gt;&quot; from the Configuration Source
+	Then the Configuration Section I retrieved from the Configuration Source should be the expected section
+Examples: 
+	| config      | name          |
+	| TestConfig1 | settings      |
+	| TestConfig2 | test/settings |</pre></code><script type="text/javascript">
+			applyranges('src24', RANGES_24)
+		</script>
+	</body>
+</html>
