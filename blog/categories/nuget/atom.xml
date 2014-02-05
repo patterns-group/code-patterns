@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[code-patterns]]></title>
-  <link href="http://thetribe.github.io/code-patterns//atom.xml" rel="self"/>
+  <title><![CDATA[Category: nuget | code-patterns]]></title>
+  <link href="http://thetribe.github.io/code-patterns//blog/categories/nuget/atom.xml" rel="self"/>
   <link href="http://thetribe.github.io/code-patterns//"/>
   <updated>2014-02-04T22:17:20-06:00</updated>
   <id>http://thetribe.github.io/code-patterns//</id>
@@ -41,17 +41,6 @@
 
 
 <p>Stay tuned for more information!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Hello World]]></title>
-    <link href="http://thetribe.github.io/code-patterns//blog/2014/01/17/hello-world/"/>
-    <updated>2014-01-17T10:57:24-06:00</updated>
-    <id>http://thetribe.github.io/code-patterns//blog/2014/01/17/hello-world</id>
-    <content type="html"><![CDATA[<h2>code-patterns + Octopress</h2>
-
-<p>I&rsquo;ve added a new blog for code-patterns using Octopress, and this is its first post! This blog is where I&rsquo;ll come to post stuff specifically about the code-patterns project. Check back here for the latest news and updates!</p>
 ]]></content>
   </entry>
   

@@ -5,13 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Blog Archive - code-patterns</title>
+  <title>Pre-release builds on MyGet - code-patterns</title>
   <meta name="author" content="John Batte">
 
   
-  <meta name="description" content="Blog Archive 2014 Pre-release builds on MyGet
-Feb 04 2014 posted in CI, myget, nuget, semver Hello World
-Jan 17 2014 Recent Posts Pre-release Builds &hellip;">
+  <meta name="description" content="Things are changing again, but while the frequency of good changes over time may be debatable, it&rsquo;s a good thing this time. I promise. What& &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +18,7 @@ Jan 17 2014 Recent Posts Pre-release Builds &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://thetribe.github.io/code-patterns//blog/archives/">
+  <link rel="canonical" href="http://thetribe.github.io/code-patterns//blog/2014/02/04/pre-release-builds-on-myget/">
   <link href="/code-patterns/favicon.png" rel="icon">
   <link href="/code-patterns/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/code-patterns/javascripts/modernizr-2.0.js"></script>
@@ -85,46 +83,117 @@ Jan 17 2014 Recent Posts Pre-release Builds &hellip;">
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Blog Archive</h1>
+    
+      
+        <h1 class="entry-title">Pre-release Builds on MyGet</h1>
+      
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-04T22:03:35-06:00" pubdate data-updated="true">Feb 4<span>th</span>, 2014</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives">
 
 
+<div class="entry-content"><p><strong>Things are changing again</strong>, but while the frequency of good changes over time may be debatable, it&rsquo;s a good thing this time. I promise.</p>
 
-  
-  <h2>2014</h2>
+<h3>What&rsquo;s changing?</h3>
 
-<article>
-  
-<h1><a href="/code-patterns/blog/2014/02/04/pre-release-builds-on-myget/">Pre-release builds on MyGet</a></h1>
-<time datetime="2014-02-04T22:03:35-06:00" pubdate><span class='month'>Feb</span> <span class='day'>04</span> <span class='year'>2014</span></time>
+<p>We&rsquo;re stabilizing our deployment channels. This is a very good thing, and it&rsquo;s going to make life even easier.</p>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/code-patterns/blog/categories/ci/'>CI</a>, <a class='category' href='/code-patterns/blog/categories/myget/'>myget</a>, <a class='category' href='/code-patterns/blog/categories/nuget/'>nuget</a>, <a class='category' href='/code-patterns/blog/categories/semver/'>semver</a></span>
-</footer>
+<h4>Stable Builds Only: <a href="https://www.nuget.org/packages?q=id%3A+Patterns%3B+author%3A+%22The+Tribe%22">NuGet.org</a></h4>
 
-
-</article>
+<ul>
+<li>Only stable (no pre-release) versions get deployed to NuGet</li>
+<li>Existing pre-release packages will remain listed on NuGet to honor all previous offerings</li>
+</ul>
 
 
+<h4>Pre-release Builds: <a href="https://www.myget.org/gallery/code-patterns">MyGet.org</a></h4>
 
-<article>
-  
-<h1><a href="/code-patterns/blog/2014/01/17/hello-world/">Hello World</a></h1>
-<time datetime="2014-01-17T10:57:24-06:00" pubdate><span class='month'>Jan</span> <span class='day'>17</span> <span class='year'>2014</span></time>
+<ul>
+<li>Built against the <code>next</code> branch</li>
+<li>(Coming Soon) Uses CI Server-assigned versions</li>
+</ul>
 
 
-</article>
-
+<p>Stay tuned for more information!</p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">John Batte</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-04T22:03:35-06:00" pubdate data-updated="true">Feb 4<span>th</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/code-patterns/blog/categories/ci/'>CI</a>, <a class='category' href='/code-patterns/blog/categories/myget/'>myget</a>, <a class='category' href='/code-patterns/blog/categories/nuget/'>nuget</a>, <a class='category' href='/code-patterns/blog/categories/semver/'>semver</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://thetribe.github.io/code-patterns//blog/2014/02/04/pre-release-builds-on-myget/" data-via="" data-counturl="http://thetribe.github.io/code-patterns//blog/2014/02/04/pre-release-builds-on-myget/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left articlenav" href="/code-patterns/blog/2014/01/17/hello-world/" title="Previous Post: Hello World">&laquo; Hello World</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -169,7 +238,10 @@ Jan 17 2014 Recent Posts Pre-release Builds &hellip;">
       var disqus_shortname = 'codemonkeytribe';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://thetribe.github.io/code-patterns//blog/2014/02/04/pre-release-builds-on-myget/';
+        var disqus_url = 'http://thetribe.github.io/code-patterns//blog/2014/02/04/pre-release-builds-on-myget/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
