@@ -9,7 +9,7 @@
   <meta name="author" content="John Batte">
 
   
-  <meta name="description" content="Things are changing again, but while the frequency of good changes over time may be debatable, it&rsquo;s a good thing this time. I promise. What& &hellip;">
+  <meta name="description" content="TL;DR: MathNet.Numerics is really awesome! I just coded out a couple of new extension methods in response to an issue I created recently: EmptyIfNull &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -84,6 +84,126 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
+        <h1 class="entry-title"><a href="/code-patterns/blog/2014/02/06/wow-math-is-cool/">Wow, Math Is Cool&#8230; As Long as I Don&#8217;t Have to Code It</a></h1>
+      
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-06T12:49:41-06:00" pubdate data-updated="true">Feb 6<span>th</span>, 2014</time>
+        
+         | <a href="/code-patterns/blog/2014/02/06/wow-math-is-cool/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><strong>TL;DR</strong>: <a href="https://github.com/mathnet/mathnet-numerics">MathNet.Numerics</a> is really awesome!</p>
+
+<p>I just coded out a couple of new extension methods in response to <a href="https://github.com/TheTribe/code-patterns/issues/152">an issue</a> I created recently: <code>EmptyIfNull</code> and <code>Compact</code>. Both of them operate on enumerable sets of items. <code>EmptyIfNull</code> converts a null set into an empty one, preventing repetitive or lengthy null checks in LINQ queries. <code>Compact</code> attaches a new <code>Where</code> clause to the set, filtering out null items. The net effect is that you&rsquo;ll be able to run queries against sets of objects while maintaining null safety, without sacrificing the gracefulness of the call flow. Here&rsquo;s an example:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="n">Func</span><span class="p">&lt;</span><span class="n">IEnumerable</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;,</span> <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;&gt;</span> <span class="n">extractor</span> <span class="p">=</span> <span class="k">set</span> <span class="p">=&gt;</span> <span class="k">set</span>
+</span><span class='line'>  <span class="p">.</span><span class="n">EmptyIfNull</span><span class="p">().</span><span class="n">Compact</span><span class="p">().</span><span class="n">Select</span><span class="p">(</span><span class="n">item</span> <span class="p">=&gt;</span> <span class="n">item</span><span class="p">.</span><span class="n">Length</span><span class="p">);</span> <span class="c1">// too easy!</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">string</span><span class="p">[]</span> <span class="n">set1</span> <span class="p">=</span> <span class="k">new</span><span class="p">[]{</span> <span class="s">&quot;thing0&quot;</span><span class="p">,</span> <span class="k">null</span><span class="p">,</span> <span class="s">&quot;thing25&quot;</span><span class="p">,</span> <span class="k">null</span> <span class="p">};</span>
+</span><span class='line'><span class="kt">string</span><span class="p">[]</span> <span class="n">set2</span> <span class="p">=</span> <span class="k">null</span><span class="p">;</span>
+</span><span class='line'><span class="n">IEnumerable</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;</span> <span class="n">lengths1</span> <span class="p">=</span> <span class="n">extractor</span><span class="p">(</span><span class="n">set1</span><span class="p">);</span> <span class="c1">// 6,7</span>
+</span><span class='line'><span class="n">IEnumerable</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;</span> <span class="n">lengths2</span> <span class="p">=</span> <span class="n">extractor</span><span class="p">(</span><span class="n">set2</span><span class="p">);</span> <span class="c1">// empty</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This works, but every new thing we do in code-patterns is supposed to be done in a BDD workflow&hellip; I should know; it was my rule! There are a few considerations I had to make in order to be sure I was testing what I thought I was testing. As always, the testing logic is several orders of magnitude harder to grok than the logic under test, but hey whatever! This is fun stuff!</p>
+
+<p>The first weird spot I hit was mathematical in nature, and the second was all about SpecFlow bindings. I&rsquo;ll write up a separate article about the SpecFlow bits, so that this article can just focus on what a math nerd I&rsquo;m not. The math-nerdy method is <code>Compact</code>. It&rsquo;s not obvious why at first (the implementation is one line of code!) but bear with me. I don&rsquo;t want the nulls in my set to show up in predictable locations within the set. If they are always at the beginning, middle, or end of the set, then an algorithm that simply trims the ends of the set, or eliminates nulls when they are in a sequence would generate a false positive. If I have an evenly distributed random sort of the items in that set, then the nulls will always be in unpredictable locations, and the algorithm will only be able to consistently pass by doing exactly what it&rsquo;s meant to: remove all nulls, regardless of location. This isn&rsquo;t about the fact that there&rsquo;s just a simple <code>Where</code> clause under the covers. It&rsquo;s about the fact that this new extension promises to do something to your data without leaking any details about how it did so to the consumer. That means the only valid way to test is by making zero assumptions. So&hellip; hopefully I haven&rsquo;t made myself sound too crazy here&hellip; anyway, on to the math in all this:</p>
+
+<p>Let&rsquo;s say I have a set of 100 strings. I know that 5% (so, 5) of these strings need to have a null value. I can easily get 95 other randomly generated values as well, and each of them needs to have the same even-but-random distribution as each of the 5 nulls I need. The problem: I need to generate a random distribution of all 100 items. It won&rsquo;t do to have them show up in a sequence OR a regular pattern in the set. I knew there was a known algorithm that handles this, but Spaghetti Monster help me if I have to implement any of it myself. I&rsquo;d just punt the ball and go with <code>Random.Next</code>!</p>
+
+<p>Luckily for me, <a href="https://github.com/mathnet/mathnet-numerics">MathNet.Numerics</a> exists. This set of libraries is amazingly cool, and gives the world access to math functions that I&rsquo;ll probably never completely understand&hellip; all the better that it&rsquo;s been done for me and is considered to be in a working state. After doing a little research, it turns out the distribution I needed was the first 100 distinct items from a <a href="http://en.wikipedia.org/wiki/Uniform_distribution_%28discrete%29">Discrete Uniform</a> distribution of a <a href="http://en.wikipedia.org/wiki/Mersenne_twister">Mersenne Twister</a> sequence. I chose the Mersenne Twister PRNG because of its wide level of acceptance as the superior algorithm. Let&rsquo;s start with the generation of positional values using this distribution. This is so easy it&rsquo;s scary:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="kt">var</span> <span class="n">random</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MersenneTwister</span><span class="p">();</span>
+</span><span class='line'><span class="kt">var</span> <span class="n">positions</span> <span class="p">=</span> <span class="n">DiscreteUniform</span><span class="p">.</span><span class="n">Samples</span><span class="p">(</span><span class="n">random</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="n">count</span> <span class="p">-</span> <span class="m">1</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">.</span><span class="n">Distinct</span><span class="p">().</span><span class="n">Take</span><span class="p">(</span><span class="n">count</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now I have a pseudo-random list of positional indexes that can be used to randomize the sequence of a set of items of known size. All I have to do to apply that set of indexes is:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="kt">var</span> <span class="n">sortedValues</span> <span class="p">=</span> <span class="n">positions</span><span class="p">.</span><span class="n">Select</span><span class="p">(</span><span class="n">position</span> <span class="p">=&gt;</span> <span class="n">values</span><span class="p">[</span><span class="n">position</span><span class="p">]);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>How great is that? Here&rsquo;s the full method signature that I ended up with in my test code:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">public</span> <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;</span> <span class="n">CreateStringSet</span><span class="p">(</span><span class="kt">int</span> <span class="n">count</span><span class="p">,</span> <span class="kt">int</span> <span class="n">nullCount</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;</span> <span class="n">nulls</span> <span class="p">=</span> <span class="n">Enumerable</span><span class="p">.</span><span class="n">Range</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="n">nullCount</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">.</span><span class="n">Select</span><span class="p">(</span><span class="n">_</span> <span class="p">=&gt;</span> <span class="p">(</span><span class="kt">string</span><span class="p">)</span> <span class="k">null</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;</span> <span class="n">nonNulls</span> <span class="p">=</span> <span class="n">Enumerable</span><span class="p">.</span><span class="n">Range</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="n">count</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">.</span><span class="n">Skip</span><span class="p">(</span><span class="n">nullCount</span><span class="p">).</span><span class="n">Select</span><span class="p">(</span><span class="n">_</span> <span class="p">=&gt;</span> <span class="n">_generator</span><span class="p">.</span><span class="n">Phrase</span><span class="p">(</span><span class="m">20</span><span class="p">));</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kt">var</span> <span class="n">values</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;(</span><span class="n">nulls</span><span class="p">.</span><span class="n">Concat</span><span class="p">(</span><span class="n">nonNulls</span><span class="p">));</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">return</span> <span class="n">DiscreteUniform</span><span class="p">.</span><span class="n">Samples</span><span class="p">(</span><span class="k">new</span> <span class="n">MersenneTwister</span><span class="p">(),</span> <span class="m">0</span><span class="p">,</span> <span class="n">count</span> <span class="p">-</span> <span class="m">1</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">.</span><span class="n">Distinct</span><span class="p">().</span><span class="n">Take</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">.</span><span class="n">Select</span><span class="p">(</span><span class="n">position</span> <span class="p">=&gt;</span> <span class="n">values</span><span class="p">[</span><span class="n">position</span><span class="p">]);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>BTW, the <code>_generator.Phrase</code> call is using <a href="https://github.com/garethdown44/nbuilder/">NBuilder</a>&rsquo;s <code>RandomGenerator</code> class&mdash;another cool little OSS tool you should know about.</p>
+
+<p>So that&rsquo;s it. That was a really long explanation for using something that&rsquo;s exponentially more complex than I can explain to test something that&rsquo;s exponentially less complex than this blog post would seem to indicate&hellip; yeah. I love being a nerd.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -200,6 +320,10 @@
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/code-patterns/blog/2014/02/06/wow-math-is-cool/">Wow, Math Is Cool&#8230; As Long as I Don&#8217;t Have to Code It</a>
+      </li>
     
       <li class="post">
         <a href="/code-patterns/blog/2014/02/04/pre-release-builds-on-myget/">Pre-release Builds on MyGet</a>
