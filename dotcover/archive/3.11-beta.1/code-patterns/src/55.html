@@ -1,0 +1,167 @@
+<html>
+	<head>
+		<script type="text/javascript" src="../js/coverreport.js">
+
+		</script><script type="text/javascript">
+			RANGES_55 = [
+   [51,3,51,148,'dccv']
+, [52,3,52,4,'dccv']
+, [53,4,53,27,'dccv']
+, [54,4,54,23,'dccv']
+, [55,4,55,15,'dccv']
+, [56,4,56,21,'dccv']
+, [57,4,57,27,'dccv']
+, [58,3,58,4,'dccv']
+, [62,3,62,4,'dccv']
+, [63,4,63,115,'dccv']
+, [63,147,63,149,'dccv']
+, [64,3,64,4,'dccv']
+, [68,3,68,4,'dccv']
+, [69,4,69,106,'dccv']
+, [70,3,70,4,'dccv']
+, [74,3,74,4,'dccv']
+, [76,4,76,5,'dccv']
+, [77,5,77,78,'dccv']
+, [78,4,78,5,'dccv']
+, [79,4,79,27,'dccv']
+, [80,4,80,5,'dccv']
+, [81,5,81,31,'dccv']
+, [82,4,82,5,'dccv']
+, [83,3,83,4,'dccv']
+, [87,3,87,4,'dccv']
+, [88,4,88,47,'dccv']
+, [89,3,89,4,'dccv']
+, [93,3,93,4,'dccv']
+, [94,4,94,91,'dccv']
+, [95,3,95,4,'dccv']
+, [99,3,99,4,'dccv']
+, [100,4,100,50,'dccv']
+, [101,4,101,89,'dccv']
+, [102,3,102,4,'dccv']
+, [106,3,106,4,'dccv']
+, [107,4,107,52,'dccv']
+, [108,4,108,77,'dccv']
+, [108,109,108,111,'dccv']
+, [109,4,109,42,'dccv']
+, [110,3,110,4,'dccv']
+, [63,115,63,147,'dcuc']
+, [108,77,108,109,'dcuc']
+];
+		</script><link rel="stylesheet" type="text/css" href="../css/coverreport.css" />
+	</head><body>
+		<code id="src55" class="dotCoverSource"><pre>#region FreeBSD
+
+// Copyright (c) 2013, John Batte
+// All rights reserved.
+// 
+// Redistribution and use in source and binary forms, with or without modification, are permitted provided that
+// the following conditions are met:
+// 
+//  * Redistributions of source code must retain the above copyright notice, this list of conditions and the
+//    following disclaimer.
+// 
+//  * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the
+//    following disclaimer in the documentation and/or other materials provided with the distribution.
+// 
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED
+// WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+// PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR
+// ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+// TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+// HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+// NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+// POSSIBILITY OF SUCH DAMAGE.
+
+#endregion
+
+using System;
+using System.Xml.Linq;
+
+using BoDi;
+using FluentAssertions;
+
+using Patterns.Configuration;
+using Patterns.Specifications.Models;
+using Patterns.Specifications.Models.Configuration;
+using Patterns.Specifications.Models.Mocking;
+using Patterns.Testing.Configuration;
+
+using TechTalk.SpecFlow;
+
+namespace Patterns.Specifications.Steps.Configuration
+{
+	[Binding]
+	public class ConfigSourceSteps
+	{
+		private readonly IObjectContainer _container;
+		private readonly ConfigSourceContext _context;
+		private readonly MoqContext _moq;
+		private readonly ErrorContext _errors;
+		private readonly ResourceContext _resources;
+
+		public ConfigSourceSteps(IObjectContainer container, ConfigSourceContext context, MoqContext moq, ErrorContext errors, ResourceContext resources)
+		{
+			_container = container;
+			_context = context;
+			_moq = moq;
+			_errors = errors;
+			_resources = resources;
+		}
+
+		[Given(@&quot;I have a new Configuration Source using the mocked config abstraction&quot;)]
+		public void CreateSourceUsingMockedAbstraction()
+		{
+			_context.ConfigSource = new ConfigurationSource(_moq.Container.Mock&lt;IConfigurationManager&gt;().Object, config =&gt; new ConfigurationWrapper(config));
+		}
+
+		[Given(@&quot;I have a new Configuration Source using the canned config called &quot;&quot;(.*)&quot;&quot;&quot;)]
+		public void CreateSourceUsingCannedConfig(string configName)
+		{
+			_context.ConfigSource = new TestConfigurationSource(XElement.Parse(_resources.GetString(configName)));
+		}
+
+		[When(@&quot;I ask for a Configuration Section named &quot;&quot;(.*)&quot;&quot; from the Configuration Source&quot;)]
+		public void RequestConfigSection(string sectionName)
+		{
+			try
+			{
+				_context.ResolvedSection = _context.ConfigSource.GetSection(sectionName);
+			}
+			catch (Exception error)
+			{
+				_errors.LastError = error;
+			}
+		}
+
+		[Then(@&quot;the Configuration Section I retrieved from the Configuration Source should be null&quot;)]
+		public void VerifyResolvedConfigSectionNull()
+		{
+			_context.ResolvedSection.Should().BeNull();
+		}
+
+		[Then(@&quot;the Configuration Section I retrieved from the Configuration Source should be the expected section&quot;)]
+		public void VerifyResolvedSectionType()
+		{
+			_context.ResolvedSection.Should().NotBeNull().And.BeOfType&lt;TestConfigurationSection&gt;();
+		}
+
+		[Then(@&quot;the Configuration Section I retrieved from the Configuration Source should not be the expected section&quot;)]
+		public void VerifyResolveSectionWrongType()
+		{
+			_context.ResolvedSection.Should().NotBeNull();
+			_context.ResolvedSection.GetType().Should().NotBe(typeof (TestConfigurationSection));
+		}
+
+		[BeforeScenario(&quot;configured&quot;)]
+		public void ProvideConfigurationSource()
+		{
+			var manager = new ConfigurationManagerWrapper();
+			IConfigurationSource source = new ConfigurationSource(manager, config =&gt; new ConfigurationWrapper(config));
+			_container.RegisterInstanceAs(source);
+		}
+	}
+}</pre></code><script type="text/javascript">
+			applyranges('src55', RANGES_55)
+		</script>
+	</body>
+</html>

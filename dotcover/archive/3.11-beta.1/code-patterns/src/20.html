@@ -1,0 +1,35 @@
+<html>
+	<head>
+		<script type="text/javascript" src="../js/coverreport.js">
+
+		</script><script type="text/javascript">
+			RANGES_20 = [
+   [6,1,6,34,'dccv']
+, [7,2,7,123,'dccv']
+, [8,2,9,2,'dccv']
+, [9,2,9,143,'dccv']
+, [11,1,11,34,'dccv']
+, [12,2,12,123,'dccv']
+, [13,2,14,2,'dccv']
+, [14,2,14,143,'dccv']
+];
+		</script><link rel="stylesheet" type="text/css" href="../css/coverreport.css" />
+	</head><body>
+		<code id="src20" class="dotCoverSource"><pre>Feature: Date Time Info
+	As a developer, I want to be able to use an abstraction to the static
+	DateTime class and its Now property, and I want the default implementation
+	to provide equivalent information when compared to DateTime.
+
+Scenario: Now vs GetNow
+	Given I have a default DateTime abstraction
+	When I store the results of both the DateTime.Now property and the IDateTimeInfo.GetNow method
+	Then the results of both &quot;now&quot; DateTime values should be equal
+
+Scenario: UtcNow vs GetUtcNow
+	Given I have a default DateTime abstraction
+	When I store the results of both the DateTime.UtcNow property and the IDateTimeInfo.GetUtcNow method
+	Then the results of both &quot;now&quot; DateTime values should be equal</pre></code><script type="text/javascript">
+			applyranges('src20', RANGES_20)
+		</script>
+	</body>
+</html>

@@ -1,0 +1,43 @@
+<html>
+	<head>
+		<script type="text/javascript" src="../js/coverreport.js">
+
+		</script><script type="text/javascript">
+			RANGES_6 = [
+   [6,1,6,34,'dccv']
+, [7,2,7,122,'dccv']
+, [8,2,8,140,'dccv']
+, [9,2,9,145,'dccv']
+, [10,2,10,125,'dccv']
+, [11,2,11,137,'dccv']
+, [13,1,13,34,'dccv']
+, [14,2,14,122,'dccv']
+, [15,2,15,140,'dccv']
+, [16,2,17,2,'dccv']
+, [17,2,17,125,'dccv']
+, [18,2,18,150,'dccv']
+];
+		</script><link rel="stylesheet" type="text/css" href="../css/coverreport.css" />
+	</head><body>
+		<code id="src6" class="dotCoverSource"><pre>Feature: Each for Enumerables
+	As a developer, I want to be able to easily run a delegate,
+	method group, or lambda expression across a set of items, while
+	optionally setting the actions to run in parallel.
+
+Scenario: Serial
+	Given I have a set of objects with 5 items
+	And my Each logic for objects logs invocations with Thread IDs
+	When I run my Each logic against each object in the set using Each
+	Then the invocation log should contain 5 items
+	And each Thread ID in the invocation log should be the same
+
+Scenario: Parallel
+	Given I have a set of objects with 5 items
+	And my Each logic for objects logs invocations with Thread IDs
+	When I run my Each logic against each object in the set using Each with parallel set to true
+	Then the invocation log should contain 5 items
+	And there should be more than one unique Thread ID in the invocation log</pre></code><script type="text/javascript">
+			applyranges('src6', RANGES_6)
+		</script>
+	</body>
+</html>

@@ -1,0 +1,221 @@
+<html>
+	<head>
+		<script type="text/javascript" src="../js/coverreport.js">
+
+		</script><script type="text/javascript">
+			RANGES_98 = [
+   [57,3,59,100,'dccv']
+, [60,3,60,4,'dccv']
+, [61,4,61,69,'dccv']
+, [62,3,62,4,'dccv']
+, [120,3,120,4,'dccv']
+, [121,4,121,52,'dccv']
+, [128,4,128,5,'dccv']
+, [129,5,129,24,'dccv']
+, [129,25,129,44,'dccv']
+, [131,5,131,55,'dccv']
+, [131,69,131,71,'dccv']
+, [132,5,132,25,'dccv']
+, [134,5,134,23,'dccv']
+, [134,24,134,42,'dccv']
+, [135,4,135,5,'dccv']
+, [136,4,136,27,'dccv']
+, [137,4,137,5,'dccv']
+, [138,5,139,33,'dccv']
+, [139,67,139,69,'dccv']
+, [140,5,140,60,'dccv']
+, [142,5,142,25,'dccv']
+, [142,26,142,33,'dccv']
+, [144,5,144,77,'dccv']
+, [146,5,146,11,'dccv']
+, [149,4,149,5,'dccv']
+, [150,5,150,25,'dccv']
+, [150,26,150,46,'dccv']
+, [151,4,151,5,'dccv']
+, [152,3,152,4,'dccv']
+, [156,3,156,4,'dccv']
+, [157,4,157,26,'dccv']
+, [158,4,158,20,'dccv']
+, [159,4,159,18,'dccv']
+, [160,4,160,23,'dccv']
+, [161,4,161,22,'dccv']
+, [162,4,162,22,'dccv']
+, [163,3,163,4,'dccv']
+, [131,55,131,69,'dccv']
+, [122,4,122,5,'dcuc']
+, [123,5,123,26,'dcuc']
+, [124,5,124,12,'dcuc']
+, [144,78,144,100,'dcuc']
+, [139,33,139,67,'dcuc']
+];
+		</script><link rel="stylesheet" type="text/css" href="../css/coverreport.css" />
+	</head><body>
+		<code id="src98" class="dotCoverSource"><pre>#region FreeBSD
+
+// Copyright (c) 2013, The Tribe
+// All rights reserved.
+// 
+// Redistribution and use in source and binary forms, with or without modification, are permitted provided that
+// the following conditions are met:
+// 
+//  * Redistributions of source code must retain the above copyright notice, this list of conditions and the
+//    following disclaimer.
+// 
+//  * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the
+//    following disclaimer in the documentation and/or other materials provided with the distribution.
+// 
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED
+// WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+// PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR
+// ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+// TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+// HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+// NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+// POSSIBILITY OF SUCH DAMAGE.
+
+#endregion
+
+using System;
+using Castle.DynamicProxy;
+using Patterns.ExceptionHandling;
+
+namespace Patterns.Interception
+{
+	/// &lt;summary&gt;
+	///    Provides an interceptor that allows its interception logic to be
+	///    injected; no-op fall-backs are used when no logic has been specified
+	///    for an interception step.
+	/// &lt;/summary&gt;
+	public class DelegateInterceptor : IInterceptor
+	{
+		/// &lt;summary&gt;
+		///    Initializes a new instance of the &lt;see cref=&quot;DelegateInterceptor&quot; /&gt; class.
+		/// &lt;/summary&gt;
+		/// &lt;param name=&quot;after&quot;&gt;
+		///    The action to execute after proceeding. This action will not run
+		///    if the invocation throws an exception.
+		/// &lt;/param&gt;
+		/// &lt;param name=&quot;before&quot;&gt;The action to execute before proceeding.&lt;/param&gt;
+		/// &lt;param name=&quot;condition&quot;&gt;
+		///    The interception condition. If this condition returns &lt;c&gt;false&lt;/c&gt;,
+		///    the invocation proceeds with no further interception.
+		/// &lt;/param&gt;
+		/// &lt;param name=&quot;finally&quot;&gt;
+		///    The action to execute at the end of the interception, regardless of
+		///    whether or not an exception was thrown.
+		/// &lt;/param&gt;
+		/// &lt;param name=&quot;onError&quot;&gt;The function to execute when an error occurs.&lt;/param&gt;
+		/// &lt;param name=&quot;proceed&quot;&gt;The action to execute. Only set this if proceeding as normal is not desired.&lt;/param&gt;
+		public DelegateInterceptor(Action&lt;IInvocation&gt; after = null, Action&lt;IInvocation&gt; before = null,
+			Func&lt;IInvocation, bool&gt; condition = null, Action&lt;IInvocation&gt; @finally = null,
+			Func&lt;IInvocation, Exception, ExceptionState&gt; onError = null, Action&lt;IInvocation&gt; proceed = null)
+		{
+			Initialize(after, before, condition, @finally, onError, proceed);
+		}
+
+		/// &lt;summary&gt;
+		///    Gets or sets the action to execute. Only set this if proceeding as normal is not desired.
+		/// &lt;/summary&gt;
+		/// &lt;value&gt;
+		///    The action to execute.
+		/// &lt;/value&gt;
+		public virtual Action&lt;IInvocation&gt; Proceed { get; set; }
+
+		/// &lt;summary&gt;
+		///    Gets or sets the action to execute after proceeding. This action will not run
+		///    if the invocation throws an exception.
+		/// &lt;/summary&gt;
+		/// &lt;value&gt;
+		///    The action to execute after proceeding.
+		/// &lt;/value&gt;
+		public virtual Action&lt;IInvocation&gt; After { get; set; }
+
+		/// &lt;summary&gt;
+		///    Gets or sets the action to execute before proceeding.
+		/// &lt;/summary&gt;
+		/// &lt;value&gt;
+		///    The action to execute before proceeding.
+		/// &lt;/value&gt;
+		public virtual Action&lt;IInvocation&gt; Before { get; set; }
+
+		/// &lt;summary&gt;
+		///    Gets or sets the interception condition. If this condition returns &lt;c&gt;false&lt;/c&gt;,
+		///    the invocation proceeds with no further interception.
+		/// &lt;/summary&gt;
+		/// &lt;value&gt;
+		///    The interception condition.
+		/// &lt;/value&gt;
+		public virtual Func&lt;IInvocation, bool&gt; Condition { get; set; }
+
+		/// &lt;summary&gt;
+		///    Gets or sets the action to execute at the end of the interception, regardless of
+		///    whether or not an exception was thrown.
+		/// &lt;/summary&gt;
+		/// &lt;value&gt;
+		///    The action to execute at the end of the interception.
+		/// &lt;/value&gt;
+		public virtual Action&lt;IInvocation&gt; Finally { get; set; }
+
+		/// &lt;summary&gt;
+		///    Gets or sets the function to execute when an error occurs.
+		/// &lt;/summary&gt;
+		/// &lt;value&gt;
+		///    The function to execute when an error occurs.
+		/// &lt;/value&gt;
+		public virtual Func&lt;IInvocation, Exception, ExceptionState&gt; OnError { get; set; }
+
+		/// &lt;summary&gt;
+		///    Intercepts the specified invocation.
+		/// &lt;/summary&gt;
+		/// &lt;param name=&quot;invocation&quot;&gt;The invocation.&lt;/param&gt;
+		public virtual void Intercept(IInvocation invocation)
+		{
+			if (Condition != null &amp;&amp; !Condition(invocation))
+			{
+				invocation.Proceed();
+				return;
+			}
+
+			try
+			{
+				if (Before != null) Before(invocation);
+
+				Action&lt;IInvocation&gt; proceed = Proceed ?? (call =&gt; call.Proceed());
+				proceed(invocation);
+
+				if (After != null) After(invocation);
+			}
+			catch (Exception error)
+			{
+				Func&lt;IInvocation, Exception, ExceptionState&gt; errorHandler = OnError
+					?? ((thisCall, thisBug) =&gt; new ExceptionState(thisBug, false));
+				ExceptionState state = errorHandler(invocation, error);
+
+				if (state.IsHandled) return;
+
+				if (!ReferenceEquals(error, state.Exception) &amp;&amp; state.Exception != null) throw state.Exception;
+
+				throw;
+			}
+			finally
+			{
+				if (Finally != null) Finally(invocation);
+			}
+		}
+
+		private void Initialize(Action&lt;IInvocation&gt; after, Action&lt;IInvocation&gt; before, Func&lt;IInvocation, bool&gt; condition,
+			Action&lt;IInvocation&gt; @finally, Func&lt;IInvocation, Exception, ExceptionState&gt; onError, Action&lt;IInvocation&gt; proceed)
+		{
+			Condition = condition;
+			Before = before;
+			After = after;
+			Finally = @finally;
+			OnError = onError;
+			Proceed = proceed;
+		}
+	}
+}</pre></code><script type="text/javascript">
+			applyranges('src98', RANGES_98)
+		</script>
+	</body>
+</html>

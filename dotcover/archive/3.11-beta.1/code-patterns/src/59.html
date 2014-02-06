@@ -1,0 +1,131 @@
+<html>
+	<head>
+		<script type="text/javascript" src="../js/coverreport.js">
+
+		</script><script type="text/javascript">
+			RANGES_59 = [
+   [45,3,45,70,'dccv']
+, [46,3,46,4,'dccv']
+, [47,4,47,23,'dccv']
+, [48,4,48,15,'dccv']
+, [49,3,49,4,'dccv']
+, [53,3,53,4,'dccv']
+, [54,4,54,68,'dccv']
+, [55,4,55,44,'dccv']
+, [56,4,56,42,'dccv']
+, [57,3,57,4,'dccv']
+, [61,3,61,4,'dccv']
+, [62,4,62,68,'dccv']
+, [63,4,63,44,'dccv']
+, [64,4,64,71,'dccv']
+, [65,4,65,42,'dccv']
+, [66,3,66,4,'dccv']
+, [70,3,70,4,'dccv']
+, [71,4,71,68,'dccv']
+, [72,4,72,44,'dccv']
+, [73,4,73,67,'dccv']
+, [74,4,74,42,'dccv']
+, [75,3,75,4,'dccv']
+, [79,3,79,4,'dccv']
+, [80,4,80,84,'dccv']
+, [81,3,81,4,'dccv']
+, [84,3,84,4,'dccv']
+, [85,4,85,72,'dccv']
+, [86,4,86,90,'dccv']
+, [87,3,87,4,'dccv']
+];
+		</script><link rel="stylesheet" type="text/css" href="../css/coverreport.css" />
+	</head><body>
+		<code id="src59" class="dotCoverSource"><pre>#region FreeBSD
+
+// Copyright (c) 2013, John Batte
+// All rights reserved.
+// 
+// Redistribution and use in source and binary forms, with or without modification, are permitted provided that
+// the following conditions are met:
+// 
+//  * Redistributions of source code must retain the above copyright notice, this list of conditions and the
+//    following disclaimer.
+// 
+//  * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the
+//    following disclaimer in the documentation and/or other materials provided with the distribution.
+// 
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED
+// WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+// PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR
+// ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+// TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+// HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+// NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+// POSSIBILITY OF SUCH DAMAGE.
+
+#endregion
+
+using System;
+
+using Castle.DynamicProxy;
+
+using Moq;
+
+using Patterns.Specifications.Models.Interception;
+using Patterns.Specifications.Models.Mocking;
+
+using TechTalk.SpecFlow;
+
+namespace Patterns.Specifications.Steps.Interception
+{
+	[Binding]
+	public class InvocationSteps
+	{
+		private readonly InterceptionContext _context;
+		private readonly MoqContext _moq;
+
+		public InvocationSteps(InterceptionContext context, MoqContext moq)
+		{
+			_context = context;
+			_moq = moq;
+		}
+
+		[Given(@&quot;I have a mocked invocation&quot;)]
+		public void CreateMockedInvocation()
+		{
+			Mock&lt;IInvocation&gt; mockCall = _moq.Container.Mock&lt;IInvocation&gt;();
+			SetInvocationToObjectToString(mockCall);
+			_context.Invocation = mockCall.Object;
+		}
+
+		[Given(@&quot;I have a mocked invocation that returns a value&quot;)]
+		public void CreateMockedInvocationWithReturn()
+		{
+			Mock&lt;IInvocation&gt; mockCall = _moq.Container.Mock&lt;IInvocation&gt;();
+			SetInvocationToObjectToString(mockCall);
+			mockCall.SetupGet(call =&gt; call.ReturnValue).Returns(&quot;hello world&quot;);
+			_context.Invocation = mockCall.Object;
+		}
+
+		[Given(@&quot;I have a mocked invocation that throws an Exception&quot;)]
+		public void CreateMockedInvocationWithException()
+		{
+			Mock&lt;IInvocation&gt; mockCall = _moq.Container.Mock&lt;IInvocation&gt;();
+			SetInvocationToObjectToString(mockCall);
+			mockCall.Setup(call =&gt; call.Proceed()).Throws(new Exception());
+			_context.Invocation = mockCall.Object;
+		}
+
+		[Then(@&quot;the mocked invocation should have been instructed to proceed&quot;)]
+		public void VerifyMockInvocationProceed()
+		{
+			_moq.Container.Mock&lt;IInvocation&gt;().Verify(call =&gt; call.Proceed(), Times.Once());
+		}
+
+		private static void SetInvocationToObjectToString(Mock&lt;IInvocation&gt; mockCall)
+		{
+			mockCall.SetupGet(call =&gt; call.TargetType).Returns(typeof (object));
+			mockCall.SetupGet(call =&gt; call.Method).Returns(typeof (object).GetMethod(&quot;ToString&quot;));
+		}
+	}
+}</pre></code><script type="text/javascript">
+			applyranges('src59', RANGES_59)
+		</script>
+	</body>
+</html>

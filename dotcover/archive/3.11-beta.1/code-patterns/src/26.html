@@ -1,0 +1,97 @@
+<html>
+	<head>
+		<script type="text/javascript" src="../js/coverreport.js">
+
+		</script><script type="text/javascript">
+			RANGES_26 = [
+   [7,2,7,122,'dccv']
+, [8,2,8,164,'dccv']
+, [10,1,10,34,'dccv']
+, [6,1,6,26,'dccv']
+, [11,2,11,145,'dccv']
+, [12,2,12,133,'dccv']
+, [13,2,13,161,'dccv']
+, [14,2,14,152,'dccv']
+, [16,1,16,34,'dccv']
+, [6,1,6,26,'dccv']
+, [17,2,17,150,'dccv']
+, [18,2,18,133,'dccv']
+, [19,2,19,161,'dccv']
+, [20,2,20,156,'dccv']
+, [22,1,22,34,'dccv']
+, [6,1,6,26,'dccv']
+, [23,2,23,128,'dccv']
+, [24,2,24,143,'dccv']
+, [25,2,25,163,'dccv']
+, [26,2,26,131,'dccv']
+, [27,2,27,156,'dccv']
+, [29,1,29,34,'dccv']
+, [6,1,6,26,'dccv']
+, [30,2,30,128,'dccv']
+, [31,2,31,143,'dccv']
+, [32,2,32,163,'dccv']
+, [33,2,33,131,'dccv']
+, [34,2,34,156,'dccv']
+, [36,2,36,186,'dccv']
+, [37,2,37,143,'dccv']
+, [38,2,38,164,'dccv']
+, [39,2,39,131,'dccv']
+, [40,2,40,142,'dccv']
+, [41,2,41,152,'dccv']
+, [42,2,42,179,'dccv']
+];
+		</script><link rel="stylesheet" type="text/css" href="../css/coverreport.css" />
+	</head><body>
+		<code id="src26" class="dotCoverSource"><pre>Feature: Autofac Moq Container
+	In order to be able to easily get a mixture of mocked and registered objects
+	As a unit or integration test developer
+	I want to have a container that seamlessly blends Autofac with Moq
+
+Background: 
+	Given I have an Autofac/Moq test container
+	Then the Autofac/Moq test container should have 0 registrations for my test interface
+
+Scenario: Create an unregistered interface
+	When I create an instance of an interface using the test container
+	Then the test container should have given me an object
+	And the Autofac/Moq test container should have 1 registration for my test interface
+	And the object retrieved by the test container should be a mock-based type
+
+Scenario: Create an unregistered creatable class
+	When I create an instance of a creatable class using the test container
+	Then the test container should have given me an object
+	And the Autofac/Moq test container should have 1 registration for my test interface
+	And the object retrieved by the test container should not be a mock-based type
+
+Scenario: Create a registered object
+	When I register an object with the test container
+	And I create an instance of an interface using the test container
+	Then the Autofac/Moq test container should have 1 registration for my test interface
+	And the test container should have given me an object
+	And the object retrieved by the test container should not be a mock-based type
+
+Scenario Outline: Override a registered object
+	When I register an object with the test container
+	And I create an instance of an interface using the test container
+	Then the Autofac/Moq test container should have 1 registration for my test interface
+	And the test container should have given me an object
+	And the object retrieved by the test container should not be a mock-based type
+
+	When I create a mock of the object using the test container with &lt;expected&gt; mock behavior
+	And I create an instance of an interface using the test container
+	Then the Autofac/Moq test container should have 2 registrations for my test interface
+	And the test container should have given me an object
+	And the test container should have given me a mock of the object
+	And the object retrieved by the test container should be a mock-based type
+	And the object retrieved by the test container should have &lt;expected&gt; mock behavior
+
+	Examples:
+	| expected        |
+	| the container&#39;s |
+	| default         |
+	| loose           |
+	| strict          |</pre></code><script type="text/javascript">
+			applyranges('src26', RANGES_26)
+		</script>
+	</body>
+</html>

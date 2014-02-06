@@ -1,0 +1,72 @@
+<html>
+	<head>
+		<script type="text/javascript" src="../js/coverreport.js">
+
+		</script><script type="text/javascript">
+			RANGES_88 = [
+   [22,3,22,105,'dccv']
+, [23,3,23,4,'dccv']
+, [24,4,24,29,'dccv']
+, [25,4,25,61,'dccv']
+, [26,3,26,4,'dccv']
+, [35,3,35,4,'dccv']
+, [36,4,36,38,'dccv']
+, [43,4,43,28,'dccv']
+, [44,3,44,4,'dccv']
+, [37,4,37,5,'dcuc']
+, [38,5,38,37,'dcuc']
+, [38,38,38,71,'dcuc']
+, [40,5,40,28,'dcuc']
+];
+		</script><link rel="stylesheet" type="text/css" href="../css/coverreport.css" />
+	</head><body>
+		<code id="src88" class="dotCoverSource"><pre>using System.Collections.Generic;
+
+namespace Patterns.Collections
+{
+	/// &lt;summary&gt;
+	///    Defines a default implementation of the &lt;see cref=&quot;IDictionaryValueRetriever{TKey,TValue}&quot; /&gt; interface.
+	/// &lt;/summary&gt;
+	/// &lt;typeparam name=&quot;TKey&quot;&gt;The type of the key.&lt;/typeparam&gt;
+	/// &lt;typeparam name=&quot;TValue&quot;&gt;The type of the value.&lt;/typeparam&gt;
+	public class DictionaryValueRetriever&lt;TKey, TValue&gt; : IDictionaryValueRetriever&lt;TKey, TValue&gt;
+	{
+		private readonly IDictionary&lt;TKey, TValue&gt; _dictionary;
+		private readonly bool _throwKeyNotFoundExceptions;
+
+		/// &lt;summary&gt;
+		///    Initializes a new instance of the &lt;see cref=&quot;DictionaryValueRetriever{TKey, TValue}&quot; /&gt; class.
+		/// &lt;/summary&gt;
+		/// &lt;param name=&quot;dictionary&quot;&gt;The dictionary.&lt;/param&gt;
+		/// &lt;param name=&quot;throwKeyNotFoundExceptions&quot;&gt;
+		///    if set to &lt;c&gt;true&lt;/c&gt;, throw KeyNotFoundExceptions for missing keys.
+		/// &lt;/param&gt;
+		public DictionaryValueRetriever(IDictionary&lt;TKey, TValue&gt; dictionary, bool throwKeyNotFoundExceptions)
+		{
+			_dictionary = dictionary;
+			_throwKeyNotFoundExceptions = throwKeyNotFoundExceptions;
+		}
+
+		/// &lt;summary&gt;
+		///    Retrieves the value at the specified key.
+		/// &lt;/summary&gt;
+		/// &lt;param name=&quot;key&quot;&gt;The key.&lt;/param&gt;
+		/// &lt;returns&gt;&lt;/returns&gt;
+		/// &lt;exception cref=&quot;System.NotImplementedException&quot;&gt;&lt;/exception&gt;
+		public TValue Retrieve(TKey key)
+		{
+			if (!_dictionary.ContainsKey(key))
+			{
+				if (_throwKeyNotFoundExceptions) throw new KeyNotFoundException();
+
+				return default(TValue);
+			}
+
+			return _dictionary[key];
+		}
+	}
+}</pre></code><script type="text/javascript">
+			applyranges('src88', RANGES_88)
+		</script>
+	</body>
+</html>

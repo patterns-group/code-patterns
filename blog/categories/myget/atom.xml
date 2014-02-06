@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: myget | code-patterns]]></title>
+  <link href="http://thetribe.github.io/code-patterns//blog/categories/myget/atom.xml" rel="self"/>
+  <link href="http://thetribe.github.io/code-patterns//"/>
+  <updated>2014-02-06T14:39:13-06:00</updated>
+  <id>http://thetribe.github.io/code-patterns//</id>
+  <author>
+    <name><![CDATA[John Batte]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Pre-release builds on MyGet]]></title>
+    <link href="http://thetribe.github.io/code-patterns//blog/2014/02/04/pre-release-builds-on-myget/"/>
+    <updated>2014-02-04T22:03:35-06:00</updated>
+    <id>http://thetribe.github.io/code-patterns//blog/2014/02/04/pre-release-builds-on-myget</id>
+    <content type="html"><![CDATA[<p><strong>Things are changing again</strong>, but while the frequency of good changes over time may be debatable, it&rsquo;s a good thing this time. I promise.</p>
+
+<h3>What&rsquo;s changing?</h3>
+
+<p>We&rsquo;re stabilizing our deployment channels. This is a very good thing, and it&rsquo;s going to make life even easier.</p>
+
+<h4>Stable Builds Only: <a href="https://www.nuget.org/packages?q=id%3A+Patterns%3B+author%3A+%22The+Tribe%22">NuGet.org</a></h4>
+
+<ul>
+<li>Only stable (no pre-release) versions get deployed to NuGet</li>
+<li>Existing pre-release packages will remain listed on NuGet to honor all previous offerings</li>
+</ul>
+
+
+<h4>Pre-release Builds: <a href="https://www.myget.org/gallery/code-patterns">MyGet.org</a></h4>
+
+<ul>
+<li>Built against the <code>next</code> branch</li>
+<li>(Coming Soon) Uses CI Server-assigned versions</li>
+</ul>
+
+
+<p>Stay tuned for more information!</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,130 @@
+<html>
+	<head>
+		<script type="text/javascript" src="../js/coverreport.js">
+
+		</script><script type="text/javascript">
+			RANGES_72 = [
+   [46,3,46,80,'dccv']
+, [47,3,47,4,'dccv']
+, [48,4,48,23,'dccv']
+, [49,4,49,23,'dccv']
+, [50,3,50,4,'dccv']
+, [54,3,54,4,'dccv']
+, [55,4,55,54,'dccv']
+, [56,3,56,4,'dccv']
+, [60,3,60,4,'dccv']
+, [61,4,61,72,'dccv']
+, [62,3,62,4,'dccv']
+, [66,3,66,4,'dccv']
+, [67,4,67,56,'dccv']
+, [68,4,68,38,'dccv']
+, [69,3,69,4,'dccv']
+, [73,3,73,4,'dccv']
+, [74,4,74,59,'dccv']
+, [75,4,75,41,'dccv']
+, [76,3,76,4,'dccv']
+, [80,3,80,4,'dccv']
+, [81,4,81,47,'dccv']
+, [82,4,82,78,'dccv']
+, [83,3,83,4,'dccv']
+, [87,3,87,4,'dccv']
+, [88,4,88,99,'dccv']
+, [89,3,89,4,'dccv']
+];
+		</script><link rel="stylesheet" type="text/css" href="../css/coverreport.css" />
+	</head><body>
+		<code id="src72" class="dotCoverSource"><pre>#region FreeBSD
+
+// Copyright (c) 2013, John Batte
+// All rights reserved.
+// 
+// Redistribution and use in source and binary forms, with or without modification, are permitted provided that
+// the following conditions are met:
+// 
+//  * Redistributions of source code must retain the above copyright notice, this list of conditions and the
+//    following disclaimer.
+// 
+//  * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the
+//    following disclaimer in the documentation and/or other materials provided with the distribution.
+// 
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED
+// WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+// PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR
+// ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+// TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+// HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+// NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+// POSSIBILITY OF SUCH DAMAGE.
+
+#endregion
+
+using System;
+
+using Autofac;
+
+using FluentAssertions;
+
+using Patterns.Runtime;
+using Patterns.Specifications.Models.Autofac;
+using Patterns.Specifications.Models.Runtime;
+
+using TechTalk.SpecFlow;
+
+namespace Patterns.Specifications.Steps.Runtime
+{
+	[Binding]
+	public class DateTimeInfoSteps
+	{
+		private readonly AutofacContext _autofac;
+		private readonly DateTimeInfoContext _context;
+
+		public DateTimeInfoSteps(DateTimeInfoContext context, AutofacContext autofac)
+		{
+			_context = context;
+			_autofac = autofac;
+		}
+
+		[Given(@&quot;I have a default DateTime abstraction&quot;)]
+		public void CreateDefaultDateTimeInfo()
+		{
+			_context.DateTimeInfo = new DefaultDateTimeInfo();
+		}
+
+		[When(@&quot;I try to resolve an IDateTimeInfo instance&quot;)]
+		public void ResolveIDateTimeInfo()
+		{
+			_context.DateTimeInfo = _autofac.Container.Resolve&lt;IDateTimeInfo&gt;();
+		}
+
+		[When(@&quot;I store the results of both the DateTime\.Now property and the IDateTimeInfo\.GetNow method&quot;)]
+		public void StoreBothDateTimeResults()
+		{
+			_context.CustomNow = _context.DateTimeInfo.GetNow();
+			_context.SystemNow = DateTime.Now;
+		}
+
+		[When(@&quot;I store the results of both the DateTime\.UtcNow property and the IDateTimeInfo\.GetUtcNow method&quot;)]
+		public void StoreBothUtcDateTimeResults()
+		{
+			_context.CustomNow = _context.DateTimeInfo.GetUtcNow();
+			_context.SystemNow = DateTime.UtcNow;
+		}
+
+		[Then(@&quot;the resolved IDateTimeInfo object should be an instance of DefaultDateTimeInfo&quot;)]
+		public void AssertResolvedIDateTimeInfoIsDefault()
+		{
+			_context.DateTimeInfo.Should().NotBeNull();
+			_context.DateTimeInfo.GetType().Should().Be(typeof (DefaultDateTimeInfo));
+		}
+
+		[Then(@&quot;the results of both &quot;&quot;now&quot;&quot; DateTime values should be equal&quot;)]
+		public void BothDateTimeResultsShouldEqual()
+		{
+			_context.CustomNow.AccurateToOneSecond().Should().Be(_context.SystemNow.AccurateToOneSecond());
+		}
+	}
+}</pre></code><script type="text/javascript">
+			applyranges('src72', RANGES_72)
+		</script>
+	</body>
+</html>

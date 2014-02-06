@@ -1,0 +1,150 @@
+<html>
+	<head>
+		<script type="text/javascript" src="../js/coverreport.js">
+
+		</script><script type="text/javascript">
+			RANGES_53 = [
+   [47,3,47,85,'dccv']
+, [48,3,48,4,'dccv']
+, [49,4,49,23,'dccv']
+, [50,4,50,33,'dccv']
+, [51,3,51,4,'dccv']
+, [55,3,55,4,'dccv']
+, [56,4,56,43,'dccv']
+, [57,3,57,4,'dccv']
+, [61,3,61,4,'dccv']
+, [62,4,62,51,'dccv']
+, [63,3,63,4,'dccv']
+, [67,3,67,4,'dccv']
+, [68,4,68,39,'dccv']
+, [69,3,69,4,'dccv']
+, [73,3,73,4,'dccv']
+, [74,4,74,115,'dccv']
+, [77,4,77,5,'dccv']
+, [78,5,78,47,'dccv']
+, [79,4,79,5,'dccv']
+, [80,4,80,27,'dccv']
+, [81,4,81,5,'dccv']
+, [82,5,82,37,'dccv']
+, [83,4,83,5,'dccv']
+, [84,3,84,4,'dccv']
+, [88,3,88,4,'dccv']
+, [89,4,89,45,'dccv']
+, [90,3,90,4,'dccv']
+, [94,3,94,4,'dccv']
+, [95,4,95,55,'dccv']
+, [96,3,96,4,'dccv']
+, [100,3,100,4,'dccv']
+, [101,4,101,48,'dccv']
+, [102,3,102,4,'dccv']
+];
+		</script><link rel="stylesheet" type="text/css" href="../css/coverreport.css" />
+	</head><body>
+		<code id="src53" class="dotCoverSource"><pre>#region FreeBSD
+
+// Copyright (c) 2013, John Batte
+// All rights reserved.
+// 
+// Redistribution and use in source and binary forms, with or without modification, are permitted provided that
+// the following conditions are met:
+// 
+//  * Redistributions of source code must retain the above copyright notice, this list of conditions and the
+//    following disclaimer.
+// 
+//  * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the
+//    following disclaimer in the documentation and/or other materials provided with the distribution.
+// 
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED
+// WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+// PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR
+// ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+// TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+// HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+// NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+// POSSIBILITY OF SUCH DAMAGE.
+
+#endregion
+
+using System;
+using System.Collections.Generic;
+
+using FizzWare.NBuilder;
+
+using FluentAssertions;
+
+using Patterns.Collections;
+using Patterns.Specifications.Models;
+using Patterns.Specifications.Models.Collections;
+
+using TechTalk.SpecFlow;
+
+namespace Patterns.Specifications.Steps.Collections
+{
+	[Binding]
+	public class ObjectCollectionSteps
+	{
+		private readonly CollectionContext _context;
+		private readonly ErrorContext _errorContext;
+
+		public ObjectCollectionSteps(CollectionContext context, ErrorContext errorContext)
+		{
+			_context = context;
+			_errorContext = errorContext;
+		}
+
+		[Given(@&quot;I have an empty object collection&quot;)]
+		public void CreateEmptyObjectCollection()
+		{
+			_context.InitializeObjectCollection(0);
+		}
+
+		[Given(@&quot;I have an object collection with (.*) items&quot;)]
+		public void CreateObjectCollection(int itemCount)
+		{
+			_context.InitializeObjectCollection(itemCount);
+		}
+
+		[Given(@&quot;I have a null object collection&quot;)]
+		public void GivenIHaveANullObjectCollection()
+		{
+			_context.NullifyObjectCollection();
+		}
+
+		[When(@&quot;I add (.*) items to the object collection using the AddRange extension&quot;)]
+		public void AddRangeToObjectCollection(int itemCount)
+		{
+			IList&lt;object&gt; items = itemCount &gt; 0 ? Builder&lt;object&gt;.CreateListOfSize(itemCount).Build() : new List&lt;object&gt;();
+
+			try
+			{
+				_context.ObjectCollection.AddRange(items);
+			}
+			catch (Exception error)
+			{
+				_errorContext.LastError = error;
+			}
+		}
+
+		[When(@&quot;I add a null set to the object collection using the AddRange extension&quot;)]
+		public void AddRangeNullSetToObjectCollection()
+		{
+			_context.ObjectCollection.AddRange(null);
+		}
+
+		[Then(@&quot;the object collection should contain (.*) items&quot;)]
+		public void AssertObjectCollectionCount(int count)
+		{
+			_context.ObjectCollection.Count.Should().Be(count);
+		}
+
+		[Then(@&quot;the object collection should be null&quot;)]
+		public void ThenTheCollectionShouldBeNull()
+		{
+			_context.ObjectCollection.Should().BeNull();
+		}
+	}
+}</pre></code><script type="text/javascript">
+			applyranges('src53', RANGES_53)
+		</script>
+	</body>
+</html>

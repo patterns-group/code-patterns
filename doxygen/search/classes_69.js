@@ -1,7 +1,6 @@
 var searchData=
 [
   ['iautofacmoqcontainer',['IAutofacMoqContainer',['../interface_patterns_1_1_testing_1_1_autofac_1_1_moq_1_1_i_autofac_moq_container.html',1,'Patterns::Testing::Autofac::Moq']]],
-  ['ibindingroot',['IBindingRoot',['../interface_ninject_1_1_syntax_1_1_i_binding_root.html',1,'Ninject::Syntax']]],
   ['iconfiguration',['IConfiguration',['../interface_patterns_1_1_configuration_1_1_i_configuration.html',1,'Patterns::Configuration']]],
   ['iconfigurationmanager',['IConfigurationManager',['../interface_patterns_1_1_configuration_1_1_i_configuration_manager.html',1,'Patterns::Configuration']]],
   ['iconfigurationsource',['IConfigurationSource',['../interface_patterns_1_1_configuration_1_1_i_configuration_source.html',1,'Patterns::Configuration']]],

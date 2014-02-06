@@ -1,0 +1,75 @@
+<html>
+	<head>
+		<script type="text/javascript" src="../js/coverreport.js">
+
+		</script><script type="text/javascript">
+			RANGES_43 = [
+   [39,8,39,9,'dccv']
+, [39,10,39,50,'dccv']
+, [39,51,39,52,'dccv']
+, [46,8,46,9,'dccv']
+, [46,10,46,53,'dccv']
+, [46,54,46,55,'dccv']
+, [40,8,40,9,'dcuc']
+, [40,10,40,41,'dcuc']
+, [40,42,40,43,'dcuc']
+, [47,8,47,9,'dcuc']
+, [47,10,47,44,'dcuc']
+, [47,45,47,46,'dcuc']
+];
+		</script><link rel="stylesheet" type="text/css" href="../css/coverreport.css" />
+	</head><body>
+		<code id="src43" class="dotCoverSource"><pre>#region FreeBSD
+
+// Copyright (c) 2013, John Batte
+// All rights reserved.
+// 
+// Redistribution and use in source and binary forms, with or without modification, are permitted provided that
+// the following conditions are met:
+// 
+//  * Redistributions of source code must retain the above copyright notice, this list of conditions and the
+//    following disclaimer.
+// 
+//  * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the
+//    following disclaimer in the documentation and/or other materials provided with the distribution.
+// 
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED
+// WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+// PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR
+// ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+// TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+// HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+// NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+// POSSIBILITY OF SUCH DAMAGE.
+
+#endregion
+
+using System.Configuration;
+
+namespace Patterns.Specifications.Models.Text
+{
+	public class DictionaryParserConfig : ConfigurationSection
+	{
+		public const string SectionName = &quot;patterns/specifications/dictionaryParser&quot;;
+		private const string _rowDelimiterKey = &quot;rowDelimiter&quot;;
+		private const string _columnDelimiterKey = &quot;columnDelimiter&quot;;
+
+		[ConfigurationProperty(_rowDelimiterKey)]
+		public string RowDelimiter
+		{
+			get { return this[_rowDelimiterKey] as string; }
+			set { this[_rowDelimiterKey] = value; }
+		}
+
+		[ConfigurationProperty(_columnDelimiterKey)]
+		public string ColumnDelimiter
+		{
+			get { return this[_columnDelimiterKey] as string; }
+			set { this[_columnDelimiterKey] = value; }
+		}
+	}
+}</pre></code><script type="text/javascript">
+			applyranges('src43', RANGES_43)
+		</script>
+	</body>
+</html>

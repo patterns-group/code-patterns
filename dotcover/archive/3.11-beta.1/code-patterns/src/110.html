@@ -1,0 +1,198 @@
+<html>
+	<head>
+		<script type="text/javascript" src="../js/coverreport.js">
+
+		</script><script type="text/javascript">
+			RANGES_110 = [
+   [17,3,17,84,'dccv']
+, [20,3,20,4,'dccv']
+, [21,4,21,30,'dccv']
+, [21,47,21,48,'dccv']
+, [22,3,22,4,'dccv']
+, [29,3,29,118,'dccv']
+, [30,3,30,4,'dccv']
+, [31,4,31,55,'dccv']
+, [31,56,31,79,'dccv']
+, [32,3,32,4,'dccv']
+, [49,3,49,4,'dccv']
+, [50,4,50,31,'dccv']
+, [51,4,51,63,'dccv']
+, [52,3,52,4,'dccv']
+, [69,3,69,4,'dccv']
+, [70,4,71,24,'dccv']
+, [71,53,71,55,'dccv']
+, [73,4,74,67,'dccv']
+, [74,86,75,24,'dccv']
+, [76,3,76,4,'dccv']
+, [84,3,84,4,'dccv']
+, [85,4,85,38,'dccv']
+, [86,3,86,4,'dccv']
+, [98,3,98,4,'dccv']
+, [100,4,100,99,'dccv']
+, [101,4,101,51,'dccv']
+, [102,3,102,4,'dccv']
+, [124,3,124,4,'dccv']
+, [125,4,125,75,'dccv']
+, [125,76,125,117,'dccv']
+, [126,4,126,27,'dccv']
+, [127,3,127,4,'dccv']
+, [130,3,130,4,'dccv']
+, [132,4,132,45,'dccv']
+, [133,3,133,4,'dccv']
+, [31,55,31,56,'dccv']
+, [71,24,71,25,'dccv']
+, [74,67,74,72,'dccv']
+, [74,79,74,86,'dccv']
+, [71,32,71,53,'dccv']
+, [63,3,63,4,'dcuc']
+, [64,4,64,45,'dcuc']
+, [65,4,65,45,'dcuc']
+, [65,92,65,94,'dcuc']
+, [66,3,66,4,'dcuc']
+, [120,8,120,9,'dcuc']
+, [120,10,120,37,'dcuc']
+, [120,38,120,39,'dcuc']
+, [21,30,21,47,'dcuc']
+, [65,45,65,92,'dcuc']
+];
+		</script><link rel="stylesheet" type="text/css" href="../css/coverreport.css" />
+	</head><body>
+		<code id="src110" class="dotCoverSource"><pre>using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+
+namespace Patterns.Text.RegularExpressions
+{
+	///&lt;summary&gt;
+	///	Provides a &lt;see cref = &quot;Regex&quot; /&gt; implementation that is easier to instantiate.
+	///&lt;/summary&gt;
+	///&lt;remarks&gt;
+	///	Instances of the &lt;see cref = &quot;CompiledRegex&quot; /&gt; type are always &quot;compiled&quot;;
+	///	that is, their &lt;see cref = &quot;RegexOptions&quot; /&gt; always include the &lt;see cref = &quot;RegexOptions.Compiled&quot; /&gt; option.
+	///&lt;/remarks&gt;
+	public class CompiledRegex : Regex
+	{
+		private static readonly IRegexEvaluator _defaultEvaluator = new RegexEvaluator();
+
+		static CompiledRegex()
+		{
+			EvaluatorAccessor = () =&gt; _defaultEvaluator;
+		}
+
+		///&lt;summary&gt;
+		///	Initializes a new instance of the &lt;see cref = &quot;CompiledRegex&quot; /&gt; class.
+		///&lt;/summary&gt;
+		///&lt;param name = &quot;pattern&quot;&gt;The regular expression.&lt;/param&gt;
+		///&lt;param name = &quot;options&quot;&gt;The options (optional).&lt;/param&gt;
+		public CompiledRegex(string pattern, RegexOptions options = RegexOptions.None) : base(pattern, GetOptions(options))
+		{
+			GroupDetails = GetGroupNumbers().ToDictionary(i =&gt; i, GroupNameFromNumber);
+		}
+
+		/// &lt;summary&gt;
+		/// 	Gets the group details.
+		/// &lt;/summary&gt;
+		/// &lt;value&gt;The group details.&lt;/value&gt;
+		public IDictionary&lt;int, string&gt; GroupDetails { get; private set; }
+
+		///&lt;summary&gt;
+		///	Gets the first pattern match as a key-value dictionary.
+		///	Useful with patterns that use named groups.
+		///&lt;/summary&gt;
+		///&lt;param name = &quot;input&quot;&gt;The input.&lt;/param&gt;
+		///&lt;param name = &quot;removeSystemGroups&quot;&gt;True to remove system-added groups (such as group &quot;0&quot;, &quot;1&quot;, etc.) 
+		///	before extracting dictionary values.  The default is true.&lt;/param&gt;
+		///&lt;returns&gt;The dictionary of matches.&lt;/returns&gt;
+		public IDictionary&lt;string, string&gt; DictionaryMatch(string input, bool removeSystemGroups = true)
+		{
+			Match match = Match(input);
+			return ConvertMatchToDictionary(match, removeSystemGroups);
+		}
+
+		///&lt;summary&gt;
+		///	Gets the pattern matches as key-value dictionaries.
+		///	Useful with patterns that use named groups.
+		///&lt;/summary&gt;
+		///&lt;param name = &quot;input&quot;&gt;The input.&lt;/param&gt;
+		///&lt;param name = &quot;removeSystemGroups&quot;&gt;True to remove system-added groups (such as group &quot;0&quot;) before extracting
+		///	dictionary values.  The default is true.&lt;/param&gt;
+		///&lt;returns&gt;A collection of matches formatted as key-value dictionaries.&lt;/returns&gt;
+		public IEnumerable&lt;IDictionary&lt;string, string&gt;&gt; DictionaryMatches(string input, bool removeSystemGroups = true)
+		{
+			MatchCollection matches = Matches(input);
+			return matches.Cast&lt;Match&gt;().Select(m =&gt; ConvertMatchToDictionary(m, removeSystemGroups));
+		}
+
+		private IDictionary&lt;string, string&gt; ConvertMatchToDictionary(Match match, bool removeSystemGroups)
+		{
+			Dictionary&lt;string, string&gt; allValues = GroupDetails.Values
+				.ToDictionary(s =&gt; s, s =&gt; match.Groups[s].Value);
+
+			return removeSystemGroups
+			       	? allValues.SkipWhile(IsSystemGroup).ToDictionary(p =&gt; p.Key, p =&gt; p.Value)
+			       	: allValues;
+		}
+
+		///&lt;summary&gt;
+		///	Implicitly converts strings into instances of &lt;see cref = &quot;CompiledRegex&quot; /&gt;.
+		///&lt;/summary&gt;
+		///&lt;param name = &quot;pattern&quot;&gt;The regular expression.&lt;/param&gt;
+		///&lt;returns&gt;The compiled regular expression.&lt;/returns&gt;
+		public static implicit operator CompiledRegex(string pattern)
+		{
+			return new CompiledRegex(pattern);
+		}
+
+		/// &lt;summary&gt;
+		/// Builds a new &lt;see cref=&quot;CompiledRegex&quot;/&gt; instance from the specified raw text.  Reserved characters are automatically escaped,
+		/// causing them to serve as required components of the resulting pattern.  Whitespace is always interpreted to be of variable length (i.e. all
+		/// contiguous whitespace blocks are replaced with the \s+ search term).  Useful in scenarios were existing text is used to match against
+		/// other values.
+		/// &lt;/summary&gt;
+		/// &lt;param name=&quot;text&quot;&gt;The raw text.&lt;/param&gt;
+		/// &lt;param name=&quot;options&quot;&gt;The options (optional).&lt;/param&gt;
+		/// &lt;returns&gt;&lt;/returns&gt;
+		public static CompiledRegex BuildFrom(string text, RegexOptions options = RegexOptions.None)
+		{
+			const string whiteSpace = @&quot;\s+&quot;;
+			string escapedText = string.Join(whiteSpace, Split(text, whiteSpace).Select(Escape).ToArray());
+			return new CompiledRegex(escapedText, options);
+		}
+
+		/// &lt;summary&gt;
+		/// Gets or sets the evaluator accessor.
+		/// &lt;/summary&gt;
+		/// &lt;value&gt;
+		/// The evaluator accessor.
+		/// &lt;/value&gt;
+		public static Func&lt;IRegexEvaluator&gt; EvaluatorAccessor { get; set; }
+
+		/// &lt;summary&gt;
+		/// Gets the evaluator.
+		/// &lt;/summary&gt;
+		/// &lt;value&gt;
+		/// The evaluator.
+		/// &lt;/value&gt;
+		public static IRegexEvaluator Evaluator
+		{
+			get { return EvaluatorAccessor(); }
+		}
+
+		private static RegexOptions GetOptions(RegexOptions originalOptions)
+		{
+			if ((originalOptions &amp; RegexOptions.Compiled) != RegexOptions.Compiled) originalOptions |= RegexOptions.Compiled;
+			return originalOptions;
+		}
+
+		private static bool IsSystemGroup(KeyValuePair&lt;string, string&gt; pair)
+		{
+			int value;
+			return int.TryParse(pair.Key, out value);
+		}
+	}
+}</pre></code><script type="text/javascript">
+			applyranges('src110', RANGES_110)
+		</script>
+	</body>
+</html>

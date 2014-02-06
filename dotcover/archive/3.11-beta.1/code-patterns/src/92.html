@@ -1,0 +1,78 @@
+<html>
+	<head>
+		<script type="text/javascript" src="../js/coverreport.js">
+
+		</script><script type="text/javascript">
+			RANGES_92 = [
+   [9,3,9,4,'dccv']
+, [10,4,10,56,'dccv']
+, [11,3,11,4,'dccv']
+, [38,56,38,57,'dccv']
+, [38,58,38,98,'dccv']
+, [38,99,38,100,'dccv']
+, [39,77,39,78,'dccv']
+, [39,79,39,125,'dccv']
+, [39,126,39,127,'dccv']
+, [14,3,14,4,'dcuc']
+, [15,4,15,62,'dcuc']
+, [16,3,16,4,'dcuc']
+, [19,3,19,4,'dcuc']
+, [20,4,20,64,'dcuc']
+, [21,3,21,4,'dcuc']
+, [24,3,24,4,'dcuc']
+, [25,4,25,59,'dcuc']
+, [26,3,26,4,'dcuc']
+, [29,3,29,4,'dcuc']
+, [30,4,30,79,'dcuc']
+, [31,3,31,4,'dcuc']
+, [34,3,34,4,'dcuc']
+, [35,4,35,53,'dcuc']
+, [36,3,36,4,'dcuc']
+];
+		</script><link rel="stylesheet" type="text/css" href="../css/coverreport.css" />
+	</head><body>
+		<code id="src92" class="dotCoverSource"><pre>using System.Collections.Specialized;
+using System.Configuration;
+
+namespace Patterns.Configuration
+{
+	public class ConfigurationManagerWrapper : IConfigurationManager
+	{
+		public virtual object GetSection(string sectionName)
+		{
+			return ConfigurationManager.GetSection(sectionName);
+		}
+
+		public virtual System.Configuration.Configuration OpenExeConfiguration(string exePath)
+		{
+			return ConfigurationManager.OpenExeConfiguration(exePath);
+		}
+
+		public virtual System.Configuration.Configuration OpenExeConfiguration(ConfigurationUserLevel userLevel)
+		{
+			return ConfigurationManager.OpenExeConfiguration(userLevel);
+		}
+
+		public virtual System.Configuration.Configuration OpenMachineConfiguration()
+		{
+			return ConfigurationManager.OpenMachineConfiguration();
+		}
+
+		public virtual System.Configuration.Configuration OpenMappedExeConfiguration(ExeConfigurationFileMap fileMap, ConfigurationUserLevel userLevel)
+		{
+			return ConfigurationManager.OpenMappedExeConfiguration(fileMap, userLevel);
+		}
+
+		public virtual void RefreshSection(string sectionName)
+		{
+			ConfigurationManager.RefreshSection(sectionName);
+		}
+
+		public virtual NameValueCollection AppSettings { get { return ConfigurationManager.AppSettings; } }
+		public virtual ConnectionStringSettingsCollection ConnectionStrings { get { return ConfigurationManager.ConnectionStrings; } }
+	}
+}</pre></code><script type="text/javascript">
+			applyranges('src92', RANGES_92)
+		</script>
+	</body>
+</html>
