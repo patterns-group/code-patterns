@@ -63,6 +63,12 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\FluentAssertions.2.0.1\lib\net40\FluentAssertions.dll</HintPath>
     </Reference>
+    <Reference Include="MathNet.Numerics">
+      <HintPath>..\packages\MathNet.Numerics.2.6.2\lib\net40\MathNet.Numerics.dll</HintPath>
+    </Reference>
+    <Reference Include="MathNet.Numerics.IO">
+      <HintPath>..\packages\MathNet.Numerics.2.6.2\lib\net40\MathNet.Numerics.IO.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation">
       <HintPath>..\packages\CommonServiceLocator.1.0\lib\NET35\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
@@ -76,6 +82,7 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -86,6 +93,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Features\Collections\NullSafeCollections.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NullSafeCollections.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Collections\CollectionFactory.cs" />
+    <Compile Include="Models\Collections\CollectionModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CollectionModelResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Collections\CollectionOperationsContext.cs" />
+    <Compile Include="Models\Collections\Extensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <DependentUpon>AssemblyInfo.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -211,6 +231,7 @@
     <Compile Include="Steps\Collections\EachSteps.cs" />
     <Compile Include="Steps\Collections\EqualityComparerSteps.cs" />
     <Compile Include="Steps\Collections\InvocationLogSteps.cs" />
+    <Compile Include="Steps\Collections\NullSafeCollectionSteps.cs" />
     <Compile Include="Steps\Collections\ObjectCollectionSteps.cs" />
     <Compile Include="Steps\Collections\ObjectSetSteps.cs" />
     <Compile Include="Steps\Configuration\ConfigSourceSteps.cs" />
@@ -238,6 +259,10 @@
     <Compile Include="Steps\Text\RegularExpressions\DictionaryMatchSteps.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Models\Collections\CollectionModelResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>CollectionModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Models\Text\TextModelResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>TextModelResources.Designer.cs</LastGenOutput>
@@ -249,6 +274,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Features\Collections\NullSafeCollections.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>NullSafeCollections.feature.cs</LastGenOutput>
+    </None>
     <None Include="Properties\AssemblyInfo.settings.tt" />
     <None Include="Properties\AssemblyInfo.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
