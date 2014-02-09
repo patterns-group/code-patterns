@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Patterns.Specifications.Models.Text {
+namespace Patterns.Specifications.Models.Collections {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace Patterns.Specifications.Models.Text {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class TextModelResources {
+    internal class CollectionModelResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal TextModelResources() {
+        internal CollectionModelResources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Patterns.Specifications.Models.Text {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Patterns.Specifications.Models.Text.TextModelResources", typeof(TextModelResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Patterns.Specifications.Models.Collections.CollectionModelResources", typeof(CollectionModelResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,29 +61,65 @@ namespace Patterns.Specifications.Models.Text {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Could not parse {0} as a list of key value pairs. Format must be: {1}..
+        ///   Looks up a localized string similar to I expected all the strings to be non-null.
         /// </summary>
-        internal static string DictionaryParseErrorFormat {
+        internal static string AssertResultStringSetAllNonNull_Reason {
             get {
-                return ResourceManager.GetString("DictionaryParseErrorFormat", resourceCulture);
+                return ResourceManager.GetString("AssertResultStringSetAllNonNull_Reason", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0}{1}{2}.
+        ///   Looks up a localized string similar to I expected the set of strings to be empty.
         /// </summary>
-        internal static string DictionaryParseExampleFormat {
+        internal static string AssertResultStringSetEmpty_Reason {
             get {
-                return ResourceManager.GetString("DictionaryParseExampleFormat", resourceCulture);
+                return ResourceManager.GetString("AssertResultStringSetEmpty_Reason", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to key{0}{1}value{0}.
+        ///   Looks up a localized string similar to I expected the set of strings to be non-empty.
         /// </summary>
-        internal static string DictionaryParseExamplePairFormat {
+        internal static string AssertResultStringSetNonEmpty_Reason {
             get {
-                return ResourceManager.GetString("DictionaryParseExamplePairFormat", resourceCulture);
+                return ResourceManager.GetString("AssertResultStringSetNonEmpty_Reason", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to I expected the set of strings to be non-null.
+        /// </summary>
+        internal static string AssertResultStringSetNonNull_Reason {
+            get {
+                return ResourceManager.GetString("AssertResultStringSetNonNull_Reason", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A default factory has not been chosen for the {0} type..
+        /// </summary>
+        internal static string DefaultFactoryNotFound {
+            get {
+                return ResourceManager.GetString("DefaultFactoryNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Original Strings.
+        /// </summary>
+        internal static string OriginalStringsLabel {
+            get {
+                return ResourceManager.GetString("OriginalStringsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Result Strings.
+        /// </summary>
+        internal static string ResultStringsLabel {
+            get {
+                return ResourceManager.GetString("ResultStringsLabel", resourceCulture);
             }
         }
     }
