@@ -46,7 +46,7 @@ namespace Patterns.Testing.Configuration
     /// <summary>
     ///   Gets the config XML.
     /// </summary>
-    public XContainer Xml
+    public XElement Xml
     {
       get { return ConfigXml; }
     }

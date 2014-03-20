@@ -28,6 +28,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Reflection;
+using System.Xml;
 using System.Xml.Linq;
 using Patterns.Text.RegularExpressions;
 
@@ -48,7 +49,7 @@ namespace Patterns.Configuration
     protected const string DeserializeSectionMethodName = "DeserializeSection";
     protected const char PathSeparator = '/';
     protected readonly CompiledRegex SectionNamePattern = "[^/]+$";
-    protected XContainer ConfigXml { get; private set; }
+    protected XElement ConfigXml { get; private set; }
 
     /// <summary>
     ///   Gets the app settings.
@@ -70,8 +71,6 @@ namespace Patterns.Configuration
     ///   Gets the section.
     /// </summary>
     /// <param name="sectionName">Name of the section.</param>
-    /// <returns></returns>
-    /// <exception cref="System.NotImplementedException"></exception>
     public virtual ConfigurationSection GetSection(string sectionName)
     {
       return DeserializeSection(ConfigXml, sectionName);
@@ -82,8 +81,6 @@ namespace Patterns.Configuration
     /// </summary>
     /// <typeparam name="TSection">The type of the section.</typeparam>
     /// <param name="sectionName">Name of the section.</param>
-    /// <returns></returns>
-    /// <exception cref="System.NotImplementedException"></exception>
     public virtual TSection GetSection<TSection>(string sectionName) where TSection : ConfigurationSection, new()
     {
       return DeserializeSection<TSection>(ConfigXml, sectionName);
@@ -93,8 +90,7 @@ namespace Patterns.Configuration
     ///   Opens the exe configuration.
     /// </summary>
     /// <param name="exePath">The exe path.</param>
-    /// <returns></returns>
-    /// <exception cref="System.NotImplementedException"></exception>
+    /// <exception cref="System.NotSupportedException"></exception>
     public virtual IConfiguration OpenExeConfiguration(string exePath)
     {
       throw new NotSupportedException();
@@ -103,8 +99,7 @@ namespace Patterns.Configuration
     /// <summary>
     ///   Opens the machine configuration.
     /// </summary>
-    /// <returns></returns>
-    /// <exception cref="System.NotImplementedException"></exception>
+    /// <exception cref="System.NotSupportedException"></exception>
     public virtual IConfiguration OpenMachineConfiguration()
     {
       throw new NotSupportedException();
@@ -114,7 +109,6 @@ namespace Patterns.Configuration
     ///   Refreshes the section.
     /// </summary>
     /// <param name="sectionName">Name of the section.</param>
-    /// <exception cref="System.NotImplementedException"></exception>
     public virtual void RefreshSection(string sectionName) {}
 
     /// <summary>
@@ -122,8 +116,7 @@ namespace Patterns.Configuration
     /// </summary>
     /// <param name="fileMap">The file map.</param>
     /// <param name="userLevel">The user level.</param>
-    /// <returns></returns>
-    /// <exception cref="System.NotImplementedException"></exception>
+    /// <exception cref="System.NotSupportedException"></exception>
     public virtual IConfiguration OpenMappedExeConfiguration(ExeConfigurationFileMap fileMap,
       ConfigurationUserLevel userLevel)
     {
@@ -134,8 +127,7 @@ namespace Patterns.Configuration
     ///   Opens the exe configuration.
     /// </summary>
     /// <param name="userLevel">The user level.</param>
-    /// <returns></returns>
-    /// <exception cref="System.NotImplementedException"></exception>
+    /// <exception cref="System.NotSupportedException"></exception>
     public virtual IConfiguration OpenExeConfiguration(ConfigurationUserLevel userLevel)
     {
       throw new NotSupportedException();
@@ -143,7 +135,7 @@ namespace Patterns.Configuration
 
     protected void SetConfigurationXml(XContainer configXml)
     {
-      ConfigXml = configXml;
+      ConfigXml = configXml.NodeType == XmlNodeType.Document ? ((XDocument)configXml).Root : (XElement) configXml;
       var appSettings = GetSection<AppSettingsSection>(AppSettingsSectionName);
       if (appSettings != null)
       {
