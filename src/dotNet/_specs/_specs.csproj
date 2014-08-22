@@ -344,10 +344,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Patterns\Patterns.csproj">
-      <Project>{2BC41806-D0BF-4993-B342-CC7A3EDDF313}</Project>
-      <Name>Patterns</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Patterns.Autofac\Patterns.Autofac.csproj">
       <Project>{97728D2C-BDD1-4DE5-A478-3ED86B3F091B}</Project>
       <Name>Patterns.Autofac</Name>

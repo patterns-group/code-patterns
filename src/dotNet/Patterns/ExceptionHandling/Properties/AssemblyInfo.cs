@@ -1,4 +1,4 @@
-﻿#region FreeBSD
+#region FreeBSD
 
 // Copyright (c) 2014, John Batte
 // All rights reserved.
@@ -23,19 +23,16 @@
 
 #endregion
 
-namespace Patterns.Collections
-{
-  /// <summary>
-  ///   Provides a proxy for dictionary value retrieval.
-  /// </summary>
-  /// <typeparam name="TKey">The type of the key.</typeparam>
-  /// <typeparam name="TValue">The type of the value.</typeparam>
-  public interface IDictionaryValueRetriever<in TKey, out TValue>
-  {
-    /// <summary>
-    ///   Retrieves the value at the specified key.
-    /// </summary>
-    /// <param name="key">The key.</param>
-    TValue Retrieve(TKey key);
-  }
-}
+using System.Reflection;
+using System.Resources;
+using System.Runtime.InteropServices;
+
+[assembly: AssemblyTitle("Patterns.ExceptionHandling")]
+[assembly: AssemblyDescription("code-patterns for .NET: Exception Handling")]
+[assembly: Guid("4c87d973-26ce-4e3b-b029-3f448269bea0")]
+[assembly: AssemblyCompany("The Tribe")]
+[assembly: AssemblyProduct("Code Patterns")]
+[assembly: AssemblyCopyright("Copyright © 2014")]
+[assembly: ComVisible(false)]
+[assembly: NeutralResourcesLanguage("en-US")]
+[assembly: AssemblyVersion("3.11.0")]

@@ -23,19 +23,43 @@
 
 #endregion
 
+using System;
+using System.Collections.Generic;
+using Patterns.Collections.Properties;
+
 namespace Patterns.Collections
 {
   /// <summary>
-  ///   Provides a proxy for dictionary value retrieval.
+  ///   Provides an exception type for <see cref="KeyNotFoundException" /> scenarios
+  ///   that produces a key-specific error message.
   /// </summary>
-  /// <typeparam name="TKey">The type of the key.</typeparam>
-  /// <typeparam name="TValue">The type of the value.</typeparam>
-  public interface IDictionaryValueRetriever<in TKey, out TValue>
+  public class SpecificKeyNotFoundException<TKey> : KeyNotFoundException
   {
     /// <summary>
-    ///   Retrieves the value at the specified key.
+    ///   Initializes a new instance of the <see cref="SpecificKeyNotFoundException{TKey}" /> class.
     /// </summary>
     /// <param name="key">The key.</param>
-    TValue Retrieve(TKey key);
+    /// <param name="converter">The converter.</param>
+    /// <remarks>
+    ///   If the converter is specified, it will be used to convert the key value to its
+    ///   string representation. If not, <see cref="object.ToString" /> will be used.
+    /// </remarks>
+    public SpecificKeyNotFoundException(TKey key, Func<TKey, string> converter = null)
+      : base(BuildMessage(key, converter))
+    {
+    }
+
+    private static string BuildMessage(TKey key, Func<TKey, string> converter)
+    {
+      try
+      {
+        converter = converter ?? (value => value.ToString());
+        return string.Format(Resources.SpecificKeyNotFoundException_MessageFormat, converter(key));
+      }
+      catch
+      {
+        return Resources.SpecificKeyNotFoundException_DefaultMessage;
+      }
+    }
   }
 }

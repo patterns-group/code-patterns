@@ -1,6 +1,6 @@
 ﻿#region FreeBSD
 
-// Copyright (c) 2014, The Tribe
+// Copyright (c) 2014, John Batte
 // All rights reserved.
 // 
 // Redistribution and use in source and binary forms, with or without modification, are permitted provided that

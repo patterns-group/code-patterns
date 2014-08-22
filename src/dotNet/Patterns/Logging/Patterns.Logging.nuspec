@@ -1,0 +1,24 @@
+﻿<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
+  <metadata>
+    <version>$version$</version>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <projectUrl>https://github.com/TheTribe/code-patterns</projectUrl>
+    <dependencies>
+      <dependency id="Patterns.Collections" version="$version$" />
+      <dependency id="Patterns.ExceptionHandling" version="$version$" />
+      <dependency id="Patterns.Interception" version="$version$" />
+    </dependencies>
+    <id>$id$</id>
+    <title>$id$</title>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <copyright>Copyright © 2014</copyright>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="System" />
+      <frameworkAssembly assemblyName="System.Configuration" />
+      <frameworkAssembly assemblyName="System.Web.Extensions" />
+    </frameworkAssemblies>
+  </metadata>
+</package>

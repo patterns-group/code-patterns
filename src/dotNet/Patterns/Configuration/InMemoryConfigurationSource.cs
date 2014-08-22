@@ -1,6 +1,6 @@
 ﻿#region FreeBSD
 
-// Copyright (c) 2014, The Tribe
+// Copyright (c) 2014, John Batte
 // All rights reserved.
 // 
 // Redistribution and use in source and binary forms, with or without modification, are permitted provided that
@@ -109,7 +109,9 @@ namespace Patterns.Configuration
     ///   Refreshes the section.
     /// </summary>
     /// <param name="sectionName">Name of the section.</param>
-    public virtual void RefreshSection(string sectionName) {}
+    public virtual void RefreshSection(string sectionName)
+    {
+    }
 
     /// <summary>
     ///   Opens the mapped exe configuration.
@@ -135,7 +137,7 @@ namespace Patterns.Configuration
 
     protected void SetConfigurationXml(XContainer configXml)
     {
-      ConfigXml = configXml.NodeType == XmlNodeType.Document ? ((XDocument)configXml).Root : (XElement) configXml;
+      ConfigXml = configXml.NodeType == XmlNodeType.Document ? ((XDocument) configXml).Root : (XElement) configXml;
       var appSettings = GetSection<AppSettingsSection>(AppSettingsSectionName);
       if (appSettings != null)
       {
