@@ -29,7 +29,7 @@ using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("Patterns.Logging")]
 [assembly: AssemblyDescription("code-patterns for .NET: Logging")]
-[assembly: Guid("4c87d973-26ce-4e3b-b029-3f448269bea0")]
+[assembly: Guid("3f938791-0e9b-448b-94bc-1a83fbcaeb15")]
 [assembly: AssemblyCompany("The Tribe")]
 [assembly: AssemblyProduct("Code Patterns")]
 [assembly: AssemblyCopyright("Copyright © 2014")]

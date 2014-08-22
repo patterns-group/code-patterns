@@ -29,7 +29,7 @@ using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("Patterns.Collections")]
 [assembly: AssemblyDescription("code-patterns for .NET: Collections")]
-[assembly: Guid("4c87d973-26ce-4e3b-b029-3f448269bea0")]
+[assembly: Guid("c63e2ec4-cf7c-41cc-90a9-e8ba3afb14e5")]
 [assembly: AssemblyCompany("The Tribe")]
 [assembly: AssemblyProduct("Code Patterns")]
 [assembly: AssemblyCopyright("Copyright © 2014")]

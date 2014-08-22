@@ -29,7 +29,7 @@ using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("Patterns.Interception")]
 [assembly: AssemblyDescription("code-patterns for .NET: Interception")]
-[assembly: Guid("4c87d973-26ce-4e3b-b029-3f448269bea0")]
+[assembly: Guid("74b35cb5-e071-4e45-916b-cce5b2f71f76")]
 [assembly: AssemblyCompany("The Tribe")]
 [assembly: AssemblyProduct("Code Patterns")]
 [assembly: AssemblyCopyright("Copyright © 2014")]

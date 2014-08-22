@@ -39,6 +39,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interception", "Patterns\In
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logging", "Patterns\Logging\Logging.csproj", "{C0DEA7AF-998F-4671-8D01-EF7255D267F8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapping", "Patterns\Mapping\Mapping.csproj", "{998C5867-AAB4-4813-8494-7B52D84C66AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reflection", "Patterns\Reflection\Reflection.csproj", "{20879360-A3CF-4B1C-B3E9-F6B5D6C0143F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -85,6 +89,14 @@ Global
 		{C0DEA7AF-998F-4671-8D01-EF7255D267F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C0DEA7AF-998F-4671-8D01-EF7255D267F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C0DEA7AF-998F-4671-8D01-EF7255D267F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{998C5867-AAB4-4813-8494-7B52D84C66AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{998C5867-AAB4-4813-8494-7B52D84C66AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{998C5867-AAB4-4813-8494-7B52D84C66AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{998C5867-AAB4-4813-8494-7B52D84C66AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20879360-A3CF-4B1C-B3E9-F6B5D6C0143F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20879360-A3CF-4B1C-B3E9-F6B5D6C0143F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20879360-A3CF-4B1C-B3E9-F6B5D6C0143F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20879360-A3CF-4B1C-B3E9-F6B5D6C0143F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -96,9 +108,11 @@ Global
 		{EB8F001A-471C-4F07-80DB-11D7F03F5C84} = {7E766DBE-A161-450F-AE10-7D07D97464EB}
 		{B90450DC-45E0-40D3-9A69-D467A0B7C098} = {7E766DBE-A161-450F-AE10-7D07D97464EB}
 		{C0DEA7AF-998F-4671-8D01-EF7255D267F8} = {7E766DBE-A161-450F-AE10-7D07D97464EB}
+		{998C5867-AAB4-4813-8494-7B52D84C66AF} = {7E766DBE-A161-450F-AE10-7D07D97464EB}
+		{20879360-A3CF-4B1C-B3E9-F6B5D6C0143F} = {7E766DBE-A161-450F-AE10-7D07D97464EB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		CodeStyleEnforcer_RulesLocation = 1
 		CodeStyleEnforcer_Active = -1
+		CodeStyleEnforcer_RulesLocation = 1
 	EndGlobalSection
 EndGlobal

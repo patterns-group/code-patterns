@@ -27,9 +27,9 @@ using System.Reflection;
 using System.Resources;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("Patterns.Configuration")]
-[assembly: AssemblyDescription("code-patterns for .NET: Configuration")]
-[assembly: Guid("2a3328e3-8963-4dc1-a288-dc45c9cb97d5")]
+[assembly: AssemblyTitle("Patterns.Reflection")]
+[assembly: AssemblyDescription("code-patterns for .NET: Reflection")]
+[assembly: Guid("43441658-7164-4a90-bbdd-b11733b504f6")]
 [assembly: AssemblyCompany("The Tribe")]
 [assembly: AssemblyProduct("Code Patterns")]
 [assembly: AssemblyCopyright("Copyright © 2014")]
