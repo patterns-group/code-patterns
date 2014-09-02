@@ -1,6 +1,6 @@
 ﻿#region FreeBSD
 
-// Copyright (c) 2013, The Tribe
+// Copyright (c) 2014, John Batte
 // All rights reserved.
 // 
 // Redistribution and use in source and binary forms, with or without modification, are permitted provided that
@@ -25,21 +25,21 @@
 
 namespace Patterns.Logging
 {
-	/// <summary>
-	///    Defines a formatter for log values.
-	/// </summary>
-	public interface ILogValueFormatter
-	{
-		/// <summary>
-		///    Formats the specified value.
-		/// </summary>
-		/// <param name="value">The value.</param>
-		string Format(object value);
+  /// <summary>
+  ///   Defines a formatter for log values.
+  /// </summary>
+  public interface ILogValueFormatter
+  {
+    /// <summary>
+    ///   Formats the specified value.
+    /// </summary>
+    /// <param name="value">The value.</param>
+    string Format(object value);
 
-		/// <summary>
-		///    Formats the specified values.
-		/// </summary>
-		/// <param name="values">The values.</param>
-		string Format(object[] values);
-	}
+    /// <summary>
+    ///   Formats the specified values.
+    /// </summary>
+    /// <param name="values">The values.</param>
+    string Format(object[] values);
+  }
 }

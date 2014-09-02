@@ -1,6 +1,6 @@
 ﻿#region FreeBSD
 
-// Copyright (c) 2013, John Batte
+// Copyright (c) 2014, John Batte
 // All rights reserved.
 // 
 // Redistribution and use in source and binary forms, with or without modification, are permitted provided that
@@ -25,25 +25,25 @@
 
 namespace Patterns.Reflection
 {
-	/// <summary>
-	///    Encapsulates the name and value of a property.
-	/// </summary>
-	public class PropertyValue
-	{
-		/// <summary>
-		///    Gets or sets the name.
-		/// </summary>
-		/// <value>
-		///    The name.
-		/// </value>
-		public string Name { get; set; }
+  /// <summary>
+  ///   Encapsulates the name and value of a property.
+  /// </summary>
+  public class PropertyValue
+  {
+    /// <summary>
+    ///   Gets or sets the name.
+    /// </summary>
+    /// <value>
+    ///   The name.
+    /// </value>
+    public string Name { get; set; }
 
-		/// <summary>
-		///    Gets or sets the value.
-		/// </summary>
-		/// <value>
-		///    The value.
-		/// </value>
-		public object Value { get; set; }
-	}
+    /// <summary>
+    ///   Gets or sets the value.
+    /// </summary>
+    /// <value>
+    ///   The value.
+    /// </value>
+    public object Value { get; set; }
+  }
 }

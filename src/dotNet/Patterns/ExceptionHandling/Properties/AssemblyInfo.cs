@@ -29,7 +29,6 @@ using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("Patterns.ExceptionHandling")]
 [assembly: AssemblyDescription("code-patterns for .NET: Exception Handling")]
-[assembly: Guid("ff047676-0f5c-43f5-9582-042a5b12179b")]
 [assembly: AssemblyCompany("The Tribe")]
 [assembly: AssemblyProduct("Code Patterns")]
 [assembly: AssemblyCopyright("Copyright © 2014")]

@@ -29,7 +29,6 @@ using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("Patterns.Reflection")]
 [assembly: AssemblyDescription("code-patterns for .NET: Reflection")]
-[assembly: Guid("43441658-7164-4a90-bbdd-b11733b504f6")]
 [assembly: AssemblyCompany("The Tribe")]
 [assembly: AssemblyProduct("Code Patterns")]
 [assembly: AssemblyCopyright("Copyright © 2014")]

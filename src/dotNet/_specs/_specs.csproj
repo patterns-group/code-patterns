@@ -344,20 +344,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Patterns.Autofac\Patterns.Autofac.csproj">
-      <Project>{97728D2C-BDD1-4DE5-A478-3ED86B3F091B}</Project>
-      <Name>Patterns.Autofac</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Patterns.Testing\Patterns.Testing.csproj">
-      <Project>{367EAA3A-FABB-4CFB-AF01-AD0A4F0499FD}</Project>
-      <Name>Patterns.Testing</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Patterns.Testing.Autofac\Patterns.Testing.Autofac.csproj">
-      <Project>{88379560-EFAE-4296-BF81-D1809B0F7BD3}</Project>
-      <Name>Patterns.Testing.Autofac</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\TestConfig1.xml" />
   </ItemGroup>
   <ItemGroup>

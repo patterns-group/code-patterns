@@ -43,7 +43,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="SpecificKeyNotFoundException.cs" />
     <Compile Include="Strategies\ActionStrategies.cs" />
     <Compile Include="Strategies\FuncStrategies.cs" />
   </ItemGroup>

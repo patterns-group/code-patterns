@@ -4,7 +4,7 @@ The following log details the outward-facing changes made to code-patterns since
 
 ## 3.11 ##
 
-- Updated resources to reflect new versioning/deployment plans (stable-only on NuGet/CI builds on MyGet)
+- Updated resources to reflect new versioning/deployment plans (stable-only on NuGet; CI builds on MyGet)
 
 ## 3.11-beta.1 ##
 

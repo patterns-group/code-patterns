@@ -30,6 +30,7 @@ using System.Linq;
 using System.Reflection;
 using System.Xml;
 using System.Xml.Linq;
+
 using Patterns.Text.RegularExpressions;
 
 namespace Patterns.Configuration

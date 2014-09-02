@@ -1,6 +1,6 @@
 ﻿#region FreeBSD
 
-// Copyright (c) 2013, The Tribe
+// Copyright (c) 2014, John Batte
 // All rights reserved.
 // 
 // Redistribution and use in source and binary forms, with or without modification, are permitted provided that
@@ -30,68 +30,68 @@ using Patterns.Collections.Strategies;
 
 namespace Patterns.Logging
 {
-	/// <summary>
-	///    Provides a base class for log value formatters.
-	/// </summary>
-	public abstract class LogValueFormatterBase : ILogValueFormatter
-	{
-		/// <summary>
-		///    The special value format.
-		/// </summary>
-		protected const string SpecialValueFormat = "[{0}]";
+  /// <summary>
+  ///   Provides a base class for log value formatters.
+  /// </summary>
+  public abstract class LogValueFormatterBase : ILogValueFormatter
+  {
+    /// <summary>
+    ///   The special value format.
+    /// </summary>
+    protected const string SpecialValueFormat = "[{0}]";
 
-		/// <summary>
-		///    The argument list format.
-		/// </summary>
-		protected const string ArgumentListFormat = "({0})";
+    /// <summary>
+    ///   The argument list format.
+    /// </summary>
+    protected const string ArgumentListFormat = "({0})";
 
-		/// <summary>
-		///    The argument list separator.
-		/// </summary>
-		protected const string ArgumentListSeparator = ",";
+    /// <summary>
+    ///   The argument list separator.
+    /// </summary>
+    protected const string ArgumentListSeparator = ",";
 
-		/// <summary>
-		///    The string display format.
-		/// </summary>
-		protected const string StringDisplayFormat = @"""{0}""";
+    /// <summary>
+    ///   The string display format.
+    /// </summary>
+    protected const string StringDisplayFormat = @"""{0}""";
 
-		private static readonly FuncStrategies<Type, object, object> _displayStrategies
-			= new FuncStrategies<Type, object, object>
-			{
-				{typeof (string), value => string.Format(StringDisplayFormat, value)}
-			};
+    private static readonly FuncStrategies<Type, object, object> _displayStrategies
+      = new FuncStrategies<Type, object, object>
+      {
+        {typeof (string), value => string.Format(StringDisplayFormat, value)}
+      };
 
-		/// <summary>
-		/// Formats the specified value.
-		/// </summary>
-		/// <param name="value">The value.</param>
-		public virtual string Format(object value)
-		{
-			object valueForDisplay = ConvertValueForDisplay(value);
-			return valueForDisplay != null ? valueForDisplay.ToString() : null;
-		}
+    /// <summary>
+    ///   Formats the specified value.
+    /// </summary>
+    /// <param name="value">The value.</param>
+    public virtual string Format(object value)
+    {
+      object valueForDisplay = ConvertValueForDisplay(value);
+      return valueForDisplay != null ? valueForDisplay.ToString() : null;
+    }
 
-		/// <summary>
-		/// Formats the specified values.
-		/// </summary>
-		/// <param name="values">The values.</param>
-		public virtual string Format(object[] values)
-		{
-			string[] convertedValues = values.Select(Format).ToArray();
-			return string.Format(ArgumentListFormat, string.Join(ArgumentListSeparator, convertedValues));
-		}
+    /// <summary>
+    ///   Formats the specified values.
+    /// </summary>
+    /// <param name="values">The values.</param>
+    public virtual string Format(object[] values)
+    {
+      string[] convertedValues = values.Select(Format).ToArray();
+      return string.Format(ArgumentListFormat, string.Join(ArgumentListSeparator, convertedValues));
+    }
 
-		/// <summary>
-		///    Converts the value for display.
-		/// </summary>
-		/// <param name="value">The value.</param>
-		protected virtual object ConvertValueForDisplay(object value)
-		{
-			if (value == null) return string.Format(SpecialValueFormat, LoggingResources.ILogValueFormatter_NullValue);
+    /// <summary>
+    ///   Converts the value for display.
+    /// </summary>
+    /// <param name="value">The value.</param>
+    protected virtual object ConvertValueForDisplay(object value)
+    {
+      if (value == null) return string.Format(SpecialValueFormat, LoggingResources.ILogValueFormatter_NullValue);
 
-			Type valueType = value.GetType();
+      Type valueType = value.GetType();
 
-			return _displayStrategies.Execute(valueType, value);
-		}
-	}
+      return _displayStrategies.Execute(valueType, value);
+    }
+  }
 }

@@ -1,6 +1,6 @@
 ﻿#region FreeBSD
 
-// Copyright (c) 2013, The Tribe
+// Copyright (c) 2014, John Batte
 // All rights reserved.
 // 
 // Redistribution and use in source and binary forms, with or without modification, are permitted provided that
@@ -31,231 +31,231 @@ using AutoMapper;
 
 namespace Patterns.Mapping
 {
-	/// <summary>
-	///    Provides a DI-driven implementation of <see cref="IMappingServices" />
-	/// </summary>
-	public class MappingServices : IMappingServices
-	{
-		private readonly IConfiguration _configuration;
-		private readonly IConfigurationProvider _configurationProvider;
-		private readonly IMappingEngine _engine;
+  /// <summary>
+  ///   Provides a DI-driven implementation of <see cref="IMappingServices" />
+  /// </summary>
+  public class MappingServices : IMappingServices
+  {
+    private readonly IConfiguration _configuration;
+    private readonly IConfigurationProvider _configurationProvider;
+    private readonly IMappingEngine _engine;
 
-		/// <summary>
-		///    Initializes a new instance of the <see cref="MappingServices" /> class.
-		/// </summary>
-		/// <param name="engine">The engine.</param>
-		/// <param name="configuration">The configuration.</param>
-		/// <param name="configurationProvider">The configuration provider.</param>
-		public MappingServices(IMappingEngine engine, IConfiguration configuration,
-			IConfigurationProvider configurationProvider)
-		{
-			_engine = engine;
-			_configuration = configuration;
-			_configurationProvider = configurationProvider;
-		}
+    /// <summary>
+    ///   Initializes a new instance of the <see cref="MappingServices" /> class.
+    /// </summary>
+    /// <param name="engine">The engine.</param>
+    /// <param name="configuration">The configuration.</param>
+    /// <param name="configurationProvider">The configuration provider.</param>
+    public MappingServices(IMappingEngine engine, IConfiguration configuration,
+      IConfigurationProvider configurationProvider)
+    {
+      _engine = engine;
+      _configuration = configuration;
+      _configurationProvider = configurationProvider;
+    }
 
-		/// <summary>
-		///    Gets the engine.
-		/// </summary>
-		/// <value>
-		///    The engine.
-		/// </value>
-		public IMappingEngine Engine
-		{
-			get { return _engine; }
-		}
+    /// <summary>
+    ///   Gets the engine.
+    /// </summary>
+    /// <value>
+    ///   The engine.
+    /// </value>
+    public IMappingEngine Engine
+    {
+      get { return _engine; }
+    }
 
-		/// <summary>
-		///    Gets the configuration.
-		/// </summary>
-		/// <value>
-		///    The configuration.
-		/// </value>
-		public IConfiguration Configuration
-		{
-			get { return _configuration; }
-		}
+    /// <summary>
+    ///   Gets the configuration.
+    /// </summary>
+    /// <value>
+    ///   The configuration.
+    /// </value>
+    public IConfiguration Configuration
+    {
+      get { return _configuration; }
+    }
 
-		/// <summary>
-		///    Gets the configuration provider.
-		/// </summary>
-		/// <value>
-		///    The configuration provider.
-		/// </value>
-		public IConfigurationProvider ConfigurationProvider
-		{
-			get { return _configurationProvider; }
-		}
+    /// <summary>
+    ///   Gets the configuration provider.
+    /// </summary>
+    /// <value>
+    ///   The configuration provider.
+    /// </value>
+    public IConfigurationProvider ConfigurationProvider
+    {
+      get { return _configurationProvider; }
+    }
 
-		/// <summary>
-		///    Maps the specified source to the indicated destination.
-		/// </summary>
-		/// <typeparam name="TSource">The type of the source.</typeparam>
-		/// <typeparam name="TDestination">The type of the destination.</typeparam>
-		/// <param name="source">The source.</param>
-		/// <returns></returns>
-		/// <exception cref="System.NotImplementedException"></exception>
-		public TDestination Map<TSource, TDestination>(TSource source)
-		{
-			EnsureTypeMapPresence(typeof (TSource), typeof (TDestination));
+    /// <summary>
+    ///   Maps the specified source to the indicated destination.
+    /// </summary>
+    /// <typeparam name="TSource">The type of the source.</typeparam>
+    /// <typeparam name="TDestination">The type of the destination.</typeparam>
+    /// <param name="source">The source.</param>
+    /// <returns></returns>
+    /// <exception cref="System.NotImplementedException"></exception>
+    public TDestination Map<TSource, TDestination>(TSource source)
+    {
+      EnsureTypeMapPresence(typeof (TSource), typeof (TDestination));
 
-			return Engine.Map<TSource, TDestination>(source);
-		}
+      return Engine.Map<TSource, TDestination>(source);
+    }
 
-		/// <summary>
-		///    Maps the specified source to the indicated destination.
-		/// </summary>
-		/// <typeparam name="TDestination">The type of the destination.</typeparam>
-		/// <param name="source">The source.</param>
-		/// <returns></returns>
-		public TDestination Map<TDestination>(object source)
-		{
-			EnsureTypeMapPresence(source.GetType(), typeof (TDestination));
+    /// <summary>
+    ///   Maps the specified source to the indicated destination.
+    /// </summary>
+    /// <typeparam name="TDestination">The type of the destination.</typeparam>
+    /// <param name="source">The source.</param>
+    /// <returns></returns>
+    public TDestination Map<TDestination>(object source)
+    {
+      EnsureTypeMapPresence(source.GetType(), typeof (TDestination));
 
-			return Engine.Map<TDestination>(source);
-		}
+      return Engine.Map<TDestination>(source);
+    }
 
-		/// <summary>
-		///    Maps the specified source to the indicated destination.
-		/// </summary>
-		/// <typeparam name="TDestination">The type of the destination.</typeparam>
-		/// <param name="source">The source.</param>
-		/// <param name="opts">The opts.</param>
-		/// <returns></returns>
-		public TDestination Map<TDestination>(object source, Action<IMappingOperationOptions> opts)
-		{
-			EnsureTypeMapPresence(source.GetType(), typeof (TDestination));
+    /// <summary>
+    ///   Maps the specified source to the indicated destination.
+    /// </summary>
+    /// <typeparam name="TDestination">The type of the destination.</typeparam>
+    /// <param name="source">The source.</param>
+    /// <param name="opts">The opts.</param>
+    /// <returns></returns>
+    public TDestination Map<TDestination>(object source, Action<IMappingOperationOptions> opts)
+    {
+      EnsureTypeMapPresence(source.GetType(), typeof (TDestination));
 
-			return Engine.Map<TDestination>(source, opts);
-		}
+      return Engine.Map<TDestination>(source, opts);
+    }
 
-		/// <summary>
-		///    Maps the specified source to the indicated destination.
-		/// </summary>
-		/// <typeparam name="TSource">The type of the source.</typeparam>
-		/// <typeparam name="TDestination">The type of the destination.</typeparam>
-		/// <param name="source">The source.</param>
-		/// <param name="opts">The opts.</param>
-		/// <returns></returns>
-		public TDestination Map<TSource, TDestination>(TSource source, Action<IMappingOperationOptions> opts)
-		{
-			EnsureTypeMapPresence(typeof (TSource), typeof (TDestination));
+    /// <summary>
+    ///   Maps the specified source to the indicated destination.
+    /// </summary>
+    /// <typeparam name="TSource">The type of the source.</typeparam>
+    /// <typeparam name="TDestination">The type of the destination.</typeparam>
+    /// <param name="source">The source.</param>
+    /// <param name="opts">The opts.</param>
+    /// <returns></returns>
+    public TDestination Map<TSource, TDestination>(TSource source, Action<IMappingOperationOptions> opts)
+    {
+      EnsureTypeMapPresence(typeof (TSource), typeof (TDestination));
 
-			return Engine.Map<TSource, TDestination>(source, opts);
-		}
+      return Engine.Map<TSource, TDestination>(source, opts);
+    }
 
-		/// <summary>
-		///    Maps the specified source to the specified destination.
-		/// </summary>
-		/// <typeparam name="TSource">The type of the source.</typeparam>
-		/// <typeparam name="TDestination">The type of the destination.</typeparam>
-		/// <param name="source">The source.</param>
-		/// <param name="destination">The destination.</param>
-		/// <returns></returns>
-		public TDestination Map<TSource, TDestination>(TSource source, TDestination destination)
-		{
-			EnsureTypeMapPresence(typeof (TSource), typeof (TDestination));
+    /// <summary>
+    ///   Maps the specified source to the specified destination.
+    /// </summary>
+    /// <typeparam name="TSource">The type of the source.</typeparam>
+    /// <typeparam name="TDestination">The type of the destination.</typeparam>
+    /// <param name="source">The source.</param>
+    /// <param name="destination">The destination.</param>
+    /// <returns></returns>
+    public TDestination Map<TSource, TDestination>(TSource source, TDestination destination)
+    {
+      EnsureTypeMapPresence(typeof (TSource), typeof (TDestination));
 
-			return Engine.Map(source, destination);
-		}
+      return Engine.Map(source, destination);
+    }
 
-		/// <summary>
-		///    Maps the specified source to the specified destination.
-		/// </summary>
-		/// <typeparam name="TSource">The type of the source.</typeparam>
-		/// <typeparam name="TDestination">The type of the destination.</typeparam>
-		/// <param name="source">The source.</param>
-		/// <param name="destination">The destination.</param>
-		/// <param name="opts">The opts.</param>
-		/// <returns></returns>
-		public TDestination Map<TSource, TDestination>(TSource source, TDestination destination,
-			Action<IMappingOperationOptions> opts)
-		{
-			EnsureTypeMapPresence(typeof (TSource), typeof (TDestination));
+    /// <summary>
+    ///   Maps the specified source to the specified destination.
+    /// </summary>
+    /// <typeparam name="TSource">The type of the source.</typeparam>
+    /// <typeparam name="TDestination">The type of the destination.</typeparam>
+    /// <param name="source">The source.</param>
+    /// <param name="destination">The destination.</param>
+    /// <param name="opts">The opts.</param>
+    /// <returns></returns>
+    public TDestination Map<TSource, TDestination>(TSource source, TDestination destination,
+      Action<IMappingOperationOptions> opts)
+    {
+      EnsureTypeMapPresence(typeof (TSource), typeof (TDestination));
 
-			return Engine.Map(source, destination, opts);
-		}
+      return Engine.Map(source, destination, opts);
+    }
 
-		/// <summary>
-		///    Maps the specified source to the indicated destination.
-		/// </summary>
-		/// <param name="source">The source.</param>
-		/// <param name="sourceType">Type of the source.</param>
-		/// <param name="destinationType">Type of the destination.</param>
-		/// <returns></returns>
-		public object Map(object source, Type sourceType, Type destinationType)
-		{
-			EnsureTypeMapPresence(sourceType, destinationType);
+    /// <summary>
+    ///   Maps the specified source to the indicated destination.
+    /// </summary>
+    /// <param name="source">The source.</param>
+    /// <param name="sourceType">Type of the source.</param>
+    /// <param name="destinationType">Type of the destination.</param>
+    /// <returns></returns>
+    public object Map(object source, Type sourceType, Type destinationType)
+    {
+      EnsureTypeMapPresence(sourceType, destinationType);
 
-			return Engine.Map(source, sourceType, destinationType);
-		}
+      return Engine.Map(source, sourceType, destinationType);
+    }
 
-		/// <summary>
-		///    Maps the specified source to the indicated destination.
-		/// </summary>
-		/// <param name="source">The source.</param>
-		/// <param name="sourceType">Type of the source.</param>
-		/// <param name="destinationType">Type of the destination.</param>
-		/// <param name="opts">The opts.</param>
-		/// <returns></returns>
-		public object Map(object source, Type sourceType, Type destinationType, Action<IMappingOperationOptions> opts)
-		{
-			EnsureTypeMapPresence(sourceType, destinationType);
+    /// <summary>
+    ///   Maps the specified source to the indicated destination.
+    /// </summary>
+    /// <param name="source">The source.</param>
+    /// <param name="sourceType">Type of the source.</param>
+    /// <param name="destinationType">Type of the destination.</param>
+    /// <param name="opts">The opts.</param>
+    /// <returns></returns>
+    public object Map(object source, Type sourceType, Type destinationType, Action<IMappingOperationOptions> opts)
+    {
+      EnsureTypeMapPresence(sourceType, destinationType);
 
-			return Engine.Map(source, sourceType, destinationType, opts);
-		}
+      return Engine.Map(source, sourceType, destinationType, opts);
+    }
 
-		/// <summary>
-		///    Maps the specified source to the specified destination.
-		/// </summary>
-		/// <param name="source">The source.</param>
-		/// <param name="destination">The destination.</param>
-		/// <param name="sourceType">Type of the source.</param>
-		/// <param name="destinationType">Type of the destination.</param>
-		/// <returns></returns>
-		public object Map(object source, object destination, Type sourceType, Type destinationType)
-		{
-			EnsureTypeMapPresence(sourceType, destinationType);
+    /// <summary>
+    ///   Maps the specified source to the specified destination.
+    /// </summary>
+    /// <param name="source">The source.</param>
+    /// <param name="destination">The destination.</param>
+    /// <param name="sourceType">Type of the source.</param>
+    /// <param name="destinationType">Type of the destination.</param>
+    /// <returns></returns>
+    public object Map(object source, object destination, Type sourceType, Type destinationType)
+    {
+      EnsureTypeMapPresence(sourceType, destinationType);
 
-			return Engine.Map(source, destination, sourceType, destinationType);
-		}
+      return Engine.Map(source, destination, sourceType, destinationType);
+    }
 
-		/// <summary>
-		///    Maps the specified source to the specified destination.
-		/// </summary>
-		/// <param name="source">The source.</param>
-		/// <param name="destination">The destination.</param>
-		/// <param name="sourceType">Type of the source.</param>
-		/// <param name="destinationType">Type of the destination.</param>
-		/// <param name="opts">The opts.</param>
-		/// <returns></returns>
-		public object Map(object source, object destination, Type sourceType, Type destinationType,
-			Action<IMappingOperationOptions> opts)
-		{
-			EnsureTypeMapPresence(sourceType, destinationType);
+    /// <summary>
+    ///   Maps the specified source to the specified destination.
+    /// </summary>
+    /// <param name="source">The source.</param>
+    /// <param name="destination">The destination.</param>
+    /// <param name="sourceType">Type of the source.</param>
+    /// <param name="destinationType">Type of the destination.</param>
+    /// <param name="opts">The opts.</param>
+    /// <returns></returns>
+    public object Map(object source, object destination, Type sourceType, Type destinationType,
+      Action<IMappingOperationOptions> opts)
+    {
+      EnsureTypeMapPresence(sourceType, destinationType);
 
-			return Engine.Map(source, destination, sourceType, destinationType, opts);
-		}
+      return Engine.Map(source, destination, sourceType, destinationType, opts);
+    }
 
-		private void EnsureTypeMapPresence(Type sourceType, Type destinationType)
-		{
-			BuildTypeMapIfMissing(ResolveType(sourceType), ResolveType(destinationType));
-		}
+    private void EnsureTypeMapPresence(Type sourceType, Type destinationType)
+    {
+      BuildTypeMapIfMissing(ResolveType(sourceType), ResolveType(destinationType));
+    }
 
-		private static Type ResolveType(Type type)
-		{
-			if (type.IsArray) return type.GetElementType();
+    private static Type ResolveType(Type type)
+    {
+      if (type.IsArray) return type.GetElementType();
 
-			if (typeof (IEnumerable).IsAssignableFrom(type) && type.IsGenericType)
-				return type.GetGenericArguments().FirstOrDefault();
+      if (typeof (IEnumerable).IsAssignableFrom(type) && type.IsGenericType)
+        return type.GetGenericArguments().FirstOrDefault();
 
-			return type;
-		}
+      return type;
+    }
 
-		private void BuildTypeMapIfMissing(Type sourceType, Type destinationType)
-		{
-			if (ConfigurationProvider.FindTypeMapFor(sourceType, destinationType) == null)
-				Configuration.CreateMap(sourceType, destinationType);
-		}
-	}
+    private void BuildTypeMapIfMissing(Type sourceType, Type destinationType)
+    {
+      if (ConfigurationProvider.FindTypeMapFor(sourceType, destinationType) == null)
+        Configuration.CreateMap(sourceType, destinationType);
+    }
+  }
 }

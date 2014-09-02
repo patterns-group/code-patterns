@@ -32,6 +32,7 @@ using Autofac.Core.Registration;
 using Common.Logging;
 
 using Patterns.Autofac.Configuration;
+using Patterns.Autofac.Core;
 using Patterns.Configuration;
 using Patterns.Logging;
 

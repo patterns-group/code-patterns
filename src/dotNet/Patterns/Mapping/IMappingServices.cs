@@ -1,6 +1,6 @@
 ﻿#region FreeBSD
 
-// Copyright (c) 2013, John Batte
+// Copyright (c) 2014, John Batte
 // All rights reserved.
 // 
 // Redistribution and use in source and binary forms, with or without modification, are permitted provided that
@@ -29,132 +29,132 @@ using AutoMapper;
 
 namespace Patterns.Mapping
 {
-	/// <summary>
-	///    Aggregates central AutoMapper services.
-	/// </summary>
-	public interface IMappingServices
-	{
-		/// <summary>
-		///    Gets the engine.
-		/// </summary>
-		/// <value>
-		///    The engine.
-		/// </value>
-		IMappingEngine Engine { get; }
+  /// <summary>
+  ///   Aggregates central AutoMapper services.
+  /// </summary>
+  public interface IMappingServices
+  {
+    /// <summary>
+    ///   Gets the engine.
+    /// </summary>
+    /// <value>
+    ///   The engine.
+    /// </value>
+    IMappingEngine Engine { get; }
 
-		/// <summary>
-		///    Gets the configuration.
-		/// </summary>
-		/// <value>
-		///    The configuration.
-		/// </value>
-		IConfiguration Configuration { get; }
+    /// <summary>
+    ///   Gets the configuration.
+    /// </summary>
+    /// <value>
+    ///   The configuration.
+    /// </value>
+    IConfiguration Configuration { get; }
 
-		/// <summary>
-		///    Gets the configuration provider.
-		/// </summary>
-		/// <value>
-		///    The configuration provider.
-		/// </value>
-		IConfigurationProvider ConfigurationProvider { get; }
+    /// <summary>
+    ///   Gets the configuration provider.
+    /// </summary>
+    /// <value>
+    ///   The configuration provider.
+    /// </value>
+    IConfigurationProvider ConfigurationProvider { get; }
 
-		/// <summary>
-		///    Maps the specified source to the indicated destination.
-		/// </summary>
-		/// <typeparam name="TSource">The type of the source.</typeparam>
-		/// <typeparam name="TDestination">The type of the destination.</typeparam>
-		/// <param name="source">The source.</param>
-		/// <returns></returns>
-		TDestination Map<TSource, TDestination>(TSource source);
+    /// <summary>
+    ///   Maps the specified source to the indicated destination.
+    /// </summary>
+    /// <typeparam name="TSource">The type of the source.</typeparam>
+    /// <typeparam name="TDestination">The type of the destination.</typeparam>
+    /// <param name="source">The source.</param>
+    /// <returns></returns>
+    TDestination Map<TSource, TDestination>(TSource source);
 
-		/// <summary>
-		///    Maps the specified source to the indicated destination.
-		/// </summary>
-		/// <typeparam name="TDestination">The type of the destination.</typeparam>
-		/// <param name="source">The source.</param>
-		/// <returns></returns>
-		TDestination Map<TDestination>(object source);
+    /// <summary>
+    ///   Maps the specified source to the indicated destination.
+    /// </summary>
+    /// <typeparam name="TDestination">The type of the destination.</typeparam>
+    /// <param name="source">The source.</param>
+    /// <returns></returns>
+    TDestination Map<TDestination>(object source);
 
-		/// <summary>
-		///    Maps the specified source to the indicated destination.
-		/// </summary>
-		/// <typeparam name="TDestination">The type of the destination.</typeparam>
-		/// <param name="source">The source.</param>
-		/// <param name="opts">The opts.</param>
-		/// <returns></returns>
-		TDestination Map<TDestination>(object source, Action<IMappingOperationOptions> opts);
+    /// <summary>
+    ///   Maps the specified source to the indicated destination.
+    /// </summary>
+    /// <typeparam name="TDestination">The type of the destination.</typeparam>
+    /// <param name="source">The source.</param>
+    /// <param name="opts">The opts.</param>
+    /// <returns></returns>
+    TDestination Map<TDestination>(object source, Action<IMappingOperationOptions> opts);
 
-		/// <summary>
-		///    Maps the specified source to the indicated destination.
-		/// </summary>
-		/// <typeparam name="TSource">The type of the source.</typeparam>
-		/// <typeparam name="TDestination">The type of the destination.</typeparam>
-		/// <param name="source">The source.</param>
-		/// <param name="opts">The opts.</param>
-		/// <returns></returns>
-		TDestination Map<TSource, TDestination>(TSource source, Action<IMappingOperationOptions> opts);
+    /// <summary>
+    ///   Maps the specified source to the indicated destination.
+    /// </summary>
+    /// <typeparam name="TSource">The type of the source.</typeparam>
+    /// <typeparam name="TDestination">The type of the destination.</typeparam>
+    /// <param name="source">The source.</param>
+    /// <param name="opts">The opts.</param>
+    /// <returns></returns>
+    TDestination Map<TSource, TDestination>(TSource source, Action<IMappingOperationOptions> opts);
 
-		/// <summary>
-		///    Maps the specified source to the specified destination.
-		/// </summary>
-		/// <typeparam name="TSource">The type of the source.</typeparam>
-		/// <typeparam name="TDestination">The type of the destination.</typeparam>
-		/// <param name="source">The source.</param>
-		/// <param name="destination">The destination.</param>
-		/// <returns></returns>
-		TDestination Map<TSource, TDestination>(TSource source, TDestination destination);
+    /// <summary>
+    ///   Maps the specified source to the specified destination.
+    /// </summary>
+    /// <typeparam name="TSource">The type of the source.</typeparam>
+    /// <typeparam name="TDestination">The type of the destination.</typeparam>
+    /// <param name="source">The source.</param>
+    /// <param name="destination">The destination.</param>
+    /// <returns></returns>
+    TDestination Map<TSource, TDestination>(TSource source, TDestination destination);
 
-		/// <summary>
-		///    Maps the specified source to the specified destination.
-		/// </summary>
-		/// <typeparam name="TSource">The type of the source.</typeparam>
-		/// <typeparam name="TDestination">The type of the destination.</typeparam>
-		/// <param name="source">The source.</param>
-		/// <param name="destination">The destination.</param>
-		/// <param name="opts">The opts.</param>
-		/// <returns></returns>
-		TDestination Map<TSource, TDestination>(TSource source, TDestination destination,
-			Action<IMappingOperationOptions> opts);
+    /// <summary>
+    ///   Maps the specified source to the specified destination.
+    /// </summary>
+    /// <typeparam name="TSource">The type of the source.</typeparam>
+    /// <typeparam name="TDestination">The type of the destination.</typeparam>
+    /// <param name="source">The source.</param>
+    /// <param name="destination">The destination.</param>
+    /// <param name="opts">The opts.</param>
+    /// <returns></returns>
+    TDestination Map<TSource, TDestination>(TSource source, TDestination destination,
+      Action<IMappingOperationOptions> opts);
 
-		/// <summary>
-		///    Maps the specified source to the indicated destination.
-		/// </summary>
-		/// <param name="source">The source.</param>
-		/// <param name="sourceType">Type of the source.</param>
-		/// <param name="destinationType">Type of the destination.</param>
-		/// <returns></returns>
-		object Map(object source, Type sourceType, Type destinationType);
+    /// <summary>
+    ///   Maps the specified source to the indicated destination.
+    /// </summary>
+    /// <param name="source">The source.</param>
+    /// <param name="sourceType">Type of the source.</param>
+    /// <param name="destinationType">Type of the destination.</param>
+    /// <returns></returns>
+    object Map(object source, Type sourceType, Type destinationType);
 
-		/// <summary>
-		///    Maps the specified source to the indicated destination.
-		/// </summary>
-		/// <param name="source">The source.</param>
-		/// <param name="sourceType">Type of the source.</param>
-		/// <param name="destinationType">Type of the destination.</param>
-		/// <param name="opts">The opts.</param>
-		/// <returns></returns>
-		object Map(object source, Type sourceType, Type destinationType, Action<IMappingOperationOptions> opts);
+    /// <summary>
+    ///   Maps the specified source to the indicated destination.
+    /// </summary>
+    /// <param name="source">The source.</param>
+    /// <param name="sourceType">Type of the source.</param>
+    /// <param name="destinationType">Type of the destination.</param>
+    /// <param name="opts">The opts.</param>
+    /// <returns></returns>
+    object Map(object source, Type sourceType, Type destinationType, Action<IMappingOperationOptions> opts);
 
-		/// <summary>
-		///    Maps the specified source to the specified destination.
-		/// </summary>
-		/// <param name="source">The source.</param>
-		/// <param name="destination">The destination.</param>
-		/// <param name="sourceType">Type of the source.</param>
-		/// <param name="destinationType">Type of the destination.</param>
-		/// <returns></returns>
-		object Map(object source, object destination, Type sourceType, Type destinationType);
+    /// <summary>
+    ///   Maps the specified source to the specified destination.
+    /// </summary>
+    /// <param name="source">The source.</param>
+    /// <param name="destination">The destination.</param>
+    /// <param name="sourceType">Type of the source.</param>
+    /// <param name="destinationType">Type of the destination.</param>
+    /// <returns></returns>
+    object Map(object source, object destination, Type sourceType, Type destinationType);
 
-		/// <summary>
-		///    Maps the specified source to the specified destination.
-		/// </summary>
-		/// <param name="source">The source.</param>
-		/// <param name="destination">The destination.</param>
-		/// <param name="sourceType">Type of the source.</param>
-		/// <param name="destinationType">Type of the destination.</param>
-		/// <param name="opts">The opts.</param>
-		/// <returns></returns>
-		object Map(object source, object destination, Type sourceType, Type destinationType,
-			Action<IMappingOperationOptions> opts);
-	}
+    /// <summary>
+    ///   Maps the specified source to the specified destination.
+    /// </summary>
+    /// <param name="source">The source.</param>
+    /// <param name="destination">The destination.</param>
+    /// <param name="sourceType">Type of the source.</param>
+    /// <param name="destinationType">Type of the destination.</param>
+    /// <param name="opts">The opts.</param>
+    /// <returns></returns>
+    object Map(object source, object destination, Type sourceType, Type destinationType,
+      Action<IMappingOperationOptions> opts);
+  }
 }

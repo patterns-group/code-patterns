@@ -1,6 +1,6 @@
 ﻿#region FreeBSD
 
-// Copyright (c) 2013, John Batte
+// Copyright (c) 2014, John Batte
 // All rights reserved.
 // 
 // Redistribution and use in source and binary forms, with or without modification, are permitted provided that
@@ -27,33 +27,34 @@ using System.Configuration;
 
 namespace Patterns.Logging
 {
-	/// <summary>
-	/// Defines configuration options for the Patterns.Logging namespace.
-	/// </summary>
-	public class LoggingConfig : ConfigurationSection, ILoggingConfig
-	{
-		/// <summary>
-		/// The default section name.
-		/// </summary>
-		public const string SectionName = "patterns/logging";
-		private const string _trapExceptionsKey = "trapExceptions";
+  /// <summary>
+  ///   Defines configuration options for the Patterns.Logging namespace.
+  /// </summary>
+  public class LoggingConfig : ConfigurationSection, ILoggingConfig
+  {
+    /// <summary>
+    ///   The default section name.
+    /// </summary>
+    public const string SectionName = "patterns/logging";
 
-		/// <summary>
-		/// Gets or sets a value indicating whether the logging interceptor should trap exceptions
-		/// (as opposed to allowing them to bubble up).
-		/// </summary>
-		/// <value>
-		///   <c>true</c> if the logging interceptor should trap exceptions; otherwise, <c>false</c>.
-		/// </value>
-		[ConfigurationProperty(_trapExceptionsKey)]
-		public bool TrapExceptions
-		{
-			get
-			{
-				object value = this[_trapExceptionsKey];
-				return value is bool ? (bool) value : default(bool);
-			}
-			set { this[_trapExceptionsKey] = value; }
-		}
-	}
+    private const string _trapExceptionsKey = "trapExceptions";
+
+    /// <summary>
+    ///   Gets or sets a value indicating whether the logging interceptor should trap exceptions
+    ///   (as opposed to allowing them to bubble up).
+    /// </summary>
+    /// <value>
+    ///   <c>true</c> if the logging interceptor should trap exceptions; otherwise, <c>false</c>.
+    /// </value>
+    [ConfigurationProperty(_trapExceptionsKey)]
+    public bool TrapExceptions
+    {
+      get
+      {
+        object value = this[_trapExceptionsKey];
+        return value is bool ? (bool) value : default(bool);
+      }
+      set { this[_trapExceptionsKey] = value; }
+    }
+  }
 }

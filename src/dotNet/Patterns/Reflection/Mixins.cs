@@ -1,6 +1,6 @@
 ﻿#region FreeBSD
 
-// Copyright (c) 2013, John Batte
+// Copyright (c) 2014, John Batte
 // All rights reserved.
 // 
 // Redistribution and use in source and binary forms, with or without modification, are permitted provided that
@@ -28,23 +28,23 @@ using System.Linq;
 
 namespace Patterns.Reflection
 {
-	/// <summary>
-	///    Provides extensions for ease-of-use during Reflection-based operations.
-	/// </summary>
-	public static class Mixins
-	{
-		/// <summary>
-		///    Gets the property values.
-		/// </summary>
-		/// <param name="source">The source.</param>
-		/// <returns></returns>
-		public static IEnumerable<PropertyValue> GetPropertyValues(this object source)
-		{
-			return source.GetType().GetProperties().Select(property => new PropertyValue
-			{
-				Name = property.Name,
-				Value = property.GetValue(source, null)
-			});
-		}
-	}
+  /// <summary>
+  ///   Provides extensions for ease-of-use during Reflection-based operations.
+  /// </summary>
+  public static class Mixins
+  {
+    /// <summary>
+    ///   Gets the property values.
+    /// </summary>
+    /// <param name="source">The source.</param>
+    /// <returns></returns>
+    public static IEnumerable<PropertyValue> GetPropertyValues(this object source)
+    {
+      return source.GetType().GetProperties().Select(property => new PropertyValue
+      {
+        Name = property.Name,
+        Value = property.GetValue(source, null)
+      });
+    }
+  }
 }

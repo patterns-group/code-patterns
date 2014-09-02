@@ -74,20 +74,29 @@
   <ItemGroup>
     <ProjectReference Include="..\Collections\Collections.csproj">
       <Project>{72D556D8-BED5-4FCF-BABC-6C4714BAD25A}</Project>
-      <Name>Patterns.Collections</Name>
+      <Name>Collections</Name>
     </ProjectReference>
     <ProjectReference Include="..\ExceptionHandling\ExceptionHandling.csproj">
       <Project>{EB8F001A-471C-4F07-80DB-11D7F03F5C84}</Project>
-      <Name>Patterns.ExceptionHandling</Name>
+      <Name>ExceptionHandling</Name>
     </ProjectReference>
     <ProjectReference Include="..\Interception\Interception.csproj">
       <Project>{B90450DC-45E0-40D3-9A69-D467A0B7C098}</Project>
-      <Name>Patterns.Interception</Name>
+      <Name>Interception</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="Logging.nuspec" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\ExceptionErrorFormat.txt" />
+    <Content Include="Resources\InnerExceptionFormat.txt" />
+    <Content Include="Resources\MethodArgsDebugFormat.txt" />
+    <Content Include="Resources\MethodInfoFormat.txt" />
+    <Content Include="Resources\MethodReturnDebugFormat.txt" />
+    <Content Include="Resources\MethodStartTraceFormat.txt" />
+    <Content Include="Resources\MethodStopTraceFormat.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" />

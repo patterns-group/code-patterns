@@ -125,25 +125,25 @@
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ExceptionErrorFormat" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ExceptionErrorFormat.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+    <value>Resources\ExceptionErrorFormat.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
   <data name="InnerExceptionFormat" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\InnerExceptionFormat.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+    <value>Resources\InnerExceptionFormat.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
   <data name="MethodArgsDebugFormat" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\MethodArgsDebugFormat.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+    <value>Resources\MethodArgsDebugFormat.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
   <data name="MethodInfoFormat" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\MethodInfoFormat.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+    <value>Resources\MethodInfoFormat.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
   <data name="MethodReturnDebugFormat" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\MethodReturnDebugFormat.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+    <value>Resources\MethodReturnDebugFormat.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
   <data name="MethodStartTraceFormat" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\MethodStartTraceFormat.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+    <value>Resources\MethodStartTraceFormat.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
   <data name="MethodStopTraceFormat" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\MethodStopTraceFormat.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+    <value>Resources\MethodStopTraceFormat.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
 	<data name="ILogValueFormatter_NullValue" xml:space="preserve">
     <value>NULL</value>

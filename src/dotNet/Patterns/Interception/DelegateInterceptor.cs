@@ -1,6 +1,6 @@
 ﻿#region FreeBSD
 
-// Copyright (c) 2013, The Tribe
+// Copyright (c) 2014, John Batte
 // All rights reserved.
 // 
 // Redistribution and use in source and binary forms, with or without modification, are permitted provided that
@@ -24,142 +24,146 @@
 #endregion
 
 using System;
+
 using Castle.DynamicProxy;
+
 using Patterns.ExceptionHandling;
 
 namespace Patterns.Interception
 {
-	/// <summary>
-	///    Provides an interceptor that allows its interception logic to be
-	///    injected; no-op fall-backs are used when no logic has been specified
-	///    for an interception step.
-	/// </summary>
-	public class DelegateInterceptor : IInterceptor
-	{
-		/// <summary>
-		///    Initializes a new instance of the <see cref="DelegateInterceptor" /> class.
-		/// </summary>
-		/// <param name="after">
-		///    The action to execute after proceeding. This action will not run
-		///    if the invocation throws an exception.
-		/// </param>
-		/// <param name="before">The action to execute before proceeding.</param>
-		/// <param name="condition">
-		///    The interception condition. If this condition returns <c>false</c>,
-		///    the invocation proceeds with no further interception.
-		/// </param>
-		/// <param name="finally">
-		///    The action to execute at the end of the interception, regardless of
-		///    whether or not an exception was thrown.
-		/// </param>
-		/// <param name="onError">The function to execute when an error occurs.</param>
-		/// <param name="proceed">The action to execute. Only set this if proceeding as normal is not desired.</param>
-		public DelegateInterceptor(Action<IInvocation> after = null, Action<IInvocation> before = null,
-			Func<IInvocation, bool> condition = null, Action<IInvocation> @finally = null,
-			Func<IInvocation, Exception, ExceptionState> onError = null, Action<IInvocation> proceed = null)
-		{
-			Initialize(after, before, condition, @finally, onError, proceed);
-		}
+  /// <summary>
+  ///   Provides an interceptor that allows its interception logic to be
+  ///   injected; no-op fall-backs are used when no logic has been specified
+  ///   for an interception step.
+  /// </summary>
+  public class DelegateInterceptor : IInterceptor
+  {
+    /// <summary>
+    ///   Initializes a new instance of the <see cref="DelegateInterceptor" /> class.
+    /// </summary>
+    /// <param name="after">
+    ///   The action to execute after proceeding. This action will not run
+    ///   if the invocation throws an exception.
+    /// </param>
+    /// <param name="before">The action to execute before proceeding.</param>
+    /// <param name="condition">
+    ///   The interception condition. If this condition returns <c>false</c>,
+    ///   the invocation proceeds with no further interception.
+    /// </param>
+    /// <param name="finally">
+    ///   The action to execute at the end of the interception, regardless of
+    ///   whether or not an exception was thrown.
+    /// </param>
+    /// <param name="onError">The function to execute when an error occurs.</param>
+    /// <param name="proceed">The action to execute. Only set this if proceeding as normal is not desired.</param>
+    public DelegateInterceptor(Action<IInvocation> after = null, Action<IInvocation> before = null,
+      Func<IInvocation, bool> condition = null, Action<IInvocation> @finally = null,
+      Func<IInvocation, Exception, ExceptionState> onError = null, Action<IInvocation> proceed = null)
+    {
+      Initialize(after, before, condition, @finally, onError, proceed);
+    }
 
-		/// <summary>
-		///    Gets or sets the action to execute. Only set this if proceeding as normal is not desired.
-		/// </summary>
-		/// <value>
-		///    The action to execute.
-		/// </value>
-		public virtual Action<IInvocation> Proceed { get; set; }
+    /// <summary>
+    ///   Gets or sets the action to execute. Only set this if proceeding as normal is not desired.
+    /// </summary>
+    /// <value>
+    ///   The action to execute.
+    /// </value>
+    public virtual Action<IInvocation> Proceed { get; set; }
 
-		/// <summary>
-		///    Gets or sets the action to execute after proceeding. This action will not run
-		///    if the invocation throws an exception.
-		/// </summary>
-		/// <value>
-		///    The action to execute after proceeding.
-		/// </value>
-		public virtual Action<IInvocation> After { get; set; }
+    /// <summary>
+    ///   Gets or sets the action to execute after proceeding. This action will not run
+    ///   if the invocation throws an exception.
+    /// </summary>
+    /// <value>
+    ///   The action to execute after proceeding.
+    /// </value>
+    public virtual Action<IInvocation> After { get; set; }
 
-		/// <summary>
-		///    Gets or sets the action to execute before proceeding.
-		/// </summary>
-		/// <value>
-		///    The action to execute before proceeding.
-		/// </value>
-		public virtual Action<IInvocation> Before { get; set; }
+    /// <summary>
+    ///   Gets or sets the action to execute before proceeding.
+    /// </summary>
+    /// <value>
+    ///   The action to execute before proceeding.
+    /// </value>
+    public virtual Action<IInvocation> Before { get; set; }
 
-		/// <summary>
-		///    Gets or sets the interception condition. If this condition returns <c>false</c>,
-		///    the invocation proceeds with no further interception.
-		/// </summary>
-		/// <value>
-		///    The interception condition.
-		/// </value>
-		public virtual Func<IInvocation, bool> Condition { get; set; }
+    /// <summary>
+    ///   Gets or sets the interception condition. If this condition returns <c>false</c>,
+    ///   the invocation proceeds with no further interception.
+    /// </summary>
+    /// <value>
+    ///   The interception condition.
+    /// </value>
+    public virtual Func<IInvocation, bool> Condition { get; set; }
 
-		/// <summary>
-		///    Gets or sets the action to execute at the end of the interception, regardless of
-		///    whether or not an exception was thrown.
-		/// </summary>
-		/// <value>
-		///    The action to execute at the end of the interception.
-		/// </value>
-		public virtual Action<IInvocation> Finally { get; set; }
+    /// <summary>
+    ///   Gets or sets the action to execute at the end of the interception, regardless of
+    ///   whether or not an exception was thrown.
+    /// </summary>
+    /// <value>
+    ///   The action to execute at the end of the interception.
+    /// </value>
+    public virtual Action<IInvocation> Finally { get; set; }
 
-		/// <summary>
-		///    Gets or sets the function to execute when an error occurs.
-		/// </summary>
-		/// <value>
-		///    The function to execute when an error occurs.
-		/// </value>
-		public virtual Func<IInvocation, Exception, ExceptionState> OnError { get; set; }
+    /// <summary>
+    ///   Gets or sets the function to execute when an error occurs.
+    /// </summary>
+    /// <value>
+    ///   The function to execute when an error occurs.
+    /// </value>
+    public virtual Func<IInvocation, Exception, ExceptionState> OnError { get; set; }
 
-		/// <summary>
-		///    Intercepts the specified invocation.
-		/// </summary>
-		/// <param name="invocation">The invocation.</param>
-		public virtual void Intercept(IInvocation invocation)
-		{
-			if (Condition != null && !Condition(invocation))
-			{
-				invocation.Proceed();
-				return;
-			}
+    /// <summary>
+    ///   Intercepts the specified invocation.
+    /// </summary>
+    /// <param name="invocation">The invocation.</param>
+    public virtual void Intercept(IInvocation invocation)
+    {
+      if (Condition != null && !Condition(invocation))
+      {
+        invocation.Proceed();
+        return;
+      }
 
-			try
-			{
-				if (Before != null) Before(invocation);
+      try
+      {
+        if (Before != null) Before(invocation);
 
-				Action<IInvocation> proceed = Proceed ?? (call => call.Proceed());
-				proceed(invocation);
+        Action<IInvocation> proceed = Proceed ?? (call => call.Proceed());
+        proceed(invocation);
 
-				if (After != null) After(invocation);
-			}
-			catch (Exception error)
-			{
-				Func<IInvocation, Exception, ExceptionState> errorHandler = OnError
-					?? ((thisCall, thisBug) => new ExceptionState(thisBug, false));
-				ExceptionState state = errorHandler(invocation, error);
+        if (After != null) After(invocation);
+      }
+      catch (Exception error)
+      {
+        Func<IInvocation, Exception, ExceptionState> errorHandler = OnError
+                                                                    ??
+                                                                    ((thisCall, thisBug) =>
+                                                                      new ExceptionState(thisBug, false));
+        ExceptionState state = errorHandler(invocation, error);
 
-				if (state.IsHandled) return;
+        if (state.IsHandled) return;
 
-				if (!ReferenceEquals(error, state.Exception) && state.Exception != null) throw state.Exception;
+        if (!ReferenceEquals(error, state.Exception) && state.Exception != null) throw state.Exception;
 
-				throw;
-			}
-			finally
-			{
-				if (Finally != null) Finally(invocation);
-			}
-		}
+        throw;
+      }
+      finally
+      {
+        if (Finally != null) Finally(invocation);
+      }
+    }
 
-		private void Initialize(Action<IInvocation> after, Action<IInvocation> before, Func<IInvocation, bool> condition,
-			Action<IInvocation> @finally, Func<IInvocation, Exception, ExceptionState> onError, Action<IInvocation> proceed)
-		{
-			Condition = condition;
-			Before = before;
-			After = after;
-			Finally = @finally;
-			OnError = onError;
-			Proceed = proceed;
-		}
-	}
+    private void Initialize(Action<IInvocation> after, Action<IInvocation> before, Func<IInvocation, bool> condition,
+      Action<IInvocation> @finally, Func<IInvocation, Exception, ExceptionState> onError, Action<IInvocation> proceed)
+    {
+      Condition = condition;
+      Before = before;
+      After = after;
+      Finally = @finally;
+      OnError = onError;
+      Proceed = proceed;
+    }
+  }
 }

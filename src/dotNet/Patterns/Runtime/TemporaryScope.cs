@@ -28,8 +28,7 @@ namespace Patterns.Runtime
 	/// </summary>
 	public class TemporaryScope : IDisposable
 	{
-		private readonly Action _setup;
-		private readonly Action _tearDown;
+	  private readonly Action _tearDown;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="TemporaryScope" /> class.
@@ -38,10 +37,9 @@ namespace Patterns.Runtime
 		/// <param name="tearDown">The tear down.</param>
 		public TemporaryScope(Action setup = null, Action tearDown = null)
 		{
-			_setup = setup;
 			_tearDown = tearDown;
 
-			if (_setup != null) _setup();
+			if (setup != null) setup();
 		}
 
 		/// <summary>

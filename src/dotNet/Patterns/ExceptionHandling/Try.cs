@@ -1,6 +1,6 @@
 ﻿#region FreeBSD
 
-// Copyright (c) 2014, The Tribe
+// Copyright (c) 2014, John Batte
 // All rights reserved.
 // 
 // Redistribution and use in source and binary forms, with or without modification, are permitted provided that
@@ -49,7 +49,8 @@ namespace Patterns.ExceptionHandling
     /// <returns>
     ///   The result of the retriever, or the default value if an exception is thrown but handled.
     /// </returns>
-    public static TValue Get<TValue>(Func<TValue> retriever, Func<Exception, ExceptionState> errorHandler = null, Func<TValue> fallback = null, Action<TValue> finalAction = null)
+    public static TValue Get<TValue>(Func<TValue> retriever, Func<Exception, ExceptionState> errorHandler = null,
+      Func<TValue> fallback = null, Action<TValue> finalAction = null)
     {
       HandleErrors.Initialize();
       TValue result = default(TValue);

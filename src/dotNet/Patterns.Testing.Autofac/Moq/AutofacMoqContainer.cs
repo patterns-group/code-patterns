@@ -23,10 +23,12 @@ using System;
 using System.Collections.Generic;
 using Autofac;
 using Autofac.Core;
+using Autofac.Core.Registration;
 using Autofac.Extras.CommonServiceLocator;
 using Microsoft.Practices.ServiceLocation;
 using Moq;
 using Patterns.Autofac;
+using Patterns.Autofac.Core;
 using Patterns.ExceptionHandling;
 using Patterns.Testing.Moq;
 
