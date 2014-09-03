@@ -9,7 +9,15 @@
 //      the code is regenerated.
 //  </auto-generated>
 // ------------------------------------------------------------------------------
+
+using System.Diagnostics;
+using System.Reflection;
+
+using Patterns.Logging;
+
 #region Designer generated code
+
+
 #pragma warning disable
 namespace Patterns.Specifications.Features.Autofac.Modules
 {
@@ -31,11 +39,25 @@ namespace Patterns.Specifications.Features.Autofac.Modules
         [NUnit.Framework.TestFixtureSetUpAttribute()]
         public virtual void FeatureSetup()
         {
+          try
+          {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Runtime Module", "As a developer, I want to be able to register an Autofac module for Patterns.Runt" +
-                    "ime\r\nand get the default implementations of each public interface defined in\r\nth" +
-                    "e Patterns.Runtime namespace.", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo =
+              new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Runtime Module",
+                "As a developer, I want to be able to register an Autofac module for Patterns.Runt" +
+                "ime\r\nand get the default implementations of each public interface defined in\r\nth" +
+                "e Patterns.Runtime namespace.", ProgrammingLanguage.CSharp, ((string[]) (null)));
             testRunner.OnFeatureStart(featureInfo);
+          }
+          catch (ReflectionTypeLoadException omg)
+          {
+            foreach (var loaderError in omg.LoaderExceptions)
+            {
+              Debug.WriteLine(loaderError.ToFullString());
+              Debug.WriteLine(loaderError.StackTrace);
+            }
+            throw omg;
+          }
         }
         
         [NUnit.Framework.TestFixtureTearDownAttribute()]

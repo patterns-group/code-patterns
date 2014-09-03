@@ -19,53 +19,53 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{AB1B5C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "_specs", "_specs\_specs.csproj", "{5294698C-FC9F-491B-A914-22C5E32B51F6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Collections", "Patterns\Collections\Collections.csproj", "{72D556D8-BED5-4FCF-BABC-6C4714BAD25A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Patterns.Collections", "Patterns\Collections\Patterns.Collections.csproj", "{72D556D8-BED5-4FCF-BABC-6C4714BAD25A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Patterns", "Patterns", "{7E766DBE-A161-450F-AE10-7D07D97464EB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Configuration", "Patterns\Configuration\Configuration.csproj", "{1E5AC2FE-1C48-449C-B82E-BE51DFFED47D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Patterns.Configuration", "Patterns\Configuration\Patterns.Configuration.csproj", "{1E5AC2FE-1C48-449C-B82E-BE51DFFED47D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Text", "Patterns\Text\Text.csproj", "{4EF5049B-D710-4BF2-BC8B-D849D126110D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Patterns.Text", "Patterns\Text\Patterns.Text.csproj", "{4EF5049B-D710-4BF2-BC8B-D849D126110D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExceptionHandling", "Patterns\ExceptionHandling\ExceptionHandling.csproj", "{EB8F001A-471C-4F07-80DB-11D7F03F5C84}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Patterns.ExceptionHandling", "Patterns\ExceptionHandling\Patterns.ExceptionHandling.csproj", "{EB8F001A-471C-4F07-80DB-11D7F03F5C84}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interception", "Patterns\Interception\Interception.csproj", "{B90450DC-45E0-40D3-9A69-D467A0B7C098}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Patterns.Interception", "Patterns\Interception\Patterns.Interception.csproj", "{B90450DC-45E0-40D3-9A69-D467A0B7C098}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logging", "Patterns\Logging\Logging.csproj", "{C0DEA7AF-998F-4671-8D01-EF7255D267F8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Patterns.Logging", "Patterns\Logging\Patterns.Logging.csproj", "{C0DEA7AF-998F-4671-8D01-EF7255D267F8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapping", "Patterns\Mapping\Mapping.csproj", "{998C5867-AAB4-4813-8494-7B52D84C66AF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Patterns.Mapping", "Patterns\Mapping\Patterns.Mapping.csproj", "{998C5867-AAB4-4813-8494-7B52D84C66AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reflection", "Patterns\Reflection\Reflection.csproj", "{20879360-A3CF-4B1C-B3E9-F6B5D6C0143F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Patterns.Reflection", "Patterns\Reflection\Patterns.Reflection.csproj", "{20879360-A3CF-4B1C-B3E9-F6B5D6C0143F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Patterns.Autofac", "Patterns.Autofac", "{76284185-C690-4F4F-87C7-BB3DBC371073}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Patterns.Autofac\Core\Core.csproj", "{A05DD577-7157-409E-AD85-9E4438DDB4E6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Patterns.Autofac.Core", "Patterns.Autofac\Core\Patterns.Autofac.Core.csproj", "{A05DD577-7157-409E-AD85-9E4438DDB4E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Configuration", "Patterns.Autofac\Configuration\Configuration.csproj", "{1D7DB349-4752-4DC6-94F6-56DC712AA0EB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Patterns.Autofac.Configuration", "Patterns.Autofac\Configuration\Patterns.Autofac.Configuration.csproj", "{1D7DB349-4752-4DC6-94F6-56DC712AA0EB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logging", "Patterns.Autofac\Logging\Logging.csproj", "{EABA34AF-7CE8-45D5-B442-F916E00DBA2C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Patterns.Autofac.Logging", "Patterns.Autofac\Logging\Patterns.Autofac.Logging.csproj", "{EABA34AF-7CE8-45D5-B442-F916E00DBA2C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapping", "Patterns.Autofac\Mapping\Mapping.csproj", "{B6B54E5A-442B-4D64-AF05-0768AA179E78}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Patterns.Autofac.Mapping", "Patterns.Autofac\Mapping\Patterns.Autofac.Mapping.csproj", "{B6B54E5A-442B-4D64-AF05-0768AA179E78}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Runtime", "Patterns.Autofac\Runtime\Runtime.csproj", "{1D91BA74-3CC3-49E3-9AF3-A15FE815275C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Patterns.Autofac.Runtime", "Patterns.Autofac\Runtime\Patterns.Autofac.Runtime.csproj", "{1D91BA74-3CC3-49E3-9AF3-A15FE815275C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Runtime", "Patterns\Runtime\Runtime.csproj", "{7E7896F5-4424-4DF3-91D3-BE713043C040}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Patterns.Runtime", "Patterns\Runtime\Patterns.Runtime.csproj", "{7E7896F5-4424-4DF3-91D3-BE713043C040}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sources", "Patterns.Autofac\Sources\Sources.csproj", "{533FBD48-4349-4A24-9A2C-9ABCFC7B875F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Patterns.Autofac.Sources", "Patterns.Autofac\Sources\Patterns.Autofac.Sources.csproj", "{533FBD48-4349-4A24-9A2C-9ABCFC7B875F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Patterns.Testing", "Patterns.Testing", "{FF949D2D-F431-40CB-9B56-DEB504721DC9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Configuration", "Patterns.Testing\Configuration\Configuration.csproj", "{FE44C527-3A57-4761-AAFD-A10F371F2ED2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Patterns.Testing.Configuration", "Patterns.Testing\Configuration\Patterns.Testing.Configuration.csproj", "{FE44C527-3A57-4761-AAFD-A10F371F2ED2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moq", "Patterns.Testing\Moq\Moq.csproj", "{A63DCC72-0B4C-4454-9C68-95F0090FB664}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Patterns.Testing.Moq", "Patterns.Testing\Moq\Patterns.Testing.Moq.csproj", "{A63DCC72-0B4C-4454-9C68-95F0090FB664}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpecFlow", "Patterns.Testing\SpecFlow\SpecFlow.csproj", "{7B5EDB4E-9960-403D-8004-F0BB1F58B2BE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Patterns.Testing.SpecFlow", "Patterns.Testing\SpecFlow\Patterns.Testing.SpecFlow.csproj", "{7B5EDB4E-9960-403D-8004-F0BB1F58B2BE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Values", "Patterns.Testing\Values\Values.csproj", "{E4028C25-CB4F-4428-B2CE-B61D38BA64A2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Patterns.Testing.Values", "Patterns.Testing\Values\Patterns.Testing.Values.csproj", "{E4028C25-CB4F-4428-B2CE-B61D38BA64A2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Patterns.Testing.Autofac", "Patterns.Testing.Autofac", "{CFCD40F5-8500-4A4B-86EE-F9AEC7DBEB3E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moq", "Patterns.Testing.Autofac\Moq\Moq.csproj", "{88379560-EFAE-4296-BF81-D1809B0F7BD3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Patterns.Testing.Autofac.Moq", "Patterns.Testing.Autofac\Moq\Patterns.Testing.Autofac.Moq.csproj", "{88379560-EFAE-4296-BF81-D1809B0F7BD3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

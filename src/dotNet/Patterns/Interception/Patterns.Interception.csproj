@@ -4,16 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1E5AC2FE-1C48-449C-B82E-BE51DFFED47D}</ProjectGuid>
+    <ProjectGuid>{B90450DC-45E0-40D3-9A69-D467A0B7C098}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Patterns.Configuration</RootNamespace>
-    <AssemblyName>Patterns.Configuration</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <RootNamespace>Patterns.Interception</RootNamespace>
+    <AssemblyName>Patterns.Interception</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <BuildPackage>true</BuildPackage>
     <RestorePackages>true</RestorePackages>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -33,29 +34,23 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="ConfigurationManagerWrapper.cs" />
-    <Compile Include="ConfigurationSource.cs" />
-    <Compile Include="ConfigurationWrapper.cs" />
-    <Compile Include="IConfiguration.cs" />
-    <Compile Include="IConfigurationManager.cs" />
-    <Compile Include="IConfigurationSource.cs" />
-    <Compile Include="InMemoryConfigurationSource.cs" />
+    <Compile Include="DelegateInterceptor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.configuration" />
-    <Reference Include="System.XML" />
-    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Castle.Core">
+      <HintPath>..\..\packages\Castle.Core.3.3.0\lib\net35\Castle.Core.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Text\Text.csproj">
-      <Project>{4EF5049B-D710-4BF2-BC8B-D849D126110D}</Project>
-      <Name>Text</Name>
+    <None Include="packages.config" />
+    <None Include="Patterns.Interception.nuspec" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ExceptionHandling\Patterns.ExceptionHandling.csproj">
+      <Project>{eb8f001a-471c-4f07-80db-11d7f03f5c84}</Project>
+      <Name>Patterns.ExceptionHandling</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Configuration.nuspec" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" />

@@ -109,7 +109,7 @@ namespace Patterns.Testing.Autofac.Moq
 		/// </returns>
 		public Mock<TService> Mock<TService>(MockBehavior mockBehavior) where TService : class
 		{
-			TService service = Try.Get<TService>(Create<TService>);
+			TService service = Try.Get(Create<TService>);
 			var existingMock = service as IMocked<TService>;
 			if (existingMock != null) return existingMock.Mock;
 

@@ -4,12 +4,12 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B90450DC-45E0-40D3-9A69-D467A0B7C098}</ProjectGuid>
+    <ProjectGuid>{1D91BA74-3CC3-49E3-9AF3-A15FE815275C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Patterns.Interception</RootNamespace>
-    <AssemblyName>Patterns.Interception</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <RootNamespace>Patterns.Autofac.Runtime</RootNamespace>
+    <AssemblyName>Patterns.Autofac.Runtime</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <BuildPackage>true</BuildPackage>
     <RestorePackages>true</RestorePackages>
@@ -34,23 +34,23 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="DelegateInterceptor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RuntimeModule.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ExceptionHandling\ExceptionHandling.csproj">
-      <Project>{EB8F001A-471C-4F07-80DB-11D7F03F5C84}</Project>
-      <Name>ExceptionHandling</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="Castle.Core">
-      <HintPath>..\..\packages\Castle.Core.3.3.0\lib\net35\Castle.Core.dll</HintPath>
+    <Reference Include="Autofac">
+      <HintPath>..\..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="Interception.nuspec" />
+    <None Include="Patterns.Autofac.Runtime.nuspec" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Patterns\Runtime\Patterns.Runtime.csproj">
+      <Project>{7E7896F5-4424-4DF3-91D3-BE713043C040}</Project>
+      <Name>Patterns.Runtime</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" />

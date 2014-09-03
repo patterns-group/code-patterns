@@ -74,23 +74,23 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Moq.nuspec" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Patterns.Testing.Autofac.Moq.nuspec" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Patterns.Autofac\Core\Core.csproj">
-      <Project>{a05dd577-7157-409e-ad85-9e4438ddb4e6}</Project>
+    <ProjectReference Include="..\..\Patterns.Autofac\Core\Patterns.Autofac.Core.csproj">
+      <Project>{A05DD577-7157-409E-AD85-9E4438DDB4E6}</Project>
       <Name>Patterns.Autofac.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Patterns\ExceptionHandling\ExceptionHandling.csproj">
-      <Project>{eb8f001a-471c-4f07-80db-11d7f03f5c84}</Project>
-      <Name>Patterns.ExceptionHandling</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Patterns.Testing\Moq\Moq.csproj">
-      <Project>{a63dcc72-0b4c-4454-9c68-95f0090fb664}</Project>
+    <ProjectReference Include="..\..\Patterns.Testing\Moq\Patterns.Testing.Moq.csproj">
+      <Project>{A63DCC72-0B4C-4454-9C68-95F0090FB664}</Project>
       <Name>Patterns.Testing.Moq</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Patterns\ExceptionHandling\Patterns.ExceptionHandling.csproj">
+      <Project>{EB8F001A-471C-4F07-80DB-11D7F03F5C84}</Project>
+      <Name>Patterns.ExceptionHandling</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
