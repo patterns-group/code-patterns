@@ -170,6 +170,16 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Features\Stream\ResetPosition.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ResetPosition.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Stream\ToArray.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ToArray.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\Testing\Configuration\TestConfigSource.feature.cs">
       <DependentUpon>TestConfigSource.feature</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -211,6 +221,7 @@
     <Compile Include="Models\ResourceContext.cs" />
     <Compile Include="Models\Runtime\DateTimeInfoContext.cs" />
     <Compile Include="Models\Runtime\TimeExtensionsContext.cs" />
+    <Compile Include="Models\Stream\DummyUnseekableStream.cs" />
     <Compile Include="Models\Testing\Moq\TestContainerContext.cs" />
     <Compile Include="Models\Testing\Moq\TestContainerTarget.cs" />
     <Compile Include="Models\Text\DictionaryParser.cs" />
@@ -257,6 +268,7 @@
     <Compile Include="Steps\Reflection\PropertyValueSteps.cs" />
     <Compile Include="Steps\Runtime\DateTimeInfoSteps.cs" />
     <Compile Include="Steps\Runtime\TimeExtensionsSteps.cs" />
+    <Compile Include="Steps\Stream\StreamExtensionsSteps.cs" />
     <Compile Include="Steps\Testing\Moq\Autofac\AutofacTestContainerSteps.cs" />
     <Compile Include="Steps\Testing\Moq\TestContainerSteps.cs" />
     <Compile Include="Steps\Text\RegularExpressions\CompiledRegexSteps.cs" />
@@ -330,6 +342,14 @@
     <None Include="Features\Runtime\TimeExtensions.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>TimeExtensions.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Stream\ResetPosition.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ResetPosition.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Stream\ToArray.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ToArray.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Testing\Configuration\TestConfigSource.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
