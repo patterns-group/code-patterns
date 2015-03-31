@@ -4,7 +4,7 @@
 	what kind of stream I have
 
 @stream
-Scenario: Conversion preserve data
+Scenario: Conversion preserves data
 	Given I have a memory stream of "This is data"
 	When I call ToArray on the memory stream
 	Then the result byte array should be "This is data"

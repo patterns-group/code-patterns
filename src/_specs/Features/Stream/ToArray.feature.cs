@@ -66,11 +66,11 @@ namespace Patterns.Specifications.Features.Stream
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Conversion preserve data")]
+        [NUnit.Framework.DescriptionAttribute("Conversion preserves data")]
         [NUnit.Framework.CategoryAttribute("stream")]
-        public virtual void ConversionPreserveData()
+        public virtual void ConversionPreservesData()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Conversion preserve data", new string[] {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Conversion preserves data", new string[] {
                         "stream"});
 #line 7
 this.ScenarioSetup(scenarioInfo);
