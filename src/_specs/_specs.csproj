@@ -195,6 +195,7 @@
     <Compile Include="Models\ResourceContext.cs" />
     <Compile Include="Models\Runtime\DateTimeInfoContext.cs" />
     <Compile Include="Models\Runtime\TimeExtensionsContext.cs" />
+    <Compile Include="Models\Stream\DummyUnseekableStream.cs" />
     <Compile Include="Models\Testing\Moq\TestContainerContext.cs" />
     <Compile Include="Models\Testing\Moq\TestContainerTarget.cs" />
     <Compile Include="Models\Text\DictionaryParser.cs" />
